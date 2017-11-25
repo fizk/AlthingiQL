@@ -1,0 +1,78 @@
+@import "../../config";
+
+// - -[FIELD]- - - - - - -
+.input {
+    border-width: 1px;
+    border-style: solid;
+    border-color: map_get($color, gray-light);
+    outline: none;
+}
+
+.input:focus {
+    border-color: map_get($color, gray);
+}
+
+.input::placeholder {
+    color: map_get($color, text-disabled);
+}
+
+// - -[FIELD variations]- - - - - - -
+
+.input--border-less {
+    border-width: 0;
+    border-style: none;
+    border-color: transparent;
+    background-color: map_get($color, white);
+    @include shadow;
+    outline: none;
+
+    &.input--error {
+        @include shadow-red;
+    }
+}
+.input--sm {
+    padding: map_get($space, xs) map_get($space, md);
+
+    &.input--search {
+        padding-left: map_get($space, xl);
+    }
+}
+
+.input--md {
+    padding: map_get($space, xs) map_get($space, md);
+
+    &.input--search {
+        padding-left: map_get($space, xl);
+    }
+}
+
+.input--lg {
+    padding: map_get($space, md) map_get($space, md);
+
+    &.input--search {
+        padding-left: map_get($space, xxl);
+    }
+}
+
+.input--xl {
+    padding: map_get($space, md) map_get($space, md);
+
+    &.input--search {
+        padding-left: map_get($space, xxl);
+    }
+}
+
+.input--error {
+    border-color: map_get($color, error);
+}
+
+// - -[SEARCH]- - - - - - -
+.input--search {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24"><path fill="#adaba9" d="M14.966,13.679h-0.678l-0.24-0.23c0.841-0.979,1.347-2.248,1.347-3.628c0-3.079-2.496-5.575-5.575-5.575 c-3.079,0-5.575,2.496-5.575,5.575c0,3.079,2.496,5.575,5.575,5.575c1.38,0,2.65-0.506,3.628-1.347l0.23,0.24v0.678l4.288,4.279 l1.278-1.278L14.966,13.679z M9.82,13.679c-2.136,0-3.859-1.723-3.859-3.859S7.684,5.96,9.82,5.96s3.859,1.724,3.859,3.859 S11.956,13.679,9.82,13.679z"/><path fill="none" d="M0,0h24v24H0V0z"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.input--is-searching {
+    background-image: url('data:image/svg+xml;utf8,<svg  xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24"><circle id="thepath" fill="none" stroke-miterlimit="10" cx="12" cy="12" r="6.6"/><path fill="#F5F5F6" d="M12,4.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5c4.142,0,7.5-3.358,7.5-7.5 C19.5,7.858,16.142,4.5,12,4.5z M12,17.364c-2.963,0-5.365-2.401-5.365-5.364S9.037,6.635,12,6.635S17.364,9.037,17.364,12 S14.963,17.364,12,17.364z"/><path fill="#adaba9" d="M17.364,12c0,2.963-2.401,5.364-5.364,5.364V19.5c4.142,0,7.5-3.357,7.5-7.5H17.364z"><animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1s" to="360 12 12" from="0 12 12" attributeType="XML" attributeName="transform" type="rotate" fill="remove"></animateTransform></path></svg>');
+}

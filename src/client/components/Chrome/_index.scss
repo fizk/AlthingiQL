@@ -1,0 +1,27 @@
+@import "../../config";
+
+.chrome {
+    //ref
+}
+
+.chrome__header {
+    margin: auto;
+    background-color: map_get($color-primary, dark);
+    background-image: linear-gradient(to right, #973999, #f8598b, #f7bf00);
+}
+
+.chrome__header-container {
+    max-width: 1024px;
+    margin: auto
+}
+
+.chrome__main {
+    max-width: 1024px;
+    margin: auto
+}
+
+.chrome__footer {
+    max-width: 1024px;
+    margin: auto
+}
+

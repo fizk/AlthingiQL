@@ -1,0 +1,10 @@
+@import "../../config";
+
+.assembly-badge {
+    padding: 16px 8px;
+    display: block;
+}
+
+.assembly-badge--active {
+    background-color: map_get($color-secondary, light);
+}

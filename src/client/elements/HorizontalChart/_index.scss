@@ -1,0 +1,21 @@
+.horizontal-chart {
+    max-width: 100%;
+    height: auto;
+}
+
+.horizontal-chart__bar {
+    fill: rgb(89, 200, 151);
+    stroke-width: 1px;
+    stroke: transparent;
+}
+
+.horizontal-chart__baseline {
+    stroke-width: 1px;
+    stroke: black;
+}
+
+.horizontal-chart__line {
+    stroke-width: 1px;
+    stroke-dasharray: 4;
+    stroke: rgb(200, 200, 200);
+}

@@ -1,24 +1,47 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
         "target": "es6",
-        "sourceMap": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "isolatedModules": false,
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "preserveConstEnums": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": false,
         "allowJs": true,
-
+        "lib": [
+            "es5",
+            "es6",
+            "dom",
+            "es2015.core",
+            "es2015.collection",
+            "es2015.generator",
+            "es2015.iterable",
+            "es2015.promise",
+            "es2015.proxy",
+            "es2015.reflect",
+            "es2015.symbol",
+            "es2015.symbol.wellknown",
+            "esnext.asynciterable"
+        ],
         "typeRoots": [
             "node_modules/@types",
             "@types"
         ],
-        "jsx": "react",
-
         "outDir": "./dist",
-        "rootDir": "./src/server"
+        "rootDir": "./src"
     },
     "include": [
-        "**/*"
+        "./src/"
     ],
     "exclude": [
-        "node_modules",
-        "src/client"
+        "node_modules"
     ]
 }

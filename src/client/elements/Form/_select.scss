@@ -1,0 +1,46 @@
+@import "../../config";
+
+.select__input {
+    border-width: 1px;
+    border-style: solid;
+    border-color: map_get($color, gray-light);
+    outline: none;
+    background-color: map_get($color, white);
+    padding: map_get($space, xs) map_get($space, md);
+    cursor: pointer;
+}
+
+.select__input:focus {
+    border-color: map_get($color, gray);
+}
+
+// - -[FIELD variations]- - - - - - -
+
+.select__input--border-less {
+    border-width: 0;
+    border-style: none;
+    border-color: transparent;
+    background-color: map_get($color, white);
+    @include shadow;
+    outline: none;
+
+    &.input--error {
+        @include shadow-red;
+    }
+}
+
+.select__input--sm {
+    padding: map_get($space, xs) map_get($space, md);
+}
+
+.select__input--md {
+    padding: map_get($space, xs) map_get($space, md);
+}
+
+.select__input--lg {
+    padding: map_get($space, md) map_get($space, md);
+}
+
+.select__input--xl {
+    padding: map_get($space, md) map_get($space, md);
+}

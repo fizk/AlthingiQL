@@ -1,0 +1,17 @@
+@import "../../config";
+
+.nav-tab {
+    display: flex;
+    background-color: map_get($color-primary, middle);
+}
+
+.nav-tab__item {
+    color: map_get($color, white);
+    text-decoration: none;
+    padding: map_get($space, md);
+    border-bottom: 4px solid transparent;
+}
+
+.nav-tab__item--active {
+    border-bottom: 4px solid map_get($color-secondary, middle);
+}

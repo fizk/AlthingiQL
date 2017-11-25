@@ -1,0 +1,70 @@
+@import "../../config";
+
+.headline-1 {
+    font-size: map_get($font-size, xl);
+    font-weight: 700;
+
+    //+ .headline-2 {}
+    //+ .headline-3 {}
+    //+ .headline-4 {}
+    //+ .headline-5 {}
+}
+
+.headline-2 {
+    font-size: map_get($font-size, lg);
+    font-weight: 700;
+
+    //+ .headline-1 {
+    //    margin-top: - map_get($space, xs);
+    //}
+    //+ .headline-2 {}
+    //+ .headline-3 {}
+    //+ .headline-4 {}
+    //+ .headline-5 {}
+}
+
+.headline-3 {
+    font-size: map_get($font-size, md);
+    font-weight: 400;
+
+    //+ .headline-1 {
+    //    margin-top: - map_get($space, xs);
+    //}
+    //+ .headline-2 {
+    //    margin-top: - map_get($space, xxs);
+    //}
+    //+ .headline-3 {}
+    //+ .headline-4 {
+    //    padding-top: map_get($space, xxs);
+    //}
+    //+ .headline-5 {
+    //    padding-top: map_get($space, xxs);
+    //}
+}
+
+.headline-4 {
+    font-size: map_get($font-size, sm);
+    font-weight: 400;
+
+    //+ .headline-1 {
+    //    margin-top: - map_get($space, xxs);
+    //}
+    //+ .headline-2 {}
+    //+ .headline-3 {}
+    //+ .headline-4 {}
+    //+ .headline-5 {
+    //    padding-top: map_get($space, xxs);
+    //}
+}
+
+.headline-5 {
+    font-size: map_get($font-size, xs);
+    font-weight: 400;
+
+    //+ .headline-1 {}
+    //+ .headline-2 {}
+    //+ .headline-3 {}
+    //+ .headline-4 {}
+    //+ .headline-5 {}
+}
+

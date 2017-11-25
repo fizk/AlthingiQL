@@ -1,0 +1,62 @@
+@mixin circle {
+    border-radius: 50%;
+}
+
+@mixin shadow {
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+}
+@mixin shadow-red {
+    box-shadow: 0 10px 50px rgba(227, 63, 54, 0.3);
+}
+
+$color-primary: (
+    light: #819ca9,
+    middle: #546e7a,
+    dark: #29434e,
+);
+
+$color-secondary: (
+    light: #ffffb3,
+    middle: #ffe082,
+    dark: #caae53,
+);
+
+$space: (
+    xxs:  4px,
+    xs:  8px,
+    sm:  11px,
+    md:  16px,
+    lg:  23px,
+    xl:  32px,
+    xxl:  46px,
+);
+
+$font-size: (
+    xs: 11px,
+    sm: 14px,
+    md: 16px,
+    lg: 22px,
+    xl: 32px,
+    xxl: 46px,
+);
+
+$color: (
+    white: #ffffff,
+    blue: #0000ee,
+    purple: #973999,
+    pink: #f8598b,
+    orange: #f7bf00,
+    gray-light-ultra: #F5F5F6,
+    gray-light: #adaba9,
+    gray: #496274,
+    gray-dark: #59585b,
+    black: #2a2e31,
+
+    alert: #58a32d,
+    warning: #cbaf3f,
+    error: #e33f36,
+
+    text-main: #000,
+    text-light: #000,
+    text-disabled: #000,
+);

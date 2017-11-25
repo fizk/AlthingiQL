@@ -1,0 +1,55 @@
+.status-pie-chart {
+    max-width: 100%;
+    height: auto;
+}
+
+.status-pie-chart__arch {
+    //ref
+}
+
+.status-pie-chart__path {
+    stroke: white;
+    stroke-width: 1px;
+    fill: rgb(200, 200, 200);
+}
+
+
+.status-pie-chart__path--wait-1 {
+    fill: rgb(200, 200, 200);
+}
+
+.status-pie-chart__path--wait-2 {
+    fill: rgb(200, 200, 200);
+}
+
+.status-pie-chart__path--question-void {
+    fill: rgb(200, 200, 200);
+}
+
+.status-pie-chart__path--question-retracted {
+    fill: rgb(200, 200, 200);
+}
+
+.status-pie-chart__path--question-not-answered {
+    fill: rgb(200, 200, 200);
+}
+
+.status-pie-chart__path--question-answered-verbal {
+    fill: rgb(200, 200, 200);
+}
+
+.status-pie-chart__path--question-answered-written {
+    fill: rgb(200, 200, 200);
+}
+
+.status-pie-chart__path--committee-1 {
+    fill: rgb(200, 200, 200);
+}
+
+.status-pie-chart__path--passed {
+    fill: rgb(106, 200, 120);
+}
+
+.status-pie-chart__path--to-government {
+    fill: rgb(200, 200, 200);
+}

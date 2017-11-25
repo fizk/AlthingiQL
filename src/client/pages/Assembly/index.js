@@ -1,86 +1,24 @@
 import React from 'react';
-import {graphql, compose, gql} from 'react-apollo';
-import Assembly from './Assembly';
+import PropTypes from 'prop-types';
+import {AssemblyNavigation} from "../../elements/AssemblyNavigation";
+import AssemblyHeader from '../../components/AssemblyHeader';
 
-const assemblyQuery = gql`
-    query assembly ($assembly: Int!) {
-        Assembly(assembly: $assembly) {
-            id
-            period {
-                from
-                to
-            }
-        }
-        AssemblySummary(assembly: $assembly) {
-            categories {
-                id
-                superCategoryId
-                title
-                title
-                count
-            }
-            parties {
-                party {
-                    id
-                    name
-                    color
-                }
-                time
-            }
-            bills {
-                count
-                status
-            }
-            governmentBills {
-                count
-                status
-            }
-            types {
-                count
-                type
-                typeName
-                typeSubName
-            }
-            votes {
-                count
-                date
-            }
-            speeches {
-                count
-                date
-            }
-            election {
-                id
-                date
-                title
-                description
-            }
-            electionResults {
-                party {
-                    id
-                    name
-                    color
-                }
-                results {
-                    seats
-                    result
-                }
-            }
-        }
+export default class Assembly extends React.Component {
+    static propTypes = {
+        assembly: PropTypes.number,
+    };
+
+    static defaultProps = {
+        assembly: undefined,
+    };
+
+    render() {
+        return (
+            <div>
+                <AssemblyNavigation assembly={this.props.assembly} />
+                <AssemblyHeader assembly={this.props.assembly} />
+                {this.props.children}
+            </div>
+        )
     }
-`;
-
-export default compose(
-    graphql(assemblyQuery, {
-        props: all => ({
-            assembly: all.data.loading === false ? all.data.Assembly : undefined,
-            summary: all.data.loading === false ? all.data.AssemblySummary : undefined,
-            loading: all.data.loading,
-        }),
-        options: ({assembly}) => ({
-            variables: {
-                assembly: assembly
-            }
-        })
-    })
-)(Assembly)
+}

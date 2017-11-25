@@ -1,0 +1,12 @@
+@import "../../config";
+
+.list--horizontal {
+    display: flex;
+}
+
+.list--separated {
+    > .list__item {
+        //border-bottom: 1px solid map_get($color-primary, light);
+    }
+}
+.list__item {}

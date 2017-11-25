@@ -1,0 +1,28 @@
+$enable-grid-classes: true;
+
+$grid-columns: 12;
+$grid-gutter-width: 30px;
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 480px,
+    md: 768px,
+    lg: 1024px
+);
+
+$container-max-widths: (
+    sm: 420px,
+    md: 720px,
+    lg: 960px
+);
+
+@import "bootstrap/scss/mixins/_clearfix.scss";
+@import "bootstrap/scss/mixins/_breakpoints.scss";
+@import "bootstrap/scss/mixins/_grid-framework.scss";
+@import "bootstrap/scss/mixins/_grid.scss";
+@import "bootstrap/scss/_grid.scss";
+@import "bootstrap/scss/utilities/_flex.scss";
+
+.row-tall {
+    height: 100%;
+}

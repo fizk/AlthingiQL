@@ -1,0 +1,18 @@
+.date-and-count-chart {
+    max-width: 100%;
+    height: auto;
+}
+
+.date-and-count-chart__bar {
+    fill: rgb(20, 20, 20)
+}
+
+.date-and-count-chart__baseline {
+    stroke-width: 1px;
+    stroke: black;
+}
+
+.date-and-count-chart__line {
+    stroke-width: 1px;
+    stroke: rgb(200, 200, 200);
+}

@@ -1,0 +1,25 @@
+@import "../../config";
+
+.avatar {
+    width: map_get($space, xxl);
+    height: map_get($space, xxl);
+    @include circle;
+    background-position: center;
+    background-size: cover;
+}
+
+.avatar--sm {
+    width: map_get($space, md);
+    height: map_get($space, md);
+}
+
+.avatar--md {
+    width: map_get($space, xl);
+    height: map_get($space, xl);
+}
+
+
+.avatar--lg {
+    width: map_get($space, xxl);
+    height: map_get($space, xxl);
+}

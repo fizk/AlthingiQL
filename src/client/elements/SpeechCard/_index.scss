@@ -1,0 +1,30 @@
+@import "../../config";
+
+.speech-card {
+    padding: map_get($space, md) 0;
+}
+
+.speech-card__meta {
+    padding: map_get($space, xs) 0;
+}
+
+.speech-card__type {
+    padding-right: map_get($space, md);
+}
+
+.speech-card__iteration {
+    padding-right: map_get($space, md);
+}
+
+.speech-card__date + .speech-card__date::before {
+    content: '\2022';
+    display: inline-block;
+    padding: 0 map_get($space, xxs);
+}
+
+.speech-card__text {
+    text-indent: map_get($space, lg);
+    p + p {
+        margin-top: map_get($space, sm);
+    }
+}
