@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "$(npm bin)/forever start ./dist/server/index.js",
+    "stop": "$(npm bin)/forever stop ./dist/server/index.js",
     "server:dev": "nodemon --exec $(npm bin)/babel-node --presets=es2015,react,stage-2 -- ./src/server/index.js",
+    "server:prod": "SERVER_PROTOCOL=hundur SERVER_HOST=kottur PORT=1234 npm run build && npm start",
     "webpack": "$(npm bin)/webpack -p",
     "webpack:watch": "$(npm bin)/webpack --watch",
     "sass": "$(npm bin)/gulp sass",

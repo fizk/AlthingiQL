@@ -82,7 +82,7 @@ const issueSearchDispatchAction = (dispatch, assembly, issue, query) => {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    const req = new Request('http://localhost:3000/graphql', {
+    const req = new Request(__GRAPHQL_SERVER__, {
         method: 'POST',
         body: JSON.stringify({
             query: searchQuery,

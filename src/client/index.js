@@ -10,8 +10,8 @@ import reducers from './reducers';
 
 const client = new ApolloClient({
     networkInterface: createNetworkInterface({
-        uri: 'http://localhost:3000/graphql',
-        // dataIdFromObject: record => record.id,
+        // uri: 'http://localhost:3000/graphql',
+        url: __GRAPHQL_SERVER__,
     })
 });
 
@@ -20,7 +20,11 @@ let combinedReducer = combineReducers({
     apollo: client.reducer(),
 });
 
-const store = createStore(combinedReducer, window.__APOLLO_STATE__, applyMiddleware(client.middleware(),thunk));
+const store = createStore(
+    combinedReducer,
+    window.__APOLLO_STATE__,
+    applyMiddleware(client.middleware(),thunk)
+);
 
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = composeEnhancers(

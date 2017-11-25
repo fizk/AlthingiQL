@@ -15,8 +15,13 @@ import {Routers} from '../client/router';
 import {Chrome} from '../client/components/Chrome';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const serverConfig = {
+    protocol: process.env.SERVER_PROTOCOL || 'http',
+    host: process.env.SERVER_HOST || 'localhost',
+    port: process.env.PORT || 3000,
+};
 const clientConfig = {
+    protocol: process.env.CLIENT_PROTOCOL || 'http',
     host: process.env.CLIENT_HOST || 'localhost',
     port: process.env.CLIENT_PORT || 8080,
 };
@@ -31,24 +36,25 @@ app.use('/graphql', graphqlHTTP({
 }));
 app.get('*', (request, response) => {
 
-    response.send(`<!doctype html><html>
-                 <head>
-                     <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" />
-                 </head>
-                 <body>
-                     <div data-react></div>
-                     <script src="/scripts/application.js"></script>
-                 </body>
-             </html>`);
-    response.end();
-
-    return;
-
+    // response.send(`
+    //          <!doctype html>
+    //          <html>
+    //              <head>
+    //                  <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" />
+    //              </head>
+    //              <body>
+    //                  <div data-react></div>
+    //                  <script src="/scripts/application.js"></script>
+    //              </body>
+    //          </html>`);
+    // response.end();
+    //
+    // return;
 
     const client = new ApolloClient({
         ssrMode: true,
         networkInterface: createNetworkInterface({
-            uri: `http://localhost:${port}/graphql`,
+            uri: `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/graphql`,
             opts: {
                 credentials: 'same-origin',
                 headers: {
@@ -114,4 +120,4 @@ app.get('*', (request, response) => {
 
 });
 
-app.listen(port, () => console.log(`Server started on ${port}`));
+app.listen(serverConfig.port, () => console.log(`Server started on ${serverConfig.port}`));
