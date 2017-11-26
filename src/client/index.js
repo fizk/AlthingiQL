@@ -10,8 +10,7 @@ import reducers from './reducers';
 
 const client = new ApolloClient({
     networkInterface: createNetworkInterface({
-        // uri: 'http://localhost:3000/graphql',
-        url: __GRAPHQL_SERVER__,
+        uri: __GRAPHQL_SERVER__,
     })
 });
 

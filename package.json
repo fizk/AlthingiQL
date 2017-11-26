@@ -8,7 +8,7 @@
     "start": "$(npm bin)/forever start ./dist/server/index.js",
     "stop": "$(npm bin)/forever stop ./dist/server/index.js",
     "server:dev": "nodemon --exec $(npm bin)/babel-node --presets=es2015,react,stage-2 -- ./src/server/index.js",
-    "server:prod": "SERVER_PROTOCOL=https SERVER_HOST=loggjafarthing.einarvalur.co PORT=443 CLIENT_PROTOCOL=https CLIENT_HOST=loggjafarthing-api.einarvalur.co CLIENT_PORT=443 npm run build && npm start",
+    "server:prod": "SERVER_PROTOCOL=https SERVER_HOST=loggjafarthing.einarvalur.co PORT=443 npm run build && npm start",
     "webpack": "$(npm bin)/webpack -p",
     "webpack:watch": "$(npm bin)/webpack --watch",
     "sass": "$(npm bin)/gulp sass",
