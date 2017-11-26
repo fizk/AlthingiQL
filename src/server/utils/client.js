@@ -28,7 +28,7 @@ export const getPagination = (debug, config) => (url, cursor) => {
                 reject(error);
                 debug('Request: %O, Error: %O', options, error);
             } else {
-                const contentRange: string = String(response.headers['content-range']);
+                const contentRange = String(response.headers['content-range']);
                 const [_0, _1, from, to, total] = contentRange.match(/(items )([0-9]*)-([0-9]*)\/([0-9]*)/);
                 const size = Number(to) - Number(from);
 

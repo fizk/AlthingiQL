@@ -6,7 +6,14 @@ html {
     box-sizing: inherit;
 }
 
-*, *::before, *::after {margin: 0; padding: 0;}
-ul, ol {
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+ol {
     list-style: none;
 }

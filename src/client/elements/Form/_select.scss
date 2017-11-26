@@ -17,11 +17,11 @@
 // - -[FIELD variations]- - - - - - -
 
 .select__input--border-less {
+    @include shadow;
     border-width: 0;
     border-style: none;
     border-color: transparent;
     background-color: map_get($color, white);
-    @include shadow;
     outline: none;
 
     &.input--error {

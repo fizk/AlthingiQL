@@ -1,11 +1,12 @@
 @font-face {
     font-family: 'tt-webfont';
-    src: url('/fonts/tt-regular-webfont.woff2') format('woff2'); /* Super Modern Browsers */
+    src: url('/fonts/tt-regular-webfont.woff2') format('woff2');
     font-weight: normal;
 }
+
 @font-face {
     font-family: 'tt-webfont';
-    src: url('/fonts/tt-medium-webfont.woff2') format('woff2'); /* Super Modern Browsers */
+    src: url('/fonts/tt-medium-webfont.woff2') format('woff2');
     font-weight: bold;
 }
 
@@ -13,13 +14,10 @@ body {
     font-family: 'tt-webfont', sans-serif;
     line-height: 1.25;
     background-color: #fafafa;
-    /* Adjust font size */
     font-size: 100%;
     -webkit-text-size-adjust: 100%;
-    /* Font varient */
     font-variant-ligatures: none;
     -webkit-font-variant-ligatures: none;
-    /* Smoothing */
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
     font-smoothing: antialiased;

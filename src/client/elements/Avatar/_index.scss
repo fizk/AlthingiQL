@@ -1,9 +1,9 @@
 @import "../../config";
 
 .avatar {
+    @include circle;
     width: map_get($space, xxl);
     height: map_get($space, xxl);
-    @include circle;
     background-position: center;
     background-size: cover;
 }
@@ -17,7 +17,6 @@
     width: map_get($space, xl);
     height: map_get($space, xl);
 }
-
 
 .avatar--lg {
     width: map_get($space, xxl);

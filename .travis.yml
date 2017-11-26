@@ -1,6 +1,20 @@
 language: node_js
 node_js:
   - "8"
-  
+
 install:
     - npm install
+
+scripts:
+    - npm run test
+    - npm run lint:js
+
+notifications:
+    webhooks:
+        urls:
+            - https://loggjafarthing-api.einarvalur.co/client.php
+        on_success: always
+        on_failure: never
+        on_start: never
+        on_cancel: never
+        on_error: never

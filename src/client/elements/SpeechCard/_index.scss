@@ -24,6 +24,7 @@
 
 .speech-card__text {
     text-indent: map_get($space, lg);
+
     p + p {
         margin-top: map_get($space, sm);
     }
