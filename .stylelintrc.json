@@ -1,24 +1,26 @@
 {
-  "extends": "stylelint-config-standard",
-  "plugins": [
-    "stylelint-scss",
-    "stylelint-declaration-strict-value"
-  ],
-  "rules": {
+    "extends": "stylelint-config-standard",
+    "plugins": [
+        "stylelint-scss",
+        "stylelint-declaration-strict-value"
+    ],
+    "rules": {
 
-    "selector-class-pattern": "^(?:(?:o|c|u|t|s|is|has|_|js|qa)-)?[a-z0-9]+(?:-[a-z0-9]+)*(?:__[a-z0-9]+(?:-[a-z0-9]+)*)?(?:--[a-z0-9]+(?:-[a-z0-9]+)*)?(?:\\[.+\\])?$",
+        "indentation": 4,
 
-    "scale-unlimited/declaration-strict-value": [[
-      "/^((.+-)?(color))$/",
-      "/^((.+-)?(height|width|radius|size))$/",
-      "/^(margin|padding)(-top|-left|-bottom|-right)?/"
-    ], {
-      "ignoreKeywords": {
-        "/^((.+-)?(color))$/": ["currentColor", "transparent", "inherit"],
-        "/^((.+-)?(height|width|radius|size))$/": ["auto", "0", "100%", "map_get"],
-        "/^(margin|padding)(-top|-left|-bottom|-right)?/": ["auto", "0", "100%", "map_get", "map_get auto"]
-      }
+        "selector-class-pattern": "^(?:(?:o|c|u|t|s|is|has|_|js|qa)-)?[a-z0-9]+(?:-[a-z0-9]+)*(?:__[a-z0-9]+(?:-[a-z0-9]+)*)?(?:--[a-z0-9]+(?:-[a-z0-9]+)*)?(?:\\[.+\\])?$",
+
+        "scale-unlimited/declaration-strict-value": [[
+            "/^((.+-)?(color))$/",
+            "/^((.+-)?(height|width|radius|size))$/",
+            "/^(margin|padding)(-top|-left|-bottom|-right)?/"
+        ], {
+            "ignoreKeywords": {
+                "/^((.+-)?(color))$/": ["currentColor", "transparent", "inherit"],
+                "/^((.+-)?(height|width|radius|size))$/": ["cover", "contain", "auto", "0", "100%", "map_get"],
+                "/^(margin|padding)(-top|-left|-bottom|-right)?/": ["auto", "0", "100%", "map_get", "map_get auto"]
+            }
+        }
+        ]
     }
-    ]
-  }
 }

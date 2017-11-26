@@ -4,12 +4,17 @@
     display: flex;
     align-items: center;
 }
+
 .congressman__party {
     flex: 0 0 (map_get($space, xl) + map_get($space, xs));
     align-self: flex-start;
 }
+
 .congressman__avatar {
     flex: 0 0 (map_get($space, xxl) + map_get($space, xs));
     align-self: flex-start;
 }
-.congressman__body {  }
+
+.congressman__body {
+    //ref
+}

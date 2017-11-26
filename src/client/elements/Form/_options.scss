@@ -38,9 +38,8 @@
     background-color: map_get($color-secondary, light);
 }
 
-
 // - -[options-list-container]- - - - - - -
 .options-list__container {
-    background-color: map_get($color, white);
     @include shadow;
+    background-color: map_get($color, white);
 }

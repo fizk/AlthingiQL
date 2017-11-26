@@ -5,6 +5,7 @@
 @mixin shadow {
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
 }
+
 @mixin shadow-red {
     box-shadow: 0 10px 50px rgba(227, 63, 54, 0.3);
 }
@@ -51,11 +52,9 @@ $color: (
     gray: #496274,
     gray-dark: #59585b,
     black: #2a2e31,
-
     alert: #58a32d,
     warning: #cbaf3f,
     error: #e33f36,
-
     text-main: #000,
     text-light: #000,
     text-disabled: #000,

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/server';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import schema from './schema';
-import {client} from './utils/client'
+import {client} from './utils/client';
 import debug from 'debug';
 import {ApolloClient, createNetworkInterface, ApolloProvider, renderToStringWithData} from 'react-apollo';
 import {StaticRouter} from 'react-router';
@@ -31,8 +31,8 @@ app.use('/graphql', graphqlHTTP({
     schema: schema,
     graphiql: true,
     context: {
-        client: client(debug('server-log'), clientConfig)
-    }
+        client: client(debug('server-log'), clientConfig),
+    },
 }));
 app.get('*', (request, response) => {
 
@@ -68,7 +68,7 @@ app.get('*', (request, response) => {
         ...reducers,
         apollo: client.reducer(),
     });
-    const store = createStore(combinedReducer, applyMiddleware(client.middleware(),thunk));
+    const store = createStore(combinedReducer, applyMiddleware(client.middleware(), thunk));
 
     const app = (
         <ApolloProvider client={client} store={store}>
@@ -79,7 +79,7 @@ app.get('*', (request, response) => {
     );
 
     renderToStringWithData(app).then(content => {
-        const initialState = {apollo: client.getInitialState()};
+        const initialState = {apollo: client.getInitialState(), };
         const html = `<!doctype html>
              <html>
                  <head>
@@ -117,7 +117,6 @@ app.get('*', (request, response) => {
         response.send(`<!doctype html>${html}`);
         response.end();
     });
-
 });
 
-app.listen(serverConfig.port, () => console.log(`Server started on ${serverConfig.port}`));
+app.listen(serverConfig.port, () => debug('server-log')(`Server started on ${serverConfig.port}`));
