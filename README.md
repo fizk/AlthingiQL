@@ -89,4 +89,4 @@ The client is a part of a bigger system that includes:
 * [AlthingiAggregator](https://github.com/fizk/AlthingiAggregator)
 
 This system is the blue box in this diagram:
-![loggjafarthing-schema](https://user-images.githubusercontent.com/386336/33247903-b0c64d7c-d375-11e7-938e-f514d67e9386.png)
+![loggjafarthing-schema](https://user-images.githubusercontent.com/386336/33251209-9b8ba358-d389-11e7-83cd-eb2e34614afe.png)
