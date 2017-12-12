@@ -5,7 +5,7 @@ node_js:
 install:
     - npm install
 
-scripts:
+script:
     - npm run test
     - npm run lint:js
 
@@ -16,5 +16,3 @@ notifications:
         on_success: always
         on_failure: never
         on_start: never
-        on_cancel: never
-        on_error: never
