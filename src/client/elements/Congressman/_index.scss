@@ -2,7 +2,9 @@
 
 .congressman {
     display: flex;
+    flex: auto;
     align-items: center;
+    max-width: 100%;
 }
 
 .congressman__party {
@@ -16,5 +18,6 @@
 }
 
 .congressman__body {
-    //ref
+    max-width: calc(100% - #{map_get($space, xl) + map_get($space, xs)} - #{map_get($space, xxl) + map_get($space, xs)});
+    flex-grow: 1;
 }

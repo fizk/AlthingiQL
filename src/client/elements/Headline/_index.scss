@@ -68,3 +68,22 @@
     //+ .headline-5 {}
 }
 
+.headline-1--ellipsis {
+    @include ellipsis;
+}
+
+.headline-2--ellipsis {
+    @include ellipsis;
+}
+
+.headline-3--ellipsis {
+    @include ellipsis;
+}
+
+.headline-4--ellipsis {
+    @include ellipsis;
+}
+
+.headline-5--ellipsis {
+    @include ellipsis;
+}

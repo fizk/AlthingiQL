@@ -1,19 +1,22 @@
+@import "../../config";
+
 $enable-grid-classes: true;
 
 $grid-columns: 12;
-$grid-gutter-width: 30px;
+$grid-gutter-width: map_get($space, xl);
 
 $grid-breakpoints: (
     xs: 0,
-    sm: 480px,
-    md: 768px,
-    lg: 1024px
+    sm: map_get($breakpoint-values, sm),
+    md: map_get($breakpoint-values, md),
+    lg: map_get($breakpoint-values, lg),
+    xl: map_get($breakpoint-values, xl),
 );
 
 $container-max-widths: (
-    sm: 420px,
-    md: 720px,
-    lg: 960px
+    sm: map_get($breakpoint-values, sm),
+    md: map_get($breakpoint-values, md),
+    lg: map_get($breakpoint-values, lg),
 );
 
 @import "bootstrap/scss/mixins/_clearfix.scss";

@@ -11,6 +11,7 @@ const assemblyIssueQuery = gql`
                 status
                 type
                 typeName
+                subName
                 goal
                 assembly {id}
                 proponentsCount

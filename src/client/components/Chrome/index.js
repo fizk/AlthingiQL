@@ -26,7 +26,9 @@ class Chrome extends React.Component {
                 <main className="chrome__main">
                     {this.props.children}
                 </main>
-                <footer className="chrome__footer"></footer>
+                <footer className="chrome__footer">
+                    @loggjafarthing
+                </footer>
             </div>
         )
     }

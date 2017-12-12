@@ -4,6 +4,7 @@ import Assemblies from './Assemblies';
 import Congressman from './Congressman';
 import Congressmen from './Congressmen';
 import AssemblyIssue from './AssemblyIssue';
+import AssemblyIssueProgress from './AssemblyIssueProgress';
 import AssemblyIssues from './AssemblyIssues';
 import IssueDocuments from './IssueDocuments';
 import IssueSpeeches from './IssueSpeeches';
@@ -16,6 +17,10 @@ import CongressmanAssemblyPromote from './CongressmanAssemblyPromote';
 import CongressmanAssemblyVotes from './CongressmanAssemblyVotes';
 import CongressmanIssueTypePromotion from './CongressmanIssueTypePromotion';
 import CongressmanAssemblyCategorySpeechTime from './CongressmanAssemblyCategorySpeechTime';
+import CongressmenAssemblySpeechTime from './CongressmenAssemblySpeechTime';
+import CongressmenAssemblyQuestions from './CongressmenAssemblyQuestions';
+import CongressmenAssemblyResolutions from './CongressmenAssemblyResolutions';
+import CongressmenAssemblyBills from './CongressmenAssemblyBills';
 import DocumentVotes from './DocumentVotes';
 
 export default {
@@ -27,6 +32,7 @@ export default {
     Congressman,
     Congressmen,
     AssemblyIssue,
+    AssemblyIssueProgress,
     AssemblyIssues,
     IssueDocuments,
     IssueSpeeches,
@@ -37,5 +43,9 @@ export default {
     CongressmanAssemblyPromote,
     CongressmanAssemblyCategorySpeechTime,
     CongressmanIssueTypePromotion,
+    CongressmenAssemblySpeechTime,
+    CongressmenAssemblyQuestions,
+    CongressmenAssemblyResolutions,
+    CongressmenAssemblyBills,
     DocumentVotes
 }

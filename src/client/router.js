@@ -45,7 +45,6 @@ export const Routers = () => (
                     <Column>
                         <Route path="/loggjafathing/:id">
                             <div>
-
                                 <Route exact={true} path="/loggjafathing/:assembly" render={({match, }) => {
                                     return (
                                         <Assembly assembly={Number(match.params.assembly)}>

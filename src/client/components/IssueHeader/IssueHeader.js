@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {H1, H2, H3} from "../../elements/Headline/index";
-import {Grid, Row, Column} from "../../elements/Grid/index";
+import {Row, Column} from "../../elements/Grid/index";
 
 export default class AssemblyHeader extends React.Component {
     static propTypes = {
@@ -46,18 +46,16 @@ export default class AssemblyHeader extends React.Component {
 
     render() {
         return (
-            <Grid>
-                <Row>
-                    <Column>
-                        <H1>{this.props.issue.id} {this.props.issue.name}</H1>
-                        <H3>{this.props.issue.typeName}</H3>
-                        <H2>{this.props.issue.status}</H2>
-                        <time>
-                            {this.props.issue.date}
-                        </time>
-                    </Column>
-                </Row>
-            </Grid>
+            <Row>
+                <Column>
+                    <H1>{this.props.issue.id} {this.props.issue.name}</H1>
+                    <H3>{this.props.issue.typeName}</H3>
+                    <H2>{this.props.issue.status}</H2>
+                    <time>
+                        {this.props.issue.date}
+                    </time>
+                </Column>
+            </Row>
         )
     }
 }

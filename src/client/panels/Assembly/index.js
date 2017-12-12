@@ -60,6 +60,30 @@ const assemblyQuery = gql`
                 }
             }
         }
+        CongressmanSpeekLeast: CongressmenAssemblySpeechTime (assembly: $assembly order: "asc" size: 5) {
+            ... congressmanWithValue
+        }
+        CongressmanSpeekMost: CongressmenAssemblySpeechTime (assembly: $assembly order: "desc" size: 5) {
+            ... congressmanWithValue
+        }
+        CongressmenAssemblyQuestions (assembly: $assembly order: "desc" size: 5) {
+            ... congressmanWithValue
+        }
+        CongressmenAssemblyResolutions (assembly: $assembly order: "desc" size: 5) {
+            ... congressmanWithValue
+        }
+        CongressmenAssemblyBills (assembly: $assembly order: "desc" size: 5) {
+            ... congressmanWithValue
+        }
+    }
+    fragment congressmanWithValue on CongressmanValue  {
+        value
+        congressman {
+            id
+            name
+            assembly {id}
+            party {id name color}
+        }
     }
 `;
 
@@ -68,6 +92,11 @@ export default compose(
         props: all => ({
             assembly: all.data.loading === false ? all.data.Assembly : undefined,
             summary: all.data.loading === false ? all.data.AssemblySummary : undefined,
+            speakMost: all.data.loading === false ? all.data.CongressmanSpeekMost : undefined,
+            speakLeast: all.data.loading === false ? all.data.CongressmanSpeekLeast : undefined,
+            questioner: all.data.loading === false ? all.data.CongressmenAssemblyQuestions : undefined,
+            resolutionaries: all.data.loading === false ? all.data.CongressmenAssemblyResolutions : undefined,
+            bills: all.data.loading === false ? all.data.CongressmenAssemblyBills : undefined,
             loading: all.data.loading,
         }),
         options: ({assembly}) => ({

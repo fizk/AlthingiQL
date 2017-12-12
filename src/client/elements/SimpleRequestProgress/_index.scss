@@ -1,0 +1,33 @@
+@import "../../config";
+
+.simple-request-progress {
+
+}
+
+.simple-request-progress__backdrop {
+    fill: #fafafa;
+}
+
+
+.simple-request-progress__status {
+    fill: map_get($color, gray-light);
+}
+
+
+.simple-request-progress--dismissed {
+    .simple-request-progress__status {
+        fill: map_get($color, orange);
+    }
+}
+
+.simple-request-progress--answered {
+    .simple-request-progress__status {
+        fill: map_get($color, green);
+    }
+}
+
+.simple-request-progress--not-answered {
+    .simple-request-progress__status {
+        fill: map_get($color, red);
+    }
+}

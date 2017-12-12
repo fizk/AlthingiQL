@@ -6,7 +6,7 @@ export const NavTab = ({children}) => (
 );
 
 export const NavTabItem = props => (
-    <NavLink exact={true} className="nav-tab__item" activeClassName="nav-tab__item--active" {...props}>
+    <NavLink exact={true} className="nav-tab__item" activeClassName="nav-tab__item nav-tab__item--active" {...props}>
         {props.children}
     </NavLink>
 );

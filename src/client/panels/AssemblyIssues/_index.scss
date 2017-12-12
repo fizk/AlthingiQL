@@ -6,11 +6,26 @@
 
 .assembly-issues-panel__list {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: map_get($space, md);
-    grid-row-gap: map_get($space, md);
+
+    grid-template-columns: 1fr;
+    grid-column-gap: map_get($space, lg);
+    grid-row-gap: map_get($space, lg);
+
+    @include breakpoint(md) {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .assembly-issues-panel__list-item {
-    //ref
+    //background-color: pink;
+}
+
+.assembly-issues-panel__list-item--sm {
+
+}
+.assembly-issues-panel__list-item--md {
+    grid-template-rows: 1fr 1fr;
+}
+.assembly-issues-panel__list-item--lg {
+    grid-template-rows: 1fr 1fr 1fr;
 }

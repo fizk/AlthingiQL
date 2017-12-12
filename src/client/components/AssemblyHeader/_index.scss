@@ -1,0 +1,23 @@
+@import "../../config";
+
+.assembly-header {
+    display: flex;
+    padding: map_get($space, xl) 0;
+}
+
+.assembly-header__headline {
+    flex-grow: 1;
+}
+
+.assembly-header__parties {
+
+}
+
+.assembly-header__party-list {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.assembly-header__party-list-item {
+    padding: map_get($space, xxs) / 2;
+}
