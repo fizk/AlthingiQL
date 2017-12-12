@@ -1,6 +1,142 @@
 @import "../../config";
 
 .issue-badge {
-    border-left: 2px solid red;
-    padding-left: 16px;
+    @include shadow;
+    @include rounded;
+    height: 100%; //@todo remove this...
+    background-color: map_get($color, white);
+    padding: map_get($space, md);
+    text-decoration: none;
+}
+
+.issue-badge__header {
+    display: flex;
+    padding-bottom: map_get($space, sm);
+}
+
+.issue-badge__body {
+    display: flex;
+    padding-bottom: map_get($space, sm);
+}
+
+.issue-badge__footer {
+    display: flex;
+    align-items: center;
+}
+
+.issue-badge__headline {
+    flex-grow: 1;
+}
+
+.issue-badge__type {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: right;
+    text-transform: uppercase;
+    color: map_get($color, gray);
+    flex: 0 0 (map_get($space, xxl) + map_get($space, sm));
+}
+
+.issue-badge__type-name {
+    flex-grow: 1;
+}
+
+.issue-badge__status{
+    //ref
+}
+
+.issue-badge__congressman {
+    display: flex;
+    width: calc(100% - #{map_get($space, xxl)});
+    align-items: center;
+}
+
+.issue-badge__congressman-count {
+    flex: 0 0 map_get($space, xxl);
+    align-self: center;
+    text-align: right;
+}
+
+
+// - - - - - BILL
+.issue-badge--bill {
+    padding: 0;
+
+    .issue-badge__header {
+        @include rounded-top;
+        min-height: 180px;
+        max-height: 220px;
+        background-color: map_get($color, gray-light-ultra);
+        background-position: center;
+        background-size: cover;
+        padding: map_get($space, sm);
+        display: flex;
+        align-items: flex-end;
+        color: map_get($color, white);
+    }
+
+    .issue-badge__congressman-badge {
+        flex: 0 0 map_get($space, xl) + map_get($space, sm);
+    }
+
+    .issue-badge__body {
+        padding-top: map_get($space, md);
+        padding-left: map_get($space, md);
+        padding-right: map_get($space, md);
+    }
+
+    .issue-badge__headline {
+        flex-grow: 1;
+    }
+
+    .issue-badge__type {
+        @include circle;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: map_get($color, white);
+
+        width: (map_get($space, xxl) + map_get($space, sm));
+        height: (map_get($space, xxl) + map_get($space, sm));
+        margin-top: - (map_get($space, xl));
+        display: flex;
+    }
+
+    .issue-badge__footer {
+        padding: 0 map_get($space, md) map_get($space, md) map_get($space, md);
+    }
+}
+
+// - - - - - RESOLUTION
+.issue-badge--resolution {
+    //ref
+}
+
+// - - - - - OPINION
+.issue-badge--opinion {
+    //ref
+}
+
+// - - - - - REQUEST
+.issue-badge--request {
+    //ref
+}
+
+// - - - - - REPORT
+.issue-badge--report {
+    //ref
+}
+
+// - - - - - MEETING
+.issue-badge--meeting {
+    //ref
+}
+
+// - - - - - INQUIRY
+.issue-badge--inquiry {
+    //ref
+}
+
+// - - - - - WRITTEN INQUIRY
+.issue-badge--written-inquiry {
+    //ref
 }

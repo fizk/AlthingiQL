@@ -4,6 +4,17 @@ import AssemblyIssue from './AssemblyIssue';
 
 const assemblyIssueQuery = gql`
     query ($assembly: Int! $issue: Int!) {
+        AssemblyIssueProgress (assembly: $assembly, issue: $issue) {
+            issue {id}
+            assembly {id}
+            committee {id name}
+            speech {id}
+            document {id}
+            date
+            title
+            type
+            completed
+        }
         AssemblyIssue(assembly: $assembly issue: $issue) {
             id
             assembly {
@@ -60,6 +71,7 @@ export default compose(
     graphql(assemblyIssueQuery, {
         props: all => ({
             issue: all.data.loading === false ? all.data.AssemblyIssue : undefined,
+            progress: all.data.loading === false ? all.data.AssemblyIssueProgress : undefined,
             loading: all.data.loading,
         }),
         options: ({issue, assembly}) => ({

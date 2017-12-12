@@ -20,6 +20,7 @@ module.exports = {
             __GRAPHQL_SERVER__: JSON.stringify(
                 `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/graphql`
             ),
+            __IMAGE_SERVER__: JSON.stringify('http://localhost:8000')
         })
     ],
     module: {

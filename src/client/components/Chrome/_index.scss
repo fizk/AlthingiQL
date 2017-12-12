@@ -8,6 +8,7 @@
     margin: auto;
     background-color: map_get($color-primary, dark);
     background-image: linear-gradient(to right, #973999, #f8598b, #f7bf00);
+    padding: map_get($space, md) 0;
 }
 
 .chrome__header-container {
@@ -21,7 +22,6 @@
 }
 
 .chrome__footer {
-    max-width: 1024px;
-    margin: auto;
+    padding: map_get($space, xxl);
 }
 

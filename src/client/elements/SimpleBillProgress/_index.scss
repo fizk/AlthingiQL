@@ -1,0 +1,110 @@
+@import "../../config";
+
+.simple-bill-progress {
+
+}
+
+.simple-bill-progress__status {
+    fill: #D8D8D8;
+}
+
+// - - -
+.simple-bill-progress--await-one {
+    .simple-bill-progress__status--await-one {
+        fill: #E7E683 //map_get($color, orange);
+    }
+}
+
+// - - -
+.simple-bill-progress--await-two {
+    .simple-bill-progress__status--await-one {
+        fill: #979797 //map_get($color, gray);
+    }
+
+    .simple-bill-progress__status--await-two {
+        fill: #E7E683 //map_get($color, orange);
+    }
+}
+
+// - - -
+.simple-bill-progress--committee-one {
+    .simple-bill-progress__status--await-one {
+        fill: #979797 //map_get($color, gray);
+    }
+
+    .simple-bill-progress__status--await-two {
+        fill: #979797 //map_get($color, gray);
+    }
+
+    .simple-bill-progress__status--committee-one {
+        fill: #E7E683 //map_get($color, orange);
+    }
+}
+
+// - - -
+.simple-bill-progress--committee-two {
+    .simple-bill-progress__status--await-one {
+        fill: #979797 //map_get($color, gray);
+    }
+
+    .simple-bill-progress__status--await-two {
+        fill: #979797 //map_get($color, gray);
+    }
+
+    .simple-bill-progress__status--committee-one {
+        fill: #979797 //map_get($color, gray);
+    }
+
+    .simple-bill-progress__status--committee-two {
+        fill: #E7E683 //map_get($color, orange);
+    }
+}
+
+// - - -
+.simple-bill-progress--law {
+    .simple-bill-progress__status--await-one {
+        fill: #92E687 //map_get($color, green);
+    }
+
+    .simple-bill-progress__status--await-two {
+        fill: #92E687 //map_get($color, green);
+    }
+
+    .simple-bill-progress__status--committee-one {
+        fill: #92E687 //map_get($color, green);
+    }
+
+    .simple-bill-progress__status--committee-two {
+        fill: #92E687 //map_get($color, green);
+    }
+
+    .simple-bill-progress__status--low {
+        fill: #92E687 //map_get($color, green);
+    }
+}
+
+// - - -
+.simple-bill-progress--referred {
+    .simple-bill-progress__status--await-one {
+        fill: #E68787 //map_get($color, red);
+    }
+
+    .simple-bill-progress__status--await-two {
+        fill: #E68787 //map_get($color, red);
+    }
+
+    .simple-bill-progress__status--committee-one {
+        fill: #E68787 //map_get($color, red);
+    }
+
+    .simple-bill-progress__status--committee-two {
+        fill: #E68787 //map_get($color, red);
+    }
+
+    .simple-bill-progress__status--low {
+        fill: #E68787 //map_get($color, red);
+    }
+}
+
+// - - -
+

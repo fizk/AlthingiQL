@@ -25,17 +25,21 @@ export class Congressman extends React.Component {
         party: undefined,
     };
 
+    url(id) {
+        return __IMAGE_SERVER__ + `/unsafe/60x60/smart/http://www.althingi.is/myndir/mynd/thingmenn/${id}/org/mynd.jpg`;
+    }
+
     render() {
         return (
             <div className="congressman">
                 <div className="congressman__avatar">
-                    <Avatar src={`http://www.althingi.is/myndir/thingmenn-cache/${this.props.congressman.id}/${this.props.congressman.id}-220.jpg`} />
+                    <Avatar src={this.url(this.props.congressman.id)} />
                 </div>
                 {this.props.party && <div className="congressman__party">
                     <Badge title={this.props.party.name} color={this.props.party.color} />
                 </div>}
                 <div className="congressman__body">
-                    <H3>{this.props.congressman.name}</H3>
+                    <H3 variations={['ellipsis']}>{this.props.congressman.name}</H3>
                     {this.props.children}
                 </div>
             </div>

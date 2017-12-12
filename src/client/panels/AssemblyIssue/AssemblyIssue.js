@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import {Grid, Row, Column} from '../../elements/Grid';
 import {Congressman} from '../../elements/Congressman';
 import {DateAndCountChart} from '../../elements/DateAndCountChart';
@@ -58,6 +59,17 @@ export default class AssemblyIssue extends React.Component {
                 date: PropTypes.string,
             })),
         }),
+        progress: PropTypes.arrayOf(PropTypes.shape({
+            issue: PropTypes.shape({id: PropTypes.number}),
+            assembly: PropTypes.shape({id: PropTypes.number}),
+            committee: PropTypes.shape({id: PropTypes.number}),
+            speech: PropTypes.shape({id: PropTypes.string}),
+            document: PropTypes.shape({id: PropTypes.number}),
+            date: PropTypes.string,
+            title: PropTypes.string,
+            type: PropTypes.string,
+            completed: PropTypes.bool,
+        }))
     };
 
     static defaultProps = {
@@ -85,53 +97,69 @@ export default class AssemblyIssue extends React.Component {
             voteRange: [],
             speechRange: []
         },
+        progress: [],
     };
 
     render() {
         return (
-            <div>
-                <Row>
-                    <Column>
-                        <H2>Framsögumenn</H2>
-                        <Paper>
-                            <ul>
-                                {this.props.issue.proponents.map((congressman, i) => (
-                                    <li key={`congressman-${congressman.id}-${i}`}>
-                                        <Congressman party={congressman.party}
-                                                     congressman={congressman} />
-                                    </li>
-                                ))}
-                            </ul>
-                        </Paper>
-                        <H2>Ræðumenn</H2>
+            <Row>
+                <Column>
+                    <H2>Framsögumenn</H2>
+                    <Paper>
                         <ul>
-                            {this.props.issue.speakers.map((item, i) => (
-                                <li key={`congressman-${item.congressman.id}-${i}`}>
-                                    <Congressman party={item.congressman.party}
-                                                 congressman={item.congressman}>
-                                        <H4>{item.duration} mínútur</H4>
-                                    </Congressman>
+                            {this.props.issue.proponents.map((congressman, i) => (
+                                <li key={`congressman-${congressman.id}-${i}`}>
+                                    <Congressman party={congressman.party}
+                                                 congressman={congressman} />
                                 </li>
                             ))}
                         </ul>
-                    </Column>
-                    <Column>
-                        <Markdown source={this.props.issue.goal || ''} />
-                        <Markdown source={this.props.issue.majorChanges || ''} />
-                        <Markdown source={this.props.issue.changesInLaw || ''} />
-                        <Markdown source={this.props.issue.costsAndRevenues || ''} />
-                        <Markdown source={this.props.issue.deliveries || ''} />
-                        <Markdown source={this.props.issue.additionalInformation || ''} />
+                    </Paper>
+                    <H2>Ræðumenn</H2>
+                    <ul>
+                        {this.props.issue.speakers.map((item, i) => (
+                            <li key={`congressman-${item.congressman.id}-${i}`}>
+                                <Congressman party={item.congressman.party}
+                                             congressman={item.congressman}>
+                                    <H4>{item.duration} mínútur</H4>
+                                </Congressman>
+                            </li>
+                        ))}
+                    </ul>
+                </Column>
+                <Column>
+                    <Markdown source={this.props.issue.goal || ''} />
+                    <Markdown source={this.props.issue.majorChanges || ''} />
+                    <Markdown source={this.props.issue.changesInLaw || ''} />
+                    <Markdown source={this.props.issue.costsAndRevenues || ''} />
+                    <Markdown source={this.props.issue.deliveries || ''} />
+                    <Markdown source={this.props.issue.additionalInformation || ''} />
 
-                        <h4>Vote</h4>
-                        <DateAndCountChart source={this.props.issue.voteRange} />
+                    <h4>Vote</h4>
+                    <DateAndCountChart source={this.props.issue.voteRange} />
 
-                        <h4>Speeches</h4>
-                        <DateAndCountChart source={this.props.issue.speechRange} />
+                    <h4>Speeches</h4>
+                    <DateAndCountChart source={this.props.issue.speechRange} />
+                    <Paper>
+                        <ul>
+                            {this.props.progress.map((progress, i) => (
+                                <li key={`progress-${i}`}>
 
-                    </Column>
-                </Row>
-            </div>
+                                    {progress.document && progress.document.id && (
+                                        <span> | <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/thingskjol`} >{progress.title}</Link></span>
+                                    )}
+                                    {progress.speech && progress.speech.id && (
+                                        <span>| umræda : <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/raedur/${progress.speech.id}`} >{progress.title}</Link></span>
+                                    )}
+                                    {progress.committee && progress.committee.id && (
+                                        <span>| {progress.title} : <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/raedur/${progress.committee.id}`} >{progress.committee.name}</Link></span>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    </Paper>
+                </Column>
+            </Row>
         )
     }
 }

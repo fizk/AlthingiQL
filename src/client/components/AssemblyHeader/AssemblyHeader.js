@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {H1} from "../../elements/Headline/index";
 import {Badge} from "../../elements/Badge/index";
-import {Grid, Row, Column} from "../../elements/Grid/index";
 
 export default class AssemblyHeader extends React.Component {
     static propTypes = {
@@ -45,33 +44,31 @@ export default class AssemblyHeader extends React.Component {
 
     render() {
         return (
-            <Grid>
-                <Row>
-                    <Column>
-                        <H1>{this.props.assembly.id}</H1>
-                        <time>
-                            {this.props.assembly.period.from}
-                            {this.props.assembly.period.to}
-                        </time>
-                    </Column>
-                    <Column>
-                        <Row>
-                            {this.props.assembly.division.majority.map(party => (
-                                <Column key={`party-${party.id}`}>
-                                    <Badge title={party.name} color={party.color}/>
-                                </Column>
-                            ))}
-                        </Row>
-                        <Row>
-                            {this.props.assembly.division.minority.map(party => (
-                                <Column key={`party-${party.id}`}>
-                                    <Badge title={party.name} color={party.color}/>
-                                </Column>
-                            ))}
-                        </Row>
-                    </Column>
-                </Row>
-            </Grid>
+            <div className="assembly-header">
+                <div className="assembly-header__headline">
+                    <H1>{this.props.assembly.id}. Löggjafarþing</H1>
+                    <time>
+                        {this.props.assembly.period.from}
+                        {this.props.assembly.period.to}
+                    </time>
+                </div>
+                <div className="assembly-header__parties">
+                    <ul className="assembly-header__party-list">
+                        {this.props.assembly.division.majority.map(party => (
+                            <li key={`party-${party.id}`} className="assembly-header__party-list-item">
+                            <Badge title={party.name} color={party.color}/>
+                            </li>
+                        ))}
+                    </ul>
+                    <ul className="assembly-header__party-list">
+                        {this.props.assembly.division.minority.map(party => (
+                            <li key={`party-${party.id}`} className="assembly-header__party-list-item">
+                                <Badge title={party.name} color={party.color}/>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
         )
     }
 }

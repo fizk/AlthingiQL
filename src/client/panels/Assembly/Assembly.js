@@ -9,6 +9,7 @@ import {SeatChart} from "../../elements/SeatChart/index";
 import {ISSUE_STATUS} from '../../utils/maps';
 import {Paper} from "../../elements/Paper/index";
 import {Badge} from "../../elements/Badge/index";
+import {Congressman} from "../../elements/Congressman/index";
 
 export default class Assembly extends React.Component {
     static propTypes = {
@@ -68,6 +69,66 @@ export default class Assembly extends React.Component {
                 }),
             })),
         }),
+        speakMost: PropTypes.arrayOf(PropTypes.shape({
+            congressman: PropTypes.shape({
+                id: PropTypes.number,
+                name: PropTypes.string,
+                party: PropTypes.shape({
+                    id: PropTypes.number,
+                    name: PropTypes.string,
+                    color: PropTypes.string,
+                })
+            }),
+            value: PropTypes.number,
+        })),
+        speakLeast: PropTypes.arrayOf(PropTypes.shape({
+            congressman: PropTypes.shape({
+                id: PropTypes.number,
+                name: PropTypes.string,
+                party: PropTypes.shape({
+                    id: PropTypes.number,
+                    name: PropTypes.string,
+                    color: PropTypes.string,
+                })
+            }),
+            value: PropTypes.number,
+        })),
+        questioner: PropTypes.arrayOf(PropTypes.shape({
+            congressman: PropTypes.shape({
+                id: PropTypes.number,
+                name: PropTypes.string,
+                party: PropTypes.shape({
+                    id: PropTypes.number,
+                    name: PropTypes.string,
+                    color: PropTypes.string,
+                })
+            }),
+            value: PropTypes.number,
+        })),
+        resolutionaries: PropTypes.arrayOf(PropTypes.shape({
+            congressman: PropTypes.shape({
+                id: PropTypes.number,
+                name: PropTypes.string,
+                party: PropTypes.shape({
+                    id: PropTypes.number,
+                    name: PropTypes.string,
+                    color: PropTypes.string,
+                })
+            }),
+            value: PropTypes.number,
+        })),
+        bills: PropTypes.arrayOf(PropTypes.shape({
+            congressman: PropTypes.shape({
+                id: PropTypes.number,
+                name: PropTypes.string,
+                party: PropTypes.shape({
+                    id: PropTypes.number,
+                    name: PropTypes.string,
+                    color: PropTypes.string,
+                })
+            }),
+            value: PropTypes.number,
+        })),
     };
 
     static defaultProps = {
@@ -94,6 +155,11 @@ export default class Assembly extends React.Component {
             },
             electionResults: []
         },
+        speakMost: [],
+        speakLeast: [],
+        questioner: [],
+        resolutionaries: [],
+        bills: [],
     };
 
     render() {
@@ -129,7 +195,6 @@ export default class Assembly extends React.Component {
                 </Row>
                 <Row>
                     <Column>
-
                             <Row>
                                 <Column>
                                     <h2>Party speech time</h2>
@@ -163,7 +228,80 @@ export default class Assembly extends React.Component {
                                     </table>
                                 </Column>
                             </Row>
-
+                            <Row>
+                                <Column>
+                                    Tessi toludu mest
+                                    <ul>
+                                        {this.props.speakMost.map(data => (
+                                            <li key={`congressman-speak-${data.congressman.id}`}>
+                                                <Link to={`/loggjafathing/${this.props.assembly.id}/thingmenn/${data.congressman.id}`}>
+                                                    <Congressman congressman={data.congressman} party={data.congressman.party}>
+                                                        {data.value}
+                                                    </Congressman>
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Column>
+                                <Column>
+                                    Tessi toludu minnst
+                                    <ul>
+                                        {this.props.speakLeast.map(data => (
+                                            <li key={`congressman-speak-${data.congressman.id}`}>
+                                                <Link to={`/loggjafathing/${this.props.assembly.id}/thingmenn/${data.congressman.id}`}>
+                                                    <Congressman congressman={data.congressman} party={data.congressman.party}>
+                                                        {data.value}
+                                                    </Congressman>
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Column>
+                            </Row>
+                    </Column>
+                </Row>
+                <Row>
+                    <Column>
+                        Tessi spurdu mest
+                        <ul>
+                            {this.props.questioner.map(data => (
+                                <li key={`congressman-questioner-${data.congressman.id}`}>
+                                    <Link to={`/loggjafathing/${this.props.assembly.id}/thingmenn/${data.congressman.id}`}>
+                                        <Congressman congressman={data.congressman} party={data.congressman.party}>
+                                            {data.value}
+                                        </Congressman>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </Column>
+                    <Column>
+                        Tessi logdu fram flestar Tillögur til þingsályktana.
+                        <ul>
+                            {this.props.resolutionaries.map(data => (
+                                <li key={`congressman-resolutionaries-${data.congressman.id}`}>
+                                    <Link to={`/loggjafathing/${this.props.assembly.id}/thingmenn/${data.congressman.id}`}>
+                                        <Congressman congressman={data.congressman} party={data.congressman.party}>
+                                            {data.value}
+                                        </Congressman>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </Column>
+                    <Column>
+                        Tessi logdu fram flest Frumvarp til laga
+                        <ul>
+                            {this.props.bills.map(data => (
+                                <li key={`congressman-bills-${data.congressman.id}`}>
+                                    <Link to={`/loggjafathing/${this.props.assembly.id}/thingmenn/${data.congressman.id}`}>
+                                        <Congressman congressman={data.congressman} party={data.congressman.party}>
+                                            {data.value}
+                                        </Congressman>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
                     </Column>
                 </Row>
                 <Row>

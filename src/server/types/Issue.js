@@ -1,7 +1,7 @@
 import {GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLList} from 'graphql';
-import {GraphQLDateTime} from 'graphql-iso-date';
-import Assembly from "./Assembly";
-import Congressman from "./Congressman";
+import Assembly from './Assembly';
+import Congressman from './Congressman';
+import CongressmanValue from './CongressmanValue';
 
 export default new GraphQLObjectType({
     name: 'Issue',
@@ -71,25 +71,13 @@ export default new GraphQLObjectType({
             // type: GraphQLDateTime,
         },
         speakers: {
-            type: new GraphQLList(new GraphQLObjectType({
-                name: 'SpeakerAndTime',
-                fields: {
-                    congressman: {
-                        type: Congressman
-                    },
-                    duration: {
-                        type: GraphQLInt
-                    }
-                }
-            })),
+            type: new GraphQLList(CongressmanValue),
             resolve (root) {
                 return root.speakers.map(item => ({
                     congressman: item,
-                    duration: item.time,
+                    value: item.time,
                 }));
             }
-            // type: new GraphQLList(Congressman),
-            // resolve: (root) => root.speakers,
         },
         proponents: {
             type: new GraphQLList(Congressman),

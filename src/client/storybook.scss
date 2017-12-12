@@ -1,33 +1,5 @@
-@font-face {
-    font-family: 'tt-webfont';
-    src: url('/fonts/tt-regular-webfont.woff2') format('woff2');
-    font-weight: normal;
-}
-
-@font-face {
-    font-family: 'tt-webfont';
-    src: url('/fonts/tt-medium-webfont.woff2') format('woff2');
-    font-weight: bold;
-}
-
-body {
-    font-family: 'tt-webfont', sans-serif;
-    line-height: 1.25;
-    background-color: #fafafa;
-    font-size: 100%;
-    -webkit-text-size-adjust: 100%;
-    font-variant-ligatures: none;
-    -webkit-font-variant-ligatures: none;
-    text-rendering: optimizeLegibility;
-    -moz-osx-font-smoothing: grayscale;
-    font-smoothing: antialiased;
-    -webkit-font-smoothing: antialiased;
-    color: #496274;;
-}
+@import "./application";
 
 body {
     padding: 20px;
 }
-
-@import "reset";
-@import "index";
