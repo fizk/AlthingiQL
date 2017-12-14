@@ -10,6 +10,7 @@ import {ISSUE_STATUS} from '../../utils/maps';
 import {Paper} from "../../elements/Paper/index";
 import {Badge} from "../../elements/Badge/index";
 import {Congressman} from "../../elements/Congressman/index";
+import {IssueBadge} from "../../elements/IssueBadge/index";
 
 export default class Assembly extends React.Component {
     static propTypes = {
@@ -129,6 +130,31 @@ export default class Assembly extends React.Component {
             }),
             value: PropTypes.number,
         })),
+        issues: PropTypes.arrayOf(PropTypes.shape({
+            issue: PropTypes.shape({
+                id: PropTypes.number,
+                assembly: PropTypes.shape({id: PropTypes.number}),
+                category: PropTypes.string,
+                name: PropTypes.string,
+                subName: PropTypes.string,
+                type: PropTypes.string,
+                typeName: PropTypes.string,
+                typeSubName: PropTypes.string,
+                status: PropTypes.string,
+                goal: PropTypes.string,
+                proponentsCount: PropTypes.number,
+                proponents: PropTypes.arrayOf(PropTypes.shape({
+                    id: PropTypes.number,
+                    name: PropTypes.string,
+                    party: PropTypes.shape({
+                        id: PropTypes.number,
+                        name: PropTypes.string,
+                        color: PropTypes.string
+                    })
+                }))
+            }),
+            value: PropTypes.number
+        })),
     };
 
     static defaultProps = {
@@ -160,6 +186,7 @@ export default class Assembly extends React.Component {
         questioner: [],
         resolutionaries: [],
         bills: [],
+        issues: [],
     };
 
     render() {
@@ -304,6 +331,21 @@ export default class Assembly extends React.Component {
                         </ul>
                     </Column>
                 </Row>
+                <Row>
+                    <Column>
+                        Tessi mal voru mest rædd.
+                        <ul className="issue-badge-grid">
+                            {this.props.issues.map(issue => (
+                                <li key={`issue-${issue.issue.id}`} className="issue-badge-grid__item">
+                                    <IssueBadge issue={issue.issue} congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
+                                        {parseInt(issue.value / 60)} minutur
+                                    </IssueBadge>
+                                </li>
+                            ))}
+                        </ul>
+                    </Column>
+                </Row>
+
                 <Row>
                     <Column>
                         <Paper>

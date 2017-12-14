@@ -53,7 +53,7 @@ const assemblyIssueQuery = gql`
                         color
                     }
                 }
-                duration
+                value
             }
             voteRange {
                 count
