@@ -110,7 +110,7 @@ app.get('*', (request, response) => {
                 <body>
                     <Chrome>
                         <pre>
-                            {JSON.stringify(error, undefined, 4)}
+                            {error.message}
                         </pre>
                     </Chrome>
                 </body>
