@@ -2,8 +2,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import {SearchSpeech} from '../../src/client/components/SearchSpeech';
-import '../../public/stylesheets/storybook.css';
-
 
 const results = [
     {

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {scaleTime, scaleLinear} from 'd3-scale';
+import {scaleLinear} from 'd3-scale';
+import './_index.scss';
 
 export class HorizontalChart extends React.Component {
     static propTypes = {

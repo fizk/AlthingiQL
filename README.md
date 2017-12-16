@@ -17,17 +17,15 @@ data to the GraphQL server.
 * Run `npm install`
 
 ### Develop
-* Watch JS files `webpack:watch`
-* Watch SCSS files `sass:watch`
+* Watch JS and CSS files `webpack:watch`
 * Run Express server in dev mode `server:dev`
 
 This will start **Express server** through **nodemon** and run the
 server-side code in-memory through **babel-node**. Client-side code is
-compiled and stored in the `./public` folder. **Gulp** will be listening
-for SCSS changes and storing CSS files in `./public` as well.
+compiled and stored in the `./public` folder.
 
-**Summary**: Run `npm run webpack:watch`, `npm run sass:watch`,
-`server:dev` for development.
+**Summary**: Run `npm run dev` for development. (This will run
+`npm run webpack:watch` and `server:dev`).
 
 ### Production
 Production code is run through **forever** from the `./dist` directory.
@@ -65,9 +63,7 @@ it is best to talk to it via `localhost`. The default values will do just fine.
 * **server:dev** Run server through `nodemon` for development
 * **server:prod** Build (client and server) and run production server through `forever`
 * **webpack** Build client JS code
-* **webpack:watch** Build and watch JS client code
-* **sass** Build SCSS
-* **sass:watch** Build and watch SCSS
+* **webpack:watch** Build and watch JS/CSS client code
 * **build:server** Build server JS code
 * **build:client** Build client JS/SCSS code
 * **build** Build client and server JS code

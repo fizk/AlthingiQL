@@ -1,5 +1,6 @@
 import React from 'react';
 import classVariations from '../../utils/classVariations';
+import './_index.scss';
 
 export const H1 = ({children, variations = []}) => (
     <h1 className={classVariations('headline-1', variations)}>{children}</h1>

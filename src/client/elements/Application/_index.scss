@@ -1,3 +1,5 @@
+@import "../../reset";
+
 @font-face {
     font-family: 'tt-webfont';
     src: url('/fonts/tt-regular-webfont.woff2') format('woff2');
@@ -22,7 +24,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
-    color: #496274;;
+    color: #496274;
 }
 
 a,
@@ -32,6 +34,3 @@ a:active {
     //color: #0000ee;
     text-decoration: inherit;
 }
-
-@import "reset";
-@import "index";

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
-import classVariations from '../../utils/classVariations';
+import './_index.scss';
 
 export default class SpeechCard extends React.Component {
     static propTypes = {

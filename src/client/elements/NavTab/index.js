@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import './_index.scss';
 
 export const NavTab = ({children}) => (
     <div className="nav-tab">{children}</div>
