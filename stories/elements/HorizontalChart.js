@@ -1,9 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import '../../public/stylesheets/storybook.css';
 import {HorizontalChart} from "../../src/client/elements/HorizontalChart";
-
 
 const data = [
     {

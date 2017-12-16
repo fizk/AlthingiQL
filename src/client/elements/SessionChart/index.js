@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {scaleTime, scaleLinear} from 'd3-scale';
 import {timeMonth} from 'd3-time';
+import './_index.scss';
 
 const Map = {
     'varamaður': 'a6d1fd',

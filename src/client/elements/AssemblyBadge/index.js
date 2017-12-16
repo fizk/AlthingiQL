@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 import {Badge} from "../Badge/index";
 import {ListHorizontal, ListItem} from '../List';
+import './_index.scss';
 
 class AssemblyBadge extends React.Component {
     static propTypes = {

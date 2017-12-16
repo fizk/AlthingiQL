@@ -75,6 +75,31 @@ const assemblyQuery = gql`
         CongressmenAssemblyBills (assembly: $assembly order: "desc" size: 5) {
             ... congressmanWithValue
         }
+        AssemblyIssuesSpeechDuration (assembly: $assembly size: 6 order: "desc") {
+            issue {
+                id
+                assembly {id}
+                category
+                name
+                subName
+                type
+                typeName
+                typeSubName
+                status
+                goal
+                proponentsCount
+                proponents (count: 1) {
+                    id
+                    name
+                    party {
+                        id
+                        name
+                        color
+                    }
+                }
+            }
+            value
+        }
     }
     fragment congressmanWithValue on CongressmanValue  {
         value
@@ -97,6 +122,7 @@ export default compose(
             questioner: all.data.loading === false ? all.data.CongressmenAssemblyQuestions : undefined,
             resolutionaries: all.data.loading === false ? all.data.CongressmenAssemblyResolutions : undefined,
             bills: all.data.loading === false ? all.data.CongressmenAssemblyBills : undefined,
+            issues: all.data.loading === false ? all.data.AssemblyIssuesSpeechDuration : undefined,
             loading: all.data.loading,
         }),
         options: ({assembly}) => ({

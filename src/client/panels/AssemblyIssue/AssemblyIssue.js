@@ -48,7 +48,7 @@ export default class AssemblyIssue extends React.Component {
                         color: PropTypes.string,
                     })
                 }),
-                duration: PropTypes.number,
+                value: PropTypes.number,
             })),
             voteRange: PropTypes.arrayOf(PropTypes.shape({
                 count: PropTypes.number,
@@ -121,7 +121,7 @@ export default class AssemblyIssue extends React.Component {
                             <li key={`congressman-${item.congressman.id}-${i}`}>
                                 <Congressman party={item.congressman.party}
                                              congressman={item.congressman}>
-                                    <H4>{item.duration} mínútur</H4>
+                                    <H4>{item.value} mínútur</H4>
                                 </Congressman>
                             </li>
                         ))}
@@ -146,13 +146,13 @@ export default class AssemblyIssue extends React.Component {
                                 <li key={`progress-${i}`}>
 
                                     {progress.document && progress.document.id && (
-                                        <span> | <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/thingskjol`} >{progress.title}</Link></span>
+                                        <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/thingskjol`} >{progress.title}</Link>
                                     )}
                                     {progress.speech && progress.speech.id && (
-                                        <span>| umræda : <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/raedur/${progress.speech.id}`} >{progress.title}</Link></span>
+                                        <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/raedur/${progress.speech.id}`} >umræda : {progress.title}</Link>
                                     )}
                                     {progress.committee && progress.committee.id && (
-                                        <span>| {progress.title} : <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/raedur/${progress.committee.id}`} >{progress.committee.name}</Link></span>
+                                        <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/raedur/${progress.committee.id}`} >{progress.title} {progress.committee.name}</Link>
                                     )}
                                 </li>
                             ))}

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {H1} from "../../elements/Headline/index";
 import {Badge} from "../../elements/Badge/index";
+import './_index.scss';
 
 export default class AssemblyHeader extends React.Component {
     static propTypes = {

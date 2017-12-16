@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Badge} from '../Badge';
 import {Avatar} from '../Avatar';
 import {H3} from "../Headline/index";
+import './_index.scss';
 
 export class Congressman extends React.Component {
     static propTypes = {

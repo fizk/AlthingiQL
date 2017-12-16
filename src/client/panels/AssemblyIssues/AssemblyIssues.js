@@ -17,6 +17,7 @@ import {
     RequestForReportBadge,
     WrittenInquiryBadge
 } from "../../elements/IssueBadge";
+import './_index.scss';
 
 export default class AssemblyIssues extends React.Component {
     static propTypes = {

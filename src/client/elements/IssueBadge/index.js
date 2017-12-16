@@ -7,6 +7,7 @@ import {SimpleRequestProgress} from "../SimpleRequestProgress/index";
 import {Badge} from "../Badge/index";
 import {Paper} from "../Paper/index";
 import {Congressman} from "../Congressman/index";
+import './_index.scss';
 
 export class ParliamentaryResolutionBadge extends React.Component {
     // a: Tillaga til þingsályktunar / þingsályktunartillaga
@@ -693,6 +694,103 @@ export class OpinionBadge extends React.Component {
                     </header>
                     <footer className="issue-badge__footer">
                         <H5>{this.props.issue.typeName}</H5>
+                    </footer>
+                </Link>
+            </article>
+        );
+    }
+}
+
+export class IssueBadge extends React.Component {
+    // m : Fyrirspurn / fyrirspurn
+    static propTypes = {
+        issue: PropTypes.shape({
+            id: PropTypes.number,
+            assembly: PropTypes.shape({
+                id: PropTypes.number,
+            }),
+            name: PropTypes.string,
+            subName: PropTypes.string,
+            type: PropTypes.string,
+            goal: PropTypes.string,
+            typeName: PropTypes.string,
+            proponentsCount: PropTypes.number,
+        }),
+        congressman: PropTypes.shape({
+            id: PropTypes.number,
+            name: PropTypes.string,
+            party: PropTypes.shape({
+                id: PropTypes.number,
+                name: PropTypes.string,
+                color: PropTypes.string,
+            })
+        })
+    };
+
+    static defaultProps = {
+        issue: {
+            id: undefined,
+            assembly: {
+                id: undefined,
+            },
+            name: undefined,
+            subName: undefined,
+            type: undefined,
+            goal: undefined,
+            typeName: undefined,
+            proponentsCount: 0
+        },
+        congressman: {
+            id: undefined,
+            name: undefined,
+            party: {
+                id: undefined,
+                name: undefined,
+                color: undefined
+            },
+        }
+    };
+
+    count(count) {
+        return count - 1 > 1
+            ? (
+                <div className="issue-badge__congressman-count">
+                    <span> +{count - 1}</span>
+                </div>
+            )
+            : null
+    }
+
+    render() {
+        return (
+            <article className="issue-badge issue-badge--inquiry">
+                <Link to={`/loggjafathing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+                    <header className="issue-badge__header">
+                        <div className="issue-badge__headline">
+                            <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
+                        </div>
+                        <div className="issue-badge__type">
+                            {this.props.issue.type}
+                        </div>
+                    </header>
+                    <section className="issue-badge__body">
+                        <div className="issue-badge__congressman">
+                            <Congressman key={`proponent-${this.props.congressman.id}`}
+                                         congressman={this.props.congressman} party={this.props.congressman.party}>
+                            </Congressman>
+                        </div>
+                        {this.count(this.props.issue.proponentsCount)}
+                    </section>
+                    <aside>
+                        {this.props.children}
+                    </aside>
+                    <footer className="issue-badge__footer">
+                        <div className="issue-badge__type-name">
+                            <H5>{this.props.issue.typeName}</H5>
+                        </div>
+                        <div className="issue-badge__status">
+
+                        </div>
                     </footer>
                 </Link>
             </article>

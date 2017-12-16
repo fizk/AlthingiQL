@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './_index.scss';
 
 export const Grid = ({children, fluid}) => {
     return (

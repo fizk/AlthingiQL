@@ -29,3 +29,19 @@
 .assembly-issues-panel__list-item--lg {
     grid-template-rows: 1fr 1fr 1fr;
 }
+
+
+// - - - - - @todo move this to somewhere else
+
+.issue-badge-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+    grid-column-gap: map_get($space, lg);
+    grid-row-gap: map_get($space, lg);
+
+    @include breakpoint(md) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+.issue-badge-grid__item {}

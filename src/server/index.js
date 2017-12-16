@@ -35,22 +35,22 @@ app.use('/graphql', graphqlHTTP({
     },
 }));
 app.get('*', (request, response) => {
-
-    response.send(`
-             <!doctype html>
-             <html>
-                 <head>
-                     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-                     <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" />
-                 </head>
-                 <body>
-                     <div data-react></div>
-                     <script src="/scripts/application.js"></script>
-                 </body>
-             </html>`);
-    response.end();
-
-    return;
+    //
+    // response.send(`
+    //          <!doctype html>
+    //          <html>
+    //              <head>
+    //                  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    //                  <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" />
+    //              </head>
+    //              <body>
+    //                  <div data-react></div>
+    //                  <script src="/scripts/application.js"></script>
+    //              </body>
+    //          </html>`);
+    // response.end();
+    //
+    // return;
 
     const client = new ApolloClient({
         ssrMode: true,

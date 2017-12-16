@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -8,14 +9,12 @@ module.exports = {
         path: path.resolve(__dirname) + '/public/scripts',
         filename: '[name].js',
     },
+    plugins: [
+        new webpack.DefinePlugin({
+            __IMAGE_SERVER__: JSON.stringify('http://localhost:8000')
+        }),
+    ],
     module: {
-        rules: [
-            {
-                test: /\.css$/,
-                loaders: ["style-loader", "css-loader"],
-                include: path.resolve(__dirname, '../')
-            }
-        ],
         loaders: [
             {
                 test: /.jsx?$/,
@@ -25,5 +24,21 @@ module.exports = {
                 },
             },
         ],
+        rules: [
+            {
+                test: /\.s?css$/,
+                include: path.resolve(__dirname, '../'),
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings
+                }, {
+                    loader: "css-loader" // translates CSS into CommonJS
+                }, {
+                    loader: "sass-loader" // compiles Sass to CSS
+                }]
+            },
+        ],
     },
 };
+
+
+

@@ -1,4 +1,5 @@
 import React from 'react';
+import './_index.scss';
 
 export const ListHorizontal = ({children}) => (
     <ul className="list--horizontal">{children}</ul>
