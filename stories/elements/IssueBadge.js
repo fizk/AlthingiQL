@@ -2,7 +2,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import '../../public/stylesheets/storybook.css';
 import {
     BillBadge,
     ParliamentaryResolutionBadge,

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {pie, arc} from 'd3-shape'
 import {ISSUE_STATUS} from '../../utils/maps';
 import classVariations from '../../utils/classVariations';
+import './_index.scss';
 
 class StatusPieChart extends React.Component {
     static propTypes = {

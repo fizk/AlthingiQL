@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {pie, arc} from 'd3-shape'
+import './_index.scss';
 
 class SeatChart extends React.Component {
     static propTypes = {

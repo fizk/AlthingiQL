@@ -7,6 +7,7 @@ import {SimpleRequestProgress} from "../SimpleRequestProgress/index";
 import {Badge} from "../Badge/index";
 import {Paper} from "../Paper/index";
 import {Congressman} from "../Congressman/index";
+import './_index.scss';
 
 export class ParliamentaryResolutionBadge extends React.Component {
     // a: Tillaga til þingsályktunar / þingsályktunartillaga

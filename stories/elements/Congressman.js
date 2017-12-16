@@ -2,9 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import {Congressman} from '../../src/client/elements/Congressman';
-import '../../public/stylesheets/storybook.css';
 import {H4} from "../../src/client/elements/Headline";
-
 
 const congressman = {
     id: 719,

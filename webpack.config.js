@@ -1,5 +1,11 @@
 const webpack = require('webpack');
 const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const extractSass = new ExtractTextPlugin({
+    filename: 'stylesheets/[name].css',
+    disable: false
+});
 
 const serverConfig = {
     protocol: process.env.SERVER_PROTOCOL || 'http',
@@ -12,8 +18,8 @@ module.exports = {
         application: './src/client/index.js'
     },
     output: {
-        path: path.resolve(__dirname) + '/public/scripts',
-        filename: '[name].js',
+        path: path.resolve(__dirname) + '/public',
+        filename: 'scripts/[name].js',
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -21,17 +27,32 @@ module.exports = {
                 `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/graphql`
             ),
             __IMAGE_SERVER__: JSON.stringify('http://localhost:8000')
-        })
+        }),
+        extractSass
     ],
     module: {
-        loaders: [
+        rules: [
             {
-                test: /.jsx?$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015', 'react', 'stage-2', ],
-                },
-            },
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    query: {
+                        presets: ['es2015', 'react', 'stage-2', ],
+                    },
+                }
+            }, {
+                test: /\.scss$/,
+                use: extractSass.extract({
+                    use: [{
+                        loader: "css-loader"
+                    }, {
+                        loader: "sass-loader"
+                    }],
+                    // use style-loader in development
+                    fallback: "style-loader"
+                })
+            }
         ],
     },
 };

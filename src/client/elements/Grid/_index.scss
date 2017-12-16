@@ -19,12 +19,12 @@ $container-max-widths: (
     lg: map_get($breakpoint-values, lg),
 );
 
-@import "bootstrap/scss/mixins/_clearfix.scss";
-@import "bootstrap/scss/mixins/_breakpoints.scss";
-@import "bootstrap/scss/mixins/_grid-framework.scss";
-@import "bootstrap/scss/mixins/_grid.scss";
-@import "bootstrap/scss/_grid.scss";
-@import "bootstrap/scss/utilities/_flex.scss";
+@import "~bootstrap/scss/mixins/_clearfix.scss";
+@import "~bootstrap/scss/mixins/_breakpoints.scss";
+@import "~bootstrap/scss/mixins/_grid-framework.scss";
+@import "~bootstrap/scss/mixins/_grid.scss";
+@import "~bootstrap/scss/_grid.scss";
+@import "~bootstrap/scss/utilities/_flex.scss";
 
 .row-tall {
     height: 100%;

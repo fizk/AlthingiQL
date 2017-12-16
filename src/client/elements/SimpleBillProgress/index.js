@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classVariations from '../../utils/classVariations';
+import './_index.scss';
 
 export class SimpleBillProgress extends React.Component {
     static propTypes = {

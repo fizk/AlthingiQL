@@ -2,7 +2,6 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import {Input, Search, Options, OptionsItem, Select, SelectWithKeyBinding} from '../../src/client/elements/Form';
-import '../../public/stylesheets/storybook.css';
 import {H3} from '../../src/client/elements/Headline';
 
 const Exapmple = ((Component) => {
