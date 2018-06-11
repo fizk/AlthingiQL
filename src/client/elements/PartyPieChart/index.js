@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {pie, arc} from 'd3-shape'
 import './_index.scss';
 
-class PartyPieChart extends React.Component {
+export default class PartyPieChart extends React.Component {
     static propTypes = {
         source: PropTypes.arrayOf(PropTypes.shape({
             party: PropTypes.shape({
@@ -87,5 +87,3 @@ class PartyPieChart extends React.Component {
         )
     }
 }
-
-export {PartyPieChart}

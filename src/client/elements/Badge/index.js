@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classVariations from '../../utils/classVariations';
 import './_index.scss';
 
-class Badge extends React.Component {
+export default class Badge extends React.Component {
     static propTypes = {
         variations: PropTypes.array,
         color: PropTypes.string
@@ -24,5 +24,3 @@ class Badge extends React.Component {
         )
     }
 }
-
-export {Badge}

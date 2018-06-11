@@ -18,6 +18,7 @@ const assemblyIssueQuery = gql`
                 proponents(count: 1) {
                     id
                     name
+                    avatar {templateSrc}
                     party {
                         id
                         name

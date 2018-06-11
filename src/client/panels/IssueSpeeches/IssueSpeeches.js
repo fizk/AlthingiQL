@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Grid, Row, Column} from '../../elements/Grid';
-import {Congressman} from '../../elements/Congressman';
+import {Row, Column} from '../../elements/Grid';
+import Congressman from '../../elements/Congressman';
 import {SearchSpeechWithStore} from '../../components/SearchSpeech';
-import {Blank} from "../../elements/Blank/index";
-import {Loading} from "../../elements/Loading/index";
+import Blank from "../../elements/Blank/index";
+import Loading from "../../elements/Loading/index";
 import {H4} from "../../elements/Headline";
-import SpeechCard from "../../elements/SpeechCard/index";
-import ScrollIntoView from "../../elements/ScrollIntoView/index";
+import SpeechCard from '../../elements/SpeechCard';
+import ScrollIntoView from '../../elements/ScrollIntoView';
 
 export default class IssueSpeeches extends React.Component {
     static propTypes = {
@@ -33,6 +33,9 @@ export default class IssueSpeeches extends React.Component {
             congressman: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
+                avatar: PropTypes.shape({
+                    templateSrc: PropTypes.string,
+                }),
                 party: PropTypes.shape({
                     id: PropTypes.number,
                     name: PropTypes.string,
@@ -58,32 +61,30 @@ export default class IssueSpeeches extends React.Component {
 
     render() {
         return (
-            <div>
-                <Row>
-                    <Column>
-                        <SearchSpeechWithStore
-                            assembly={this.props.speeches.length > 0 ? this.props.speeches[0].assembly.id : undefined}
-                            issue={this.props.speeches.length > 0 ?  this.props.speeches[0].issue.id : undefined} />
-                        <ul>
-                            {this.props.speeches.map(speech => (
-                                <li key={speech.id} style={{backgroundColor: (speech.id === this.props.speech) ? 'pink' : 'transparent'}}>
-                                    <ScrollIntoView active={speech.id === this.props.speech}>
-                                        <SpeechCard speech={speech}>
-                                            <Congressman congressman={speech.congressman}
-                                                         party={speech.congressman.party}>
-                                                <H4>{speech.congressmanType}</H4>
-                                            </Congressman>
-                                        </SpeechCard>
-                                    </ScrollIntoView>
-                                </li>
-                            ))}
-                        </ul>
-                        {this.props.loading === true && <Loading/>}
-                        {this.props.loading === false && this.props.speeches.length === 0 && <Blank/>}
-                        {!this.props.done && <button onClick={this.props.loadMore}>[more]</button>}
-                    </Column>
-                </Row>
-            </div>
+            <Row>
+                <Column>
+                    <SearchSpeechWithStore
+                        assembly={this.props.speeches.length > 0 ? this.props.speeches[0].assembly.id : undefined}
+                        issue={this.props.speeches.length > 0 ?  this.props.speeches[0].issue.id : undefined} />
+                    <ul>
+                        {this.props.speeches.map(speech => (
+                            <li key={speech.id} style={{backgroundColor: (speech.id === this.props.speech) ? 'pink' : 'transparent'}}>
+                                <ScrollIntoView active={speech.id === this.props.speech}>
+                                    <SpeechCard speech={speech}>
+                                        <Congressman congressman={speech.congressman}
+                                                     party={speech.congressman.party}>
+                                            <H4>{speech.congressmanType}</H4>
+                                        </Congressman>
+                                    </SpeechCard>
+                                </ScrollIntoView>
+                            </li>
+                        ))}
+                    </ul>
+                    {this.props.loading === true && <Loading/>}
+                    {this.props.loading === false && this.props.speeches.length === 0 && <Blank/>}
+                    {!this.props.done && <button onClick={this.props.loadMore}>[more]</button>}
+                </Column>
+            </Row>
         )
     }
 }

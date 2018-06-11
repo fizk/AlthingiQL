@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {H3} from "../../elements/Headline";
@@ -30,12 +30,12 @@ export default class IssuesMenu extends React.Component {
 
     render() {
         return (
-            <div>
+            <Fragment>
                 <H3>Málstegund</H3>
                 <ul>
                     {this.props.types.map(type => (
                         <li key={`type-${type.type}`}>
-                            <Link to={`/loggjafathing/${this.props.assembly}/thingmal?tegund=${type.type}`}>{type.typeName}</Link>
+                            <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?tegund=${type.type}`}>{type.typeName}</Link>
                             {type.typeSubName} - ({type.count})
 
                         </li>
@@ -45,12 +45,12 @@ export default class IssuesMenu extends React.Component {
                 <ul>
                     {this.props.categories.map((category, i) => (
                         <li key={`category-${category.id}`}>
-                            <Link to={`/loggjafathing/${this.props.assembly}/thingmal?flokkur=${category.id}`}>{category.title}</Link>
+                            <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?flokkur=${category.id}`}>{category.title}</Link>
                             ({category.count})
                         </li>
                     ))}
                 </ul>
-            </div>
+            </Fragment>
         )
     }
 }

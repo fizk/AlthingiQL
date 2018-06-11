@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AssemblyHeader /> data 1`] = `
+<div
+  className="assembly-header"
+>
+  <div
+    className="assembly-header__headline"
+  >
+    <h1
+      className="headline-1"
+    >
+      1
+      . Löggjafarþing
+    </h1>
+    <time>
+      2001-01-01
+      2001-01-01
+    </time>
+  </div>
+  <div
+    className="assembly-header__parties"
+  >
+    <ul
+      className="assembly-header__party-list"
+    >
+      <li
+        className="assembly-header__party-list-item"
+      >
+        <div
+          className="badge"
+          style={
+            Object {
+              "backgroundColor": "#123123",
+            }
+          }
+          title="party"
+        />
+      </li>
+    </ul>
+    <ul
+      className="assembly-header__party-list"
+    >
+      <li
+        className="assembly-header__party-list-item"
+      >
+        <div
+          className="badge"
+          style={
+            Object {
+              "backgroundColor": "#123123",
+            }
+          }
+          title="party"
+        />
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`<AssemblyHeader /> default props 1`] = `
+<div
+  className="assembly-header"
+>
+  <div
+    className="assembly-header__headline"
+  >
+    <h1
+      className="headline-1"
+    >
+      . Löggjafarþing
+    </h1>
+    <time />
+  </div>
+  <div
+    className="assembly-header__parties"
+  >
+    <ul
+      className="assembly-header__party-list"
+    />
+    <ul
+      className="assembly-header__party-list"
+    />
+  </div>
+</div>
+`;

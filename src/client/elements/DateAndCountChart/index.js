@@ -4,7 +4,7 @@ import {scaleTime, scaleLinear} from 'd3-scale';
 import {timeMonth} from 'd3-time';
 import './_index.scss';
 
-class DateAndCountChart extends React.Component {
+export default class DateAndCountChart extends React.Component {
     static propTypes = {
         source: PropTypes.arrayOf(PropTypes.shape({
             count: PropTypes.number,
@@ -113,5 +113,3 @@ class DateAndCountChart extends React.Component {
         )
     }
 }
-
-export {DateAndCountChart}

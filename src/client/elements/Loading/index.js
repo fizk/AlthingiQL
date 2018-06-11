@@ -1,8 +1,8 @@
 import React from 'react';
-import {Spinner} from "../Icons/index";
+import {Spinner} from '../Icons';
 import './_index.scss';
 
-export const Loading = props => (
+export default props => (
     <div className="spinner">
         <Spinner/>
     </div>

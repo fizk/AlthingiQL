@@ -15,149 +15,167 @@ import {
 
 const billIssues = [
     {
-    assembly:{
-        id: 146,
+        assembly:{
+            id: 146,
+        },
+        goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
+        "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
+        "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
+        "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
+        id:1,
+        name:"Fjárlög 2017",
+        proponents:[{
+            id: 652,
+            name:"Bjarni BenediktssonBenediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
+            party: {
+                color: "0000ff",
+                id: 35,
+                name: "Sjálfstæðisflokkur",
+            }
+        }],
+        proponentsCount:14,
+        status:"Bíður 1. umræðu",
+        type:"l",
+        typeName:"Frumvarp til laga",
     },
-    goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
-    "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
-    "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
-    "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
-    id:1,
-    name:"fjárlög 2017",
-    proponents:[{
-        id: 652,
-        name:"Bjarni BenediktssonBenediktsson",
-        party: {
-            color: "0000ff",
-            id: 35,
-            name: "Sjálfstæðisflokkur",
-        }
-    }],
-    proponentsCount:14,
-    status:"Bíður 1. umræðu",
-    type:"l",
-    typeName:"Frumvarp til laga",
-},
     {
-    assembly:{
-        id: 146,
+        assembly:{
+            id: 146,
+        },
+        goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
+        "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
+        "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
+        "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
+        id:2,
+        name:"Málefni Brúneggja ehf. og upplýsingagjöf til almennings um brot á reglum um dýravelferð",
+        proponents:[{
+            id: 1324,
+            name:"Albertína Friðbjörg Elíasdóttir",
+            avatar: {
+                templateSrc: undefined,
+            },
+            party: {
+                color: "0000ff",
+                id: 35,
+                name: "Sjálfstæðisflokkur",
+            }
+        }],
+        proponentsCount:3,
+        status:"Bíður 2. umræðu",
+        type:"l",
+        typeName:"Bíður 2. umræðu",
     },
-    goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
-    "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
-    "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
-    "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
-    id:2,
-    name:"málefni Brúneggja ehf. og upplýsingagjöf til almennings um brot á reglum um dýravelferð",
-    proponents:[{
-        id: 1324,
-        name:"Albertína Friðbjörg Elíasdóttir",
-        party: {
-            color: "0000ff",
-            id: 35,
-            name: "Sjálfstæðisflokkur",
-        }
-    }],
-    proponentsCount:3,
-    status:"Bíður 2. umræðu",
-    type:"l",
-    typeName:"Bíður 2. umræðu",
-},
     {
-    assembly:{
-        id: 146,
+        assembly:{
+            id: 146,
+        },
+        goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
+        "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
+        "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
+        "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
+        id:3,
+        name:"Skyldutrygging lífeyrisréttinda og starfsemi lífeyrissjóða",
+        proponents:[{
+            id: 652,
+            name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
+            party: {
+                color: "0000ff",
+                id: 35,
+                name: "Sjálfstæðisflokkur",
+            }
+        }],
+        proponentsCount:1,
+        status:"Í nefnd eftir 1. umræðu",
+        type:"l",
+        typeName:"Frumvarp til laga",
     },
-    goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
-    "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
-    "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
-    "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
-    id:3,
-    name:"skyldutrygging lífeyrisréttinda og starfsemi lífeyrissjóða",
-    proponents:[{
-        id: 652,
-        name:"Bjarni Benediktsson",
-        party: {
-            color: "0000ff",
-            id: 35,
-            name: "Sjálfstæðisflokkur",
-        }
-    }],
-    proponentsCount:1,
-    status:"Í nefnd eftir 1. umræðu",
-    type:"l",
-    typeName:"Frumvarp til laga",
-},
     {
-    assembly:{
-        id: 146,
+        assembly:{
+            id: 146,
+        },
+        goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
+        "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
+        "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
+        "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
+        id:4,
+        name:"Fjárlög 2017",
+        proponents:[{
+            id: 652,
+            name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
+            party: {
+                color: "0000ff",
+                id: 35,
+                name: "Sjálfstæðisflokkur",
+            }
+        }],
+        proponentsCount:1,
+        status:"Í nefnd eftir 2. umræðu",
+        type:"l",
+        typeName:"Frumvarp til laga",
     },
-    goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
-    "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
-    "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
-    "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
-    id:4,
-    name:"fjárlög 2017",
-    proponents:[{
-        id: 652,
-        name:"Bjarni Benediktsson",
-        party: {
-            color: "0000ff",
-            id: 35,
-            name: "Sjálfstæðisflokkur",
-        }
-    }],
-    proponentsCount:1,
-    status:"Í nefnd eftir 2. umræðu",
-    type:"l",
-    typeName:"Frumvarp til laga",
-},
     {
-    assembly:{
-        id: 146,
+        assembly:{
+            id: 146,
+        },
+        goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
+        "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
+        "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
+        "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
+        id:5,
+        name:"Breyting á ályktun Alþingis um rannsókn á kaupum á 45,8% eignarhlut í Búnaðarbanka Íslands hf. o.fl.",
+        proponents:[{
+            id: 652,
+            name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
+            party: {
+                color: "0000ff",
+                id: 35,
+                name: "Sjálfstæðisflokkur",
+            }
+        }],
+        proponentsCount:1,
+        status:"Samþykkt sem lög frá Alþingi",
+        type:"l",
+        typeName:"Frumvarp til laga",
     },
-    goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
-    "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
-    "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
-    "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
-    id:5,
-    name:"breyting á ályktun Alþingis um rannsókn á kaupum á 45,8% eignarhlut í Búnaðarbanka Íslands hf. o.fl.",
-    proponents:[{
-        id: 652,
-        name:"Bjarni Benediktsson",
-        party: {
-            color: "0000ff",
-            id: 35,
-            name: "Sjálfstæðisflokkur",
-        }
-    }],
-    proponentsCount:1,
-    status:"Samþykkt sem lög frá Alþingi",
-    type:"l",
-    typeName:"Frumvarp til laga",
-},
     {
-    assembly:{
-        id: 146,
-    },
-    goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
-    "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
-    "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
-    "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
-    id:6,
-    name:"málefni fatlaðs fólks og aðbúnaður, hollustuhættir og öryggi á vinnustöðum",
-    proponents:[{
-        id: 652,
-        name:"Bjarni Benediktsson",
-        party: {
-            color: "0000ff",
-            id: 35,
-            name: "Sjálfstæðisflokkur",
-        }
-    }],
-    proponentsCount:1,
-    status:"Vísað til ríkisstjórnar",
-    type:"l",
-    typeName:"Vísað til ríkisstjórnar",
-}
+        assembly:{
+            id: 146,
+        },
+        goal:"Að sýna áætlanir um tekjur og gjöld ríkissjóðs fyrir hvert það ár " +
+        "sem í hönd fer og leita heimilda til hvers konar fjárráðstafana, svo sem " +
+        "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
+        "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
+        id:6,
+        name:"Málefni fatlaðs fólks og aðbúnaður, hollustuhættir og öryggi á vinnustöðum",
+        proponents:[{
+            id: 652,
+            name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
+            party: {
+                color: "0000ff",
+                id: 35,
+                name: "Sjálfstæðisflokkur",
+            }
+        }],
+        proponentsCount:1,
+        status:"Vísað til ríkisstjórnar",
+        type:"l",
+        typeName:"Vísað til ríkisstjórnar",
+    }
 ];
 const resolutionIssues = [
     {
@@ -169,10 +187,13 @@ const resolutionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:1,
-        name:"fjárlög 2017",
+        name:"Fjárlög 2017",
         proponents:[{
             id: 652,
             name:"Bjarni BenediktssonBenediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -193,10 +214,13 @@ const resolutionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:2,
-        name:"málefni Brúneggja ehf. og upplýsingagjöf til almennings um brot á reglum um dýravelferð",
+        name:"Málefni Brúneggja ehf. og upplýsingagjöf til almennings um brot á reglum um dýravelferð",
         proponents:[{
             id: 1324,
             name:"Albertína Friðbjörg Elíasdóttir",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -217,10 +241,13 @@ const resolutionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:3,
-        name:"skyldutrygging lífeyrisréttinda og starfsemi lífeyrissjóða",
+        name:"Skyldutrygging lífeyrisréttinda og starfsemi lífeyrissjóða",
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -241,10 +268,13 @@ const resolutionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:4,
-        name:"fjárlög 2017",
+        name:"Fjárlög 2017",
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -265,10 +295,13 @@ const resolutionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:5,
-        name:"breyting á ályktun Alþingis um rannsókn á kaupum á 45,8% eignarhlut í Búnaðarbanka Íslands hf. o.fl.",
+        name:"Breyting á ályktun Alþingis um rannsókn á kaupum á 45,8% eignarhlut í Búnaðarbanka Íslands hf. o.fl.",
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -289,10 +322,13 @@ const resolutionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:6,
-        name:"málefni fatlaðs fólks og aðbúnaður, hollustuhættir og öryggi á vinnustöðum",
+        name:"Málefni fatlaðs fólks og aðbúnaður, hollustuhættir og öryggi á vinnustöðum",
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -315,7 +351,7 @@ const opinionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:1,
-        name:"fjárlög 2017",
+        name:"Fjárlög 2017",
         status:"Bíður 1. umræðu",
         type:"n",
         typeName:"Tillaga til þingsályktunar",
@@ -329,7 +365,7 @@ const opinionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:2,
-        name:"málefni Brúneggja ehf. og upplýsingagjöf til almennings um brot á reglum um dýravelferð",
+        name:"Málefni Brúneggja ehf. og upplýsingagjöf til almennings um brot á reglum um dýravelferð",
         status:"Bíður 2. umræðu",
         type:"n",
         typeName:"Tillaga til þingsályktunar",
@@ -343,7 +379,7 @@ const opinionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:3,
-        name:"skyldutrygging lífeyrisréttinda og starfsemi lífeyrissjóða",
+        name:"Skyldutrygging lífeyrisréttinda og starfsemi lífeyrissjóða",
         status:"Í nefnd eftir 1. umræðu",
         type:"n",
         typeName:"Tillaga til þingsályktunar",
@@ -357,7 +393,7 @@ const opinionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:4,
-        name:"fjárlög 2017",
+        name:"Fjárlög 2017",
         status:"Í nefnd eftir 2. umræðu",
         type:"n",
         typeName:"Tillaga til þingsályktunar",
@@ -371,7 +407,7 @@ const opinionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:5,
-        name:"breyting á ályktun Alþingis um rannsókn á kaupum á 45,8% eignarhlut í Búnaðarbanka Íslands hf. o.fl.",
+        name:"Breyting á ályktun Alþingis um rannsókn á kaupum á 45,8% eignarhlut í Búnaðarbanka Íslands hf. o.fl.",
         status:"Samþykkt sem lög frá Alþingi",
         type:"n",
         typeName:"Tillaga til þingsályktunar",
@@ -385,7 +421,7 @@ const opinionIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:6,
-        name:"málefni fatlaðs fólks og aðbúnaður, hollustuhættir og öryggi á vinnustöðum",
+        name:"Málefni fatlaðs fólks og aðbúnaður, hollustuhættir og öryggi á vinnustöðum",
         status:"Vísað til ríkisstjórnar",
         type:"n",
         typeName:"Tillaga til þingsályktunar",
@@ -401,10 +437,13 @@ const inquiryIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:1,
-        name:"fjárlög 2017",
+        name:"Fjárlög 2017",
         proponents:[{
             id: 652,
             name:"Bjarni BenediktssonBenediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -425,10 +464,13 @@ const inquiryIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:2,
-        name:"málefni Brúneggja ehf. og upplýsingagjöf til almennings um brot á reglum um dýravelferð",
+        name:"Málefni Brúneggja ehf. og upplýsingagjöf til almennings um brot á reglum um dýravelferð",
         proponents:[{
             id: 1324,
             name:"Albertína Friðbjörg Elíasdóttir",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -449,10 +491,13 @@ const inquiryIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:3,
-        name:"skyldutrygging lífeyrisréttinda og starfsemi lífeyrissjóða",
+        name:"Skyldutrygging lífeyrisréttinda og starfsemi lífeyrissjóða",
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -473,10 +518,13 @@ const inquiryIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:4,
-        name:"fjárlög 2017",
+        name:"Fjárlög 2017",
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -497,10 +545,13 @@ const inquiryIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:5,
-        name:"breyting á ályktun Alþingis um rannsókn á kaupum á 45,8% eignarhlut í Búnaðarbanka Íslands hf. o.fl.",
+        name:"Breyting á ályktun Alþingis um rannsókn á kaupum á 45,8% eignarhlut í Búnaðarbanka Íslands hf. o.fl.",
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -521,10 +572,13 @@ const inquiryIssues = [
         "lántöku og ríkisábyrgða og heimilda til að kaupa og selja fasteignir. " +
         "Fjárlagafrumvarp er nú í fyrsta skipti lagt fyrir Alþingi á grundvelli nýrra laga um opinber fjármál.",
         id:6,
-        name:"málefni fatlaðs fólks og aðbúnaður, hollustuhættir og öryggi á vinnustöðum",
+        name:"Málefni fatlaðs fólks og aðbúnaður, hollustuhættir og öryggi á vinnustöðum",
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -551,6 +605,9 @@ const writtenInquiryIssues = [
         proponents:[{
             id: 652,
             name:"Bjarni BenediktssonBenediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -575,6 +632,9 @@ const writtenInquiryIssues = [
         proponents:[{
             id: 1324,
             name:"Albertína Friðbjörg Elíasdóttir",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -599,6 +659,9 @@ const writtenInquiryIssues = [
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -623,6 +686,9 @@ const writtenInquiryIssues = [
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -647,6 +713,9 @@ const writtenInquiryIssues = [
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -671,6 +740,9 @@ const writtenInquiryIssues = [
         proponents:[{
             id: 652,
             name:"Bjarni Benediktsson",
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 color: "0000ff",
                 id: 35,
@@ -686,7 +758,7 @@ const writtenInquiryIssues = [
 
 
 storiesOf('IssueBadge', module)
-    .add('<BillBadge />', () => (
+    .add('BillBadge', () => (
         <div>
             <Router>
                 <Route>
@@ -701,7 +773,7 @@ storiesOf('IssueBadge', module)
             </Router>
         </div>
     ))
-    .add('<ParliamentaryResolutionBadge />', () => (
+    .add('ParliamentaryResolutionBadge', () => (
         <div>
             <Router>
                 <Route>
@@ -716,7 +788,7 @@ storiesOf('IssueBadge', module)
             </Router>
         </div>
     ))
-    .add('<OpinionBadge />', () => (
+    .add('OpinionBadge', () => (
         <div>
             <Router>
                 <Route>
@@ -731,7 +803,7 @@ storiesOf('IssueBadge', module)
             </Router>
         </div>
     ))
-    .add('<InquiryBadge />', () => (
+    .add('InquiryBadge', () => (
         <div>
             <Router>
                 <Route>
@@ -746,7 +818,7 @@ storiesOf('IssueBadge', module)
             </Router>
         </div>
     ))
-    .add('<WrittenInquiryBadge />', () => (
+    .add('WrittenInquiryBadge', () => (
         <div>
             <Router>
                 <Route>
@@ -761,7 +833,7 @@ storiesOf('IssueBadge', module)
             </Router>
         </div>
     ))
-    .add('<RequestForReportBadge />', () => (
+    .add('RequestForReportBadge', () => (
         <div>
             <Router>
                 <Route>
@@ -776,7 +848,7 @@ storiesOf('IssueBadge', module)
             </Router>
         </div>
     ))
-    .add('<ReportBadge />', () => (
+    .add('ReportBadge', () => (
         <div>
             <Router>
                 <Route>
@@ -791,7 +863,7 @@ storiesOf('IssueBadge', module)
             </Router>
         </div>
     ))
-    .add('<MeetingPostponementBadge />', () => (
+    .add('MeetingPostponementBadge', () => (
         <div>
             <Router>
                 <Route>

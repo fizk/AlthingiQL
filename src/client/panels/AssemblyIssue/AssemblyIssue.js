@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {Grid, Row, Column} from '../../elements/Grid';
-import {Congressman} from '../../elements/Congressman';
-import {DateAndCountChart} from '../../elements/DateAndCountChart';
+import {Row, Column} from '../../elements/Grid';
+import Congressman from '../../elements/Congressman';
+import DateAndCountChart from '../../elements/DateAndCountChart';
 import Markdown from 'react-markdown';
 import {H2, H4} from '../../elements/Headline';
-import {Paper} from "../../elements/Paper";
+import Paper from '../../elements/Paper';
 
 export default class AssemblyIssue extends React.Component {
     static propTypes = {
@@ -32,6 +32,9 @@ export default class AssemblyIssue extends React.Component {
             proponents: PropTypes.arrayOf(PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
+                avatar: PropTypes.shape({
+                    templateSrc: PropTypes.string,
+                }),
                 party: PropTypes.shape({
                     id: PropTypes.number,
                     name: PropTypes.string,
@@ -42,6 +45,9 @@ export default class AssemblyIssue extends React.Component {
                 congressman: PropTypes.shape({
                     id: PropTypes.number,
                     name: PropTypes.string,
+                    avatar: PropTypes.shape({
+                        templateSrc: PropTypes.string,
+                    }),
                     party: PropTypes.shape({
                         id: PropTypes.number,
                         name: PropTypes.string,
@@ -146,13 +152,13 @@ export default class AssemblyIssue extends React.Component {
                                 <li key={`progress-${i}`}>
 
                                     {progress.document && progress.document.id && (
-                                        <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/thingskjol`} >{progress.title}</Link>
+                                        <Link to={`/loggjafarthing/${progress.assembly.id}/thingmal/${progress.issue.id}/thingskjol`} >{progress.title}</Link>
                                     )}
                                     {progress.speech && progress.speech.id && (
-                                        <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/raedur/${progress.speech.id}`} >umræda : {progress.title}</Link>
+                                        <Link to={`/loggjafarthing/${progress.assembly.id}/thingmal/${progress.issue.id}/raedur/${progress.speech.id}`} >umræda : {progress.title}</Link>
                                     )}
                                     {progress.committee && progress.committee.id && (
-                                        <Link to={`/loggjafathing/${progress.assembly.id}/thingmal/${progress.issue.id}/raedur/${progress.committee.id}`} >{progress.title} {progress.committee.name}</Link>
+                                        <Link to={`/loggjafarthing/${progress.assembly.id}/thingmal/${progress.issue.id}/raedur/${progress.committee.id}`} >{progress.title} {progress.committee.name}</Link>
                                     )}
                                 </li>
                             ))}

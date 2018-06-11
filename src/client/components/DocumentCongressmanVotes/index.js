@@ -10,6 +10,7 @@ const documentVotesQuery = gql`
             congressman {
                 id
                 name
+                avatar {templateSrc}
                 party {
                     id
                     name

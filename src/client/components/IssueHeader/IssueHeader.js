@@ -1,24 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {H1, H2, H3} from "../../elements/Headline/index";
-import {Row, Column} from "../../elements/Grid/index";
+import {H1, H2, H3} from '../../elements/Headline';
+import {Row, Column} from '../../elements/Grid';
 
-export default class AssemblyHeader extends React.Component {
+export default class IssueHeader extends React.Component {
     static propTypes = {
         issue: PropTypes.shape({
             id: PropTypes.number,
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            }),
-            category: PropTypes.string,
             name: PropTypes.string,
-            subName: PropTypes.string,
-            type: PropTypes.string,
             typeName: PropTypes.string,
-            typeSubName: PropTypes.string,
             status: PropTypes.string,
-            question: PropTypes.string,
-            goal: PropTypes.string,
             date: PropTypes.string,
         }),
         loading: PropTypes.bool,
@@ -27,18 +18,9 @@ export default class AssemblyHeader extends React.Component {
     static defaultProps = {
         issue: {
             id: undefined,
-            assembly: {
-                id: undefined,
-            },
-            category: undefined,
             name: undefined,
-            subName: undefined,
-            type: undefined,
             typeName: undefined,
-            typeSubName: undefined,
             status: undefined,
-            question: undefined,
-            goal: undefined,
             date: undefined,
         },
         loading: false,

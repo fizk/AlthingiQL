@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Row, Column} from '../../elements/Grid';
-import {Congressman} from '../../elements/Congressman';
-import {Paper} from "../../elements/Paper";
 import {SearchIssueWithStore} from '../../components/SearchIssue';
-import {Loading} from "../../elements/Loading/index";
-import {Blank} from "../../elements/Blank/index";
-import IssuesMenu from "../../components/IssuesMenu";
+import Loading from '../../elements/Loading';
+import Blank from '../../elements/Blank';
+import IssuesMenu from '../../components/IssuesMenu';
 import {
     BillBadge,
     InquiryBadge,
@@ -16,7 +14,7 @@ import {
     ReportBadge,
     RequestForReportBadge,
     WrittenInquiryBadge
-} from "../../elements/IssueBadge";
+} from '../../elements/IssueBadge';
 import './_index.scss';
 
 export default class AssemblyIssues extends React.Component {
@@ -35,6 +33,9 @@ export default class AssemblyIssues extends React.Component {
             proponents: PropTypes.arrayOf(PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
+                avatar: PropTypes.shape({
+                    templateSrc: PropTypes.string,
+                }),
                 party: PropTypes.shape({
                     id: PropTypes.number,
                     name: PropTypes.string,

@@ -11,7 +11,7 @@ const Map = {
     'tók afstöðu': '123456'
 };
 
-class VoteResultPieChart extends React.Component {
+export default class VoteResultPieChart extends React.Component {
     static propTypes = {
         source: PropTypes.arrayOf(PropTypes.shape({
             vote: PropTypes.string,
@@ -92,5 +92,3 @@ class VoteResultPieChart extends React.Component {
         )
     }
 }
-
-export {VoteResultPieChart}

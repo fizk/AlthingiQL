@@ -7,6 +7,7 @@ const assemblyCongressmanQuery = gql`
         Congressmen(assembly: $assembly type: "thingmadur") {
             id
             name
+            avatar {templateSrc}
             assembly {
                 id
             }
@@ -19,6 +20,7 @@ const assemblyCongressmanQuery = gql`
         Substitutes: Congressmen(assembly: $assembly type: "varamadur") {
             id
             name
+            avatar {templateSrc}
             assembly {
                 id
             }

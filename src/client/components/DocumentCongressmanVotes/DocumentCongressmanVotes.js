@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Congressman} from "../../elements/Congressman/index";
+import Congressman from '../../elements/Congressman';
 
 export default class DocumentCongressmanVotes extends React.Component {
     static propTypes = {
@@ -14,6 +14,9 @@ export default class DocumentCongressmanVotes extends React.Component {
             congressman: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
+                avatar: PropTypes.shape({
+                    templateSrc: PropTypes.string,
+                }),
                 party: PropTypes.shape({
                     id: PropTypes.number,
                     name: PropTypes.string,
@@ -36,7 +39,6 @@ export default class DocumentCongressmanVotes extends React.Component {
     }
 
     render() {
-        console.log(this.props.votes);
         return (
             <ul>
                 {this.props.votes.slice().sort(this.voteSort).map(vote => (

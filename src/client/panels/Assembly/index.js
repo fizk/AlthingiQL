@@ -81,6 +81,7 @@ const assemblyQuery = gql`
                 assembly {id}
                 category
                 name
+                type
                 subName
                 type
                 typeName
@@ -91,6 +92,7 @@ const assemblyQuery = gql`
                 proponents (count: 1) {
                     id
                     name
+                    avatar {templateSrc}
                     party {
                         id
                         name
@@ -106,6 +108,7 @@ const assemblyQuery = gql`
         congressman {
             id
             name
+            avatar {templateSrc}
             assembly {id}
             party {id name color}
         }

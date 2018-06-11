@@ -4,7 +4,7 @@ import Application from '../../elements/Application';
 import {Column, Grid, Row} from "../../elements/Grid/index";
 import './_index.scss';
 
-class Chrome extends React.Component {
+export default class Chrome extends React.Component {
     static propTypes = {};
 
     static defaultProps = {};
@@ -13,20 +13,20 @@ class Chrome extends React.Component {
         return (
             <Application>
                 <div className="chrome">
-                    <header className="chrome__header">
+                    <header className="chrome__header" role="banner">
                         <div className="chrome__header-container">
                             <Grid>
                                 <Row>
                                     <Column>
                                         <nav>
-                                            <input type="search"/>
+                                            <input aria-label="Aðalleit" type="search"/>
                                         </nav>
                                     </Column>
                                 </Row>
                             </Grid>
                         </div>
                     </header>
-                    <main className="chrome__main">
+                    <main className="chrome__main" role="main">
                         {this.props.children}
                     </main>
                     <footer className="chrome__footer">
@@ -37,5 +37,3 @@ class Chrome extends React.Component {
         )
     }
 }
-
-export {Chrome}

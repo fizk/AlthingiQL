@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {Grid, Column, Row} from '../../elements/Grid';
-import {Congressman} from '../../elements/Congressman';
+import {Column, Row} from '../../elements/Grid';
+import Congressman from '../../elements/Congressman';
 
 export default class AssemblyCongressmen extends React.Component {
     static propTypes = {
@@ -10,6 +10,9 @@ export default class AssemblyCongressmen extends React.Component {
         congressmen: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.number,
             name: PropTypes.string,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
             party: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
@@ -22,6 +25,9 @@ export default class AssemblyCongressmen extends React.Component {
         substitutes: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.number,
             name: PropTypes.string,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
             party: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
@@ -41,34 +47,32 @@ export default class AssemblyCongressmen extends React.Component {
 
     render() {
         return (
-            <div>
-                <Row>
-                    <Column>
-                        <h3>Thingmenn</h3>
-                        <ul>
-                            {this.props.congressmen.map(congressman => (
-                                <li key={`congressman-${congressman.id}`} >
-                                    <Link to={`/loggjafathing/${this.props.assembly}/thingmenn/${congressman.id}`}>
-                                        <Congressman congressman={congressman} party={congressman.party} />
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </Column>
-                    <Column>
-                        <h3>Varamenn</h3>
-                        <ul>
-                            {this.props.substitutes.map(congressman => (
-                                <li key={`congressman-${congressman.id}`}>
-                                    <Link to={`/loggjafathing/${this.props.assembly}/thingmenn/${congressman.id}`}>
-                                        <Congressman congressman={congressman} party={congressman.party} />
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </Column>
-                </Row>
-            </div>
+            <Row>
+                <Column>
+                    <h3>Thingmenn</h3>
+                    <ul>
+                        {this.props.congressmen.map(congressman => (
+                            <li key={`congressman-${congressman.id}`} >
+                                <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>
+                                    <Congressman congressman={congressman} party={congressman.party} />
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </Column>
+                <Column>
+                    <h3>Varamenn</h3>
+                    <ul>
+                        {this.props.substitutes.map(congressman => (
+                            <li key={`congressman-${congressman.id}`}>
+                                <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>
+                                    <Congressman congressman={congressman} party={congressman.party} />
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </Column>
+            </Row>
         )
     }
 }

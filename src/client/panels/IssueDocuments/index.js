@@ -21,6 +21,7 @@ const issueDocumentsQuery = gql`
             proponents {
                 id
                 name
+                avatar {templateSrc}
                 party {
                     id
                     name

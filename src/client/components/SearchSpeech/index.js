@@ -1,27 +1,43 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import {OptionsWithKeyBinding} from '../../elements/Form';
 import {connect} from 'react-redux';
-import {speechSearchAction, speechSearchClearAction} from './redux';
 import {Redirect} from 'react-router-dom'
+import {OptionsWithKeyBinding} from '../../elements/Form';
+import {speechSearchAction, speechSearchClearAction} from './redux';
 import {SpeechSearchResult} from '../../elements/SearchResult';
 
-class SearchSpeech extends React.Component {
+export default class SearchSpeech extends React.Component {
     static propTypes = {
         assembly: PropTypes.number,
         issue: PropTypes.number,
         result: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.string,
+            assembly: PropTypes.shape({
+                id: PropTypes.number,
+            }),
+            issue: PropTypes.shape({
+                id: PropTypes.number,
+            }),
             text: PropTypes.string,
+            period: PropTypes.shape({
+                from: PropTypes.string,
+                to: PropTypes.string,
+            }),
+            iteration: PropTypes.string,
+            type: PropTypes.string,
+            congressmanType: PropTypes.string,
             congressman: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
+                avatar: PropTypes.shape({
+                    templateSrc: PropTypes.string,
+                }),
                 party: PropTypes.shape({
                     id: PropTypes.number,
                     name: PropTypes.string,
                     color: PropTypes.string,
-                }),
-            })
+                })
+            }),
         })),
         isSearching: PropTypes.bool,
         onSearch: PropTypes.func,
@@ -66,8 +82,8 @@ class SearchSpeech extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.state.redirect && <Redirect push={true} to={`/loggjafathing/${this.state.redirect.assembly.id}/thingmal/${this.state.redirect.issue.id}/raedur/${this.state.redirect.id}`} />}
+            <Fragment>
+                {this.state.redirect && <Redirect push={true} to={`/loggjafarthing/${this.state.redirect.assembly.id}/thingmal/${this.state.redirect.issue.id}/raedur/${this.state.redirect.id}`} />}
                 <OptionsWithKeyBinding
                     isSearching={this.props.isSearching}
                     onClear={this.handleOnClear}
@@ -77,7 +93,7 @@ class SearchSpeech extends React.Component {
                         <SpeechSearchResult key={`speech-${result.id}`} value={result} />
                     ))}
                 </OptionsWithKeyBinding>
-            </div>
+            </Fragment>
         )
     }
 }
@@ -98,4 +114,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 const SearchSpeechWithStore = connect(mapStateToProps, mapDispatchToProps)(SearchSpeech);
 
-export {SearchSpeech, SearchSpeechWithStore}
+export {SearchSpeechWithStore}

@@ -11,8 +11,9 @@ import 'isomorphic-fetch';
 import {createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from '../client/reducers';
-import {Routers} from '../client/router';
-import {Chrome} from '../client/components/Chrome';
+import Routers from '../client/router';
+import Chrome from '../client/components/Chrome';
+import Helmet from 'react-helmet';
 
 const app = express();
 const serverConfig = {
@@ -34,8 +35,9 @@ app.use('/graphql', graphqlHTTP({
         client: client(debug('server-log'), clientConfig),
     },
 }));
+
 app.get('*', (request, response) => {
-    //
+
     // response.send(`
     //          <!doctype html>
     //          <html>
@@ -81,11 +83,16 @@ app.get('*', (request, response) => {
 
     renderToStringWithData(app).then(content => {
         const initialState = {apollo: client.getInitialState(), };
+        const helmet = Helmet.renderStatic();
         const html = `<!doctype html>
-             <html>
+             <html lang="is">
                  <head>
-                     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+                     <meta name="viewport" content="width=device-width, initial-scale=2">
+                     <meta property="og:site_name" content="Löggjafarþing">
                      <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" />
+                     ${helmet.title.toString()}
+                     ${helmet.meta.toString()}
+                     ${helmet.link.toString()}
                  </head>
                  <body>
                      <div data-react>${content}</div>
@@ -100,7 +107,7 @@ app.get('*', (request, response) => {
         response.send(html);
         response.end();
     }).catch(error => {
-        response.status(500);
+
         const html = ReactDOM.renderToStaticMarkup(
             <html>
                 <head>
@@ -110,13 +117,33 @@ app.get('*', (request, response) => {
                 <body>
                     <Chrome>
                         <pre>
-                            {error.message}
+                            message: {error.message}
+                            file: {error.file}
+                            line: {error.line}
+                            column: {error.column}
                         </pre>
                     </Chrome>
                 </body>
             </html>
         );
-        debug('server-error')('%O', error);
+        // debug('server-error')('%O', error);
+        switch (error.constructor) {
+            case ReferenceError:
+            case EvalError:
+            case SyntaxError:
+            case RangeError:
+            case TypeError:
+            case URIError:
+                response.status(500);
+                break;
+            case Error:
+            default:
+                response.status(500);
+                debug('server-error')('%s %s %s %s', error.message, error.fileName, error.lineNumber, error.columnNumber);
+                debug('server-error')('%j', error);
+                break;
+        }
+        // debug('server-error')('%O', error);
         response.send(`<!doctype html>${html}`);
         response.end();
     });

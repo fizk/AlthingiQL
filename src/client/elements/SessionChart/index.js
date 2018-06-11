@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {scaleTime, scaleLinear} from 'd3-scale';
+import {scaleTime} from 'd3-scale';
 import {timeMonth} from 'd3-time';
 import './_index.scss';
 
@@ -10,7 +10,7 @@ const Map = {
     'þingmaður': '77bc48',
 };
 
-class SessionChart extends React.Component {
+export default class SessionChart extends React.Component {
     static propTypes = {
         source: PropTypes.arrayOf(PropTypes.shape({
             period: PropTypes.shape({
@@ -104,5 +104,3 @@ class SessionChart extends React.Component {
         )
     }
 }
-
-export {SessionChart}

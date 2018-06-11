@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
-import {Badge} from "../Badge/index";
+import Badge from '../Badge';
 import {ListHorizontal, ListItem} from '../List';
 import './_index.scss';
 
-class AssemblyBadge extends React.Component {
+export default class AssemblyBadge extends React.Component {
     static propTypes = {
         assembly: PropTypes.shape({
             id: PropTypes.number,
@@ -44,7 +44,7 @@ class AssemblyBadge extends React.Component {
 
     render() {
         return (
-            <NavLink to={`/loggjafathing/${this.props.assembly.id}`} className="assembly-badge" activeClassName="assembly-badge--active">
+            <NavLink to={`/loggjafarthing/${this.props.assembly.id}`} className="assembly-badge" activeClassName="assembly-badge--active">
                 <div style={{display: 'flex'}}>
                     <h3>{this.props.assembly.id}</h3>
                     <time>
@@ -63,5 +63,3 @@ class AssemblyBadge extends React.Component {
         );
     }
 }
-
-export {AssemblyBadge}

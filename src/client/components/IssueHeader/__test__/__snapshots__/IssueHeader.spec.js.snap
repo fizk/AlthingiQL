@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IssueHeader /> data 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col"
+  >
+    <h1
+      className="headline-1"
+    >
+      1
+       
+      name
+    </h1>
+    <h3
+      className="headline-3"
+    >
+      type name
+    </h3>
+    <h2
+      className="headline-2"
+    >
+      status
+    </h2>
+    <time>
+      2001-01-01
+    </time>
+  </div>
+</div>
+`;
+
+exports[`<IssueHeader /> default props 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col"
+  >
+    <h1
+      className="headline-1"
+    >
+       
+    </h1>
+    <h3
+      className="headline-3"
+    />
+    <h2
+      className="headline-2"
+    />
+    <time />
+  </div>
+</div>
+`;

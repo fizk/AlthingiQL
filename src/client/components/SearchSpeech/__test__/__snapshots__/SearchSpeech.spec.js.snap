@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchSpeech /> data 1`] = `
+<div
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <input
+    className="input input--md input--search"
+    onChange={[Function]}
+    onFocus={[Function]}
+    placeholder={undefined}
+    type="search"
+    value={undefined}
+  />
+  <div
+    className="options-list__container"
+    style={
+      Object {
+        "position": "absolute",
+        "zIndex": 1,
+      }
+    }
+  >
+    <div
+      className="options-list"
+    >
+      <div
+        className="options-list__item"
+        onClick={[Function]}
+      >
+        <div
+          className="speech-card"
+        >
+          <div
+            className="congressman"
+          >
+            <div
+              className="congressman__avatar"
+            >
+              <div
+                className="avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(/path/to/image.jpg)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="congressman__party"
+            >
+              <div
+                className="badge"
+                style={
+                  Object {
+                    "backgroundColor": "#123123",
+                  }
+                }
+                title="name"
+              />
+            </div>
+            <div
+              className="congressman__body"
+            >
+              <h3
+                className="headline-3 headline-3--ellipsis"
+              >
+                name
+              </h3>
+              <h4
+                className="headline-4"
+              >
+                congressman type
+              </h4>
+            </div>
+          </div>
+          <div
+            className="speech-card__meta"
+          >
+            <span
+              className="speech-card__type"
+            >
+              type
+            </span>
+            <span
+              className="speech-card__iteration"
+            >
+              1
+            </span>
+            <time
+              className="speech-card__date"
+            >
+              Jan 01, 2001, 11:00:00
+            </time>
+            <time
+              className="speech-card__date"
+            >
+              11:00:00
+            </time>
+          </div>
+          <div
+            className="speech-card__text"
+          >
+            <p>
+              text
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<SearchSpeech /> default props 1`] = `
+<div
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <input
+    className="input input--md input--search"
+    onChange={[Function]}
+    onFocus={[Function]}
+    placeholder={undefined}
+    type="search"
+    value={undefined}
+  />
+</div>
+`;

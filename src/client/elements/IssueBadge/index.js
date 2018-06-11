@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {H2, H3, H5} from '../Headline';
-import {SimpleBillProgress} from "../SimpleBillProgress/index";
-import {SimpleRequestProgress} from "../SimpleRequestProgress/index";
-import {Badge} from "../Badge/index";
-import {Paper} from "../Paper/index";
-import {Congressman} from "../Congressman/index";
+import {H3, H5} from '../Headline';
+import SimpleBillProgress from '../SimpleBillProgress';
+import SimpleRequestProgress from '../SimpleRequestProgress';
+import Badge from '../Badge';
+import Congressman from '../Congressman';
 import './_index.scss';
 
 export class ParliamentaryResolutionBadge extends React.Component {
@@ -27,6 +26,9 @@ export class ParliamentaryResolutionBadge extends React.Component {
         congressman: PropTypes.shape({
             id: PropTypes.number,
             name: PropTypes.string,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
             party: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
@@ -51,6 +53,9 @@ export class ParliamentaryResolutionBadge extends React.Component {
         congressman: {
             id: undefined,
             name: undefined,
+            avatar:{
+                templateSrc: undefined,
+            },
             party: {
                 id: undefined,
                 name: undefined,
@@ -71,8 +76,8 @@ export class ParliamentaryResolutionBadge extends React.Component {
 
     render() {
         return (
-            <article className="issue-badge issue-badge--resolution">
-                <Link to={`/loggjafathing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+                <article className="issue-badge issue-badge--resolution">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
                             <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
@@ -94,8 +99,8 @@ export class ParliamentaryResolutionBadge extends React.Component {
                             <H5>{this.props.issue.typeName}</H5>
                         </div>
                     </footer>
-                </Link>
-            </article>
+                </article>
+            </Link>
         );
     }
 }
@@ -118,6 +123,9 @@ export class RequestForReportBadge extends React.Component {
         congressman: PropTypes.shape({
             id: PropTypes.number,
             name: PropTypes.string,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
             party: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
@@ -142,6 +150,9 @@ export class RequestForReportBadge extends React.Component {
         congressman: {
             id: undefined,
             name: undefined,
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 id: undefined,
                 name: undefined,
@@ -162,8 +173,8 @@ export class RequestForReportBadge extends React.Component {
 
     render() {
         return (
-            <article className="issue-badge issue-badge--request">
-                <Link to={`/loggjafathing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+                <article className="issue-badge issue-badge--request">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
                             <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
@@ -185,8 +196,8 @@ export class RequestForReportBadge extends React.Component {
                             <H5>{this.props.issue.typeName}</H5>
                         </div>
                     </footer>
-                </Link>
-            </article>
+                </article>
+            </Link>
         );
     }
 }
@@ -209,6 +220,9 @@ export class ReportBadge extends React.Component {
         congressman: PropTypes.shape({
             id: PropTypes.number,
             name: PropTypes.string,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
             party: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
@@ -233,6 +247,9 @@ export class ReportBadge extends React.Component {
         congressman: {
             id: undefined,
             name: undefined,
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 id: undefined,
                 name: undefined,
@@ -253,8 +270,8 @@ export class ReportBadge extends React.Component {
 
     render() {
         return (
-            <article className="issue-badge issue-badge--report">
-                <Link to={`/loggjafathing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+                <article className="issue-badge issue-badge--report">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
                             <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
@@ -276,8 +293,8 @@ export class ReportBadge extends React.Component {
                             <H5>{this.props.issue.typeName}</H5>
                         </div>
                     </footer>
-                </Link>
-            </article>
+                </article>
+            </Link>
         );
     }
 }
@@ -300,6 +317,9 @@ export class MeetingPostponementBadge extends React.Component {
         congressman: PropTypes.shape({
             id: PropTypes.number,
             name: PropTypes.string,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
             party: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
@@ -324,6 +344,9 @@ export class MeetingPostponementBadge extends React.Component {
         congressman: {
             id: undefined,
             name: undefined,
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 id: undefined,
                 name: undefined,
@@ -334,8 +357,8 @@ export class MeetingPostponementBadge extends React.Component {
 
     render() {
         return (
-            <article className="issue-badge issue-badge--meeting">
-                <Link to={`/loggjafathing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+                <article className="issue-badge issue-badge--meeting">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
                             <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
@@ -354,8 +377,8 @@ export class MeetingPostponementBadge extends React.Component {
                             <H5>{this.props.issue.typeName}</H5>
                         </div>
                     </footer>
-                </Link>
-            </article>
+                </article>
+            </Link>
         );
     }
 }
@@ -379,6 +402,9 @@ export class BillBadge extends React.Component {
         congressman: PropTypes.shape({
             id: PropTypes.number,
             name: PropTypes.string,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
             party: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
@@ -404,6 +430,9 @@ export class BillBadge extends React.Component {
         congressman: {
             id: undefined,
             name: undefined,
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 id: undefined,
                 name: undefined,
@@ -422,16 +451,16 @@ export class BillBadge extends React.Component {
             : null
     }
 
-    url(id) {
-        return __IMAGE_SERVER__ + `/unsafe/300x200/smart/http://www.althingi.is/myndir/mynd/thingmenn/${id}/org/mynd.jpg`;
+    url(url) {
+        return (url || '').replace('{width}', 300).replace('{height}', 200);
     }
 
     render() {
         return (
-            <article className="issue-badge issue-badge--bill">
-                <Link to={`/loggjafathing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+                <article className="issue-badge issue-badge--bill">
                     <header className="issue-badge__header"
-                            style={{backgroundImage: `url(${this.url(this.props.congressman.id)})`}}>
+                            style={{backgroundImage: `url(${this.url(this.props.congressman.avatar.templateSrc)})`}}>
                         <div className="issue-badge__congressman">
                             <div className="issue-badge__congressman-badge">
                                 <Badge title={this.props.congressman.party.name} color={this.props.congressman.party.color}/>
@@ -440,14 +469,14 @@ export class BillBadge extends React.Component {
                             {this.count(this.props.issue.proponentsCount)}
                         </div>
                     </header>
-                    <section  className="issue-badge__body">
+                    <aside  className="issue-badge__body">
                         <div className="issue-badge__headline">
                             <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
                         </div>
                         <div className="issue-badge__type">
                             {this.props.issue.type}
                         </div>
-                    </section>
+                    </aside>
                     <footer className="issue-badge__footer">
                         <div className="issue-badge__type-name">
                             <H5>{this.props.issue.typeName}</H5>
@@ -456,8 +485,8 @@ export class BillBadge extends React.Component {
                             <SimpleBillProgress status={this.props.issue.status}/>
                         </div>
                     </footer>
-                </Link>
-            </article>
+                </article>
+            </Link>
         );
     }
 }
@@ -480,6 +509,9 @@ export class InquiryBadge extends React.Component {
         congressman: PropTypes.shape({
             id: PropTypes.number,
             name: PropTypes.string,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
             party: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
@@ -504,6 +536,9 @@ export class InquiryBadge extends React.Component {
         congressman: {
             id: undefined,
             name: undefined,
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 id: undefined,
                 name: undefined,
@@ -524,8 +559,8 @@ export class InquiryBadge extends React.Component {
 
     render() {
         return (
-            <article className="issue-badge issue-badge--inquiry">
-                <Link to={`/loggjafathing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+                <article className="issue-badge issue-badge--inquiry">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
                             <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
@@ -550,8 +585,8 @@ export class InquiryBadge extends React.Component {
                             <SimpleRequestProgress status={this.props.issue.status}/>
                         </div>
                     </footer>
-                </Link>
-            </article>
+                </article>
+            </Link>
         );
     }
 }
@@ -574,6 +609,9 @@ export class WrittenInquiryBadge extends React.Component {
         congressman: PropTypes.shape({
             id: PropTypes.number,
             name: PropTypes.string,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
             party: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
@@ -598,6 +636,9 @@ export class WrittenInquiryBadge extends React.Component {
         congressman: {
             id: undefined,
             name: undefined,
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 id: undefined,
                 name: undefined,
@@ -618,8 +659,8 @@ export class WrittenInquiryBadge extends React.Component {
 
     render() {
         return (
-            <article className="issue-badge issue-badge--written-inquiry">
-                <Link to={`/loggjafathing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+                <article className="issue-badge issue-badge--written-inquiry">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
                             <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
@@ -644,8 +685,8 @@ export class WrittenInquiryBadge extends React.Component {
                             <SimpleRequestProgress status={this.props.issue.status}/>
                         </div>
                     </footer>
-                </Link>
-            </article>
+                </article>
+            </Link>
         );
     }
 }
@@ -682,8 +723,9 @@ export class OpinionBadge extends React.Component {
 
     render() {
         return (
-            <article className="issue-badge issue-badge--opinion">
-                <Link to={`/loggjafathing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+                <article className="issue-badge issue-badge--opinion">
+
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
                             <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
@@ -695,8 +737,8 @@ export class OpinionBadge extends React.Component {
                     <footer className="issue-badge__footer">
                         <H5>{this.props.issue.typeName}</H5>
                     </footer>
-                </Link>
-            </article>
+                </article>
+            </Link>
         );
     }
 }
@@ -719,6 +761,9 @@ export class IssueBadge extends React.Component {
         congressman: PropTypes.shape({
             id: PropTypes.number,
             name: PropTypes.string,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
             party: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
@@ -743,6 +788,9 @@ export class IssueBadge extends React.Component {
         congressman: {
             id: undefined,
             name: undefined,
+            avatar: {
+                templateSrc: undefined,
+            },
             party: {
                 id: undefined,
                 name: undefined,
@@ -763,8 +811,8 @@ export class IssueBadge extends React.Component {
 
     render() {
         return (
-            <article className="issue-badge issue-badge--inquiry">
-                <Link to={`/loggjafathing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+                <article className="issue-badge issue-badge--inquiry">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
                             <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
@@ -792,8 +840,8 @@ export class IssueBadge extends React.Component {
 
                         </div>
                     </footer>
-                </Link>
-            </article>
+                </article>
+            </Link>
         );
     }
 }

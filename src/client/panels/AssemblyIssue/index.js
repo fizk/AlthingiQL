@@ -37,6 +37,7 @@ const assemblyIssueQuery = gql`
             proponents {
                 id
                 name
+                avatar {templateSrc}
                 party {
                     id
                     name
@@ -47,6 +48,7 @@ const assemblyIssueQuery = gql`
                 congressman {
                     id
                     name
+                    avatar {templateSrc}
                     party {
                         id
                         name

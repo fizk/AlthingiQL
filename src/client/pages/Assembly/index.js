@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import {AssemblyNavigation} from "../../elements/AssemblyNavigation";
+import {AssemblyNavigation} from '../../elements/AssemblyNavigation';
 import AssemblyHeader from '../../components/AssemblyHeader';
+import {Helmet} from 'react-helmet';
 
 export default class Assembly extends React.Component {
     static propTypes = {
@@ -14,11 +15,15 @@ export default class Assembly extends React.Component {
 
     render() {
         return (
-            <div>
+            <Fragment>
+                <Helmet>
+                    <title>{`Löggjafarþing ${this.props.assembly}`}</title>
+                    <link rel="canonical" href={`/loggjafarthing/${this.props.assembly}`} />
+                </Helmet>
                 <AssemblyNavigation assembly={this.props.assembly} />
                 <AssemblyHeader assembly={this.props.assembly} />
                 {this.props.children}
-            </div>
+            </Fragment>
         )
     }
 }

@@ -24,6 +24,9 @@ export default class SpeechCard extends React.Component {
             congressman: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
+                avatar: PropTypes.shape({
+                    templateSrc: PropTypes.string,
+                }),
                 party: PropTypes.shape({
                     id: PropTypes.number,
                     name: PropTypes.string,
@@ -53,6 +56,9 @@ export default class SpeechCard extends React.Component {
             congressman: {
                 id: undefined,
                 name: undefined,
+                avatar: {
+                    templateSrc: undefined,
+                },
                 party: {
                     id: undefined,
                     name: undefined,

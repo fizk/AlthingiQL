@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {Grid, Column, Row} from '../../elements/Grid';
-import {Congressman} from '../../elements/Congressman';
-import {H2} from "../../elements/Headline";
-import {HorizontalChart} from "../../elements/HorizontalChart/index";
-import {SessionChart} from "../../elements/SessionChart/index";
-import {VoteResultPieChart} from "../../elements/VoteResultPieChart/index";
+import {Column, Row} from '../../elements/Grid';
+import Congressman from '../../elements/Congressman';
+import {H2} from '../../elements/Headline';
+import HorizontalChart from '../../elements/HorizontalChart';
+import SessionChart from '../../elements/SessionChart';
+import VoteResultPieChart from '../../elements/VoteResultPieChart';
 
 export default class AssemblyCongressman extends React.Component {
     static propTypes = {
@@ -14,6 +14,9 @@ export default class AssemblyCongressman extends React.Component {
         congressman: PropTypes.number,
         person: PropTypes.shape({
             id: PropTypes.number,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
             name: PropTypes.string,
         }),
         sessions: PropTypes.arrayOf(PropTypes.shape({
@@ -72,6 +75,9 @@ export default class AssemblyCongressman extends React.Component {
         person: {
             id: undefined,
             name: undefined,
+            avatar:{
+                templateSrc: undefined,
+            },
         },
         sessions: [],
         votes: [],
@@ -94,13 +100,12 @@ export default class AssemblyCongressman extends React.Component {
 
     render() {
         return (
-            <div>
+            <Fragment>
                 <Row>
                     <Column>
                         <Congressman congressman={this.props.person} />
                     </Column>
                 </Row>
-
                 <Row>
                     <Column>
                         {this.props.sessions.map(session => session.constituency.name).reduce((total, item) => {
@@ -122,7 +127,6 @@ export default class AssemblyCongressman extends React.Component {
                         <VoteResultPieChart source={this.chartPersentage(this.props.votes)} formatValue={(value, total) => ` ${((value/total)*100).toFixed(2)}%`} />
                     </Column>
                 </Row>
-
                 <Row>
                     <Column>
                         <H2>Fyrsti flutingsmadur</H2>
@@ -139,7 +143,7 @@ export default class AssemblyCongressman extends React.Component {
                             {this.props.promotedIssues.map(issue => (
                                 <tr key={`issue-${issue.id}`}>
                                     <td>
-                                        <Link to={`/loggjafathing/${issue.assembly.id}/thingmal/${issue.id}`}>
+                                        <Link to={`/loggjafarthing/${issue.assembly.id}/thingmal/${issue.id}`}>
                                             {issue.name}
                                         </Link>
                                     </td>
@@ -193,7 +197,7 @@ export default class AssemblyCongressman extends React.Component {
                         <HorizontalChart source={this.props.categorySpeechTimes.map(item => ({label: item.title, value: item.time}))}/>
                     </Column>
                 </Row>
-            </div>
+            </Fragment>
         )
     }
 }

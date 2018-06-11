@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {scaleLinear} from 'd3-scale';
 import './_index.scss';
 
-export class HorizontalChart extends React.Component {
+export default class HorizontalChart extends React.Component {
     static propTypes = {
         source: PropTypes.arrayOf(PropTypes.shape({
             value: PropTypes.number,
@@ -28,7 +28,6 @@ export class HorizontalChart extends React.Component {
     }
 
     render() {
-
         const values = this.props.source.map(item => item.value);
         const max = Math.max(...values);
         const height = (values.length * this.dimensions.barHeight) + this.dimensions.gutter;

@@ -1,6 +1,6 @@
 import React from 'react';
 import './_index.scss';
 
-export const Paper = ({children}) => (
+export default ({children}) => (
     <div className="paper">{children}</div>
 );

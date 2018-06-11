@@ -18,6 +18,7 @@ const issueSpeechesQuery = gql`
                 congressman {
                     id
                     name
+                    avatar {templateSrc}
                     party {id name color}
                 }
                 text

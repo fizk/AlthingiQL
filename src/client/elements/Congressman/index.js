@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Badge} from '../Badge';
-import {Avatar} from '../Avatar';
-import {H3} from "../Headline/index";
+import Badge from '../Badge';
+import Avatar from '../Avatar';
+import {H3} from '../Headline';
 import './_index.scss';
 
-export class Congressman extends React.Component {
+export default class Congressman extends React.Component {
     static propTypes = {
         congressman: PropTypes.shape({
             id: PropTypes.number,
-            name: PropTypes.string
+            name: PropTypes.string,
+            avatar: PropTypes.shape({
+                templateSrc: PropTypes.string,
+            }),
         }),
         party: PropTypes.shape({
             id: PropTypes.number,
@@ -22,28 +25,30 @@ export class Congressman extends React.Component {
         congressman: {
             id: undefined,
             name: undefined,
+            avatar: {
+                templateSrc: undefined,
+            }
         },
         party: undefined,
     };
 
-    url(id) {
-        return __IMAGE_SERVER__ + `/unsafe/60x60/smart/http://www.althingi.is/myndir/mynd/thingmenn/${id}/org/mynd.jpg`;
-    }
-
     render() {
         return (
-            <div className="congressman">
-                <div className="congressman__avatar">
-                    <Avatar src={this.url(this.props.congressman.id)} />
-                </div>
-                {this.props.party && <div className="congressman__party">
-                    <Badge title={this.props.party.name} color={this.props.party.color} />
-                </div>}
+            <article className="congressman">
+                <header className="congressman__avatar">
+                    <Avatar src={this.props.congressman.avatar.templateSrc}
+                            title={`Ljósmynd af ${this.props.congressman.name}`}/>
+                </header>
+                {this.props.party && (
+                    <div className="congressman__party">
+                        <Badge title={this.props.party.name} color={this.props.party.color} />
+                    </div>
+                )}
                 <div className="congressman__body">
                     <H3 variations={['ellipsis']}>{this.props.congressman.name}</H3>
                     {this.props.children}
                 </div>
-            </div>
+            </article>
         )
     }
 }

@@ -5,7 +5,7 @@ import {ISSUE_STATUS} from '../../utils/maps';
 import classVariations from '../../utils/classVariations';
 import './_index.scss';
 
-class StatusPieChart extends React.Component {
+export default class StatusPieChart extends React.Component {
     static propTypes = {
         source: PropTypes.arrayOf(PropTypes.shape({
             bill: PropTypes.shape({
@@ -76,5 +76,3 @@ class StatusPieChart extends React.Component {
         )
     }
 }
-
-export {StatusPieChart}

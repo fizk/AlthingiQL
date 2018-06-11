@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Grid, Row, Column} from '../../elements/Grid';
-import {Congressman} from "../../elements/Congressman/index";
-import {VoteResultPieChart} from "../../elements/VoteResultPieChart/index";
-import DocumentCongressmanVotes from "../../components/DocumentCongressmanVotes";
+import {Row, Column} from '../../elements/Grid';
+import Congressman from '../../elements/Congressman';
+import VoteResultPieChart from '../../elements/VoteResultPieChart';
+import DocumentCongressmanVotes from '../../components/DocumentCongressmanVotes';
 
 export default class IssueDocuments extends React.Component {
     static propTypes = {
@@ -17,6 +17,9 @@ export default class IssueDocuments extends React.Component {
             proponents: PropTypes.arrayOf(PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
+                avatar: PropTypes.shape({
+                    templateSrc: PropTypes.string,
+                }),
                 party: PropTypes.shape({
                     id: PropTypes.number,
                     name: PropTypes.string,
@@ -70,54 +73,52 @@ export default class IssueDocuments extends React.Component {
 
     render() {
         return (
-            <div>
-                <Row>
-                    <Column>
-                        <ul>
-                            {this.props.documents.map(document => (
-                                <li key={document.id}>
-                                    <a href={document.url} target="_blank"> {document.type}</a>
-                                    <time>{document.date}</time>
-                                    <ul>
-                                        {document.proponents.map(congressman => (
-                                            <Congressman key={`proponents-${document.id}-${congressman.id}`}
-                                                         congressman={congressman}
-                                                         party={congressman.party}>
-                                            </Congressman>
-                                        ))}
-                                    </ul>
-                                    <table>
-                                        <thead>
-                                        <tr>
-                                            <td>type</td>
-                                            <td>result</td>
-                                            <td>outcome</td>
-                                            <td>committee</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            {document.votes.map(vote => (
-                                                <tr key={`vote-${vote.id}`}>
-                                                    <td>{vote.type}</td>
-                                                    <td><VoteResultPieChart source={this.formatVoteResults(vote)} formatValue={value => ` ${value}`}/></td>
-                                                    <td>{vote.outcome}</td>
-                                                    <td>{vote.committee}</td>
-                                                    <td>
-                                                        <DocumentCongressmanVotes assembly={this.props.assembly} issue={this.props.issue} vote={vote.id} />
-                                                    </td>
+            <Row>
+                <Column>
+                    <ul>
+                        {this.props.documents.map(document => (
+                            <li key={document.id}>
+                                <a href={document.url} target="_blank"> {document.type}</a>
+                                <time>{document.date}</time>
+                                <ul>
+                                    {document.proponents.map(congressman => (
+                                        <Congressman key={`proponents-${document.id}-${congressman.id}`}
+                                                     congressman={congressman}
+                                                     party={congressman.party}>
+                                        </Congressman>
+                                    ))}
+                                </ul>
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <td>type</td>
+                                        <td>result</td>
+                                        <td>outcome</td>
+                                        <td>committee</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {document.votes.map(vote => (
+                                            <tr key={`vote-${vote.id}`}>
+                                                <td>{vote.type}</td>
+                                                <td><VoteResultPieChart source={this.formatVoteResults(vote)} formatValue={value => ` ${value}`}/></td>
+                                                <td>{vote.outcome}</td>
+                                                <td>{vote.committee}</td>
+                                                <td>
+                                                    <DocumentCongressmanVotes assembly={this.props.assembly} issue={this.props.issue} vote={vote.id} />
+                                                </td>
 
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                    <hr />
-                                </li>
-                            ))}
-                        </ul>
-                        <h2>{this.props.issue.name}</h2>
-                    </Column>
-                </Row>
-            </div>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                                <hr />
+                            </li>
+                        ))}
+                    </ul>
+                    <h2>{this.props.issue.name}</h2>
+                </Column>
+            </Row>
         )
     }
 }

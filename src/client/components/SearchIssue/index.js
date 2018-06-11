@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {OptionsWithKeyBinding} from '../../elements/Form';
-import {connect} from 'react-redux';
 import {issueSearchAction, issueClearAction} from './redux';
 import {IssueSearchResult} from '../../elements/SearchResult';
 
-class SearchIssue extends React.Component {
+export default class SearchIssue extends React.Component {
     static propTypes = {
         assembly: PropTypes.number,
         result: PropTypes.arrayOf(PropTypes.shape({
@@ -79,8 +79,8 @@ class SearchIssue extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.state.redirect && <Redirect push={true} to={`/loggjafathing/${this.state.redirect.assembly.id}/thingmal/${this.state.redirect.id}`} />}
+            <Fragment>
+                {this.state.redirect && <Redirect push={true} to={`/loggjafarthing/${this.state.redirect.assembly.id}/thingmal/${this.state.redirect.id}`} />}
                 <OptionsWithKeyBinding
                     isSearching={this.props.isSearching}
                     onClear={this.handleOnClear}
@@ -90,7 +90,7 @@ class SearchIssue extends React.Component {
                         <IssueSearchResult key={`search-result-${result.id}`} issue={result} />
                     ))}
                 </OptionsWithKeyBinding>
-            </div>
+            </Fragment>
         )
     }
 }
@@ -112,4 +112,4 @@ const mapDispatchToProps = () => {
 
 const SearchIssueWithStore = connect(mapStateToProps, mapDispatchToProps())(SearchIssue);
 
-export {SearchIssue, SearchIssueWithStore}
+export {SearchIssueWithStore}

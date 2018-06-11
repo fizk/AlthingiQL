@@ -1,4 +1,3 @@
-import React from 'react';
 import {graphql, compose, gql} from 'react-apollo';
 import AssemblyHeader from './AssemblyHeader';
 

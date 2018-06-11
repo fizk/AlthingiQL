@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {ApolloProvider} from 'react-apollo';
 import {ApolloClient, createNetworkInterface} from 'apollo-client';
-import {Routers} from './router';
+import Routers from './router';
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';

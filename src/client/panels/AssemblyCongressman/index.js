@@ -7,6 +7,7 @@ const assembliesQuery = gql`
         Person(id: $congressman) {
             id
             name
+            avatar {templateSrc}
         }
         CongressmanAssemblySessions(congressman: $congressman assembly: $assembly) {
             id

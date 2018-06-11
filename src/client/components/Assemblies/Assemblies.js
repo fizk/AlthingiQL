@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {AssemblyBadge} from '../../elements/AssemblyBadge';
+import AssemblyBadge from '../../elements/AssemblyBadge';
 import {ListSeparated, ListItem} from '../../elements/List';
 
 export default class Index extends React.Component {

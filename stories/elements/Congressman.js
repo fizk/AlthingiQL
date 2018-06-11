@@ -1,12 +1,15 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import {Congressman} from '../../src/client/elements/Congressman';
+import Congressman from '../../src/client/elements/Congressman';
 import {H4} from "../../src/client/elements/Headline";
 
 const congressman = {
     id: 719,
     name: 'Oddný G. Harðardóttir',
+    avatar: {
+        templateSrc: undefined,
+    }
 };
 
 const party = {

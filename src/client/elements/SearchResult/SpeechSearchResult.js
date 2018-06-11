@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classVariations from '../../utils/classVariations';
 import SpeechCard from '../SpeechCard';
-import {Congressman} from '../Congressman';
+import Congressman from '../Congressman';
 import {H4} from '../Headline';
 
 export default class IssueSearchResult extends React.Component {
@@ -13,16 +13,32 @@ export default class IssueSearchResult extends React.Component {
         variations: PropTypes.array,
         value: PropTypes.shape({
             id: PropTypes.string,
+            assembly: PropTypes.shape({
+                id: PropTypes.number,
+            }),
+            issue: PropTypes.shape({
+                id: PropTypes.number,
+            }),
             text: PropTypes.string,
+            period: PropTypes.shape({
+                from: PropTypes.string,
+                to: PropTypes.string,
+            }),
+            iteration: PropTypes.string,
+            type: PropTypes.string,
+            congressmanType: PropTypes.string,
             congressman: PropTypes.shape({
                 id: PropTypes.number,
                 name: PropTypes.string,
+                avatar: PropTypes.shape({
+                    templateSrc: PropTypes.string,
+                }),
                 party: PropTypes.shape({
                     id: PropTypes.number,
                     name: PropTypes.string,
                     color: PropTypes.string,
-                }),
-            })
+                })
+            }),
         }),
     };
 

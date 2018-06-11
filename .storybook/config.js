@@ -18,6 +18,7 @@ function loadStories() {
     require('../stories/elements/Headline.js');
     require('../stories/components/SearchSpeech.js');
     require('../stories/elements/HorizontalChart.js');
+    require('../stories/elements/PieChart/PieChart.js');
 }
 
 configure(loadStories, module);

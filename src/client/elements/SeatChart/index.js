@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {pie, arc} from 'd3-shape'
 import './_index.scss';
 
-class SeatChart extends React.Component {
+export default class SeatChart extends React.Component {
     static propTypes = {
         source: PropTypes.arrayOf(PropTypes.shape({
             party: PropTypes.shape({
@@ -74,5 +73,3 @@ class SeatChart extends React.Component {
         )
     }
 }
-
-export {SeatChart}
