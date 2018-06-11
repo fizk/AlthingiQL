@@ -1,11 +1,7 @@
-const webpack = require('webpack');
+const DefinePlugin = require('webpack').DefinePlugin;
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-const extractSass = new ExtractTextPlugin({
-    filename: 'stylesheets/[name].css',
-    disable: false
-});
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const serverConfig = {
     protocol: process.env.SERVER_PROTOCOL || 'http',
@@ -15,45 +11,63 @@ const serverConfig = {
 
 module.exports = {
     entry: {
-        application: './src/client/index.js'
+        application: './src/client/index.tsx',
     },
     output: {
-        path: path.resolve(__dirname) + '/public',
-        filename: 'scripts/[name].js',
+        path: path.join(__dirname, 'public'),
+        filename: '[name].js',
+        publicPath: '/',
     },
-    plugins: [
-        new webpack.DefinePlugin({
-            __GRAPHQL_SERVER__: JSON.stringify(
-                `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/graphql`
-            ),
-            __IMAGE_SERVER__: JSON.stringify('http://localhost:8000')
-        }),
-        extractSass
-    ],
     module: {
         rules: [
             {
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    query: {
-                        presets: ['es2015', 'react', 'stage-2', ],
-                        plugins: ['replace-env-vars']
-                    },
-                }
-            }, {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+            {
                 test: /\.scss$/,
-                use: extractSass.extract({
-                    use: [{
-                        loader: "css-loader"
-                    }, {
-                        loader: "sass-loader"
-                    }],
-                    // use style-loader in development
-                    fallback: "style-loader"
-                })
-            }
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                        },
+                        {
+                            loader: 'sass-loader',
+                        },
+                    ],
+                }),
+            },
         ],
     },
+    resolve: {
+        extensions: [ '.tsx', '.ts', '.js', ],
+    },
+    plugins: [
+        // new DashboardPlugin(),
+        new ExtractTextPlugin('./bundle.css'),
+        new DefinePlugin({
+            __GRAPHQL_SERVER__: JSON.stringify(
+                `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/graphql`
+            ),
+            __IMAGE_SERVER__: JSON.stringify('http://localhost:8000'),
+            __API_URL__: JSON.stringify(
+                process.env.NODE_ENV === 'production'
+                    ? 'https://us-central1-reactscales.cloudfunctions.net'
+                    : 'http://localhost:3000'
+            ),
+        })
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, 'public'),
+        port: 3001,
+        hot: false,
+        inline: false,
+        historyApiFallback: true,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+        },
+    },
 };
+
