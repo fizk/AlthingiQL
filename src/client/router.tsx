@@ -1,4 +1,5 @@
-import React, {Fragment} from 'react';
+import * as React from 'react';
+import {Fragment} from 'react';
 import {Route} from 'react-router-dom';
 import Chrome from './components/Chrome';
 import {default as AssemblyPanel} from './panels/Assembly';

@@ -1,44 +1,45 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import AssemblyBadge from '../../elements/AssemblyBadge';
-import {ListSeparated, ListItem} from '../../elements/List';
+import * as React from "react";
+import AssemblyBadge from "../../elements/AssemblyBadge";
+import { ListSeparated, ListItem } from "../../elements/List";
 
-export default class Index extends React.Component {
-    static propTypes = {
-        assemblies: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.number,
-            period: PropTypes.shape({
-                from: PropTypes.string,
-                to: PropTypes.string,
-            }),
-            division: PropTypes.shape({
-                majority: PropTypes.arrayOf(PropTypes.shape({
-                    id: PropTypes.number,
-                    name: PropTypes.string,
-                    color: PropTypes.string,
-                })),
-                minority: PropTypes.arrayOf(PropTypes.shape({
-                    id: PropTypes.number,
-                    name: PropTypes.string,
-                    color: PropTypes.string,
-                }))
-            })
-        }))
-    };
+type IndexProps = {
+    assemblies: {
+        id: number,
+        period: {
+            from?: string,
+            to?: string
+        },
+        division: {
+            majority?: {
+                id?: number,
+                name?: string,
+                color?: string
+            }[],
+            minority: {
+                id?: number,
+                name?: string,
+                color?: string
+            }[]
+        }
+    }[]
+    loading?: boolean
+};
 
-    static defaultProps = {
-        assemblies: []
+export default class Index extends React.Component<IndexProps, {}> {
+    static defaultProps: IndexProps = {
+        assemblies: [],
+        loading: false
     };
 
     render() {
         return (
             <ListSeparated>
                 {this.props.assemblies.map(assembly => (
-                    <ListItem key={`assembly-${assembly.id}`} >
+                    <ListItem key={`assembly-${assembly.id}`}>
                         <AssemblyBadge assembly={assembly} />
                     </ListItem>
                 ))}
             </ListSeparated>
-        )
+        );
     }
 }

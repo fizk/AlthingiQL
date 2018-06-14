@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import {H1, H2, H3, H4, H5} from "../../src/client/elements/Headline";

@@ -1,76 +1,69 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Row, Column} from '../../elements/Grid';
-import Congressman from '../../elements/Congressman';
-import VoteResultPieChart from '../../elements/VoteResultPieChart';
-import DocumentCongressmanVotes from '../../components/DocumentCongressmanVotes';
+import * as React from 'react';
+import { Row, Column } from "../../elements/Grid";
+import Congressman from "../../elements/Congressman";
+import VoteResultPieChart from "../../elements/VoteResultPieChart";
+import DocumentCongressmanVotes from "../../components/DocumentCongressmanVotes";
 
-export default class IssueDocuments extends React.Component {
-    static propTypes = {
-        assembly: PropTypes.number,
-        issue: PropTypes.number,
-        documents: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.number,
-            url: PropTypes.string,
-            date: PropTypes.string,
-            type: PropTypes.string,
-            proponents: PropTypes.arrayOf(PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                avatar: PropTypes.shape({
-                    templateSrc: PropTypes.string,
-                }),
-                party: PropTypes.shape({
-                    id: PropTypes.number,
-                    name: PropTypes.string,
-                    color: PropTypes.string,
-                })
-            })),
-            votes: PropTypes.arrayOf(PropTypes.shape({
-                id: PropTypes.number,
-                type: PropTypes.string,
-                outcome: PropTypes.string,
-                yes: PropTypes.number,
-                no: PropTypes.number,
-                inaction: PropTypes.number,
-                committee: PropTypes.string,
-            })),
-        })),
-    };
+type IssueDocumentsProps = {
+    assembly?: number,
+    issue?: number,
+    documents?: {
+        id?: number,
+        url?: string,
+        date?: string,
+        type?: string,
+        proponents?: {
+            id?: number,
+            name?: string,
+            avatar?: {
+                templateSrc?: string
+            },
+            party?: {
+                id?: number,
+                name?: string,
+                color?: string
+            }
+        }[],
+        votes?: {
+            id?: number,
+            type?: string,
+            outcome?: string,
+            yes?: number,
+            no?: number,
+            inaction?: number,
+            committee?: string
+        }[]
+    }[]
+};
 
+export default class IssueDocuments extends React.Component<IssueDocumentsProps, {}> {
     static defaultProps = {
         assembly: undefined,
         issue: undefined,
-        documents: [],
+        documents: []
     };
-
-    formatVoteResults (vote) {
+    formatVoteResults(vote) {
         const value = [];
-
         if (vote.yes) {
             value.push({
-                vote: 'já',
-                value: vote.yes,
-            })
+                vote: "já",
+                value: vote.yes
+            });
         }
-
         if (vote.no) {
             value.push({
-                vote: 'nei',
-                value: vote.no,
-            })
+                vote: "nei",
+                value: vote.no
+            });
         }
-
         if (vote.inaction) {
             value.push({
-                vote: 'greiðir ekki atkvæði',
-                value: vote.inaction,
-            })
+                vote: "greiðir ekki atkvæði",
+                value: vote.inaction
+            });
         }
-
         return value;
     }
-
     render() {
         return (
             <Row>
@@ -78,36 +71,56 @@ export default class IssueDocuments extends React.Component {
                     <ul>
                         {this.props.documents.map(document => (
                             <li key={document.id}>
-                                <a href={document.url} target="_blank"> {document.type}</a>
+                                <a href={document.url} target="_blank">
+                                    {" "}
+                                    {document.type}
+                                </a>
                                 <time>{document.date}</time>
                                 <ul>
                                     {document.proponents.map(congressman => (
-                                        <Congressman key={`proponents-${document.id}-${congressman.id}`}
-                                                     congressman={congressman}
-                                                     party={congressman.party}>
-                                        </Congressman>
+                                        <Congressman
+                                            key={`proponents-${document.id}-${
+                                                congressman.id
+                                            }`}
+                                            congressman={congressman}
+                                            party={congressman.party}
+                                        />
                                     ))}
                                 </ul>
                                 <table>
                                     <thead>
-                                    <tr>
-                                        <td>type</td>
-                                        <td>result</td>
-                                        <td>outcome</td>
-                                        <td>committee</td>
-                                    </tr>
+                                        <tr>
+                                            <td>type</td>
+                                            <td>result</td>
+                                            <td>outcome</td>
+                                            <td>committee</td>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         {document.votes.map(vote => (
                                             <tr key={`vote-${vote.id}`}>
                                                 <td>{vote.type}</td>
-                                                <td><VoteResultPieChart source={this.formatVoteResults(vote)} formatValue={value => ` ${value}`}/></td>
+                                                <td>
+                                                    <VoteResultPieChart
+                                                        source={this.formatVoteResults(
+                                                            vote
+                                                        )}
+                                                        formatValue={value =>
+                                                            ` ${value}`
+                                                        }
+                                                    />
+                                                </td>
                                                 <td>{vote.outcome}</td>
                                                 <td>{vote.committee}</td>
                                                 <td>
-                                                    <DocumentCongressmanVotes assembly={this.props.assembly} issue={this.props.issue} vote={vote.id} />
+                                                    <DocumentCongressmanVotes
+                                                        assembly={
+                                                            this.props.assembly
+                                                        }
+                                                        issue={this.props.issue}
+                                                        vote={vote.id}
+                                                    />
                                                 </td>
-
                                             </tr>
                                         ))}
                                     </tbody>
@@ -116,9 +129,9 @@ export default class IssueDocuments extends React.Component {
                             </li>
                         ))}
                     </ul>
-                    <h2>{this.props.issue.name}</h2>
+                    <h2>{this.props.issue}</h2>
                 </Column>
             </Row>
-        )
+        );
     }
 }

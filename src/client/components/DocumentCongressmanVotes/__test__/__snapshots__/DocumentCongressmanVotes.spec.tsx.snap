@@ -3,21 +3,23 @@
 exports[`<DocumentCongressmanVotes /> data 1`] = `
 <ul>
   <li>
-    <div
+    <article
       className="congressman"
     >
-      <div
+      <header
         className="congressman__avatar"
       >
         <div
           className="avatar"
+          role="image"
           style={
             Object {
               "backgroundImage": "url(/path/to/file)",
             }
           }
+          title="Ljósmynd af congressman"
         />
-      </div>
+      </header>
       <div
         className="congressman__party"
       >
@@ -34,18 +36,18 @@ exports[`<DocumentCongressmanVotes /> data 1`] = `
       <div
         className="congressman__body"
       >
-        <h3
+        <h4
           className="headline-3 headline-3--ellipsis"
         >
           congressman
-        </h3>
+        </h4>
         <p>
           <strong>
             stuff
           </strong>
         </p>
       </div>
-    </div>
+    </article>
   </li>
 </ul>
 `;

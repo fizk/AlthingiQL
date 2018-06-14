@@ -7,12 +7,12 @@ exports[`<AssemblyHeader /> data 1`] = `
   <div
     className="assembly-header__headline"
   >
-    <h1
+    <h2
       className="headline-1"
     >
       1
       . Löggjafarþing
-    </h1>
+    </h2>
     <time>
       2001-01-01
       2001-01-01
@@ -66,11 +66,11 @@ exports[`<AssemblyHeader /> default props 1`] = `
   <div
     className="assembly-header__headline"
   >
-    <h1
+    <h2
       className="headline-1"
     >
       . Löggjafarþing
-    </h1>
+    </h2>
     <time />
   </div>
   <div

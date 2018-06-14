@@ -1,13 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Application from '../../elements/Application';
-import {Column, Grid, Row} from "../../elements/Grid/index";
-import './_index.scss';
+import * as React from "react";
+import Application from "../../elements/Application";
+import { Column, Grid, Row } from "../../elements/Grid";
+import './index.scss';
 
-export default class Chrome extends React.Component {
-    static propTypes = {};
-
-    static defaultProps = {};
+export default class Chrome extends React.Component<{}, {}> {
 
     render() {
         return (
@@ -19,7 +15,10 @@ export default class Chrome extends React.Component {
                                 <Row>
                                     <Column>
                                         <nav>
-                                            <input aria-label="Aðalleit" type="search"/>
+                                            <input
+                                                aria-label="Aðalleit"
+                                                type="search"
+                                            />
                                         </nav>
                                     </Column>
                                 </Row>
@@ -29,11 +28,9 @@ export default class Chrome extends React.Component {
                     <main className="chrome__main" role="main">
                         {this.props.children}
                     </main>
-                    <footer className="chrome__footer">
-                        @loggjafarthing
-                    </footer>
+                    <footer className="chrome__footer">@loggjafarthing</footer>
                 </div>
             </Application>
-        )
+        );
     }
 }

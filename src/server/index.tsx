@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom/server';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
@@ -89,7 +89,7 @@ app.get('*', (request, response) => {
                  <head>
                      <meta name="viewport" content="width=device-width, initial-scale=2">
                      <meta property="og:site_name" content="Löggjafarþing">
-                     <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" />
+                     <link rel="stylesheet" type="text/css" href="http://localhost:3001/stylesheets/application.css" />
                      ${helmet.title.toString()}
                      ${helmet.meta.toString()}
                      ${helmet.link.toString()}
@@ -99,7 +99,7 @@ app.get('*', (request, response) => {
                      <script>
                         window.__APOLLO_STATE__= ${JSON.stringify(initialState).replace(/</g, '\\\\\u003c')};
                     </script>
-                     <script src="/scripts/application.js"></script>
+                     <script src="http://localhost:3001/javascripts/application.js"></script>
                  </body>
              </html>`;
 
@@ -139,8 +139,8 @@ app.get('*', (request, response) => {
             case Error:
             default:
                 response.status(500);
-                debug('server-error')('%s %s %s %s', error.message, error.fileName, error.lineNumber, error.columnNumber);
-                debug('server-error')('%j', error);
+                console.log('%s %s %s %s', error.message, error.fileName, error.lineNumber, error.columnNumber);
+                console.log('%j', error);
                 break;
         }
         // debug('server-error')('%O', error);
@@ -149,4 +149,4 @@ app.get('*', (request, response) => {
     });
 });
 
-app.listen(serverConfig.port, () => debug('server-log')(`Server started on ${serverConfig.port}`));
+app.listen(serverConfig.port, () => console.log(`Server started on ${serverConfig.port}`));

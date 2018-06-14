@@ -1,4 +1,3 @@
-import React from 'react';
 import {graphql, compose, gql} from 'react-apollo';
 import IssueSpeeches from './IssueSpeeches';
 
@@ -30,7 +29,7 @@ const issueSpeechesQuery = gql`
 
 export default compose(
     graphql(issueSpeechesQuery, {
-        props: all => {
+        props: (all: {ownProps: any, data?: {fetchMore: any, loading: boolean, IssueSpeeches: any}}) => { //@todo `any`
             return {
                 speeches: all.data.loading === false ? all.data.IssueSpeeches.speeches : undefined,
                 done: all.data.loading === false ? all.data.IssueSpeeches.done : true,

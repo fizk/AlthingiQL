@@ -1,9 +1,5 @@
-import React from 'react';
-import {Empty} from '../Icons';
-import './_index.scss';
+import * as React from "react";
+import { Empty } from "../Icons";
+import './index.scss';
 
-export default props => (
-    <div className="blank">
-        <Empty/>
-    </div>
-);
+export default () => (<div className="blank"><Empty /></div>);

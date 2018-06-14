@@ -21,17 +21,17 @@ export default new GraphQLObjectType({
         avatar: {
             type: Image,
             resolve: (root) => {
-                if (typeof __IMAGE_SERVER__  === 'undefined') {
+                // if (typeof __IMAGE_SERVER__  === 'undefined') {
                     return {
                         src: `http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
                         templateSrc: `http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
                     }
-                } else {
-                    return {
-                        src: `http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
-                        templateSrc: (__IMAGE_SERVER__ || '') + `/unsafe/{width}x{height}/smart/http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
-                    }
-                }
+                // } else {
+                //     return {
+                //         src: `http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
+                //         templateSrc: (__IMAGE_SERVER__ || '') + `/unsafe/{width}x{height}/smart/http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
+                //     }
+                // }
             }
         }
     }

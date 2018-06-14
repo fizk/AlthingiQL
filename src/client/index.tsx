@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {ApolloProvider} from 'react-apollo';
 import {ApolloClient, createNetworkInterface} from 'apollo-client';
@@ -10,7 +10,7 @@ import reducers from './reducers';
 
 const client = new ApolloClient({
     networkInterface: createNetworkInterface({
-        uri: __GRAPHQL_SERVER__,
+        uri: 'http://localhost:3000/graphql',
     }),
 });
 

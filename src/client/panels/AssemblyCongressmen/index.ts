@@ -1,4 +1,3 @@
-import React from 'react';
 import {graphql, compose, gql} from 'react-apollo';
 import AssemblyCongressmen from './AssemblyCongressmen';
 
@@ -33,14 +32,14 @@ const assemblyCongressmanQuery = gql`
     }
 `;
 
-export default compose(
+export default compose<any>( //@todo `any`
     graphql(assemblyCongressmanQuery, {
-        props: all => ({
+        props: (all: {data?: {loading: boolean, Congressmen: any, Substitutes: any}}) => ({
             congressmen: all.data.loading === false ? all.data.Congressmen : undefined,
             substitutes: all.data.loading === false ? all.data.Substitutes : undefined,
             loading: all.data.loading,
         }),
-        options: ({assembly}) => ({
+        options: ({assembly}: {assembly: number}) => ({
             variables: {
                 assembly: assembly
             }

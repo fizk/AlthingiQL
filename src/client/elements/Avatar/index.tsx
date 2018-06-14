@@ -1,33 +1,33 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classVariations from '../../utils/classVariations';
-import './_index.scss';
+import * as React from "react";
+import classVariations from "../../utils/classVariations";
+import './index.scss';
 
-export default class Avatar extends React.Component {
-    static propTypes = {
-        variations: PropTypes.array,
-        src: PropTypes.string,
-        title: PropTypes.string,
-    };
+type AvatarProps = {
+    variations?: any[],
+    src?: string,
+    title?: string
+};
 
+export default class Avatar extends React.Component<AvatarProps, {}> {
     static defaultProps = {
         variations: [],
         src: undefined,
-        title: undefined,
+        title: undefined
     };
 
     fillTemplateSrc(src) {
-        return (src || '').replace('{width}', 60).replace('{height}', 60);
+        return (src || "").replace("{width}", 60).replace("{height}", 60);
     }
 
     render() {
-        const {src, variations, ...rest} = this.props;
+        const { src, variations, ...rest } = this.props;
         return (
-            <div role="image"
-                 style={{backgroundImage: `url(${this.fillTemplateSrc(src)})`}}
-                 className={classVariations('avatar', variations)}
-                 {...rest}
+            <div
+                role="image"
+                style={{ backgroundImage: `url(${this.fillTemplateSrc(src)})` }}
+                className={classVariations("avatar", variations)}
+                {...rest}
             />
-        )
+        );
     }
 }

@@ -1,39 +1,45 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classVariations from '../../utils/classVariations';
-import './_index.scss';
+import * as React from 'react';
+import classVariations from "../../utils/classVariations";
+import './index.scss';
 
-export default class SimpleRequestProgress extends React.Component {
-    static propTypes = {
-        status: PropTypes.string,
-    };
+type SimpleRequestProgressProps = {
+    status?: string
+};
 
+export default class SimpleRequestProgress extends React.Component<SimpleRequestProgressProps, {}> {
     static defaultProps = {
-        status: undefined,
+        status: undefined
     };
 
-    constructor(props) {
-        super(props);
-
-        this.status = {
-            undefined : '',
-            'Fyrirspurnin var felld niður vegna ráðherraskipta' : 'dismissed',
-            'Fyrirspurninni var ekki svarað' : 'not-answered',
-            'Fyrirspurninni var svarað skriflega' : 'answered',
-            'Fyrirspurnin var kölluð aftur' : '',
-            'Fyrirspurninni var svarað munnlega' : 'answered',
-        }
-    }
+    status = {
+        undefined: "",
+        "Fyrirspurnin var felld niður vegna ráðherraskipta": "dismissed",
+        "Fyrirspurninni var ekki svarað": "not-answered",
+        "Fyrirspurninni var svarað skriflega": "answered",
+        "Fyrirspurnin var kölluð aftur": "",
+        "Fyrirspurninni var svarað munnlega": "answered"
+    };
 
     render() {
         return (
-            <svg width="18px" height="18px" viewBox="0 0 18 18"
-                 alt={this.props.status}
-                 role="img"
-                 className={classVariations('simple-request-progress', [this.status[this.props.status]])}>>
+            <svg
+                width="18px"
+                height="18px"
+                viewBox="0 0 18 18"
+                role="img"
+                className={classVariations("simple-request-progress", [
+                    this.status[this.props.status]
+                ])}
+            >
+                >
                 <title>{this.props.status}</title>
-                <circle className="simple-request-progress__status" cx="9" cy="9" r="8" />
+                <circle
+                    className="simple-request-progress__status"
+                    cx="9"
+                    cy="9"
+                    r="8"
+                />
             </svg>
-        )
+        );
     }
 }

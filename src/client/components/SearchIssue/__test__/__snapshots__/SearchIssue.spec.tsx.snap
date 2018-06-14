@@ -12,9 +12,7 @@ exports[`<SearchIssue /> data 1`] = `
     className="input input--md input--search"
     onChange={[Function]}
     onFocus={[Function]}
-    placeholder={undefined}
     type="search"
-    value={undefined}
   />
   <div
     className="options-list__container"
@@ -29,7 +27,7 @@ exports[`<SearchIssue /> data 1`] = `
       className="options-list"
     >
       <div
-        className="options-list__item"
+        className="options-list__item options-list__item--active"
         onClick={[Function]}
       >
         <h3>
@@ -92,9 +90,7 @@ exports[`<SearchIssue /> default props 1`] = `
     className="input input--md input--search"
     onChange={[Function]}
     onFocus={[Function]}
-    placeholder={undefined}
     type="search"
-    value={undefined}
   />
 </div>
 `;

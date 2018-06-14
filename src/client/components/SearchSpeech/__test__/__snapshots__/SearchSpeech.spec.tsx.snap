@@ -12,9 +12,7 @@ exports[`<SearchSpeech /> data 1`] = `
     className="input input--md input--search"
     onChange={[Function]}
     onFocus={[Function]}
-    placeholder={undefined}
     type="search"
-    value={undefined}
   />
   <div
     className="options-list__container"
@@ -29,27 +27,29 @@ exports[`<SearchSpeech /> data 1`] = `
       className="options-list"
     >
       <div
-        className="options-list__item"
+        className="options-list__item options-list__item--active"
         onClick={[Function]}
       >
         <div
           className="speech-card"
         >
-          <div
+          <article
             className="congressman"
           >
-            <div
+            <header
               className="congressman__avatar"
             >
               <div
                 className="avatar"
+                role="image"
                 style={
                   Object {
                     "backgroundImage": "url(/path/to/image.jpg)",
                   }
                 }
+                title="Ljósmynd af name"
               />
-            </div>
+            </header>
             <div
               className="congressman__party"
             >
@@ -66,18 +66,18 @@ exports[`<SearchSpeech /> data 1`] = `
             <div
               className="congressman__body"
             >
-              <h3
+              <h4
                 className="headline-3 headline-3--ellipsis"
               >
                 name
-              </h3>
-              <h4
+              </h4>
+              <h5
                 className="headline-4"
               >
                 congressman type
-              </h4>
+              </h5>
             </div>
-          </div>
+          </article>
           <div
             className="speech-card__meta"
           >
@@ -94,7 +94,7 @@ exports[`<SearchSpeech /> data 1`] = `
             <time
               className="speech-card__date"
             >
-              Jan 01, 2001, 11:00:00
+              2001 M01 01 11:00:00
             </time>
             <time
               className="speech-card__date"
@@ -128,9 +128,7 @@ exports[`<SearchSpeech /> default props 1`] = `
     className="input input--md input--search"
     onChange={[Function]}
     onFocus={[Function]}
-    placeholder={undefined}
     type="search"
-    value={undefined}
   />
 </div>
 `;

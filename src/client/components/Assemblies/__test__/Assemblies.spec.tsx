@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Assemblies from '../Assemblies';
 import renderer from 'react-test-renderer';
 import {BrowserRouter as Router} from 'react-router-dom';
@@ -7,7 +7,7 @@ describe('<Assemblies />', () => {
     test('default props', () => {
         const tree = renderer.create(
             <Router >
-                <Assemblies />
+                <Assemblies assemblies={undefined} />
             </Router>
         ).toJSON();
 

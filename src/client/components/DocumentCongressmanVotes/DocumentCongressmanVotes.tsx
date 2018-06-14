@@ -1,54 +1,65 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Congressman from '../../elements/Congressman';
+import * as React from "react";
+import Congressman from "../../elements/Congressman";
 
-export default class DocumentCongressmanVotes extends React.Component {
-    static propTypes = {
-        assembly: PropTypes.number,
-        issue: PropTypes.number,
-        vote: PropTypes.number,
-        votes: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.number,
-            voteId: PropTypes.number,
-            vote: PropTypes.string,
-            congressman: PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                avatar: PropTypes.shape({
-                    templateSrc: PropTypes.string,
-                }),
-                party: PropTypes.shape({
-                    id: PropTypes.number,
-                    name: PropTypes.string,
-                    color: PropTypes.string
-                }),
-            }),
-        })),
-    };
+interface Picture {
+    templateSrc: string
+}
 
-    static defaultProps = {
+interface Party {
+    id: number
+    name: string
+    color: string
+}
+type DocumentVote = {
+    id: number
+    voteId: number
+    vote: string
+    congressman: {
+        id: number
+        name: string
+        avatar: Picture
+        party: Party
+    }
+}
+
+type DocumentCongressmanVotesProps = {
+    assembly?: number,
+    issue?: number,
+    vote?: number,
+    votes?: DocumentVote[]
+};
+
+export default class DocumentCongressmanVotes extends React.Component<DocumentCongressmanVotesProps, {}> {
+    static defaultProps: DocumentCongressmanVotesProps = {
         assembly: undefined,
         issue: undefined,
         vote: undefined,
-        votes: [],
+        votes: []
     };
 
-
-    voteSort (a, b) {
+    voteSort(a: {vote: string}, b: {vote: string}) {
         return b.vote.localeCompare(a.vote);
     }
 
     render() {
         return (
             <ul>
-                {this.props.votes.slice().sort(this.voteSort).map(vote => (
-                    <li key={`${vote.id}`}>
-                        <Congressman congressman={vote.congressman} party={vote.congressman.party}>
-                            <p><strong>{vote.vote}</strong></p>
-                        </Congressman>
-                    </li>
-                ))}
+                {this.props.votes
+                    .slice()
+                    .sort(this.voteSort)
+                    .map(vote => (
+                        <li key={`${vote.id}`}>
+                            <Congressman
+                                congressman={vote.congressman}
+                                party={vote.congressman.party}
+                            >
+                                <p>
+                                    <strong>{vote.vote}</strong>
+                                </p>
+                            </Congressman>
+                        </li>
+                    ))}
             </ul>
-        )
+        );
     }
 }

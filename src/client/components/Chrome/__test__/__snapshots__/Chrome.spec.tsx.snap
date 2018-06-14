@@ -9,6 +9,7 @@ exports[`<Chrome /> default props 1`] = `
   >
     <header
       className="chrome__header"
+      role="banner"
     >
       <div
         className="chrome__header-container"
@@ -24,6 +25,7 @@ exports[`<Chrome /> default props 1`] = `
             >
               <nav>
                 <input
+                  aria-label="Aðalleit"
                   type="search"
                 />
               </nav>
@@ -34,6 +36,7 @@ exports[`<Chrome /> default props 1`] = `
     </header>
     <main
       className="chrome__main"
+      role="main"
     />
     <footer
       className="chrome__footer"

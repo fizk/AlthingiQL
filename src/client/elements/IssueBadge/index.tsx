@@ -1,47 +1,45 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
-import {H3, H5} from '../Headline';
-import SimpleBillProgress from '../SimpleBillProgress';
-import SimpleRequestProgress from '../SimpleRequestProgress';
-import Badge from '../Badge';
-import Congressman from '../Congressman';
-import './_index.scss';
+import * as React from 'react';
+import { Link } from "react-router-dom";
+import { H3, H5 } from "../Headline";
+import SimpleBillProgress from "../SimpleBillProgress";
+import SimpleRequestProgress from "../SimpleRequestProgress";
+import Badge from "../Badge";
+import Congressman from "../Congressman";
+import './index.scss';
 
-export class ParliamentaryResolutionBadge extends React.Component {
-    // a: Tillaga til þingsályktunar / þingsályktunartillaga
-    static propTypes = {
-        issue: PropTypes.shape({
-            id: PropTypes.number,
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            }),
-            name: PropTypes.string,
-            subName: PropTypes.string,
-            type: PropTypes.string,
-            goal: PropTypes.string,
-            typeName: PropTypes.string,
-            proponentsCount: PropTypes.number,
-        }),
-        congressman: PropTypes.shape({
-            id: PropTypes.number,
-            name: PropTypes.string,
-            avatar: PropTypes.shape({
-                templateSrc: PropTypes.string,
-            }),
-            party: PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                color: PropTypes.string,
-            })
-        })
-    };
+type ParliamentaryResolutionBadgeProps = {
+    issue?: {
+        id?: number,
+        assembly?: {
+            id?: number
+        },
+        name?: string,
+        subName?: string,
+        type?: string,
+        goal?: string,
+        typeName?: string,
+        proponentsCount?: number
+    },
+    congressman?: {
+        id?: number,
+        name?: string,
+        avatar?: {
+            templateSrc?: string
+        },
+        party?: {
+            id?: number,
+            name?: string,
+            color?: string
+        }
+    }
+};
 
+export class ParliamentaryResolutionBadge extends React.Component<ParliamentaryResolutionBadgeProps, {}> {
     static defaultProps = {
         issue: {
             id: undefined,
             assembly: {
-                id: undefined,
+                id: undefined
             },
             name: undefined,
             subName: undefined,
@@ -53,34 +51,37 @@ export class ParliamentaryResolutionBadge extends React.Component {
         congressman: {
             id: undefined,
             name: undefined,
-            avatar:{
-                templateSrc: undefined,
+            avatar: {
+                templateSrc: undefined
             },
             party: {
                 id: undefined,
                 name: undefined,
                 color: undefined
-            },
+            }
         }
     };
-
     count(count) {
-        return count - 1 > 1
-            ? (
-                <div className="issue-badge__congressman-count">
-                    <span> +{count - 1}</span>
-                </div>
-            )
-            : null
+        return count - 1 > 1 ? (
+            <div className="issue-badge__congressman-count">
+                <span> +{count - 1}</span>
+            </div>
+        ) : null;
     }
-
     render() {
         return (
-            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
+                    this.props.issue.id
+                }`}
+            >
                 <article className="issue-badge issue-badge--resolution">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
-                            <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
+                            <H3>
+                                {this.props.issue.id}. {this.props.issue.name},{" "}
+                                {this.props.issue.subName}
+                            </H3>
                         </div>
                         <div className="issue-badge__type">
                             {this.props.issue.type}
@@ -88,9 +89,11 @@ export class ParliamentaryResolutionBadge extends React.Component {
                     </header>
                     <section className="issue-badge__body">
                         <div className="issue-badge__congressman">
-                            <Congressman key={`proponent-${this.props.congressman.id}`}
-                                         congressman={this.props.congressman} party={this.props.congressman.party}>
-                            </Congressman>
+                            <Congressman
+                                key={`proponent-${this.props.congressman.id}`}
+                                congressman={this.props.congressman}
+                                party={this.props.congressman.party}
+                            />
                         </div>
                         {this.count(this.props.issue.proponentsCount)}
                     </section>
@@ -105,40 +108,39 @@ export class ParliamentaryResolutionBadge extends React.Component {
     }
 }
 
-export class RequestForReportBadge extends React.Component {
-    // b: Beiðni um skýrslu
-    static propTypes = {
-        issue: PropTypes.shape({
-            id: PropTypes.number,
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            }),
-            name: PropTypes.string,
-            subName: PropTypes.string,
-            type: PropTypes.string,
-            goal: PropTypes.string,
-            typeName: PropTypes.string,
-            proponentsCount: PropTypes.number,
-        }),
-        congressman: PropTypes.shape({
-            id: PropTypes.number,
-            name: PropTypes.string,
-            avatar: PropTypes.shape({
-                templateSrc: PropTypes.string,
-            }),
-            party: PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                color: PropTypes.string,
-            })
-        })
-    };
+type RequestForReportBadgeProps = {
+    issue?: {
+        id?: number,
+        assembly?: {
+            id?: number
+        },
+        name?: string,
+        subName?: string,
+        type?: string,
+        goal?: string,
+        typeName?: string,
+        proponentsCount?: number
+    },
+    congressman?: {
+        id?: number,
+        name?: string,
+        avatar?: {
+            templateSrc?: string
+        },
+        party?: {
+            id?: number,
+            name?: string,
+            color?: string
+        }
+    }
+};
 
+export class RequestForReportBadge extends React.Component<RequestForReportBadgeProps, {}> {
     static defaultProps = {
         issue: {
             id: undefined,
             assembly: {
-                id: undefined,
+                id: undefined
             },
             name: undefined,
             subName: undefined,
@@ -151,33 +153,36 @@ export class RequestForReportBadge extends React.Component {
             id: undefined,
             name: undefined,
             avatar: {
-                templateSrc: undefined,
+                templateSrc: undefined
             },
             party: {
                 id: undefined,
                 name: undefined,
                 color: undefined
-            },
+            }
         }
     };
-
     count(count) {
-        return count - 1 > 1
-            ? (
-                <div className="issue-badge__congressman-count">
-                    <span> +{count - 1}</span>
-                </div>
-            )
-            : null
+        return count - 1 > 1 ? (
+            <div className="issue-badge__congressman-count">
+                <span> +{count - 1}</span>
+            </div>
+        ) : null;
     }
-
     render() {
         return (
-            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
+                    this.props.issue.id
+                }`}
+            >
                 <article className="issue-badge issue-badge--request">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
-                            <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
+                            <H3>
+                                {this.props.issue.id}. {this.props.issue.name},{" "}
+                                {this.props.issue.subName}
+                            </H3>
                         </div>
                         <div className="issue-badge__type">
                             {this.props.issue.type}
@@ -185,9 +190,11 @@ export class RequestForReportBadge extends React.Component {
                     </header>
                     <section className="issue-badge__body">
                         <div className="issue-badge__congressman">
-                            <Congressman key={`proponent-${this.props.congressman.id}`}
-                                         congressman={this.props.congressman} party={this.props.congressman.party}>
-                            </Congressman>
+                            <Congressman
+                                key={`proponent-${this.props.congressman.id}`}
+                                congressman={this.props.congressman}
+                                party={this.props.congressman.party}
+                            />
                         </div>
                         {this.count(this.props.issue.proponentsCount)}
                     </section>
@@ -202,40 +209,39 @@ export class RequestForReportBadge extends React.Component {
     }
 }
 
-export class ReportBadge extends React.Component {
-    // s: Skýrsla
-    static propTypes = {
-        issue: PropTypes.shape({
-            id: PropTypes.number,
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            }),
-            name: PropTypes.string,
-            subName: PropTypes.string,
-            type: PropTypes.string,
-            goal: PropTypes.string,
-            typeName: PropTypes.string,
-            proponentsCount: PropTypes.number,
-        }),
-        congressman: PropTypes.shape({
-            id: PropTypes.number,
-            name: PropTypes.string,
-            avatar: PropTypes.shape({
-                templateSrc: PropTypes.string,
-            }),
-            party: PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                color: PropTypes.string,
-            })
-        })
-    };
+type ReportBadgeProps = {
+    issue?: {
+        id?: number,
+        assembly?: {
+            id?: number
+        },
+        name?: string,
+        subName?: string,
+        type?: string,
+        goal?: string,
+        typeName?: string,
+        proponentsCount?: number
+    },
+    congressman?: {
+        id?: number,
+        name?: string,
+        avatar?: {
+            templateSrc?: string
+        },
+        party?: {
+            id?: number,
+            name?: string,
+            color?: string
+        }
+    }
+};
 
+export class ReportBadge extends React.Component<ReportBadgeProps, {}> {
     static defaultProps = {
         issue: {
             id: undefined,
             assembly: {
-                id: undefined,
+                id: undefined
             },
             name: undefined,
             subName: undefined,
@@ -248,33 +254,36 @@ export class ReportBadge extends React.Component {
             id: undefined,
             name: undefined,
             avatar: {
-                templateSrc: undefined,
+                templateSrc: undefined
             },
             party: {
                 id: undefined,
                 name: undefined,
                 color: undefined
-            },
+            }
         }
     };
-
     count(count) {
-        return count - 1 > 1
-            ? (
-                <div className="issue-badge__congressman-count">
-                    <span> +{count - 1}</span>
-                </div>
-            )
-            : null
+        return count - 1 > 1 ? (
+            <div className="issue-badge__congressman-count">
+                <span> +{count - 1}</span>
+            </div>
+        ) : null;
     }
-
     render() {
         return (
-            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
+                    this.props.issue.id
+                }`}
+            >
                 <article className="issue-badge issue-badge--report">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
-                            <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
+                            <H3>
+                                {this.props.issue.id}. {this.props.issue.name},{" "}
+                                {this.props.issue.subName}
+                            </H3>
                         </div>
                         <div className="issue-badge__type">
                             {this.props.issue.type}
@@ -282,9 +291,11 @@ export class ReportBadge extends React.Component {
                     </header>
                     <section className="issue-badge__body">
                         <div className="issue-badge__congressman">
-                            <Congressman key={`proponent-${this.props.congressman.id}`}
-                                         congressman={this.props.congressman} party={this.props.congressman.party}>
-                            </Congressman>
+                            <Congressman
+                                key={`proponent-${this.props.congressman.id}`}
+                                congressman={this.props.congressman}
+                                party={this.props.congressman.party}
+                            />
                         </div>
                         {this.count(this.props.issue.proponentsCount)}
                     </section>
@@ -299,40 +310,39 @@ export class ReportBadge extends React.Component {
     }
 }
 
-export class MeetingPostponementBadge extends React.Component {
-    // f: Tillaga til þingsályktunar / frestun funda
-    static propTypes = {
-        issue: PropTypes.shape({
-            id: PropTypes.number,
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            }),
-            name: PropTypes.string,
-            subName: PropTypes.string,
-            type: PropTypes.string,
-            goal: PropTypes.string,
-            typeName: PropTypes.string,
-            proponentsCount: PropTypes.number,
-        }),
-        congressman: PropTypes.shape({
-            id: PropTypes.number,
-            name: PropTypes.string,
-            avatar: PropTypes.shape({
-                templateSrc: PropTypes.string,
-            }),
-            party: PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                color: PropTypes.string,
-            })
-        })
-    };
+type MeetingPostponementBadgeProps = {
+    issue?: {
+        id?: number,
+        assembly?: {
+            id?: number
+        },
+        name?: string,
+        subName?: string,
+        type?: string,
+        goal?: string,
+        typeName?: string,
+        proponentsCount?: number
+    },
+    congressman?: {
+        id?: number,
+        name?: string,
+        avatar?: {
+            templateSrc?: string
+        },
+        party?: {
+            id?: number,
+            name?: string,
+            color?: string
+        }
+    }
+};
 
+export class MeetingPostponementBadge extends React.Component<MeetingPostponementBadgeProps, {}> {
     static defaultProps = {
         issue: {
             id: undefined,
             assembly: {
-                id: undefined,
+                id: undefined
             },
             name: undefined,
             subName: undefined,
@@ -345,32 +355,40 @@ export class MeetingPostponementBadge extends React.Component {
             id: undefined,
             name: undefined,
             avatar: {
-                templateSrc: undefined,
+                templateSrc: undefined
             },
             party: {
                 id: undefined,
                 name: undefined,
                 color: undefined
-            },
+            }
         }
     };
-
     render() {
         return (
-            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
+                    this.props.issue.id
+                }`}
+            >
                 <article className="issue-badge issue-badge--meeting">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
-                            <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
+                            <H3>
+                                {this.props.issue.id}. {this.props.issue.name},{" "}
+                                {this.props.issue.subName}
+                            </H3>
                         </div>
                         <div className="issue-badge__type">
                             {this.props.issue.type}
                         </div>
                     </header>
                     <section className="issue-badge__body">
-                        <Congressman key={`proponent-${this.props.congressman.id}`}
-                                     congressman={this.props.congressman} party={this.props.congressman.party}>
-                        </Congressman>
+                        <Congressman
+                            key={`proponent-${this.props.congressman.id}`}
+                            congressman={this.props.congressman}
+                            party={this.props.congressman.party}
+                        />
                     </section>
                     <footer className="issue-badge__footer">
                         <div className="issue-badge__type-name">
@@ -383,41 +401,40 @@ export class MeetingPostponementBadge extends React.Component {
     }
 }
 
-export class BillBadge extends React.Component {
-    // l : Frumvarp til laga
-    static propTypes = {
-        issue: PropTypes.shape({
-            id: PropTypes.number,
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            }),
-            name: PropTypes.string,
-            subName: PropTypes.string,
-            status: PropTypes.string,
-            type: PropTypes.string,
-            goal: PropTypes.string,
-            typeName: PropTypes.string,
-            proponentsCount: PropTypes.number,
-        }),
-        congressman: PropTypes.shape({
-            id: PropTypes.number,
-            name: PropTypes.string,
-            avatar: PropTypes.shape({
-                templateSrc: PropTypes.string,
-            }),
-            party: PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                color: PropTypes.string,
-            })
-        })
-    };
+type BillBadgeProps = {
+    issue?: {
+        id?: number,
+        assembly?: {
+            id?: number
+        },
+        name?: string,
+        subName?: string,
+        status?: string,
+        type?: string,
+        goal?: string,
+        typeName?: string,
+        proponentsCount?: number
+    },
+    congressman?: {
+        id?: number,
+        name?: string,
+        avatar?: {
+            templateSrc?: string
+        },
+        party?: {
+            id?: number,
+            name?: string,
+            color?: string
+        }
+    }
+};
 
+export class BillBadge extends React.Component<BillBadgeProps, {}> {
     static defaultProps = {
         issue: {
             id: undefined,
             assembly: {
-                id: undefined,
+                id: undefined
             },
             name: undefined,
             subName: undefined,
@@ -425,53 +442,66 @@ export class BillBadge extends React.Component {
             type: undefined,
             goal: undefined,
             typeName: undefined,
-            proponentsCount: 0,
+            proponentsCount: 0
         },
         congressman: {
             id: undefined,
             name: undefined,
             avatar: {
-                templateSrc: undefined,
+                templateSrc: undefined
             },
             party: {
                 id: undefined,
                 name: undefined,
                 color: undefined
-            },
+            }
         }
     };
-
     count(count) {
-        return count - 1 > 1
-            ? (
-                <div className="issue-badge__congressman-count">
-                    <span> +{count - 1}</span>
-                </div>
-            )
-            : null
+        return count - 1 > 1 ? (
+            <div className="issue-badge__congressman-count">
+                <span> +{count - 1}</span>
+            </div>
+        ) : null;
     }
-
     url(url) {
-        return (url || '').replace('{width}', 300).replace('{height}', 200);
+        return (url || "").replace("{width}", 300).replace("{height}", 200);
     }
-
     render() {
         return (
-            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
+                    this.props.issue.id
+                }`}
+            >
                 <article className="issue-badge issue-badge--bill">
-                    <header className="issue-badge__header"
-                            style={{backgroundImage: `url(${this.url(this.props.congressman.avatar.templateSrc)})`}}>
+                    <header
+                        className="issue-badge__header"
+                        style={{
+                            backgroundImage: `url(${this.url(
+                                this.props.congressman.avatar.templateSrc
+                            )})`
+                        }}
+                    >
                         <div className="issue-badge__congressman">
                             <div className="issue-badge__congressman-badge">
-                                <Badge title={this.props.congressman.party.name} color={this.props.congressman.party.color}/>
+                                <Badge
+                                    title={this.props.congressman.party.name}
+                                    color={this.props.congressman.party.color}
+                                />
                             </div>
-                            <H3 variations={['ellipsis']}>{this.props.congressman.name}</H3>
+                            <H3 variations={["ellipsis"]}>
+                                {this.props.congressman.name}
+                            </H3>
                             {this.count(this.props.issue.proponentsCount)}
                         </div>
                     </header>
-                    <aside  className="issue-badge__body">
+                    <aside className="issue-badge__body">
                         <div className="issue-badge__headline">
-                            <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
+                            <H3>
+                                {this.props.issue.id}. {this.props.issue.name},{" "}
+                                {this.props.issue.subName}
+                            </H3>
                         </div>
                         <div className="issue-badge__type">
                             {this.props.issue.type}
@@ -482,7 +512,9 @@ export class BillBadge extends React.Component {
                             <H5>{this.props.issue.typeName}</H5>
                         </div>
                         <div className="issue-badge__status">
-                            <SimpleBillProgress status={this.props.issue.status}/>
+                            <SimpleBillProgress
+                                status={this.props.issue.status}
+                            />
                         </div>
                     </footer>
                 </article>
@@ -491,41 +523,42 @@ export class BillBadge extends React.Component {
     }
 }
 
-export class InquiryBadge extends React.Component {
-    // m : Fyrirspurn / fyrirspurn
-    static propTypes = {
-        issue: PropTypes.shape({
-            id: PropTypes.number,
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            }),
-            name: PropTypes.string,
-            subName: PropTypes.string,
-            type: PropTypes.string,
-            goal: PropTypes.string,
-            typeName: PropTypes.string,
-            proponentsCount: PropTypes.number,
-        }),
-        congressman: PropTypes.shape({
-            id: PropTypes.number,
-            name: PropTypes.string,
-            avatar: PropTypes.shape({
-                templateSrc: PropTypes.string,
-            }),
-            party: PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                color: PropTypes.string,
-            })
-        })
-    };
+type InquiryBadgeProps = {
+    issue?: {
+        id?: number,
+        assembly?: {
+            id?: number
+        },
+        status?: string
+        name?: string,
+        subName?: string,
+        type?: string,
+        goal?: string,
+        typeName?: string,
+        proponentsCount?: number
+    },
+    congressman?: {
+        id?: number,
+        name?: string,
+        avatar?: {
+            templateSrc?: string
+        },
+        party?: {
+            id?: number,
+            name?: string,
+            color?: string
+        }
+    }
+};
 
+export class InquiryBadge extends React.Component<InquiryBadgeProps, {}> {
     static defaultProps = {
         issue: {
             id: undefined,
             assembly: {
-                id: undefined,
+                id: undefined
             },
+            status: undefined,
             name: undefined,
             subName: undefined,
             type: undefined,
@@ -537,33 +570,36 @@ export class InquiryBadge extends React.Component {
             id: undefined,
             name: undefined,
             avatar: {
-                templateSrc: undefined,
+                templateSrc: undefined
             },
             party: {
                 id: undefined,
                 name: undefined,
                 color: undefined
-            },
+            }
         }
     };
-
     count(count) {
-        return count - 1 > 1
-            ? (
-                <div className="issue-badge__congressman-count">
-                    <span> +{count - 1}</span>
-                </div>
-            )
-            : null
+        return count - 1 > 1 ? (
+            <div className="issue-badge__congressman-count">
+                <span> +{count - 1}</span>
+            </div>
+        ) : null;
     }
-
     render() {
         return (
-            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
+                    this.props.issue.id
+                }`}
+            >
                 <article className="issue-badge issue-badge--inquiry">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
-                            <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
+                            <H3>
+                                {this.props.issue.id}. {this.props.issue.name},{" "}
+                                {this.props.issue.subName}
+                            </H3>
                         </div>
                         <div className="issue-badge__type">
                             {this.props.issue.type}
@@ -571,9 +607,11 @@ export class InquiryBadge extends React.Component {
                     </header>
                     <section className="issue-badge__body">
                         <div className="issue-badge__congressman">
-                            <Congressman key={`proponent-${this.props.congressman.id}`}
-                                         congressman={this.props.congressman} party={this.props.congressman.party}>
-                            </Congressman>
+                            <Congressman
+                                key={`proponent-${this.props.congressman.id}`}
+                                congressman={this.props.congressman}
+                                party={this.props.congressman.party}
+                            />
                         </div>
                         {this.count(this.props.issue.proponentsCount)}
                     </section>
@@ -582,7 +620,9 @@ export class InquiryBadge extends React.Component {
                             <H5>{this.props.issue.typeName}</H5>
                         </div>
                         <div className="issue-badge__status">
-                            <SimpleRequestProgress status={this.props.issue.status}/>
+                            <SimpleRequestProgress
+                                status={this.props.issue.status}
+                            />
                         </div>
                     </footer>
                 </article>
@@ -591,42 +631,43 @@ export class InquiryBadge extends React.Component {
     }
 }
 
-export class WrittenInquiryBadge extends React.Component {
-    // q : Fyrirspurn / fyrirspurn til skrifl. svars
-    static propTypes = {
-        issue: PropTypes.shape({
-            id: PropTypes.number,
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            }),
-            name: PropTypes.string,
-            subName: PropTypes.string,
-            type: PropTypes.string,
-            goal: PropTypes.string,
-            typeName: PropTypes.string,
-            proponentsCount: PropTypes.number,
-        }),
-        congressman: PropTypes.shape({
-            id: PropTypes.number,
-            name: PropTypes.string,
-            avatar: PropTypes.shape({
-                templateSrc: PropTypes.string,
-            }),
-            party: PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                color: PropTypes.string,
-            })
-        })
-    };
+type WrittenInquiryBadgeProps = {
+    issue?: {
+        id?: number,
+        assembly?: {
+            id?: number
+        },
+        name?: string,
+        status?: string,
+        subName?: string,
+        type?: string,
+        goal?: string,
+        typeName?: string,
+        proponentsCount?: number
+    },
+    congressman?: {
+        id?: number,
+        name?: string,
+        avatar?: {
+            templateSrc?: string
+        },
+        party?: {
+            id?: number,
+            name?: string,
+            color?: string
+        }
+    }
+};
 
+export class WrittenInquiryBadge extends React.Component<WrittenInquiryBadgeProps, {}> {
     static defaultProps = {
         issue: {
             id: undefined,
             assembly: {
-                id: undefined,
+                id: undefined
             },
             name: undefined,
+            status: undefined,
             subName: undefined,
             type: undefined,
             goal: undefined,
@@ -637,33 +678,36 @@ export class WrittenInquiryBadge extends React.Component {
             id: undefined,
             name: undefined,
             avatar: {
-                templateSrc: undefined,
+                templateSrc: undefined
             },
             party: {
                 id: undefined,
                 name: undefined,
                 color: undefined
-            },
+            }
         }
     };
-
     count(count) {
-        return count - 1 > 1
-            ? (
-                <div className="issue-badge__congressman-count">
-                    <span> +{count - 1}</span>
-                </div>
-            )
-            : null
+        return count - 1 > 1 ? (
+            <div className="issue-badge__congressman-count">
+                <span> +{count - 1}</span>
+            </div>
+        ) : null;
     }
-
     render() {
         return (
-            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
+                    this.props.issue.id
+                }`}
+            >
                 <article className="issue-badge issue-badge--written-inquiry">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
-                            <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
+                            <H3>
+                                {this.props.issue.id}. {this.props.issue.name},{" "}
+                                {this.props.issue.subName}
+                            </H3>
                         </div>
                         <div className="issue-badge__type">
                             {this.props.issue.type}
@@ -671,9 +715,11 @@ export class WrittenInquiryBadge extends React.Component {
                     </header>
                     <section className="issue-badge__body">
                         <div className="issue-badge__congressman">
-                            <Congressman key={`proponent-${this.props.congressman.id}`}
-                                         congressman={this.props.congressman} party={this.props.congressman.party}>
-                            </Congressman>
+                            <Congressman
+                                key={`proponent-${this.props.congressman.id}`}
+                                congressman={this.props.congressman}
+                                party={this.props.congressman.party}
+                            />
                         </div>
                         {this.count(this.props.issue.proponentsCount)}
                     </section>
@@ -682,7 +728,9 @@ export class WrittenInquiryBadge extends React.Component {
                             <H5>{this.props.issue.typeName}</H5>
                         </div>
                         <div className="issue-badge__status">
-                            <SimpleRequestProgress status={this.props.issue.status}/>
+                            <SimpleRequestProgress
+                                status={this.props.issue.status}
+                            />
                         </div>
                     </footer>
                 </article>
@@ -691,44 +739,48 @@ export class WrittenInquiryBadge extends React.Component {
     }
 }
 
-export class OpinionBadge extends React.Component {
-    // n : Álit / álit nefndar
-    static propTypes = {
-        issue: PropTypes.shape({
-            id: PropTypes.number,
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            }),
-            name: PropTypes.string,
-            subName: PropTypes.string,
-            type: PropTypes.string,
-            goal: PropTypes.string,
-            typeName: PropTypes.string,
-        }),
-    };
+type OpinionBadgeProps = {
+    issue?: {
+        id?: number,
+        assembly?: {
+            id?: number
+        },
+        name?: string,
+        subName?: string,
+        type?: string,
+        goal?: string,
+        typeName?: string
+    }
+};
 
+export class OpinionBadge extends React.Component<OpinionBadgeProps, {}> {
     static defaultProps = {
         issue: {
             id: undefined,
             assembly: {
-                id: undefined,
+                id: undefined
             },
             name: undefined,
             subName: undefined,
             type: undefined,
             goal: undefined,
-            typeName: undefined,
+            typeName: undefined
         }
     };
-
     render() {
         return (
-            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
+                    this.props.issue.id
+                }`}
+            >
                 <article className="issue-badge issue-badge--opinion">
-
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
-                            <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
+                            <H3>
+                                {this.props.issue.id}. {this.props.issue.name},{" "}
+                                {this.props.issue.subName}
+                            </H3>
                         </div>
                         <div className="issue-badge__type">
                             {this.props.issue.type}
@@ -743,40 +795,39 @@ export class OpinionBadge extends React.Component {
     }
 }
 
-export class IssueBadge extends React.Component {
-    // m : Fyrirspurn / fyrirspurn
-    static propTypes = {
-        issue: PropTypes.shape({
-            id: PropTypes.number,
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            }),
-            name: PropTypes.string,
-            subName: PropTypes.string,
-            type: PropTypes.string,
-            goal: PropTypes.string,
-            typeName: PropTypes.string,
-            proponentsCount: PropTypes.number,
-        }),
-        congressman: PropTypes.shape({
-            id: PropTypes.number,
-            name: PropTypes.string,
-            avatar: PropTypes.shape({
-                templateSrc: PropTypes.string,
-            }),
-            party: PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                color: PropTypes.string,
-            })
-        })
-    };
+type IssueBadgeProps = {
+    issue?: {
+        id?: number,
+        assembly?: {
+            id?: number
+        },
+        name?: string,
+        subName?: string,
+        type?: string,
+        goal?: string,
+        typeName?: string,
+        proponentsCount?: number
+    },
+    congressman?: {
+        id?: number,
+        name?: string,
+        avatar?: {
+            templateSrc?: string
+        },
+        party?: {
+            id?: number,
+            name?: string,
+            color?: string
+        }
+    }
+};
 
+export class IssueBadge extends React.Component<IssueBadgeProps, {}> {
     static defaultProps = {
         issue: {
             id: undefined,
             assembly: {
-                id: undefined,
+                id: undefined
             },
             name: undefined,
             subName: undefined,
@@ -789,33 +840,36 @@ export class IssueBadge extends React.Component {
             id: undefined,
             name: undefined,
             avatar: {
-                templateSrc: undefined,
+                templateSrc: undefined
             },
             party: {
                 id: undefined,
                 name: undefined,
                 color: undefined
-            },
+            }
         }
     };
-
     count(count) {
-        return count - 1 > 1
-            ? (
-                <div className="issue-badge__congressman-count">
-                    <span> +{count - 1}</span>
-                </div>
-            )
-            : null
+        return count - 1 > 1 ? (
+            <div className="issue-badge__congressman-count">
+                <span> +{count - 1}</span>
+            </div>
+        ) : null;
     }
-
     render() {
         return (
-            <Link to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+            <Link
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
+                    this.props.issue.id
+                }`}
+            >
                 <article className="issue-badge issue-badge--inquiry">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
-                            <H3>{this.props.issue.id}.  {this.props.issue.name}, {this.props.issue.subName}</H3>
+                            <H3>
+                                {this.props.issue.id}. {this.props.issue.name},{" "}
+                                {this.props.issue.subName}
+                            </H3>
                         </div>
                         <div className="issue-badge__type">
                             {this.props.issue.type}
@@ -823,22 +877,20 @@ export class IssueBadge extends React.Component {
                     </header>
                     <section className="issue-badge__body">
                         <div className="issue-badge__congressman">
-                            <Congressman key={`proponent-${this.props.congressman.id}`}
-                                         congressman={this.props.congressman} party={this.props.congressman.party}>
-                            </Congressman>
+                            <Congressman
+                                key={`proponent-${this.props.congressman.id}`}
+                                congressman={this.props.congressman}
+                                party={this.props.congressman.party}
+                            />
                         </div>
                         {this.count(this.props.issue.proponentsCount)}
                     </section>
-                    <aside>
-                        {this.props.children}
-                    </aside>
+                    <aside>{this.props.children}</aside>
                     <footer className="issue-badge__footer">
                         <div className="issue-badge__type-name">
                             <H5>{this.props.issue.typeName}</H5>
                         </div>
-                        <div className="issue-badge__status">
-
-                        </div>
+                        <div className="issue-badge__status" />
                     </footer>
                 </article>
             </Link>

@@ -1,26 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classVariations from '../../utils/classVariations';
-import './_index.scss';
+import * as React from "react";
+import classVariations from "../../utils/classVariations";
+import './index.scss';
 
-export default class Badge extends React.Component {
-    static propTypes = {
-        variations: PropTypes.array,
-        color: PropTypes.string
-    };
+type BadgeProps = {
+    variations?: any[],
+    color?: string
+};
 
+export default class Badge extends React.Component<BadgeProps & React.HTMLProps<HTMLDivElement>, {}> {
     static defaultProps = {
         variations: [],
         color: undefined
     };
-
     render() {
-        const {color, variations, ...rest} = this.props;
+        const { color, variations, ...rest } = this.props;
         return (
             <div
                 {...rest}
-                style={{backgroundColor: `#${color}`}}
-                className={classVariations('badge', variations)} />
-        )
+                style={{ backgroundColor: `#${color}` }}
+                className={classVariations("badge", variations)}
+            />
+        );
     }
 }

@@ -1,14 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-export default class Index extends React.Component {
-    static propTypes = {};
-
+export default class Index extends React.Component<{}, {}> {
     static defaultProps = {};
-
     render() {
-        return (
-            <div>index</div>
-        )
+        return <div>index</div>;
     }
 }

@@ -1,26 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+type ScrollIntoViewProps = {
+    active?: boolean
+};
 
-export default class ScrollIntoView extends React.Component {
-    static propTypes = {
-        active: PropTypes.bool,
-    };
-
+export default class ScrollIntoView extends React.Component<ScrollIntoViewProps, {}> {
     static defaultProps = {
-        active: false,
+        active: false
     };
+
+    element: HTMLDivElement = undefined;
 
     componentDidMount() {
         if (this.props.active) {
-            this.element.scrollIntoView({behavior: "smooth"});
+            this.element.scrollIntoView({ behavior: "smooth" });
         }
     }
-
     render() {
         return (
-            <div ref={element => this.element = element}>
+            <div ref={element => (this.element = element)}>
                 {this.props.children}
             </div>
-        )
+        );
     }
 }

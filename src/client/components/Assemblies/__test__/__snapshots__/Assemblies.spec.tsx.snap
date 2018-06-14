@@ -8,11 +8,10 @@ exports[`<Assemblies /> data 1`] = `
     className="list__item"
   >
     <a
-      aria-current={false}
+      aria-current={null}
       className="assembly-badge"
       href="/loggjafarthing/1"
       onClick={[Function]}
-      style={undefined}
     >
       <div
         style={
@@ -26,7 +25,9 @@ exports[`<Assemblies /> data 1`] = `
         </h3>
         <time>
           2001
-           - 
+           
+          -
+           
           2001
         </time>
       </div>

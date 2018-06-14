@@ -1,21 +1,15 @@
-const DefinePlugin = require('webpack').DefinePlugin;
+// // const DefinePlugin = require('webpack').DefinePlugin;
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const DashboardPlugin = require('webpack-dashboard/plugin');
-
-const serverConfig = {
-    protocol: process.env.SERVER_PROTOCOL || 'http',
-    host: process.env.SERVER_HOST || 'localhost',
-    port: process.env.PORT || 3000,
-};
 
 module.exports = {
+    name: 'althingi-ql',
     entry: {
         application: './src/client/index.tsx',
     },
     output: {
         path: path.join(__dirname, 'public'),
-        filename: '[name].js',
+        filename: 'javascripts/[name].js',
         publicPath: '/',
     },
     module: {
@@ -32,6 +26,7 @@ module.exports = {
                     use: [
                         {
                             loader: 'css-loader',
+                            options: {},
                         },
                         {
                             loader: 'sass-loader',
@@ -42,22 +37,21 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: [ '.tsx', '.ts', '.js', ],
+        extensions: ['.tsx', '.ts', '.js',],
     },
     plugins: [
-        // new DashboardPlugin(),
-        new ExtractTextPlugin('./bundle.css'),
-        new DefinePlugin({
-            __GRAPHQL_SERVER__: JSON.stringify(
-                `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/graphql`
-            ),
-            __IMAGE_SERVER__: JSON.stringify('http://localhost:8000'),
-            __API_URL__: JSON.stringify(
-                process.env.NODE_ENV === 'production'
-                    ? 'https://us-central1-reactscales.cloudfunctions.net'
-                    : 'http://localhost:3000'
-            ),
-        })
+        new ExtractTextPlugin('./stylesheets/application.css'),
+//         // new DefinePlugin({
+//         //     __GRAPHQL_SERVER__: JSON.stringify(
+//         //         `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/graphql`
+//         //     ),
+//         //     __IMAGE_SERVER__: JSON.stringify('http://localhost:8000'),
+//         //     __API_URL__: JSON.stringify(
+//         //         process.env.NODE_ENV === 'production'
+//         //             ? 'https://us-central1-reactscales.cloudfunctions.net'
+//         //             : 'http://localhost:3000'
+//         //     ),
+//         // })
     ],
     devServer: {
         contentBase: path.join(__dirname, 'public'),
@@ -70,4 +64,3 @@ module.exports = {
         },
     },
 };
-

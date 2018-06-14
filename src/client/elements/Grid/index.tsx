@@ -1,22 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './_index.scss';
+import * as React from 'react';
+import {StatelessComponent} from 'react';
+import './index.scss';
 
-export const Grid = ({children, fluid}) => {
+export const Grid: StatelessComponent<{fluid?: boolean}> = ({children, fluid = true}) => {
     return (
         <div className={fluid ? 'container-fluid' : 'container'}>{children}</div>
     );
 };
 
-Grid.propTypes = {
-    fluid: PropTypes.bool
-};
 
-Grid.defaultProps = {
-    fluid: true
-};
+type RowType = {
+    align?: 'start' | 'center' | 'end' | undefined
+    justify?: 'start' | 'center' | 'end' | 'around' | 'between'| undefined,
+    tall?: boolean
+}
 
-export const Row = ({children, align, justify, tall}) => {
+export const Row: StatelessComponent<RowType> = ({children, align = undefined, justify = undefined, tall = false}) => {
     const variationsArray = ['row'];
     if (tall) {
         variationsArray.push('row-tall');
@@ -35,22 +34,16 @@ export const Row = ({children, align, justify, tall}) => {
     );
 };
 
-Row.propTypes = {
-    align: PropTypes.oneOf(['start', 'center', 'end', undefined]),
-    justify: PropTypes.oneOf(['start', 'center', 'end', 'around', 'between', undefined]),
-    tall: PropTypes.bool
-};
+type ColumnType = {
+    xs?: number | 'auto'
+    sm?: number | 'auto'
+    md?: number | 'auto'
+    lg?: number | 'auto'
+    xl?: number | 'auto'
+    align?: 'start' | 'center' | 'end' | undefined
+}
 
-Row.defaultProps = {
-    xsAlign: undefined,
-    smAlign: undefined,
-    mdAlign: undefined,
-    lgAlign: undefined,
-    justify: undefined,
-    tall: false
-};
-
-export const Column = ({children, sm, md, lg, xl, align}) => {
+export const Column: StatelessComponent<ColumnType> = ({children, sm = undefined, md = undefined, lg = undefined, xl = undefined, align = undefined}) => {
     const variationsArray = ['col'];
 
     if (xl) {
@@ -76,19 +69,4 @@ export const Column = ({children, sm, md, lg, xl, align}) => {
     return (
         <div className={variationsArray.join(' ')}>{children}</div>
     );
-};
-
-Column.propsTypes = {
-    xs: PropTypes.oneOf([PropTypes.number, 'auto']),
-    sm: PropTypes.oneOf([PropTypes.number, 'auto']),
-    md: PropTypes.oneOf([PropTypes.number, 'auto']),
-    lg: PropTypes.oneOf([PropTypes.number, 'auto']),
-    align: PropTypes.oneOf(['start', 'center', 'end', undefined])
-};
-
-Column.defaultProps = {
-    xs: undefined,
-    sm: undefined,
-    md: undefined,
-    lg: undefined
 };

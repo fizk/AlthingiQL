@@ -1,9 +1,5 @@
-import React from 'react';
-import {Spinner} from '../Icons';
-import './_index.scss';
+import * as React from 'react';
+import { Spinner } from "../Icons";
+import './index.scss';
 
-export default props => (
-    <div className="spinner">
-        <Spinner/>
-    </div>
-);
+export default () => <div className="spinner"><Spinner /></div>;

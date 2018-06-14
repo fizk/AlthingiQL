@@ -1,4 +1,3 @@
-
 const SPEECH_SEARCH = {
     BEGIN: 'SPEECH_SEARCH:BEGIN',
     END: 'SPEECH_SEARCH:END',
@@ -55,7 +54,7 @@ export const speechSearchAction = (assembly, issue, query) => {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        const req = new Request(__GRAPHQL_SERVER__, {
+        const req = new Request('http://localhost:3000/graphql', {
             method: 'POST',
             body: JSON.stringify({
                 query: searchQuery,
@@ -86,30 +85,25 @@ export default (state = {result: [], loading: false, error: false}, action) => {
                 loading: true,
                 error: false
             };
-            break;
         case SPEECH_SEARCH.END:
             return {
                 result: action.result,
                 loading: false,
                 error: false
             };
-            break;
         case SPEECH_SEARCH.ERROR:
             return {
                 ...state,
                 loading: false,
                 error: action.error
             };
-            break;
         case SPEECH_SEARCH.CLEAR:
             return {
                 result: [],
                 loading: false,
                 error: false
             };
-            break;
         default:
             return state;
-            break;
     }
 }

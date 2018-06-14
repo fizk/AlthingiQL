@@ -1,50 +1,49 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
-import {Column, Row} from '../../elements/Grid';
-import Congressman from '../../elements/Congressman';
-
-export default class AssemblyCongressmen extends React.Component {
-    static propTypes = {
-        assembly: PropTypes.number,
-        congressmen: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.number,
-            name: PropTypes.string,
-            avatar: PropTypes.shape({
-                templateSrc: PropTypes.string,
-            }),
-            party: PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                color: PropTypes.string,
-            }),
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            })
-        })),
-        substitutes: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.number,
-            name: PropTypes.string,
-            avatar: PropTypes.shape({
-                templateSrc: PropTypes.string,
-            }),
-            party: PropTypes.shape({
-                id: PropTypes.number,
-                name: PropTypes.string,
-                color: PropTypes.string,
-            }),
-            assembly: PropTypes.shape({
-                id: PropTypes.number,
-            })
-        })),
-    };
-
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { Column, Row } from "../../elements/Grid";
+import Congressman from "../../elements/Congressman";
+type AssemblyCongressmenProps = {
+    assembly?: number,
+    congressmen?: {
+        id?: number,
+        name?: string,
+        avatar?: {
+            templateSrc?: string
+        },
+        party?: {
+            id?: number,
+            name?: string,
+            color?: string
+        },
+        assembly?: {
+            id?: number
+        }
+    }[],
+    substitutes?: {
+        id?: number,
+        name?: string,
+        avatar?: {
+            templateSrc?: string
+        },
+        party?: {
+            id?: number,
+            name?: string,
+            color?: string
+        },
+        assembly?: {
+            id?: number
+        }
+    }[]
+};
+export default class AssemblyCongressmen extends React.Component<
+    AssemblyCongressmenProps,
+    {}
+> {
     static defaultProps = {
         assembly: undefined,
         congressmen: [],
         substitutes: []
     };
-
     render() {
         return (
             <Row>
@@ -52,9 +51,16 @@ export default class AssemblyCongressmen extends React.Component {
                     <h3>Thingmenn</h3>
                     <ul>
                         {this.props.congressmen.map(congressman => (
-                            <li key={`congressman-${congressman.id}`} >
-                                <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>
-                                    <Congressman congressman={congressman} party={congressman.party} />
+                            <li key={`congressman-${congressman.id}`}>
+                                <Link
+                                    to={`/loggjafarthing/${
+                                        this.props.assembly
+                                    }/thingmenn/${congressman.id}`}
+                                >
+                                    <Congressman
+                                        congressman={congressman}
+                                        party={congressman.party}
+                                    />
                                 </Link>
                             </li>
                         ))}
@@ -65,14 +71,21 @@ export default class AssemblyCongressmen extends React.Component {
                     <ul>
                         {this.props.substitutes.map(congressman => (
                             <li key={`congressman-${congressman.id}`}>
-                                <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>
-                                    <Congressman congressman={congressman} party={congressman.party} />
+                                <Link
+                                    to={`/loggjafarthing/${
+                                        this.props.assembly
+                                    }/thingmenn/${congressman.id}`}
+                                >
+                                    <Congressman
+                                        congressman={congressman}
+                                        party={congressman.party}
+                                    />
                                 </Link>
                             </li>
                         ))}
                     </ul>
                 </Column>
             </Row>
-        )
+        );
     }
 }

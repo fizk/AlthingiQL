@@ -1,20 +1,69 @@
 {
   "name": "AlthingiQL",
   "version": "1.0.0",
-  "description": "GraphQL server and React/Apollo client",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "$(npm bin)/forever start ./dist/server/index.js",
-    "stop": "$(npm bin)/forever stop ./dist/server/index.js",
-    "build": " babel --extensions \".tsx,.ts\" --out-dir ./dist ./src/"
+    "dev": "npm run build:client -- -w & npm run build:server -- -w & npm run dev-server & nodemon ./dist/server/index.js --watch dist & wait",
+    "build:server": "babel src --out-dir dist --extensions \".ts,.tsx\"",
+    "build:client": "webpack",
+    "clean": "rm -rf ./dist",
+    "dev-server": "webpack-dev-server",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fizk/AlthingiQL"
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.46",
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/node": "^7.0.0-beta.51",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0-beta.46",
+    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.46",
+    "@babel/preset-es2015": "^7.0.0-beta.46",
+    "@babel/preset-react": "^7.0.0-beta.46",
+    "@babel/preset-stage-2": "^7.0.0-beta.46",
+    "@babel/preset-typescript": "^7.0.0-beta.46",
+    "@storybook/addon-knobs": "^3.4.7",
+    "@storybook/react": "^3.4.7",
+    "@types/d3-scale": "^2.0.1",
+    "@types/d3-shape": "^1.2.3",
+    "@types/d3-time": "^1.0.8",
+    "@types/debug": "0.0.30",
+    "@types/isomorphic-fetch": "0.0.34",
+    "@types/jest": "^23.0.1",
+    "@types/react": "^16.3.17",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-redux": "^6.0.2",
+    "@types/react-router-dom": "^4.2.7",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-builtin-extend": "^1.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-require-ignore": "^0.1.1",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.9.1",
+    "extract-text-webpack-plugin": "^v3.0.2",
+    "jest": "^23.1.0",
+    "jest-css-modules": "^1.1.0",
+    "node-sass": "^4.9.0",
+    "nodemon": "^1.17.5",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.20.2",
+    "stylelint": "^9.2.1",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-declaration-strict-value": "^1.0.4",
+    "stylelint-scss": "^3.1.0",
+    "ts-jest": "^22.4.6",
+    "ts-loader": "^v3.5.0",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.8.3",
+    "webpack": "^v3.11.0",
+    "webpack-cli": "^3.0.3",
+    "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
     "apollo-client": "^1.9.3",
@@ -22,6 +71,7 @@
     "d3-scale": "^2.0.0",
     "d3-shape": "^1.2.0",
     "d3-time": "^1.0.8",
+    "debug": "^3.1.0",
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
     "forever": "^0.15.3",
@@ -39,77 +89,29 @@
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0"
   },
-  "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.49",
-    "@babel/core": "^7.0.0-beta.49",
-    "@babel/plugin-transform-modules-commonjs": "^7.0.0-beta.49",
-    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.49",
-    "@babel/preset-es2015": "^7.0.0-beta.49",
-    "@babel/preset-react": "^7.0.0-beta.49",
-    "@babel/preset-stage-2": "^7.0.0-beta.49",
-    "@babel/preset-typescript": "^7.0.0-beta.49",
-    "@storybook/react": "^3.4.7",
-    "babel-eslint": "^8.2.3",
-    "babel-plugin-transform-builtin-extend": "^1.1.2",
-    "babel-plugin-transform-require-ignore": "^0.1.1",
-    "css-loader": "^0.28.11",
-    "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.9.1",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "jest": "^23.1.0",
-    "jest-css-modules": "^1.1.0",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.3",
-    "style-loader": "^0.21.0",
-    "stylelint": "^9.2.1",
-    "stylelint-config-standard": "^18.2.0",
-    "stylelint-declaration-strict-value": "^1.0.4",
-    "stylelint-scss": "^3.1.0",
-    "ts-loader": "^3.5.0",
-    "typescript": "^2.9.1",
-    "webpack": "^3.11.0",
-    "webpack-cli": "^3.0.3",
-    "webpack-dev-server": "^3.0.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-typescript",
-      "@babel/preset-react",
-      "@babel/preset-es2015",
-      [
-        "@babel/preset-stage-2",
-        {
-          "decoratorsLegacy": true
-        }
-      ]
-    ],
-    "plugins": [
-      "babel-plugin-ts-props",
-      "@babel/plugin-transform-modules-commonjs",
-      "@babel/plugin-transform-react-jsx",
-      [
-        "babel-plugin-transform-require-ignore",
-        {
-          "extensions": [
-            ".css",
-            ".scss"
-          ]
-        }
-      ],
-      [
-        "babel-plugin-transform-builtin-extend",
-        {
-          "globals": [
-            "Error",
-            "Array"
-          ]
-        }
-      ]
-    ]
-  },
   "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "ts",
+      "tsx"
+    ],
+    "globalSetup": "<rootDir>/jest/globalSetup.js",
     "moduleNameMapper": {
-      "\\.(scss)$": "<rootDir>/node_modules/jest-css-modules"
-    }
+      "\\.(scss)$": "<rootDir>/jest/cssModules",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/jest/jestAssetsTransformer.js"
+    },
+    "testMatch": [
+      "**/__test__/**/*.{ts,tsx}"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/",
+      ".mocks.js"
+    ]
   }
 }

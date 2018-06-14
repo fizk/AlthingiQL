@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import AssemblyHeader from '../AssemblyHeader';
 import renderer from 'react-test-renderer';
 import {BrowserRouter as Router} from 'react-router-dom';
