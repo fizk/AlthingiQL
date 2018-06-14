@@ -1,4 +1,4 @@
 import IssueSearchResult from './IssueSearchResult';
 import SpeechSearchResult from './SpeechSearchResult';
 
-export {IssueSearchResult, SpeechSearchResult}
+export {IssueSearchResult, SpeechSearchResult};

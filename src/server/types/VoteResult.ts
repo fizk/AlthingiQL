@@ -6,41 +6,41 @@ export default new GraphQLObjectType({
     fields: {
         id: {
             type: GraphQLInt,
-            resolve: root => root.vote_id
+            resolve: root => root.vote_id,
         },
         issue_id: {
-            type: GraphQLInt
+            type: GraphQLInt,
         },
         assembly_id: {
-            type: GraphQLInt
+            type: GraphQLInt,
         },
         document_id: {
-            type: GraphQLInt
+            type: GraphQLInt,
         },
         date: {
-            type: GraphQLString
+            type: GraphQLString,
         },
         type: {
-            type: GraphQLString
+            type: GraphQLString,
         },
         outcome: {
-            type: GraphQLString
+            type: GraphQLString,
         },
         method: {
-            type: GraphQLString
+            type: GraphQLString,
         },
         yes: {
-            type: GraphQLInt
+            type: GraphQLInt,
         },
         no: {
-            type: GraphQLInt
+            type: GraphQLInt,
         },
         inaction: {
-            type: GraphQLInt
+            type: GraphQLInt,
         },
         committee: {
             type: GraphQLString,
-            resolve: root => root.committee_to
-        }
-    }
-})
+            resolve: root => root.committee_to,
+        },
+    },
+});

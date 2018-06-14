@@ -57,21 +57,21 @@ export default compose(
                                     cursor: fetchMoreResult.AssemblyIssues.cursor,
                                     issues: [
                                         ...previousResult.AssemblyIssues.issues,
-                                        ...fetchMoreResult.AssemblyIssues.issues
+                                        ...fetchMoreResult.AssemblyIssues.issues,
                                     ],
-                                }
-                            }
-                        }
-                    })
-                }
-            }
+                                },
+                            };
+                        },
+                    });
+                },
+            };
         },
         options: ({assembly, filter}) => ({
             variables: {
-                assembly: assembly,
+                assembly,
                 type: filter.type,
                 category: filter.category,
-            }
-        })
-    })
-)(AssemblyIssues)
+            },
+        }),
+    }),
+)(AssemblyIssues);

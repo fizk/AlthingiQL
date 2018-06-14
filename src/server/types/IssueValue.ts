@@ -1,5 +1,5 @@
 import {GraphQLObjectType, GraphQLInt, GraphQLNonNull} from 'graphql';
-import Issue from "./Issue";
+import Issue from './Issue';
 
 export default new GraphQLObjectType({
     name: 'IssueValue',
@@ -9,6 +9,6 @@ export default new GraphQLObjectType({
         },
         value: {
             type: GraphQLInt,
-        }
-    }
-})
+        },
+    },
+});

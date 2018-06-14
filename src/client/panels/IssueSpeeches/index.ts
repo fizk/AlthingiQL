@@ -22,7 +22,7 @@ const issueSpeechesQuery = gql`
                 }
                 text
             }
-            
+
         }
     }
 `;
@@ -52,23 +52,23 @@ export default compose(
                                     done: fetchMoreResult.IssueSpeeches.done,
                                     speeches: [
                                         ...previousResult.IssueSpeeches.speeches,
-                                        ...fetchMoreResult.IssueSpeeches.speeches
+                                        ...fetchMoreResult.IssueSpeeches.speeches,
                                     ],
-                                }
-                            }
-                        }
-                    })
-                }
-            }
+                                },
+                            };
+                        },
+                    });
+                },
+            };
         },
         options: ({issue, assembly, speech}) => {
             return {
                 variables: {
-                    issue: issue,
-                    assembly: assembly,
-                    speech: speech,
-                }
-            }
-        }
-    })
-)(IssueSpeeches)
+                    issue,
+                    assembly,
+                    speech,
+                },
+            };
+        },
+    }),
+)(IssueSpeeches);

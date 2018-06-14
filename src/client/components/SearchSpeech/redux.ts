@@ -45,8 +45,6 @@ const searchQuery = `
     }
 `;
 
-
-
 export const speechSearchAction = (assembly, issue, query) => {
     return dispatch => {
         dispatch(speechSearchActionBegin());
@@ -60,21 +58,21 @@ export const speechSearchAction = (assembly, issue, query) => {
                 query: searchQuery,
                 variables: {assembly, issue, query},
             }),
-            headers: headers,
+            headers,
         });
 
         return fetch(req)
             .then(response => response.json())
             .then(json => {
-                if(json.hasOwnProperty('errors')) {
-                    dispatch(speechSearchActionError(json.errors))
+                if (json.hasOwnProperty('errors')) {
+                    dispatch(speechSearchActionError(json.errors));
                 } else {
                     dispatch(speechSearchActionEnd(json.data.SearchIssueSpeeches));
                 }
 
             })
-            .catch(error => dispatch(speechSearchActionError(error)))
-    }
+            .catch(error => dispatch(speechSearchActionError(error)));
+    };
 };
 
 export default (state = {result: [], loading: false, error: false}, action) => {
@@ -83,27 +81,27 @@ export default (state = {result: [], loading: false, error: false}, action) => {
             return {
                 ...state,
                 loading: true,
-                error: false
+                error: false,
             };
         case SPEECH_SEARCH.END:
             return {
                 result: action.result,
                 loading: false,
-                error: false
+                error: false,
             };
         case SPEECH_SEARCH.ERROR:
             return {
                 ...state,
                 loading: false,
-                error: action.error
+                error: action.error,
             };
         case SPEECH_SEARCH.CLEAR:
             return {
                 result: [],
                 loading: false,
-                error: false
+                error: false,
             };
         default:
             return state;
     }
-}
+};

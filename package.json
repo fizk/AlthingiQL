@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "lint": "npm run lint:ts",
     "dev": "npm run build:client -- -w & npm run build:server -- -w & npm run dev-server & nodemon ./dist/server/index.js --watch dist & wait",
     "build:server": "babel src --out-dir dist --extensions \".ts,.tsx\"",
     "build:client": "webpack",
     "clean": "rm -rf ./dist",
     "dev-server": "webpack-dev-server",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "lint:ts": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'"
   },
   "keywords": [],
   "author": "",
@@ -60,6 +62,7 @@
     "ts-jest": "^22.4.6",
     "ts-loader": "^v3.5.0",
     "ts-node": "^5.0.1",
+    "tslint": "^5.10.0",
     "typescript": "^2.8.3",
     "webpack": "^v3.11.0",
     "webpack-cli": "^3.0.3",

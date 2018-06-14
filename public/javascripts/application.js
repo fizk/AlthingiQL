@@ -1420,7 +1420,7 @@ var durationWeek = 6048e5;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (function (name, variations) {
     if (variations === void 0) { variations = []; }
-    return [name,].concat(variations.map(function (variant) { return name + "--" + variant; })).join(' ');
+    return [name].concat(variations.map(function (variant) { return name + "--" + variant; })).join(' ');
 });
 
 
@@ -16427,7 +16427,7 @@ exports.issueSearchAction = function () {
     var last;
     var deferTimer;
     return function (assembly, issue, query) { return function (dispatch) {
-        var now = +new Date;
+        var now = +new Date();
         if (last && now < last + threshold) {
             clearTimeout(deferTimer);
             deferTimer = setTimeout(function () {
@@ -16474,7 +16474,7 @@ exports.default = (function (state, action) {
             return {
                 result: action.result,
                 loading: false,
-                error: false
+                error: false,
             };
         case ISSUE_SEARCH.ERROR:
             return __assign({}, state, { loading: false, error: action.error });
@@ -16482,7 +16482,7 @@ exports.default = (function (state, action) {
             return {
                 result: [],
                 loading: false,
-                error: false
+                error: false,
             };
         default:
             return state;
@@ -16705,7 +16705,7 @@ exports.default = (function (state, action) {
             return {
                 result: action.result,
                 loading: false,
-                error: false
+                error: false,
             };
         case SPEECH_SEARCH.ERROR:
             return __assign({}, state, { loading: false, error: action.error });
@@ -16713,7 +16713,7 @@ exports.default = (function (state, action) {
             return {
                 result: [],
                 loading: false,
-                error: false
+                error: false,
             };
         default:
             return state;
@@ -16764,16 +16764,16 @@ exports.default = react_apollo_1.compose(//@todo `any`
 react_apollo_1.graphql(assemblyQuery, {
     props: function (all) { return ({
         assembly: all.data.loading === false ? all.data.Assembly : undefined,
-        loading: all.data.loading
+        loading: all.data.loading,
     }); },
     options: function (_a) {
         var assembly = _a.assembly;
         return ({
             variables: {
-                assembly: assembly
-            }
+                assembly: assembly,
+            },
         });
-    }
+    },
 }))(AssemblyHeader_1.default);
 var templateObject_1;
 
@@ -45373,10 +45373,10 @@ react_apollo_1.graphql(assemblyQuery, {
         var assembly = _a.assembly;
         return ({
             variables: {
-                assembly: assembly
-            }
+                assembly: assembly,
+            },
         });
-    }
+    },
 }))(Assembly_1.default);
 var templateObject_1;
 
@@ -50163,10 +50163,10 @@ react_apollo_1.graphql(assemblyCongressmanQuery, {
         var assembly = _a.assembly;
         return ({
             variables: {
-                assembly: assembly
-            }
+                assembly: assembly,
+            },
         });
-    }
+    },
 }))(AssemblyCongressmen_1.default);
 var templateObject_1;
 
@@ -50243,7 +50243,9 @@ react_apollo_1.graphql(assembliesQuery, {
         issueCount: all.data.loading === false ? all.data.CongressmanIssueTypePromotion : undefined,
         sessions: all.data.loading === false ? all.data.CongressmanAssemblySessions : undefined,
         votes: all.data.loading === false ? all.data.CongressmanAssemblyVotes : undefined,
-        categorySpeechTimes: all.data.loading === false ? all.data.CongressmanAssemblyCategorySpeechTime : undefined,
+        categorySpeechTimes: all.data.loading === false
+            ? all.data.CongressmanAssemblyCategorySpeechTime
+            : undefined,
         loading: all.data.loading,
     }); },
     options: function (_a) {
@@ -50252,9 +50254,9 @@ react_apollo_1.graphql(assembliesQuery, {
             variables: {
                 assembly: assembly,
                 congressman: congressman,
-            }
+            },
         });
-    }
+    },
 }))(AssemblyCongressman_1.default);
 var templateObject_1;
 
@@ -50596,10 +50598,10 @@ react_apollo_1.graphql(assemblyIssueQuery, {
         return ({
             variables: {
                 issue: issue,
-                assembly: assembly
-            }
+                assembly: assembly,
+            },
         });
-    }
+    },
 }))(AssemblyIssue_1.default);
 var templateObject_1;
 
@@ -57789,11 +57791,11 @@ exports.default = react_apollo_1.compose(react_apollo_1.graphql(assemblyIssueQue
                                 done: fetchMoreResult.AssemblyIssues.done,
                                 cursor: fetchMoreResult.AssemblyIssues.cursor,
                                 issues: previousResult.AssemblyIssues.issues.concat(fetchMoreResult.AssemblyIssues.issues),
-                            }
+                            },
                         };
-                    }
+                    },
                 });
-            }
+            },
         };
     },
     options: function (_a) {
@@ -57803,9 +57805,9 @@ exports.default = react_apollo_1.compose(react_apollo_1.graphql(assemblyIssueQue
                 assembly: assembly,
                 type: filter.type,
                 category: filter.category,
-            }
+            },
         });
-    }
+    },
 }))(AssemblyIssues_1.default);
 var templateObject_1;
 
@@ -58701,16 +58703,16 @@ react_apollo_1.graphql(assemblyQuery, {
     props: function (all) { return ({
         types: all.data.loading === false ? all.data.AssemblySummary.types : undefined,
         categories: all.data.loading === false ? all.data.AssemblyCategorySummary : undefined,
-        loading: all.data.loading
+        loading: all.data.loading,
     }); },
     options: function (_a) {
         var assembly = _a.assembly;
         return ({
             variables: {
                 assembly: assembly,
-            }
+            },
         });
-    }
+    },
 }))(IssuesMenu_1.default);
 var templateObject_1;
 
@@ -58800,10 +58802,10 @@ react_apollo_1.graphql(issueDocumentsQuery, {
         return ({
             variables: {
                 issue: issue,
-                assembly: assembly
-            }
+                assembly: assembly,
+            },
         });
-    }
+    },
 }))(IssueDocuments_1.default);
 var templateObject_1;
 
@@ -58924,9 +58926,9 @@ react_apollo_1.graphql(documentVotesQuery, {
                 assembly: assembly,
                 issue: issue,
                 vote: vote,
-            }
+            },
         });
-    }
+    },
 }))(DocumentCongressmanVotes_1.default);
 var templateObject_1;
 
@@ -58991,7 +58993,7 @@ var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cook
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_apollo_1 = __webpack_require__(5);
 var IssueSpeeches_1 = __webpack_require__(523);
-var issueSpeechesQuery = react_apollo_1.gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    query ($assembly: Int! $issue: Int! $speech: String $cursor: CursorInput) {\n        IssueSpeeches(issue: $issue assembly: $assembly speech: $speech cursor: $cursor) {\n            cursor {from to}\n            done\n            speeches {\n                id\n                assembly {id}\n                issue {id}\n                period {from to}\n                congressmanType\n                iteration\n                type\n                congressman {\n                    id\n                    name\n                    avatar {templateSrc}\n                    party {id name color}\n                }\n                text\n            }\n            \n        }\n    }\n"], ["\n    query ($assembly: Int! $issue: Int! $speech: String $cursor: CursorInput) {\n        IssueSpeeches(issue: $issue assembly: $assembly speech: $speech cursor: $cursor) {\n            cursor {from to}\n            done\n            speeches {\n                id\n                assembly {id}\n                issue {id}\n                period {from to}\n                congressmanType\n                iteration\n                type\n                congressman {\n                    id\n                    name\n                    avatar {templateSrc}\n                    party {id name color}\n                }\n                text\n            }\n            \n        }\n    }\n"])));
+var issueSpeechesQuery = react_apollo_1.gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    query ($assembly: Int! $issue: Int! $speech: String $cursor: CursorInput) {\n        IssueSpeeches(issue: $issue assembly: $assembly speech: $speech cursor: $cursor) {\n            cursor {from to}\n            done\n            speeches {\n                id\n                assembly {id}\n                issue {id}\n                period {from to}\n                congressmanType\n                iteration\n                type\n                congressman {\n                    id\n                    name\n                    avatar {templateSrc}\n                    party {id name color}\n                }\n                text\n            }\n\n        }\n    }\n"], ["\n    query ($assembly: Int! $issue: Int! $speech: String $cursor: CursorInput) {\n        IssueSpeeches(issue: $issue assembly: $assembly speech: $speech cursor: $cursor) {\n            cursor {from to}\n            done\n            speeches {\n                id\n                assembly {id}\n                issue {id}\n                period {from to}\n                congressmanType\n                iteration\n                type\n                congressman {\n                    id\n                    name\n                    avatar {templateSrc}\n                    party {id name color}\n                }\n                text\n            }\n\n        }\n    }\n"])));
 exports.default = react_apollo_1.compose(react_apollo_1.graphql(issueSpeechesQuery, {
     props: function (all) {
         return {
@@ -59016,11 +59018,11 @@ exports.default = react_apollo_1.compose(react_apollo_1.graphql(issueSpeechesQue
                                 cursor: fetchMoreResult.IssueSpeeches.cursor,
                                 done: fetchMoreResult.IssueSpeeches.done,
                                 speeches: previousResult.IssueSpeeches.speeches.concat(fetchMoreResult.IssueSpeeches.speeches),
-                            }
+                            },
                         };
-                    }
+                    },
                 });
-            }
+            },
         };
     },
     options: function (_a) {
@@ -59030,9 +59032,9 @@ exports.default = react_apollo_1.compose(react_apollo_1.graphql(issueSpeechesQue
                 issue: issue,
                 assembly: assembly,
                 speech: speech,
-            }
+            },
         };
-    }
+    },
 }))(IssueSpeeches_1.default);
 var templateObject_1;
 
@@ -60493,7 +60495,7 @@ exports.default = react_apollo_1.compose(//@todo `any`
 react_apollo_1.graphql(assemblyQuery, {
     props: function (all) { return ({
         issue: all.data.loading === false ? all.data.AssemblyIssue : undefined,
-        loading: all.data.loading
+        loading: all.data.loading,
     }); },
     options: function (_a) {
         var assembly = _a.assembly, issue = _a.issue;
@@ -60501,9 +60503,9 @@ react_apollo_1.graphql(assemblyQuery, {
             variables: {
                 assembly: assembly,
                 issue: issue,
-            }
+            },
         });
-    }
+    },
 }))(IssueHeader_1.default);
 var templateObject_1;
 

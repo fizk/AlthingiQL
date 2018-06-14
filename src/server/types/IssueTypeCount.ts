@@ -1,7 +1,7 @@
 import {GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLList} from 'graphql';
 import {GraphQLDateTime} from 'graphql-iso-date';
-import Assembly from "./Assembly";
-import Congressman from "./Congressman";
+import Assembly from './Assembly';
+import Congressman from './Congressman';
 
 export default new GraphQLObjectType({
     name: 'IssueTypeCount',
@@ -11,22 +11,22 @@ export default new GraphQLObjectType({
 
         },
         type: {
-            type: GraphQLString
+            type: GraphQLString,
         },
         typeName: {
             type: GraphQLString,
-            resolve: root => root.type_name
+            resolve: root => root.type_name,
         },
         typeSubName: {
             type: GraphQLString,
-            resolve: root => root.type_subname
+            resolve: root => root.type_subname,
         },
         documentType: {
             type: GraphQLString,
-            resolve: root => root.document_type
+            resolve: root => root.document_type,
         },
         count: {
-            type: GraphQLInt
-        }
-    }
-})
+            type: GraphQLInt,
+        },
+    },
+});

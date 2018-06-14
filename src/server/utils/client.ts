@@ -6,7 +6,7 @@ export const getPagination = (debug, config) => (url, cursor) => {
         port: config.port,
         path: url,
         method: 'GET',
-        headers: {}
+        headers: {},
     };
     if (cursor) {
         options.headers = {
@@ -19,7 +19,7 @@ export const getPagination = (debug, config) => (url, cursor) => {
     }
     return new Promise((resolve, reject) => {
         const req = http.request(options, response => {
-            if(response.statusCode !== 206) {
+            if (response.statusCode !== 206) {
                 response.resume();
                 const error = {
                     code: response.statusCode,
@@ -42,8 +42,9 @@ export const getPagination = (debug, config) => (url, cursor) => {
                 response.on('end', () => {
                     try {
                         const data = JSON.parse(body);
-                        debug('Request: %O, Done: %O, Input range: %O', options, {done: Number(to) >= Number(total)}, {from, to, total});
-                        resolve({data: data, cursor: nextCursor, done: Number(to) >= Number(total)});
+                        debug('Request: %O, Done: %O, Input range: %O',
+                            options, {done: Number(to) >= Number(total)}, {from, to, total});
+                        resolve({data, cursor: nextCursor, done: Number(to) >= Number(total)});
                     } catch (error) {
                         response.resume();
                         debug('Request: %O, Error: %O, Body: %O', options, error, body);
@@ -57,7 +58,7 @@ export const getPagination = (debug, config) => (url, cursor) => {
             reject(error);
         });
         req.end();
-    })
+    });
 
 };
 
@@ -71,7 +72,7 @@ export const get = (debug, config) => url => {
     };
     return new Promise((resolve, reject) => {
         const req = http.request(options, response => {
-            if(Math.floor(response.statusCode / 100) !== 2) {
+            if (Math.floor(response.statusCode / 100) !== 2) {
                 response.resume();
                 const error = {
                     code: response.statusCode,
@@ -101,7 +102,7 @@ export const get = (debug, config) => url => {
             reject(error);
         });
         req.end();
-    })
+    });
 };
 
 export const client = (debug, config) => ({

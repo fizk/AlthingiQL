@@ -67,14 +67,16 @@ export default compose<any>( //@todo `any`
             issueCount: all.data.loading === false ? all.data.CongressmanIssueTypePromotion : undefined,
             sessions: all.data.loading === false ? all.data.CongressmanAssemblySessions : undefined,
             votes: all.data.loading === false ? all.data.CongressmanAssemblyVotes : undefined,
-            categorySpeechTimes: all.data.loading === false ? all.data.CongressmanAssemblyCategorySpeechTime : undefined,
+            categorySpeechTimes: all.data.loading === false
+                ? all.data.CongressmanAssemblyCategorySpeechTime
+                : undefined,
             loading: all.data.loading,
         }),
         options: ({assembly, congressman}: {assembly: number, congressman: number}) => ({
             variables: {
-                assembly: assembly,
-                congressman: congressman,
-            }
-        })
-    })
-)(AssemblyCongressman)
+                assembly,
+                congressman,
+            },
+        }),
+    }),
+)(AssemblyCongressman);

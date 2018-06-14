@@ -49,5 +49,5 @@ export default {
     CongressmenAssemblyQuestions,
     CongressmenAssemblyResolutions,
     CongressmenAssemblyBills,
-    DocumentVotes
-}
+    DocumentVotes,
+};

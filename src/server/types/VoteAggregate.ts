@@ -10,5 +10,5 @@ export default new GraphQLObjectType({
         vote: {
             type: GraphQLString,
         },
-    }
-})
+    },
+});

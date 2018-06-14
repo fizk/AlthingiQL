@@ -14,8 +14,8 @@ export default new GraphQLObjectType({
         assembly: {
             type: Assembly,
             resolve: (root) => ({ //@todo it becomes to slow to `fetch` each assembly
-                assembly_id: root.assembly_id
-            })
+                assembly_id: root.assembly_id,
+            }),
         },
         category: {
             type: GraphQLString,
@@ -72,12 +72,12 @@ export default new GraphQLObjectType({
         },
         speakers: {
             type: new GraphQLList(CongressmanValue),
-            resolve (root) {
+            resolve(root) {
                 return root.speakers.map(item => ({
                     congressman: item,
                     value: item.time,
                 }));
-            }
+            },
         },
         proponents: {
             type: new GraphQLList(Congressman),
@@ -85,7 +85,7 @@ export default new GraphQLObjectType({
                 count: {
                     type: GraphQLInt,
                     defaultValue: undefined,
-                }
+                },
             },
             resolve: (root, {count}) => {
                 return (root.proponents || []).slice(0, count);
@@ -93,19 +93,19 @@ export default new GraphQLObjectType({
         },
         proponentsCount: {
             type: GraphQLInt,
-            resolve: root => (root.proponents || []).length
+            resolve: root => (root.proponents || []).length,
         },
         voteRange: {
             type: new GraphQLList(new GraphQLObjectType({
                 name: 'VoteRange',
                 fields: {
                     count: {
-                        type: GraphQLInt
+                        type: GraphQLInt,
                     },
                     date: {
-                        type: GraphQLString
-                    }
-                }
+                        type: GraphQLString,
+                    },
+                },
             })),
         },
         speechRange: {
@@ -113,13 +113,13 @@ export default new GraphQLObjectType({
                 name: 'SpeechRange',
                 fields: {
                     count: {
-                        type: GraphQLInt
+                        type: GraphQLInt,
                     },
                     date: {
-                        type: GraphQLString
-                    }
-                }
+                        type: GraphQLString,
+                    },
+                },
             })),
-        }
-    }
-})
+        },
+    },
+});

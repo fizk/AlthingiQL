@@ -4,10 +4,10 @@ export default new GraphQLObjectType({
     name: 'Image',
     fields: {
         src: {
-            type: GraphQLString
+            type: GraphQLString,
         },
         templateSrc: {
-            type: GraphQLString
-        }
-    }
-})
+            type: GraphQLString,
+        },
+    },
+});

@@ -1,28 +1,28 @@
 import {graphql, compose, gql} from 'react-apollo';
 import DocumentCongressmanVotes from './DocumentCongressmanVotes';
 
-type Picture = {
-    templateSrc: string
+interface Picture {
+    templateSrc: string;
 }
 
-type Party = {
-    id: number
-    name: string
-    color: string
+interface Party {
+    id: number;
+    name: string;
+    color: string;
 }
 
-type Congressman = {
-    id: number
-    name: string
-    avatar: Picture
-    party: Party
+interface Congressman {
+    id: number;
+    name: string;
+    avatar: Picture;
+    party: Party;
 }
 
-type DocumentVote = {
-    id: number
-    voteId: number
-    vote: string
-    congressman: Congressman
+interface DocumentVote {
+    id: number;
+    voteId: number;
+    vote: string;
+    congressman: Congressman;
 }
 
 const documentVotesQuery = gql`
@@ -53,11 +53,10 @@ export default compose<any>( //@todo `any`
         }),
         options: ({assembly, issue, vote}: {assembly: number, issue: number, vote: number}) => ({
             variables: {
-                assembly: assembly,
-                issue: issue,
-                vote: vote,
-            }
-        })
-    })
+                assembly,
+                issue,
+                vote,
+            },
+        }),
+    }),
 )(DocumentCongressmanVotes);
-

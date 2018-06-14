@@ -6,8 +6,8 @@ install:
     - npm install
 
 script:
-    - npm run test
-    - npm run lint:js
+    - npm test
+    - npm run lint
 
 notifications:
     webhooks:

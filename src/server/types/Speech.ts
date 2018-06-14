@@ -1,9 +1,9 @@
 import {GraphQLObjectType, GraphQLInt, GraphQLString} from 'graphql';
 import {GraphQLDateTime} from 'graphql-iso-date';
-import Congressman from "./Congressman";
-import PeriodTime from "./PeriodTime";
-import Assembly from "./Assembly";
-import Issue from "./Issue";
+import Congressman from './Congressman';
+import PeriodTime from './PeriodTime';
+import Assembly from './Assembly';
+import Issue from './Issue';
 
 export default new GraphQLObjectType({
     name: 'Speech',
@@ -18,7 +18,7 @@ export default new GraphQLObjectType({
         },
         assembly: {
             type: Assembly,
-            resolve: root => ({assembly_id: root.assembly_id})
+            resolve: root => ({assembly_id: root.assembly_id}),
         },
         issue: {
             type: Issue,
@@ -26,7 +26,7 @@ export default new GraphQLObjectType({
         },
         congressman: {
             type: Congressman,
-            resolve: root => root.congressman
+            resolve: root => root.congressman,
 
         },
         congressmanType: {
@@ -35,7 +35,7 @@ export default new GraphQLObjectType({
         },
         period: {
             type: PeriodTime,
-            resolve: root => ({from: root.from, to: root.to})
+            resolve: root => ({from: root.from, to: root.to}),
 
         },
         text: {
@@ -50,5 +50,5 @@ export default new GraphQLObjectType({
         position: {
             type: GraphQLInt,
         },
-    }
-})
+    },
+});

@@ -61,7 +61,7 @@ export const issueSearchAction = () => {
     let last;
     let deferTimer;
     return (assembly, issue, query) => dispatch => {
-        const now = +new Date;
+        const now = + new Date();
         if (last && now < last + threshold) {
             clearTimeout(deferTimer);
             deferTimer = setTimeout(() => {
@@ -72,7 +72,7 @@ export const issueSearchAction = () => {
             last = now;
             issueSearchDispatchAction(dispatch, assembly, issue, query);
         }
-    }
+    };
 };
 
 const issueSearchDispatchAction = (dispatch, assembly, issue, query) => {
@@ -87,19 +87,19 @@ const issueSearchDispatchAction = (dispatch, assembly, issue, query) => {
             query: searchQuery,
             variables: {assembly, issue, query},
         }),
-        headers: headers,
+        headers,
     });
 
     return fetch(req)
         .then(response => response.json())
         .then(json => {
-            if(json.hasOwnProperty('errors')) {
-                dispatch(issueSearchActionError(json.errors))
+            if (json.hasOwnProperty('errors')) {
+                dispatch(issueSearchActionError(json.errors));
             } else {
                 dispatch(issueSearchActionEnd(json.data.SearchAssemblyIssue));
             }
         })
-        .catch(error => dispatch(issueSearchActionError(error)))
+        .catch(error => dispatch(issueSearchActionError(error)));
 };
 
 export default (state = {result: [], loading: false, error: false}, action) => {
@@ -108,27 +108,27 @@ export default (state = {result: [], loading: false, error: false}, action) => {
             return {
                 ...state,
                 loading: true,
-                error: false
+                error: false,
             };
         case ISSUE_SEARCH.END:
             return {
                 result: action.result,
                 loading: false,
-                error: false
+                error: false,
             };
         case ISSUE_SEARCH.ERROR:
             return {
                 ...state,
                 loading: false,
-                error: action.error
+                error: action.error,
             };
         case ISSUE_SEARCH.CLEAR:
             return {
                 result: [],
                 loading: false,
-                error: false
+                error: false,
             };
         default:
             return state;
     }
-}
+};

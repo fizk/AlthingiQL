@@ -11,7 +11,7 @@ export default new GraphQLObjectType({
         },
         value: {
             name: 'value',
-            type: GraphQLInt
+            type: GraphQLInt,
         },
-    })
-})
+    }),
+});

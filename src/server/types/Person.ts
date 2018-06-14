@@ -8,11 +8,11 @@ export default new GraphQLObjectType({
         id: {
             name: 'id',
             type: GraphQLInt,
-            resolve: (root) => root.congressman_id
+            resolve: (root) => root.congressman_id,
         },
         name: {
             name: 'name',
-            type: GraphQLString
+            type: GraphQLString,
         },
         parties: {
             name: 'parties',
@@ -25,14 +25,15 @@ export default new GraphQLObjectType({
                     return {
                         src: `http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
                         templateSrc: `http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
-                    }
+                    };
                 // } else {
                 //     return {
                 //         src: `http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
-                //         templateSrc: (__IMAGE_SERVER__ || '') + `/unsafe/{width}x{height}/smart/http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
+                //         templateSrc: (__IMAGE_SERVER__ || '') + `/unsafe/{width}x{height}/smart/
+                // http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
                 //     }
                 // }
-            }
-        }
-    }
-})
+            },
+        },
+    },
+});

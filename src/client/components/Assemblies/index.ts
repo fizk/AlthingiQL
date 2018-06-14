@@ -1,7 +1,6 @@
 import {graphql, compose, gql} from 'react-apollo';
 import Assemblies from './Assemblies';
-import {AssemblySummary} from '../../../../@types'
-
+import {AssemblySummary} from '../../../../@types';
 
 // type AssemblySummary = {
 //     id: number,
@@ -23,7 +22,6 @@ import {AssemblySummary} from '../../../../@types'
 //     }
 // }
 
-
 const assembliesQuery = gql`
     query {
         Assemblies {
@@ -42,7 +40,6 @@ export default compose<any>( //@todo `any`
         props: (all: {data?: {loading: boolean, Assemblies: AssemblySummary}}) => ({
             assemblies: all.data.loading === false ? all.data.Assemblies : undefined,
             loading: all.data.loading,
-        })
-    })
+        }),
+    }),
 )(Assemblies);
-

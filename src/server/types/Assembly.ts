@@ -1,6 +1,6 @@
 import {GraphQLObjectType, GraphQLInt} from 'graphql';
 import Period from './Period';
-import Division from "./Division";
+import Division from './Division';
 
 export default new GraphQLObjectType({
     name: 'Assembly',
@@ -8,7 +8,7 @@ export default new GraphQLObjectType({
         id: {
             name: 'id',
             type: GraphQLInt,
-            resolve: (root) => root.assembly_id
+            resolve: (root) => root.assembly_id,
         },
         period: {
             name: 'period',
@@ -17,14 +17,14 @@ export default new GraphQLObjectType({
                 return {
                     from: root.from,
                     to: root.to,
-                }
-            }
+                };
+            },
         },
         division: {
             name: 'division',
             type: Division,
-            resolve: root => root.party
-        }
+            resolve: root => root.party,
+        },
 
-    }
-})
+    },
+});

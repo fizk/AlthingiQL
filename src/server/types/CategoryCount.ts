@@ -1,15 +1,15 @@
-import {GraphQLInt, GraphQLObjectType, GraphQLString} from "graphql";
+import {GraphQLInt, GraphQLObjectType, GraphQLString} from 'graphql';
 
 export default new GraphQLObjectType({
     name: 'CategoryCount',
     fields: {
         id: {
             type: GraphQLInt,
-            resolve: root => root.category_id
+            resolve: root => root.category_id,
         },
         superCategoryId: {
             type: GraphQLInt,
-            resolve: root => root.super_category_id
+            resolve: root => root.super_category_id,
         },
         title: {
             type: GraphQLString,
@@ -20,6 +20,5 @@ export default new GraphQLObjectType({
         count: {
             type: GraphQLInt,
         },
-    }
-})
-
+    },
+});

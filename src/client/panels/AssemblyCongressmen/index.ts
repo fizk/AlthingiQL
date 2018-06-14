@@ -41,8 +41,8 @@ export default compose<any>( //@todo `any`
         }),
         options: ({assembly}: {assembly: number}) => ({
             variables: {
-                assembly: assembly
-            }
-        })
-    })
-)(AssemblyCongressmen)
+                assembly,
+            },
+        }),
+    }),
+)(AssemblyCongressmen);

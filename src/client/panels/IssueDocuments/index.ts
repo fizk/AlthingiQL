@@ -39,9 +39,9 @@ export default compose<any>( //@todo `any`
         }),
         options: ({issue, assembly}: {issue: number, assembly: number}) => ({
             variables: {
-                issue: issue,
-                assembly: assembly
-            }
-        })
-    })
-)(IssueDocuments)
+                issue,
+                assembly,
+            },
+        }),
+    }),
+)(IssueDocuments);

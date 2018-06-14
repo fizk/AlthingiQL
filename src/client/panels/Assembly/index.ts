@@ -125,7 +125,7 @@ export default compose<any>( //@todo `any`
                 CongressmenAssemblyQuestions: any,
                 CongressmenAssemblyResolutions: any,
                 CongressmenAssemblyBills: any,
-                AssemblyIssuesSpeechDuration: any
+                AssemblyIssuesSpeechDuration: any,
             }}) => ({
             assembly: all.data.loading === false ? all.data.Assembly : undefined,
             summary: all.data.loading === false ? all.data.AssemblySummary : undefined,
@@ -139,8 +139,8 @@ export default compose<any>( //@todo `any`
         }),
         options: ({assembly}: {assembly: number}) => ({
             variables: {
-                assembly: assembly
-            }
-        })
-    })
-)(Assembly)
+                assembly,
+            },
+        }),
+    }),
+)(Assembly);

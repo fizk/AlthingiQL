@@ -1,4 +1,4 @@
-import {GraphQLInputObjectType, GraphQLInt, GraphQLNonNull, GraphQLObjectType} from "graphql";
+import {GraphQLInputObjectType, GraphQLInt, GraphQLNonNull, GraphQLObjectType} from 'graphql';
 
 export default new GraphQLObjectType({
     name: 'Cursor',
@@ -12,7 +12,7 @@ export default new GraphQLObjectType({
             type: GraphQLInt,
         },
     },
-})
+});
 export const CursorInput = new GraphQLInputObjectType({
     name: 'CursorInput',
     fields: {
@@ -24,5 +24,5 @@ export const CursorInput = new GraphQLInputObjectType({
             name: 'from',
             type: GraphQLInt,
         },
-    }
+    },
 });

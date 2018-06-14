@@ -1,16 +1,16 @@
-import {GraphQLBoolean, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString} from "graphql";
-import Issue from '../types/Issue'
-import Cursor, {CursorInput} from "../types/Cursor";
-import IssueValue from "../types/IssueValue";
+import {GraphQLBoolean, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import Issue from '../types/Issue';
+import Cursor, {CursorInput} from '../types/Cursor';
+import IssueValue from '../types/IssueValue';
 
 export default {
     type: new GraphQLList(IssueValue),
     args: {
         assembly: {
-            type: new GraphQLNonNull(GraphQLInt)
+            type: new GraphQLNonNull(GraphQLInt),
         },
         size: {
-            type: GraphQLInt
+            type: GraphQLInt,
         },
         order: {
             type: GraphQLString,
@@ -20,11 +20,11 @@ export default {
         const queryArray = [];
 
         if (order) {
-            queryArray.push(`rod=${order}`)
+            queryArray.push(`rod=${order}`);
         }
 
         if (size) {
-            queryArray.push(`fjoldi=${size}`)
+            queryArray.push(`fjoldi=${size}`);
         }
 
         const queryString = queryArray.length > 0
@@ -34,7 +34,7 @@ export default {
         return client.get(`/loggjafarthing/${assembly}/thingmal/raedutimar${queryString}`)
             .then(json => json.map(item => ({
                 issue: item,
-                value: item.value
-            })))
-    }
-}
+                value: item.value,
+            })));
+    },
+};

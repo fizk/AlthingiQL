@@ -6,23 +6,23 @@ export default new GraphQLObjectType({
         id: {
             name: 'id',
             type: GraphQLInt,
-            resolve: (root) => root.party_id
+            resolve: (root) => root.party_id,
         },
         name: {
             name: 'name',
-            type: GraphQLString
+            type: GraphQLString,
         },
         abbr_short: {
             name: 'abbr_short',
-            type: GraphQLString
+            type: GraphQLString,
         },
         abbr_long: {
             name: 'abbr_long',
-            type: GraphQLString
+            type: GraphQLString,
         },
         color: {
             name: 'color',
-            type: GraphQLString
-        }
-    }
+            type: GraphQLString,
+        },
+    },
 });

@@ -1,5 +1,5 @@
 import {GraphQLObjectType, GraphQLInt, GraphQLList, GraphQLString, GraphQLFloat} from 'graphql';
-import Party from "./Party";
+import Party from './Party';
 
 export default new GraphQLObjectType({
     name: 'AssemblySummary',
@@ -12,10 +12,10 @@ export default new GraphQLObjectType({
                         type: GraphQLInt,
                     },
                     status: {
-                        type: GraphQLString
-                    }
-                }
-            }))
+                        type: GraphQLString,
+                    },
+                },
+            })),
         },
         governmentBills: {
             type: new GraphQLList(new GraphQLObjectType({
@@ -25,9 +25,9 @@ export default new GraphQLObjectType({
                         type: GraphQLInt,
                     },
                     status: {
-                        type: GraphQLString
-                    }
-                }
+                        type: GraphQLString,
+                    },
+                },
             })),
             resolve: root => root.government_bills,
         },
@@ -39,18 +39,18 @@ export default new GraphQLObjectType({
                         type: GraphQLInt,
                     },
                     type: {
-                        type: GraphQLString
+                        type: GraphQLString,
                     },
                     typeName: {
                         type: GraphQLString,
-                        resolve: (root) => root.type_name
+                        resolve: (root) => root.type_name,
                     },
                     typeSubName: {
                         type: GraphQLString,
-                        resolve: (root) => root.type_subname
-                    }
-                }
-            }))
+                        resolve: (root) => root.type_subname,
+                    },
+                },
+            })),
         },
         votes: {
             type: new GraphQLList(new GraphQLObjectType({
@@ -60,10 +60,10 @@ export default new GraphQLObjectType({
                         type: GraphQLInt,
                     },
                     date: {
-                        type: GraphQLString
-                    }
-                }
-            }))
+                        type: GraphQLString,
+                    },
+                },
+            })),
         },
         speeches: {
             type: new GraphQLList(new GraphQLObjectType({
@@ -73,10 +73,10 @@ export default new GraphQLObjectType({
                         type: GraphQLInt,
                     },
                     date: {
-                        type: GraphQLString
-                    }
-                }
-            }))
+                        type: GraphQLString,
+                    },
+                },
+            })),
         },
         parties: {
             type: new GraphQLList(new GraphQLObjectType({
@@ -84,13 +84,13 @@ export default new GraphQLObjectType({
                 fields: {
                     party: {
                         type: Party,
-                        resolve: root => root
+                        resolve: root => root,
                     },
                     time: {
                         type: GraphQLInt,
-                        resolve: root => root.total_time
-                    }
-                }
+                        resolve: root => root.total_time,
+                    },
+                },
 
             })),
             resolve: root => root.party_times,
@@ -101,19 +101,19 @@ export default new GraphQLObjectType({
                 fields: {
                     id: {
                         type: GraphQLInt,
-                        resolve: root => root.election_id
+                        resolve: root => root.election_id,
                     },
                     date: {
-                        type: GraphQLString
+                        type: GraphQLString,
                     },
                     title: {
-                        type: GraphQLString
+                        type: GraphQLString,
                     },
                     description: {
-                        type: GraphQLString
-                    }
-                }
-            })
+                        type: GraphQLString,
+                    },
+                },
+            }),
         },
         electionResults: {
             type: new GraphQLList(new GraphQLObjectType({
@@ -124,7 +124,7 @@ export default new GraphQLObjectType({
                         resolve(root) {
                             const {seat, results, ...party} = root;
                             return party;
-                        }
+                        },
                     },
                     results: {
                         type: new GraphQLObjectType({
@@ -134,18 +134,18 @@ export default new GraphQLObjectType({
                                     type: GraphQLInt,
                                 },
                                 result: {
-                                    type: GraphQLFloat
-                                }
-                            }
+                                    type: GraphQLFloat,
+                                },
+                            },
                         }),
-                        resolve (root) {
+                        resolve(root) {
                             const {seat, results, ...party} = root;
                             return {seats: seat, result: results};
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             })),
-            resolve: root => root.election_results
-        }
-    }
-})
+            resolve: root => root.election_results,
+        },
+    },
+});

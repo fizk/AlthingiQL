@@ -6,23 +6,23 @@ export default new GraphQLObjectType({
         id: {
             name: 'id',
             type: GraphQLInt,
-            resolve: (root) => root.constituency_id
+            resolve: (root) => root.constituency_id,
         },
         name: {
             name: 'name',
-            type: GraphQLString
+            type: GraphQLString,
         },
         abbr_short: {
             name: 'abbr_short',
-            type: GraphQLString
+            type: GraphQLString,
         },
         abbr_long: {
             name: 'abbr_long',
-            type: GraphQLString
+            type: GraphQLString,
         },
         description: {
             name: 'description',
-            type: GraphQLString
+            type: GraphQLString,
         },
-    }
+    },
 });
