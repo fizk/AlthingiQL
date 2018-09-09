@@ -1,4 +1,4 @@
-// // const DefinePlugin = require('webpack').DefinePlugin;
+const DefinePlugin = require('webpack').DefinePlugin;
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -41,17 +41,9 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin('./stylesheets/application.css'),
-//         // new DefinePlugin({
-//         //     __GRAPHQL_SERVER__: JSON.stringify(
-//         //         `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/graphql`
-//         //     ),
-//         //     __IMAGE_SERVER__: JSON.stringify('http://localhost:8000'),
-//         //     __API_URL__: JSON.stringify(
-//         //         process.env.NODE_ENV === 'production'
-//         //             ? 'https://us-central1-reactscales.cloudfunctions.net'
-//         //             : 'http://localhost:3000'
-//         //     ),
-//         // })
+        new DefinePlugin({
+            __GRAPHQL_SERVER__: JSON.stringify(process.env.GRAPHQL_SERVER || 'http://localhost:3000/graphql'),
+        })
     ],
     devServer: {
         contentBase: path.join(__dirname, 'public'),

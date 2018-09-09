@@ -15,6 +15,8 @@ import Routers from '../client/router';
 import Chrome from '../client/components/Chrome';
 import Helmet from 'react-helmet';
 
+const assetsServer = process.env.ASSETS_SERVER || '';//'http://localhost:3001';
+
 const app = express();
 const serverConfig = {
     protocol: process.env.SERVER_PROTOCOL || 'http',
@@ -38,21 +40,21 @@ app.use('/graphql', graphqlHTTP({
 
 app.get('*', (request, response) => {
 
-    // response.send(`
-    //          <!doctype html>
-    //          <html>
-    //              <head>
-    //                  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    //                  <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" />
-    //              </head>
-    //              <body>
-    //                  <div data-react></div>
-    //                  <script src="/scripts/application.js"></script>
-    //              </body>
-    //          </html>`);
-    // response.end();
-    //
-    // return;
+    response.send(`
+             <!doctype html>
+             <html>
+                 <head>
+                     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+                     <link rel="stylesheet" type="text/css" href="${assetsServer}/stylesheets/application.css" />
+                 </head>
+                 <body>
+                     <div data-react></div>
+                     <script src="${assetsServer}/javascripts/application.js"></script>
+                 </body>
+             </html>`);
+    response.end();
+
+    return;
 
     const client = new ApolloClient({
         ssrMode: true,
@@ -89,7 +91,7 @@ app.get('*', (request, response) => {
                  <head>
                      <meta name="viewport" content="width=device-width, initial-scale=2">
                      <meta property="og:site_name" content="Löggjafarþing">
-                     <link rel="stylesheet" type="text/css" href="http://localhost:3001/stylesheets/application.css" />
+                     <link rel="stylesheet" type="text/css" href="${assetsServer}/stylesheets/application.css" />
                      ${helmet.title.toString()}
                      ${helmet.meta.toString()}
                      ${helmet.link.toString()}
@@ -99,7 +101,7 @@ app.get('*', (request, response) => {
                      <script>
                         window.__APOLLO_STATE__= ${JSON.stringify(initialState).replace(/</g, '\\\\\u003c')};
                     </script>
-                     <script src="http://localhost:3001/javascripts/application.js"></script>
+                     <script src="${assetsServer}/javascripts/application.js"></script>
                  </body>
              </html>`;
 

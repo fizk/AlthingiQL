@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Row, Column } from "../../elements/Grid";
 import Congressman from "../../elements/Congressman";
 import DateAndCountChart from "../../elements/DateAndCountChart";
-import Markdown from "react-markdown";
+import * as Markdown from "react-markdown";
 import { H2, H4 } from "../../elements/Headline";
 import Paper from "../../elements/Paper";
 

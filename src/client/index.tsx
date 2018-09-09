@@ -8,9 +8,12 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 
+declare const __GRAPHQL_SERVER__: string;
+
+
 const client = new ApolloClient({
     networkInterface: createNetworkInterface({
-        uri: 'http://localhost:3000/graphql',
+        uri: __GRAPHQL_SERVER__ || 'http://localhost:3000/graphql',
     }),
 });
 

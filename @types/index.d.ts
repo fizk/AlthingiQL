@@ -75,5 +75,6 @@ declare var __GRAPHQL_SERVER__: string;
 declare global {
     interface Window {
         __APOLLO_STATE__: any
+
     }
 }
