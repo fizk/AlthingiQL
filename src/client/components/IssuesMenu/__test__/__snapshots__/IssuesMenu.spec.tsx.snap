@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IssuesMenu /> data 1`] = `
+Array [
+  <h4
+    className="headline-3"
+  >
+    Málstegund
+  </h4>,
+  <ul>
+    <li>
+      <a
+        href="/loggjafarthing/1/thingmal?tegund=type"
+        onClick={[Function]}
+      >
+        type name
+      </a>
+      sub type name
+       - (
+      1
+      )
+    </li>
+  </ul>,
+  <h4
+    className="headline-3"
+  >
+    Efnisflokkar
+  </h4>,
+  <ul>
+    <li>
+      <a
+        href="/loggjafarthing/1/thingmal?flokkur=2"
+        onClick={[Function]}
+      >
+        title
+      </a>
+      (
+      3
+      )
+    </li>
+  </ul>,
+]
+`;
+
+exports[`<IssuesMenu /> default props 1`] = `
+Array [
+  <h4
+    className="headline-3"
+  >
+    Málstegund
+  </h4>,
+  <ul />,
+  <h4
+    className="headline-3"
+  >
+    Efnisflokkar
+  </h4>,
+  <ul />,
+]
+`;

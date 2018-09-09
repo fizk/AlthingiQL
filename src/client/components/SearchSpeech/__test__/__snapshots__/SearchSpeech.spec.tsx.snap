@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchSpeech /> default props 1`] = `
+<div
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <input
+    className="input input--md input--search"
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="search"
+  />
+</div>
+`;

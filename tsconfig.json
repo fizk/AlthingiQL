@@ -1,47 +1,33 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "outDir": "./dist",
+        "rootDirs": ["./src"],
         "module": "commonjs",
-        "moduleResolution": "node",
-        "isolatedModules": false,
-        "jsx": "react",
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "declaration": false,
-        "noImplicitAny": false,
-        "removeComments": true,
-        "noLib": false,
-        "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "allowSyntheticDefaultImports": true,
-        "sourceMap": false,
+        "target": "es5",
+        "lib": ["es6", "dom", "es2017"],
+        "sourceMap": true,
         "allowJs": true,
-        "lib": [
-            "es5",
-            "es6",
-            "dom",
-            "es2015.core",
-            "es2015.collection",
-            "es2015.generator",
-            "es2015.iterable",
-            "es2015.promise",
-            "es2015.proxy",
-            "es2015.reflect",
-            "es2015.symbol",
-            "es2015.symbol.wellknown",
-            "esnext.asynciterable"
-        ],
+        "jsx": "react",
+        "moduleResolution": "node",
+        "baseUrl" :  "./",
+        "paths": {
+
+        },
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noImplicitAny": false,
+        "strictNullChecks": false,
         "typeRoots": [
             "node_modules/@types",
             "@types"
         ],
-        "outDir": "./dist",
-        "rootDir": "./src"
+        "allowSyntheticDefaultImports": true
     },
-    "include": [
-        "./src/"
-    ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "dist"
+    ],
+    "types": [
+        "typePatches"
     ]
 }

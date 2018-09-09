@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchIssue /> data 1`] = `
+<div
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <input
+    className="input input--md input--search"
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="search"
+  />
+  <div
+    className="options-list__container"
+    style={
+      Object {
+        "position": "absolute",
+        "zIndex": 1,
+      }
+    }
+  >
+    <div
+      className="options-list"
+    >
+      <div
+        className="options-list__item options-list__item--active"
+        onClick={[Function]}
+      >
+        <h3>
+          name
+        </h3>
+        <h4>
+          sub name
+        </h4>
+        <h5>
+          type name
+        </h5>
+        <span>
+          status
+        </span>
+        <div>
+          <p>
+            goal
+          </p>
+        </div>
+        <div>
+          <p>
+            major change
+          </p>
+        </div>
+        <div>
+          <p>
+            changes in law
+          </p>
+        </div>
+        <div>
+          <p>
+            costs
+          </p>
+        </div>
+        <div>
+          <p>
+            deliveries
+          </p>
+        </div>
+        <div>
+          <p>
+            additionalInformation
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<SearchIssue /> default props 1`] = `
+<div
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <input
+    className="input input--md input--search"
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="search"
+  />
+</div>
+`;

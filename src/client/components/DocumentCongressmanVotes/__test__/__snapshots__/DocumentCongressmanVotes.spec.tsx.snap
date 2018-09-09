@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DocumentCongressmanVotes /> data 1`] = `
+<ul>
+  <li>
+    <article
+      className="congressman"
+    >
+      <header
+        className="congressman__avatar"
+      >
+        <div
+          className="avatar"
+          role="image"
+          style={
+            Object {
+              "backgroundImage": "url(/path/to/file)",
+            }
+          }
+          title="Ljósmynd af congressman"
+        />
+      </header>
+      <div
+        className="congressman__party"
+      >
+        <div
+          className="badge"
+          style={
+            Object {
+              "backgroundColor": "#123123",
+            }
+          }
+          title="party"
+        />
+      </div>
+      <div
+        className="congressman__body"
+      >
+        <h4
+          className="headline-3 headline-3--ellipsis"
+        >
+          congressman
+        </h4>
+        <p>
+          <strong>
+            stuff
+          </strong>
+        </p>
+      </div>
+    </article>
+  </li>
+</ul>
+`;
+
+exports[`<DocumentCongressmanVotes /> default props 1`] = `<ul />`;
