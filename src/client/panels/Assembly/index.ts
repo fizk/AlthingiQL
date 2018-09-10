@@ -10,6 +10,7 @@ const assemblyQuery = gql`
                 to
             }
         }
+
         AssemblySummary(assembly: $assembly) {
             parties {
                 party {
