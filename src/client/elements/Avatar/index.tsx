@@ -16,7 +16,7 @@ export default class Avatar extends React.Component<AvatarProps, {}> {
     };
 
     fillTemplateSrc(src) {
-        return (src || "").replace("{width}", 60).replace("{height}", 60);
+        return (src || "").replace("{size}", '60x60');
     }
 
     render() {

@@ -10,55 +10,56 @@ const assemblyQuery = gql`
                 to
             }
         }
-#        AssemblySummary(assembly: $assembly) {
-#            parties {
-#                party {
-#                    id
-#                    name
-#                    color
-#                }
-#                time
-#            }
-#            bills {
-#                count
-#                status
-#            }
-#            governmentBills {
-#                count
-#                status
-#            }
-#            types {
-#                count
-#                type
-#                typeName
-#                typeSubName
-#            }
-#            votes {
-#                count
-#                date
-#            }
-#            speeches {
-#                count
-#                date
-#            }
-#            election {
-#                id
-#                date
-#                title
-#                description
-#            }
-#            electionResults {
-#                party {
-#                    id
-#                    name
-#                    color
-#                }
-#                results {
-#                    seats
-#                    result
-#                }
-#            }
-#        }
+
+        AssemblySummary(assembly: $assembly) {
+            parties {
+                party {
+                    id
+                    name
+                    color
+                }
+                time
+            }
+            bills {
+                count
+                status
+            }
+            governmentBills {
+                count
+                status
+            }
+            types {
+                count
+                type
+                typeName
+                typeSubName
+            }
+            votes {
+                count
+                date
+            }
+            speeches {
+                count
+                date
+            }
+            election {
+                id
+                date
+                title
+                description
+            }
+            electionResults {
+                party {
+                    id
+                    name
+                    color
+                }
+                results {
+                    seats
+                    result
+                }
+            }
+        }
         CongressmanSpeekLeast: CongressmenAssemblySpeechTime (assembly: $assembly order: "asc" size: 5) {
             ... congressmanWithValue
         }

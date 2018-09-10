@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Markdown from "react-markdown";
+import * as Markdown from "react-markdown";
 import './index.scss';
 
 type SpeechCardProps = {
