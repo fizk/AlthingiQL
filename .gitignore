@@ -147,6 +147,8 @@ fabric.properties
 
 # End of https://www.gitignore.io/api/osx,node,webstorm
 
-public/scripts
-public/stylesheets
+public/javascripts/*
+!public/javascripts/.gitkeep
+public/stylesheets/*
+!public/stylesheets/.gitkeep
 dist
