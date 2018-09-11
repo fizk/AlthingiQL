@@ -27,7 +27,9 @@ export default new GraphQLObjectType({
             resolve: (root) => {
                 return {
                     src: `http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
-                    templateSrc: `/images/unsafe/{size}/smart/https://www.althingi.is/myndir/thingmenn-cache/${root.congressman_id}/${root.congressman_id}-220.jpg`,
+                    templateSrc: process.env.IMAGE_SERVER
+                        ?  `${process.env.IMAGE_SERVER}/unsafe/{size}/smart/https://www.althingi.is/myndir/thingmenn-cache/${root.congressman_id}/${root.congressman_id}-220.jpg`
+                        : `https://www.althingi.is/myndir/thingmenn-cache/${root.congressman_id}/${root.congressman_id}-220.jpg`,
                     // https://www.althingi.is/myndir/mynd/thingmenn/1324/org/mynd.jpg
                 };
             },
