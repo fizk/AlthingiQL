@@ -465,7 +465,7 @@ export class BillBadge extends React.Component<BillBadgeProps, {}> {
         ) : null;
     }
     url(url) {
-        return (url || "").replace("{size}", '300x200');
+        return (url || "").replace("{size}", '400x300');
     }
     render() {
         return (
