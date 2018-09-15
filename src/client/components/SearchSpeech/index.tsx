@@ -5,15 +5,17 @@ import { Redirect } from "react-router-dom";
 import { OptionsWithKeyBinding } from "../../elements/Form";
 import { speechSearchAction, speechSearchClearAction } from "./redux";
 import { SpeechSearchResult } from "../../elements/SearchResult";
+import {
+    Assembly as AssemblyType,
+    Congressman as CongressmanType
+} from '../../../../@types'
 
 type SearchSpeechProps = {
     assembly?: number,
     issue?: number,
     result?: {
         id?: string,
-        assembly?: {
-            id?: number
-        },
+        assembly: AssemblyType,
         issue?: {
             id?: number
         },
@@ -25,18 +27,7 @@ type SearchSpeechProps = {
         iteration?: string,
         type?: string,
         congressmanType?: string,
-        congressman?: {
-            id?: number,
-            name?: string,
-            avatar?: {
-                templateSrc?: string
-            },
-            party?: {
-                id?: number,
-                name?: string,
-                color?: string
-            }
-        }
+        congressman: CongressmanType
     }[],
     isSearching?: boolean,
     onSearch?: (...args: any[]) => any,

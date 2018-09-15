@@ -42,9 +42,9 @@ app.get('*', (request, response) => {
 
     response.send(`
              <!doctype html>
-             <html>
+             <html lang="is">
                  <head>
-                     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+                     <meta name="viewport" content="width=device-width, initial-scale=1">
                      <link rel="stylesheet" type="text/css" href="${assetsServer}/stylesheets/application.css" />
                  </head>
                  <body>
@@ -89,7 +89,7 @@ app.get('*', (request, response) => {
         const html = `<!doctype html>
              <html lang="is">
                  <head>
-                     <meta name="viewport" content="width=device-width, initial-scale=2">
+                     <meta name="viewport" content="width=device-width, initial-scale=1">
                      <meta property="og:site_name" content="Löggjafarþing">
                      <link rel="stylesheet" type="text/css" href="${assetsServer}/stylesheets/application.css" />
                      ${helmet.title.toString()}
@@ -111,7 +111,7 @@ app.get('*', (request, response) => {
     }).catch(error => {
 
         const html = ReactDOM.renderToStaticMarkup(
-            <html>
+            <html lang="is">
                 <head>
                     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
                     <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" />

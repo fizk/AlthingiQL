@@ -2,7 +2,7 @@ import {GraphQLObjectType, GraphQLInt, GraphQLList, GraphQLString, GraphQLFloat}
 import Party from './Party';
 
 export default new GraphQLObjectType({
-    name: 'AssemblySummary',
+    name: 'AssemblyStatistics',
     fields: {
         bills: {
             type: new GraphQLList(new GraphQLObjectType({

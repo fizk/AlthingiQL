@@ -7,17 +7,15 @@ import { H2 } from "../../elements/Headline";
 import HorizontalChart from "../../elements/HorizontalChart";
 import SessionChart from "../../elements/SessionChart";
 import VoteResultPieChart from "../../elements/VoteResultPieChart";
+import {
+    Person as PersonType,
+    Congressman as CongressmanType
+} from '../../../../@types'
 
 type AssemblyCongressmanProps = {
     assembly?: number,
     congressman?: number,
-    person?: {
-        id?: number,
-        avatar?: {
-            templateSrc?: string
-        },
-        name?: string
-    },
+    person?: PersonType,
     sessions?: {
         id?: number,
         type?: string,
@@ -123,8 +121,7 @@ export default class AssemblyCongressman extends React.Component<AssemblyCongres
                 </Row>
                 <Row>
                     <Column>
-                        {this.props.sessions
-                            .map(session => session.constituency.name)
+                        {this.props.sessions.map(session => session.constituency.name)
                             .reduce((total, item) => {
                                 if (total.indexOf(item) < 0) {
                                     total.push(item);

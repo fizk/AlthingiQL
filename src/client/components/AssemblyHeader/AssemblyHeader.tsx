@@ -55,20 +55,16 @@ export default class AssemblyHeader extends React.Component<AssemblyHeaderProps,
                 <div className="assembly-header__parties">
                     <ul className="assembly-header__party-list">
                         {this.props.assembly.division.majority.map(party => (
-                            <li
-                                key={`party-${party.id}`}
-                                className="assembly-header__party-list-item"
-                            >
+                            <li key={`party-${party.id}`}
+                                className="assembly-header__party-list-item">
                                 <Badge title={party.name} color={party.color} />
                             </li>
                         ))}
                     </ul>
                     <ul className="assembly-header__party-list">
                         {this.props.assembly.division.minority.map(party => (
-                            <li
-                                key={`party-${party.id}`}
-                                className="assembly-header__party-list-item"
-                            >
+                            <li key={`party-${party.id}`}
+                                className="assembly-header__party-list-item">
                                 <Badge title={party.name} color={party.color} />
                             </li>
                         ))}

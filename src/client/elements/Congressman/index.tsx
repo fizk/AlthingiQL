@@ -2,21 +2,12 @@ import * as React from "react";
 import Badge from "../Badge";
 import Avatar from "../Avatar";
 import { H3 } from "../Headline";
+import {Person as PersonType, Party as PartyType} from '../../../../@types'
 import './index.scss';
 
 type CongressmanProps = {
-    congressman?: {
-        id?: number,
-        name?: string,
-        avatar?: {
-            templateSrc?: string
-        }
-    },
-    party?: {
-        id?: number,
-        name?: string,
-        color?: string
-    }
+    congressman: PersonType,
+    party?: PartyType
 };
 
 export default class Congressman extends React.Component<CongressmanProps, {}> {

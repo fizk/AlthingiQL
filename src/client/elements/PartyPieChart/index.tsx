@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { pie, arc } from "d3-shape";
+import {Party as PartyType} from '../../../../@types'
 import './index.scss';
 
 type PartyPieChartProps = {
-    source?: {
-        party?: {
-            id?: number,
-            name?: string,
-            color?: string
-        },
+    source: {
+        party: PartyType,
         value?: number
     }[],
     formatValue?: (...args: any[]) => any

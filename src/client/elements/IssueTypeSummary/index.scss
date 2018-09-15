@@ -1,0 +1,28 @@
+@import '../../config';
+
+.issue-type-summary {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.issue-type-summary__caption {
+    text-align: left;
+}
+
+.issue-type-summary__head {
+    display: none;
+}
+
+.issue-type-summary__body {
+
+}
+
+.issue-type-summary__count {
+    text-align: right;
+    padding: 0 map_get($space, xs);
+}
+
+.issue-type-summary__title {
+    padding: 0 map_get($space, xs);
+    text-transform: capitalize;
+}

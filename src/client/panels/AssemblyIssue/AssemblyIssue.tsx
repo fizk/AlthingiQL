@@ -6,13 +6,15 @@ import DateAndCountChart from "../../elements/DateAndCountChart";
 import * as Markdown from "react-markdown";
 import { H2, H4 } from "../../elements/Headline";
 import Paper from "../../elements/Paper";
+import {
+    Congressman as CongressmanType,
+    Assembly as AssemblyType
+} from '../../../../@types';
 
 type AssemblyIssueProps = {
     issue?: {
         id?: number,
-        assembly?: {
-            id?: number
-        },
+        assembly: AssemblyType,
         name?: string,
         status?: string,
         goal?: string,
@@ -27,31 +29,9 @@ type AssemblyIssueProps = {
         deliveries?: string,
         additionalInformation?: string,
         date?: string,
-        proponents?: {
-            id?: number,
-            name?: string,
-            avatar?: {
-                templateSrc?: string
-            },
-            party?: {
-                id?: number,
-                name?: string,
-                color?: string
-            }
-        }[],
+        proponents: CongressmanType[],
         speakers?: {
-            congressman?: {
-                id?: number,
-                name?: string,
-                avatar?: {
-                    templateSrc?: string
-                },
-                party?: {
-                    id?: number,
-                    name?: string,
-                    color?: string
-                }
-            },
+            congressman: CongressmanType,
             value?: number
         }[],
         voteRange?: {

@@ -1,9 +1,12 @@
-export interface AssemblySummary {
+export interface Assembly {
     id: number,
-    period: {
+    period?: {
         from?: string,
         to?: string
     },
+}
+
+export interface AssemblyStatistics extends Assembly{
     division: {
         majority?: {
             id?: number,
@@ -18,6 +21,55 @@ export interface AssemblySummary {
     }
 }
 
+export interface AssemblySummary {
+    parties?: {
+        party: Party,
+        time: number
+    }[],
+    bills?: {
+        count: number,
+        status: string
+    }[],
+    governmentBills?: {
+        count: number,
+        status: string
+    }[],
+    types?: {
+        count: number,
+        type: string,
+        typeName: string,
+        typeSubName: string
+    }[],
+    votes?: {
+        count: number,
+        date: string
+    }[],
+    speeches?: {
+        count: number,
+        date: string
+    }[],
+    election?: {
+        id: number,
+        date: string,
+        title: string,
+        description: string
+    },
+    electionResults?: {
+        party: Party,
+        results: {
+            seats: number,
+            result: number
+        }
+    }[]
+}
+
+export interface AssemblyCategorySummary {
+    id: number
+    superCategoryId: number
+    title: string
+    count: number
+}
+
 export interface Picture {
     templateSrc: string
 }
@@ -28,10 +80,13 @@ export interface Party {
     color: string
 }
 
-export interface Congressman {
+export interface Person {
     id: number
     name: string
     avatar: Picture
+}
+
+export interface Congressman extends Person{
     party: Party
 }
 
@@ -42,35 +97,21 @@ export interface DocumentVote {
     congressman: Congressman
 }
 
-export interface AssemblyIssue {
-    id: number
-    assembly?: {id: number}
-    category?: string
-    name: string
-    subName?: string
-    type?: string
-    typeName: string
-    typeSubName?: string
-    status: string
-    question?: string
-    goal?: string
-    date: string
+export interface Issue {
+    id?: number,
+    assembly?: Assembly,
+    category?: string,
+    name?: string,
+    subName?: string,
+    type?: string,
+    typeName?: string,
+    typeSubName?: string,
+    status?: string,
+    goal?: string,
+    proponentsCount?: number,
+    proponents?: Congressman[]
 }
 
-export interface AssemblyCategorySummary {
-    id: number
-    superCategoryId: number
-    title: string
-    count: number
-}
-
-
-declare var __IMAGE_SERVER__: string;
-declare var __GRAPHQL_SERVER__: string;
-
-// declare const __IMAGE_SERVER__: string;
-// declare const __GRAPHQL_SERVER__: string;
-// declare const __APOLLO_STATE__: string;
 
 declare global {
     interface Window {

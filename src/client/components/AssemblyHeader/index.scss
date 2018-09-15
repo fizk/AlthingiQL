@@ -3,6 +3,8 @@
 .assembly-header {
     display: flex;
     padding: map_get($space, xl) 0;
+    max-width: 1024px;
+    margin: auto;
 }
 
 .assembly-header__headline {

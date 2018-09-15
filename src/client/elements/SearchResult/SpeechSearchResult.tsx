@@ -3,6 +3,11 @@ import classVariations from "../../utils/classVariations";
 import SpeechCard from "../SpeechCard";
 import Congressman from "../Congressman";
 import { H4 } from "../Headline";
+import {
+    Congressman as CongressmanType,
+    Assembly as AssemblyType
+} from '../../../../@types'
+
 
 type IssueSearchResultProps = {
     onSelect?: (...args: any[]) => any,
@@ -10,9 +15,7 @@ type IssueSearchResultProps = {
     variations?: any[],
     value?: {
         id?: string,
-        assembly?: {
-            id?: number
-        },
+        assembly: AssemblyType,
         issue?: {
             id?: number
         },
@@ -24,18 +27,7 @@ type IssueSearchResultProps = {
         iteration?: string,
         type?: string,
         congressmanType?: string,
-        congressman?: {
-            id?: number,
-            name?: string,
-            avatar?: {
-                templateSrc?: string
-            },
-            party?: {
-                id?: number,
-                name?: string,
-                color?: string
-            }
-        }
+        congressman: CongressmanType
     }
 };
 
@@ -51,15 +43,12 @@ export default class IssueSearchResult extends React.Component<IssueSearchResult
             ? this.props.variations.concat(["active"])
             : this.props.variations;
         return (
-            <div
-                className={classVariations("options-list__item", variations)}
-                onClick={() => this.props.onSelect(this.props.value)}
-            >
+            <div className={classVariations("options-list__item", variations)}
+                onClick={() => this.props.onSelect(this.props.value)}>
                 <SpeechCard speech={this.props.value}>
                     <Congressman
                         congressman={this.props.value.congressman}
-                        party={this.props.value.congressman.party}
-                    >
+                        party={this.props.value.congressman.party}>
                         <H4>{this.props.value.congressmanType}</H4>
                     </Congressman>
                 </SpeechCard>

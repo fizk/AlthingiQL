@@ -14,32 +14,20 @@ import {
     RequestForReportBadge,
     WrittenInquiryBadge
 } from "../../elements/IssueBadge";
+import {Congressman as CongressmanType, Assembly as AssemblyType} from '../../../../@types'
 import './index.scss';
 
 type AssemblyIssuesProps = {
     issues?: {
         id?: number,
-        assembly?: {
-            id?: number
-        },
+        assembly: AssemblyType,
         name?: string,
         status?: string,
         type?: string,
         goal?: string,
         typeName?: string,
         proponentsCount?: number,
-        proponents?: {
-            id?: number,
-            name?: string,
-            avatar?: {
-                templateSrc?: string
-            },
-            party?: {
-                id?: number,
-                name?: string,
-                color?: string
-            }
-        }[]
+        proponents: CongressmanType[]
     }[],
     assembly?: number,
     done?: boolean,
