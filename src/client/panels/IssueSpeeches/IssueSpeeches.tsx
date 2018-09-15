@@ -7,6 +7,7 @@ import Loading from "../../elements/Loading/index";
 import { H4 } from "../../elements/Headline";
 import SpeechCard from "../../elements/SpeechCard";
 import ScrollIntoView from "../../elements/ScrollIntoView";
+import {Congressman as CongressmanType} from '../../../../@types';
 
 type IssueSpeechesProps = {
     assembly?: number,
@@ -28,18 +29,7 @@ type IssueSpeechesProps = {
         iteration?: string,
         type?: string,
         congressmanType?: string,
-        congressman?: {
-            id?: number,
-            name?: string,
-            avatar?: {
-                templateSrc?: string
-            },
-            party?: {
-                id?: number,
-                name?: string,
-                color?: string
-            }
-        }
+        congressman: CongressmanType
     }[],
     done?: boolean,
     loadMore?: (...args: any[]) => any,

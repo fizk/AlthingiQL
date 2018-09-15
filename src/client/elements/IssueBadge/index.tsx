@@ -5,33 +5,12 @@ import SimpleBillProgress from "../SimpleBillProgress";
 import SimpleRequestProgress from "../SimpleRequestProgress";
 import Badge from "../Badge";
 import Congressman from "../Congressman";
+import {Issue as IssueType, Congressman as CongressmanType} from '../../../../@types'
 import './index.scss';
 
 type ParliamentaryResolutionBadgeProps = {
-    issue?: {
-        id?: number,
-        assembly?: {
-            id?: number
-        },
-        name?: string,
-        subName?: string,
-        type?: string,
-        goal?: string,
-        typeName?: string,
-        proponentsCount?: number
-    },
-    congressman?: {
-        id?: number,
-        name?: string,
-        avatar?: {
-            templateSrc?: string
-        },
-        party?: {
-            id?: number,
-            name?: string,
-            color?: string
-        }
-    }
+    issue: IssueType,
+    congressman: CongressmanType
 };
 
 export class ParliamentaryResolutionBadge extends React.Component<ParliamentaryResolutionBadgeProps, {}> {
@@ -109,30 +88,8 @@ export class ParliamentaryResolutionBadge extends React.Component<ParliamentaryR
 }
 
 type RequestForReportBadgeProps = {
-    issue?: {
-        id?: number,
-        assembly?: {
-            id?: number
-        },
-        name?: string,
-        subName?: string,
-        type?: string,
-        goal?: string,
-        typeName?: string,
-        proponentsCount?: number
-    },
-    congressman?: {
-        id?: number,
-        name?: string,
-        avatar?: {
-            templateSrc?: string
-        },
-        party?: {
-            id?: number,
-            name?: string,
-            color?: string
-        }
-    }
+    issue: IssueType,
+    congressman: CongressmanType
 };
 
 export class RequestForReportBadge extends React.Component<RequestForReportBadgeProps, {}> {
@@ -210,30 +167,8 @@ export class RequestForReportBadge extends React.Component<RequestForReportBadge
 }
 
 type ReportBadgeProps = {
-    issue?: {
-        id?: number,
-        assembly?: {
-            id?: number
-        },
-        name?: string,
-        subName?: string,
-        type?: string,
-        goal?: string,
-        typeName?: string,
-        proponentsCount?: number
-    },
-    congressman?: {
-        id?: number,
-        name?: string,
-        avatar?: {
-            templateSrc?: string
-        },
-        party?: {
-            id?: number,
-            name?: string,
-            color?: string
-        }
-    }
+    issue: IssueType,
+    congressman: CongressmanType
 };
 
 export class ReportBadge extends React.Component<ReportBadgeProps, {}> {
@@ -311,30 +246,8 @@ export class ReportBadge extends React.Component<ReportBadgeProps, {}> {
 }
 
 type MeetingPostponementBadgeProps = {
-    issue?: {
-        id?: number,
-        assembly?: {
-            id?: number
-        },
-        name?: string,
-        subName?: string,
-        type?: string,
-        goal?: string,
-        typeName?: string,
-        proponentsCount?: number
-    },
-    congressman?: {
-        id?: number,
-        name?: string,
-        avatar?: {
-            templateSrc?: string
-        },
-        party?: {
-            id?: number,
-            name?: string,
-            color?: string
-        }
-    }
+    issue: IssueType,
+    congressman: CongressmanType
 };
 
 export class MeetingPostponementBadge extends React.Component<MeetingPostponementBadgeProps, {}> {
@@ -402,31 +315,8 @@ export class MeetingPostponementBadge extends React.Component<MeetingPostponemen
 }
 
 type BillBadgeProps = {
-    issue?: {
-        id?: number,
-        assembly?: {
-            id?: number
-        },
-        name?: string,
-        subName?: string,
-        status?: string,
-        type?: string,
-        goal?: string,
-        typeName?: string,
-        proponentsCount?: number
-    },
-    congressman?: {
-        id?: number,
-        name?: string,
-        avatar?: {
-            templateSrc?: string
-        },
-        party?: {
-            id?: number,
-            name?: string,
-            color?: string
-        }
-    }
+    issue: IssueType,
+    congressman: CongressmanType
 };
 
 export class BillBadge extends React.Component<BillBadgeProps, {}> {
@@ -524,31 +414,8 @@ export class BillBadge extends React.Component<BillBadgeProps, {}> {
 }
 
 type InquiryBadgeProps = {
-    issue?: {
-        id?: number,
-        assembly?: {
-            id?: number
-        },
-        status?: string
-        name?: string,
-        subName?: string,
-        type?: string,
-        goal?: string,
-        typeName?: string,
-        proponentsCount?: number
-    },
-    congressman?: {
-        id?: number,
-        name?: string,
-        avatar?: {
-            templateSrc?: string
-        },
-        party?: {
-            id?: number,
-            name?: string,
-            color?: string
-        }
-    }
+    issue: IssueType,
+    congressman: CongressmanType
 };
 
 export class InquiryBadge extends React.Component<InquiryBadgeProps, {}> {
@@ -632,31 +499,8 @@ export class InquiryBadge extends React.Component<InquiryBadgeProps, {}> {
 }
 
 type WrittenInquiryBadgeProps = {
-    issue?: {
-        id?: number,
-        assembly?: {
-            id?: number
-        },
-        name?: string,
-        status?: string,
-        subName?: string,
-        type?: string,
-        goal?: string,
-        typeName?: string,
-        proponentsCount?: number
-    },
-    congressman?: {
-        id?: number,
-        name?: string,
-        avatar?: {
-            templateSrc?: string
-        },
-        party?: {
-            id?: number,
-            name?: string,
-            color?: string
-        }
-    }
+    issue: IssueType,
+    congressman: CongressmanType
 };
 
 export class WrittenInquiryBadge extends React.Component<WrittenInquiryBadgeProps, {}> {
@@ -740,17 +584,7 @@ export class WrittenInquiryBadge extends React.Component<WrittenInquiryBadgeProp
 }
 
 type OpinionBadgeProps = {
-    issue?: {
-        id?: number,
-        assembly?: {
-            id?: number
-        },
-        name?: string,
-        subName?: string,
-        type?: string,
-        goal?: string,
-        typeName?: string
-    }
+    issue: IssueType,
 };
 
 export class OpinionBadge extends React.Component<OpinionBadgeProps, {}> {
@@ -796,30 +630,8 @@ export class OpinionBadge extends React.Component<OpinionBadgeProps, {}> {
 }
 
 type IssueBadgeProps = {
-    issue?: {
-        id?: number,
-        assembly?: {
-            id?: number
-        },
-        name?: string,
-        subName?: string,
-        type?: string,
-        goal?: string,
-        typeName?: string,
-        proponentsCount?: number
-    },
-    congressman?: {
-        id?: number,
-        name?: string,
-        avatar?: {
-            templateSrc?: string
-        },
-        party?: {
-            id?: number,
-            name?: string,
-            color?: string
-        }
-    }
+    issue: IssueType,
+    congressman: CongressmanType
 };
 
 export class IssueBadge extends React.Component<IssueBadgeProps, {}> {

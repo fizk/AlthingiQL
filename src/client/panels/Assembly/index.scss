@@ -4,3 +4,57 @@
 .party-pie-chart__path--approved {
     fill: #74bb72;
 }
+
+
+.assembly-page-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    max-width: 1024px;
+    width: 100%;
+    margin: auto;
+}
+
+.assembly-page-grid__header {
+    grid-column: 1 / span 12;
+    grid-row: 1 / 1;
+}
+.assembly-page-grid__types {
+    grid-column: 1 / span 4;
+    grid-row: 2 / 4;
+}
+.assembly-page-grid__speeches {
+    grid-column: 1 / span 4;
+    grid-row: 4 / 8;
+}
+.assembly-page-grid__popular {
+    grid-column: 5 / span 8;
+    grid-row: 2 / 6;
+}
+.assembly-page-grid__talk-max {
+    grid-column: 5 / span 4;
+    grid-row: 6 / 8;
+}
+.assembly-page-grid__talk-min {
+    grid-column: 9 / span 4;
+    grid-row: 6 / 8;
+}
+
+.assembly-page-grid__questions {
+    grid-column: 1 / span 4;
+
+}
+.assembly-page-grid__resolution {
+    grid-column: 5 / span 4;
+}
+.assembly-page-grid__law {
+    grid-column: 9 / span 4;
+}
+
+.assembly-page-grid__election {
+    grid-column: 1 / span 8;
+}
+.assembly-page-grid__seating {
+    grid-column: 9 / span 4;
+}

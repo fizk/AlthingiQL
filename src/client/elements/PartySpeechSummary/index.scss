@@ -1,0 +1,31 @@
+@import '../../config';
+
+.party-speech-summary {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.party-speech-summary__caption {
+    text-align: left;
+}
+
+.party-speech-summary__head {
+    display: none;
+}
+
+.party-speech-summary__body {
+
+}
+
+.party-speech-summary__time {
+    text-align: right;
+    padding: 0 map_get($space, xs);
+}
+
+.party-speech-summary__badge {
+    text-align: center;
+}
+
+.party-speech-summary__title {
+    padding: 0 map_get($space, xs);
+}

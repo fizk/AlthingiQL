@@ -10,8 +10,8 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
 
-    grid-column-gap: map_get($space, lg);
-    grid-row-gap: map_get($space, lg);
+    grid-column-gap: map_get($space, md);
+    grid-row-gap: map_get($space, md);
 
     grid-auto-flow: dense;
 

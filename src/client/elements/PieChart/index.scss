@@ -1,14 +1,60 @@
+@import "../../config";
 
-.party-pie-chart {
+.pie-chart {
+    display: inline-block;
     max-width: 100%;
     height: auto;
+    position: relative;
 }
 
-.party-pie-chart__arch {
+.pie-chart__arch {
     //ref
 }
 
-.party-pie-chart__path {
+.pie-chart__label {
+    @include shadow($blur: 5px);
+
+    padding: map_get($space, xxs);
+    position: absolute;
+    pointer-events: none;
+    background: white;
+    white-space: nowrap;
+
+}
+
+.pie-chart__path {
     stroke: white;
     stroke-width: 1px;
+}
+
+
+.pie-chart__path--unapproved {
+    fill: #bbbbbb;
+}
+.pie-chart__path--approved {
+    fill: #74bb72;
+}
+
+.pie-chart__path--iteration-one {
+    fill: yellow;
+}
+
+.pie-chart__path--iteration-two {
+    fill: orange;
+}
+
+.pie-chart__path--committee-one {
+    fill: #E68787;
+}
+
+.pie-chart__path--committee-two {
+    fill: #E68787;
+}
+
+.pie-chart__path--await-one {
+    fill: #E68787;
+}
+
+.pie-chart__path--await-two {
+    fill: #E68787;
 }

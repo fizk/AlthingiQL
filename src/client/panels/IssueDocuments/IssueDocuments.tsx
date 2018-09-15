@@ -3,6 +3,7 @@ import { Row, Column } from "../../elements/Grid";
 import Congressman from "../../elements/Congressman";
 import VoteResultPieChart from "../../elements/VoteResultPieChart";
 import DocumentCongressmanVotes from "../../components/DocumentCongressmanVotes";
+import {Congressman as CongressmanType} from "../../../../@types";
 
 type IssueDocumentsProps = {
     assembly?: number,
@@ -12,18 +13,7 @@ type IssueDocumentsProps = {
         url?: string,
         date?: string,
         type?: string,
-        proponents?: {
-            id?: number,
-            name?: string,
-            avatar?: {
-                templateSrc?: string
-            },
-            party?: {
-                id?: number,
-                name?: string,
-                color?: string
-            }
-        }[],
+        proponents: CongressmanType[],
         votes?: {
             id?: number,
             type?: string,
