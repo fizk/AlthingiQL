@@ -1,23 +1,29 @@
 import * as http from 'http';
+import {RequestOptions} from 'http';
 
 export const getPagination = (debug, config) => (url, cursor) => {
-    const options = {
+    const startTime = process.hrtime();
+    const options: RequestOptions = {
         hostname: config.host,
         port: config.port,
         path: url,
         method: 'GET',
-        headers: {},
+        headers: {
+            Connection: 'keep-alive',
+        },
     };
     if (cursor) {
         options.headers = {
+            ...options.headers,
             Range: cursor.to ? `${cursor.from}-${cursor.to}` : `${cursor.from}-`,
         };
     } else {
         options.headers = {
+            ...options.headers,
             Range: `0-`,
         };
     }
-    return new Promise((resolve, reject) => {
+    return new Promise<{data: object, cursor: {from: number, to: number}, done: boolean}>((resolve, reject) => {
         const req = http.request(options, response => {
             if (response.statusCode !== 206) {
                 response.resume();
@@ -26,10 +32,18 @@ export const getPagination = (debug, config) => (url, cursor) => {
                     message: response.statusMessage,
                 };
                 reject(error);
-                debug('Request: %O, Error: %O', options, error);
+                // tslint:disable-next-line
+                console.error(JSON.stringify({
+                    request: options,
+                    response: response.headers,
+                    error: `${error.code} ${error.message}`,
+                    cpu: process.cpuUsage(),
+                    memory: process.memoryUsage(),
+                    time: process.hrtime(startTime),
+                }, null, 4));
             } else {
                 const contentRange = String(response.headers['content-range']);
-                const [_0, _1, from, to, total] = contentRange.match(/(items )([0-9]*)-([0-9]*)\/([0-9]*)/);
+                const [, , from, to, total] = contentRange.match(/(items )([0-9]*)-([0-9]*)\/([0-9]*)/);
                 const size = Number(to) - Number(from);
 
                 const nextCursor = {
@@ -42,35 +56,59 @@ export const getPagination = (debug, config) => (url, cursor) => {
                 response.on('end', () => {
                     try {
                         const data = JSON.parse(body);
-                        debug('Request: %O, Done: %O, Input range: %O',
-                            options, {done: Number(to) >= Number(total)}, {from, to, total});
                         resolve({data, cursor: nextCursor, done: Number(to) >= Number(total)});
+                        // tslint:disable-next-line
+                        console.log(JSON.stringify({
+                            request: Object.assign({}, options, {done: Number(to) >= Number(total)}, {from, to, total}),
+                            response: response.headers,
+                            cpu: process.cpuUsage(),
+                            memory: process.memoryUsage(),
+                            time: process.hrtime(startTime),
+                        }, null, 4));
                     } catch (error) {
                         response.resume();
-                        debug('Request: %O, Error: %O, Body: %O', options, error, body);
                         reject(error);
+                        // tslint:disable-next-line
+                        console.error(JSON.stringify({
+                            request: options,
+                            response: response.headers,
+                            error: `${error.name} ${error.message}`,
+                            cpu: process.cpuUsage(),
+                            memory: process.memoryUsage(),
+                            time: process.hrtime(startTime),
+                        }, null, 4));
                     }
                 });
             }
         });
         req.on('error', error => {
-            debug('Request: %O, Error: %O', options, error);
             reject(error);
+            // tslint:disable-next-line
+            console.error(JSON.stringify({
+                request: options,
+                response: {},
+                error: `${error.name} ${error.message}`,
+                cpu: process.cpuUsage(),
+                memory: process.memoryUsage(),
+                time: process.hrtime(startTime),
+            }, null, 4));
         });
         req.end();
     });
-
 };
 
 export const get = (debug, config) => url => {
-    const options = {
+    const startTime = process.hrtime();
+    const options: RequestOptions = {
         hostname: config.host,
         port: config.port,
         path: url,
         method: 'GET',
-
+        headers: {
+            Connection: 'keep-alive',
+        },
     };
-    return new Promise((resolve, reject) => {
+    return new Promise<object>((resolve, reject) => {
         const req = http.request(options, response => {
             if (Math.floor(response.statusCode / 100) !== 2) {
                 response.resume();
@@ -79,27 +117,57 @@ export const get = (debug, config) => url => {
                     message: response.statusMessage,
                 };
                 reject(error);
-                debug('Request: %O, Error: %O', options, error);
+                // tslint:disable-next-line
+                console.error(JSON.stringify({
+                    request: options,
+                    response: response.headers,
+                    error: `${error.code} ${error.message}`,
+                    cpu: process.cpuUsage(),
+                    memory: process.memoryUsage(),
+                    time: process.hrtime(startTime),
+                }, null, 4));
             } else {
-
                 let body = '';
                 response.setEncoding('utf8');
                 response.on('data', chunk => body += chunk);
                 response.on('end', () => {
                     try {
-                        debug('Request: %O', options);
                         resolve(JSON.parse(body));
+                        // tslint:disable-next-line
+                        console.log(JSON.stringify({
+                            request: options,
+                            response: response.headers,
+                            cpu: process.cpuUsage(),
+                            memory: process.memoryUsage(),
+                            time: process.hrtime(startTime),
+                        }, null, 4));
                     } catch (error) {
                         response.resume();
-                        debug('Request: %O, Error: %O, Body: %O', options, error, body);
                         reject(error);
+                        // tslint:disable-next-line
+                        console.error(JSON.stringify({
+                            request: options,
+                            response: response.headers,
+                            error: `${error.name} ${error.message}`,
+                            cpu: process.cpuUsage(),
+                            memory: process.memoryUsage(),
+                            time: process.hrtime(startTime),
+                        }, null, 4));
                     }
                 });
             }
         });
         req.on('error', error => {
-            debug('Request: %O, Error: %O', options, error);
             reject(error);
+            // tslint:disable-next-line
+            console.error(JSON.stringify({
+                request: options,
+                response: {},
+                error: `${error.name} ${error.message}`,
+                cpu: process.cpuUsage(),
+                memory: process.memoryUsage(),
+                time: process.hrtime(startTime),
+            }, null, 4));
         });
         req.end();
     });

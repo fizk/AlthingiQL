@@ -13,10 +13,8 @@ WORKDIR /home/node/app
 
 COPY . .
 
-RUN npm run clean \
-    && npm cache clean --force \
-    && npm install \
+RUN npm install \
     && npm run build:server \
     && npm run build:client.prod
 
-CMD ["node", "./dist/server/index.js"]
+CMD [ "./node_modules/.bin/pm2-runtime", "start", "./ecosystem.config.js" ]
