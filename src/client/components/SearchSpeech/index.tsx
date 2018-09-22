@@ -30,7 +30,7 @@ export default class SearchSpeech extends React.Component<Props, State, Context>
     };
 
     public static contextTypes = {
-        client: {},
+        client: () => {},
     };
 
     public state = {
