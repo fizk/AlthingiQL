@@ -4,8 +4,8 @@ import {Issue as IssueType} from '../../../../@types';
 import './index.scss';
 
 interface IssueHeaderProps {
-    issue: IssueType & {date: string};
-    loading: boolean;
+    issue?: IssueType & {date: string};
+    loading?: boolean;
 }
 
 export default class IssueHeader extends React.Component<IssueHeaderProps, {}> {

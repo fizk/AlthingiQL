@@ -15,7 +15,7 @@
     "dev-server": "webpack-dev-server",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "type-check": "tsc --noEmit",
-    "lint:ts": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'"
+    "lint:ts": "./node_modules/.bin/tslint -c ./tslint.json './src/**/*.{ts,tsx}'"
   },
   "keywords": [],
   "author": "",
@@ -56,6 +56,7 @@
     "@types/react-dom": "^16.0.6",
     "@types/react-redux": "^6.0.2",
     "@types/react-router-dom": "^4.2.7",
+    "@types/throttle-debounce": "^1.1.0",
     "apollo-client": "^1.9.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-builtin-extend": "^1.1.2",

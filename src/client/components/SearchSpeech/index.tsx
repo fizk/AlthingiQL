@@ -14,7 +14,7 @@ interface Props {
 }
 
 interface State {
-    redirect: any | undefined;
+    redirect: SpeechType | undefined;
     results: SpeechType[];
     isSearching: boolean;
     isError: boolean;
@@ -43,10 +43,10 @@ export default class SearchSpeech extends React.Component<Props, State, Context>
 
     public constructor(props, context) {
         super(props, context);
-        this.handleOnChange = throttle(500, this.handleOnChange);
+        this.handleOnChange = throttle<(value: string) => void>(500, false, this.handleOnChange);
     }
 
-    protected handleOnChange = (value) => {
+    protected handleOnChange = (value: string): void => {
         if (value.trim() !== '') {
             this.setState({isSearching: true, isError: false});
             this.context.client.query({
@@ -61,11 +61,11 @@ export default class SearchSpeech extends React.Component<Props, State, Context>
         }
     };
 
-    protected handleOnSelect = (value) => {
+    protected handleOnSelect = (value: SpeechType): void => {
         this.setState({results: [], redirect: value});
     };
 
-    protected handleOnClear = () => {
+    protected handleOnClear = (): void => {
         this.setState({results: [], isError: false, isSearching: false});
     };
 
