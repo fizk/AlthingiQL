@@ -328,7 +328,7 @@ export class Select extends React.Component<SelectProps, {}> {
 }
 
 const withKeyBinding = Component => {
-    return class extends React.Component<{onSelect: (value: any) => void, onClear: () => void, onChange: (value: any) => void, isSearching: boolean}, {index: number}> {
+    return class extends React.Component<{onSelect: (value: any) => void, onClear: () => void, onChange: (value: any) => void, isSearching: boolean, isError: boolean}, {index: number}> {
         constructor(props) {
             super(props);
             this.handleKeyListening = this.handleKeyListening.bind(this);

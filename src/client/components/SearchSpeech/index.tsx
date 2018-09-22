@@ -1,74 +1,74 @@
-import * as React from "react";
-import { Fragment } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { OptionsWithKeyBinding } from "../../elements/Form";
-import { speechSearchAction, speechSearchClearAction } from "./redux";
-import { SpeechSearchResult } from "../../elements/SearchResult";
-import {
-    Assembly as AssemblyType,
-    Congressman as CongressmanType
-} from '../../../../@types'
+import * as React from 'react';
+import {Fragment} from 'react';
+import {Redirect} from 'react-router-dom';
+import {OptionsWithKeyBinding} from '../../elements/Form';
+import {SpeechSearchResult} from '../../elements/SearchResult';
+import ApolloClient from 'apollo-client/ApolloClient';
+import {searchIssueSpeeches} from './graphql';
+import {throttle} from 'throttle-debounce';
 
-type SearchSpeechProps = {
-    assembly?: number,
-    issue?: number,
-    result?: {
-        id?: string,
-        assembly: AssemblyType,
-        issue?: {
-            id?: number
-        },
-        text?: string,
-        period?: {
-            from?: string,
-            to?: string
-        },
-        iteration?: string,
-        type?: string,
-        congressmanType?: string,
-        congressman: CongressmanType
-    }[],
-    isSearching?: boolean,
-    onSearch?: (...args: any[]) => any,
-    onClear?: (...args: any[]) => any
-};
+interface Props {
+    assembly?: number;
+    issue?: number;
+}
 
-type SearchSpeechState = {
-    redirect: any | undefined
-};
+interface State {
+    redirect: any | undefined;
+    results: any[];
+    isSearching: boolean;
+    isError: boolean;
+}
 
-export default class SearchSpeech extends React.Component<SearchSpeechProps, SearchSpeechState> {
-    static defaultProps = {
+interface Context {
+    client: ApolloClient;
+}
+
+export default class SearchSpeech extends React.Component<Props, State, Context> {
+    public static defaultProps = {
         assembly: undefined,
         issue: undefined,
-        result: [],
-        isSearching: false,
-        onSearch: () => {},
-        onClear: () => {}
     };
-    constructor(props) {
-        super(props);
-        this.handleOnChange = this.handleOnChange.bind(this);
-        this.handleOnSelect = this.handleOnSelect.bind(this);
-        this.handleOnClear = this.handleOnClear.bind(this);
-        this.state = {
-            redirect: undefined
-        };
+
+    public static contextTypes = {
+        client: {},
+    };
+
+    public state = {
+        redirect: undefined,
+        results: [],
+        isSearching: false,
+        isError: false,
+    };
+
+    public constructor(props, context) {
+        super(props, context);
+        this.handleOnChange = throttle(500, this.handleOnChange);
     }
-    handleOnChange(value) {
-        if (value.trim() !== "") {
-            this.props.onSearch(value);
+
+    protected handleOnChange = (value) => {
+        if (value.trim() !== '') {
+            this.setState({isSearching: true, isError: false});
+            this.context.client.query({
+                query: searchIssueSpeeches,
+                fetchPolicy: 'no-cache',
+                variables: {issue: this.props.issue, assembly: this.props.assembly, query: value},
+            }).then(response => response.data.SearchIssueSpeeches)
+                .then(json => this.setState({results: json, isSearching: false}))
+                .catch(error => {
+                    this.setState({results: [], isError: error.message});
+                });
         }
-    }
-    handleOnSelect(value) {
-        this.props.onClear();
-        this.setState({ redirect: value });
-    }
-    handleOnClear() {
-        this.props.onClear();
-    }
-    render() {
+    };
+
+    protected handleOnSelect = (value) => {
+        this.setState({results: [], redirect: value});
+    };
+
+    protected handleOnClear = () => {
+        this.setState({results: [], isError: false, isSearching: false});
+    };
+
+    public render() {
         return (
             <Fragment>
                 {this.state.redirect && (
@@ -76,45 +76,20 @@ export default class SearchSpeech extends React.Component<SearchSpeechProps, Sea
                         push={true}
                         to={`/loggjafarthing/${
                             this.state.redirect.assembly.id
-                        }/thingmal/${this.state.redirect.issue.id}/raedur/${
-                            this.state.redirect.id
-                        }`}
+                        }/thingmal/${this.state.redirect.issue.id}/raedur/${this.state.redirect.id}`}
                     />
                 )}
                 <OptionsWithKeyBinding
-                    isSearching={this.props.isSearching}
+                    isError={this.state.isError}
+                    isSearching={this.state.isSearching}
                     onClear={this.handleOnClear}
                     onChange={this.handleOnChange}
-                    onSelect={this.handleOnSelect}
-                >
-                    {this.props.result.map(result => (
-                        <SpeechSearchResult
-                            key={`speech-${result.id}`}
-                            value={result}
-                        />
+                    onSelect={this.handleOnSelect}>
+                    {this.state.results.map(result => (
+                        <SpeechSearchResult key={`speech-${result.id}`} value={result}/>
                     ))}
                 </OptionsWithKeyBinding>
             </Fragment>
         );
     }
 }
-const mapStateToProps = state => {
-    return {
-        result: state.speechSearch.result,
-        isSearching: state.speechSearch.loading
-    };
-};
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onSearch: query =>
-            dispatch(
-                speechSearchAction(ownProps.assembly, ownProps.issue, query)
-            ),
-        onClear: () => dispatch(speechSearchClearAction())
-    };
-};
-const SearchSpeechWithStore = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SearchSpeech);
-export { SearchSpeechWithStore };

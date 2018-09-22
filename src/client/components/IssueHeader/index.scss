@@ -1,0 +1,13 @@
+@import "../../config";
+
+.issue-header {
+    display: flex;
+}
+
+.issue-header__title {
+    padding-right: map_get($space, md);
+}
+
+.issue-header__state {
+
+}

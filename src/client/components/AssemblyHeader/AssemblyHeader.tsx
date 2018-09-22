@@ -2,6 +2,7 @@ import * as React from "react";
 import { H1 } from "../../elements/Headline";
 import Badge from "../../elements/Badge";
 import './index.scss';
+import {Link} from "react-router-dom";
 
 type AssemblyHeaderProps = {
     assembly?: {
@@ -46,7 +47,11 @@ export default class AssemblyHeader extends React.Component<AssemblyHeaderProps,
         return (
             <div className="assembly-header">
                 <div className="assembly-header__headline">
-                    <H1>{this.props.assembly.id}. Löggjafarþing</H1>
+                    <H1>
+                        <Link to={`/loggjafarthing/${this.props.assembly.id}`}>
+                            {this.props.assembly.id}
+                        </Link>. Löggjafarþing
+                    </H1>
                     <time>
                         {this.props.assembly.period.from}
                         {this.props.assembly.period.to}
