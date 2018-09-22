@@ -15,7 +15,7 @@
     "dev-server": "webpack-dev-server",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "type-check": "tsc --noEmit",
-    "lint:ts": "./node_modules/.bin/tslint -c ./tslint.json './src/**/*.ts"
+    "lint:ts": "./node_modules/.bin/tslint -c ./tslint.json './src/**/*.ts'"
   },
   "keywords": [],
   "author": "",
