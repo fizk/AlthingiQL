@@ -1,49 +1,31 @@
 import * as React from 'react';
-import classVariations from "../../utils/classVariations";
-import SpeechCard from "../SpeechCard";
-import Congressman from "../Congressman";
-import { H4 } from "../Headline";
-import {
-    Congressman as CongressmanType,
-    Assembly as AssemblyType
-} from '../../../../@types'
+import classVariations from '../../utils/classVariations';
+import SpeechCard from '../SpeechCard';
+import Congressman from '../Congressman';
+import {H4} from '../Headline';
+import {Speech as SpeechType} from '../../../../@types';
 
+interface Props {
+    onSelect?: (...args: any[]) => any;
+    isSelected?: boolean;
+    variations?: any[];
+    value: SpeechType;
+}
 
-type IssueSearchResultProps = {
-    onSelect?: (...args: any[]) => any,
-    isSelected?: boolean,
-    variations?: any[],
-    value?: {
-        id?: string,
-        assembly: AssemblyType,
-        issue?: {
-            id?: number
-        },
-        text?: string,
-        period?: {
-            from?: string,
-            to?: string
-        },
-        iteration?: string,
-        type?: string,
-        congressmanType?: string,
-        congressman: CongressmanType
-    }
-};
-
-export default class IssueSearchResult extends React.Component<IssueSearchResultProps, {}> {
-    static defaultProps = {
+export default class IssueSearchResult extends React.Component<Props, {}> {
+    public static defaultProps = {
         onSelect: () => {},
         value: undefined,
         isSelected: false,
-        variations: []
+        variations: [],
     };
-    render() {
+
+    public render() {
         const variations = this.props.isSelected
-            ? this.props.variations.concat(["active"])
+            ? this.props.variations.concat(['active'])
             : this.props.variations;
         return (
-            <div className={classVariations("options-list__item", variations)}
+            <div className={classVariations('options-list__item', variations)}
                 onClick={() => this.props.onSelect(this.props.value)}>
                 <SpeechCard speech={this.props.value}>
                     <Congressman

@@ -6,6 +6,7 @@ import {SpeechSearchResult} from '../../elements/SearchResult';
 import ApolloClient from 'apollo-client/ApolloClient';
 import {searchIssueSpeeches} from './graphql';
 import {throttle} from 'throttle-debounce';
+import {Speech as SpeechType} from '../../../../@types';
 
 interface Props {
     assembly?: number;
@@ -14,7 +15,7 @@ interface Props {
 
 interface State {
     redirect: any | undefined;
-    results: any[];
+    results: SpeechType[];
     isSearching: boolean;
     isError: boolean;
 }
