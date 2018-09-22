@@ -8,7 +8,7 @@ describe('<IssueHeader />', () => {
         const tree = renderer.create(
             <Router >
                 <IssueHeader />
-            </Router>
+            </Router>,
         ).toJSON();
 
         expect(tree).toMatchSnapshot();
@@ -28,11 +28,9 @@ describe('<IssueHeader />', () => {
         const tree = renderer.create(
             <Router >
                 <IssueHeader {...data} />
-            </Router>
+            </Router>,
         ).toJSON();
 
         expect(tree).toMatchSnapshot();
     });
 });
-
-

@@ -11,9 +11,6 @@
         "object-literal-sort-keys": false,
         "arrow-parens": false,
         "interface-name": [true, "never-prefix"],
-
-
-
         "indent": [true,
             "spaces"
         ],
@@ -30,13 +27,31 @@
         "comma-dangle": ["error", {
             "arrays": "always",
             "objects": "always",
-            "imports": "ignore",
-            "exports": "ignore",
+            "imports": "always",
+            "exports": "always",
             "functions": "ignore"
         }],
         "comma-spacing": [1, {
             "after": true
-        }]
+        }],
+        "no-empty": [true, "allow-empty-functions"],
+        "semicolon": [true, "always", "ignore-bound-class-methods"],
+        "member-ordering": [
+            true,
+            {
+                "order": [
+                    "public-static-field",
+                    "public-instance-field",
+                    "private-static-field",
+                    "private-instance-field",
+                    "private-constructor",
+                    "public-constructor",
+                    "private-instance-method",
+                    "protected-instance-method",
+                    "public-instance-method"
+                ]
+            }
+        ]
     },
     "rulesDirectory": []
 }

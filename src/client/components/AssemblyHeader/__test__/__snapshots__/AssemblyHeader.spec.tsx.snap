@@ -10,7 +10,12 @@ exports[`<AssemblyHeader /> data 1`] = `
     <h2
       className="headline-1"
     >
-      1
+      <a
+        href="/loggjafarthing/1"
+        onClick={[Function]}
+      >
+        1
+      </a>
       . Löggjafarþing
     </h2>
     <time>
@@ -69,6 +74,10 @@ exports[`<AssemblyHeader /> default props 1`] = `
     <h2
       className="headline-1"
     >
+      <a
+        href="/loggjafarthing/undefined"
+        onClick={[Function]}
+      />
       . Löggjafarþing
     </h2>
     <time />

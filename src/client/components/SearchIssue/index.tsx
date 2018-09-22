@@ -89,6 +89,7 @@ export default class SearchIssue extends React.Component<SearchIssueProps, Searc
                     />
                 )}
                 <OptionsWithKeyBinding
+                    isError={false}
                     isSearching={this.props.isSearching}
                     onClear={this.handleOnClear}
                     onChange={this.handleOnChange}

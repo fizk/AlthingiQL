@@ -1,50 +1,38 @@
-import * as React from "react";
-import { H1, H2, H3 } from "../../elements/Headline";
-import { Row, Column } from "../../elements/Grid";
+import * as React from 'react';
+import { H2, H3 } from '../../elements/Headline';
+import {Issue as IssueType} from '../../../../@types';
+import './index.scss';
 
-type AssemblyIssue = {
-    id: number
-    assembly?: {id: number}
-    category?: string
-    name: string
-    subName?: string
-    type?: string
-    typeName: string
-    typeSubName?: string
-    status: string
-    question?: string
-    goal?: string
-    date: string
+interface IssueHeaderProps {
+    issue?: IssueType & {date: string};
+    loading?: boolean;
 }
 
-type IssueHeaderProps = {
-    issue?: AssemblyIssue,
-    loading?: boolean
-};
-
 export default class IssueHeader extends React.Component<IssueHeaderProps, {}> {
-    static defaultProps: IssueHeaderProps = {
+    public static defaultProps: IssueHeaderProps = {
         issue: {
             id: undefined,
             name: undefined,
             typeName: undefined,
             status: undefined,
-            date: undefined
+            date: undefined,
         },
-        loading: false
+        loading: false,
     };
-    render() {
+
+    public render() {
         return (
-            <Row>
-                <Column>
-                    <H1>
-                        {this.props.issue.id} {this.props.issue.name}
-                    </H1>
+            <header className="issue-header">
+                <div className="issue-header__title">
+                    <H2>{this.props.issue.id}. {this.props.issue.name}</H2>
+                    <H3>{this.props.issue.subName}</H3>
+                </div>
+                <div className="issue-header__state">
                     <H3>{this.props.issue.typeName}</H3>
-                    <H2>{this.props.issue.status}</H2>
+                    <H3>{this.props.issue.status}</H3>
                     <time>{this.props.issue.date}</time>
-                </Column>
-            </Row>
+                </div>
+            </header>
         );
     }
 }

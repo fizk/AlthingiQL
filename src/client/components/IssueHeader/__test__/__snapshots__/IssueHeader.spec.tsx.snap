@@ -1,55 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<IssueHeader /> data 1`] = `
-<div
-  className="row"
+<header
+  className="issue-header"
 >
   <div
-    className="col"
+    className="issue-header__title"
   >
-    <h2
-      className="headline-1"
+    <h3
+      className="headline-2"
     >
       1
-       
+      . 
       name
-    </h2>
+    </h3>
+    <h4
+      className="headline-3"
+    />
+  </div>
+  <div
+    className="issue-header__state"
+  >
     <h4
       className="headline-3"
     >
       type name
     </h4>
-    <h3
-      className="headline-2"
+    <h4
+      className="headline-3"
     >
       status
-    </h3>
+    </h4>
     <time>
       2001-01-01
     </time>
   </div>
-</div>
+</header>
 `;
 
 exports[`<IssueHeader /> default props 1`] = `
-<div
-  className="row"
+<header
+  className="issue-header"
 >
   <div
-    className="col"
+    className="issue-header__title"
   >
-    <h2
-      className="headline-1"
+    <h3
+      className="headline-2"
     >
-       
-    </h2>
+      . 
+    </h3>
     <h4
       className="headline-3"
     />
-    <h3
-      className="headline-2"
+  </div>
+  <div
+    className="issue-header__state"
+  >
+    <h4
+      className="headline-3"
+    />
+    <h4
+      className="headline-3"
     />
     <time />
   </div>
-</div>
+</header>
 `;
