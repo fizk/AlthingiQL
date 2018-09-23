@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { Link } from "react-router-dom";
-import { Row, Column } from "../../elements/Grid";
-import Congressman from "../../elements/Congressman";
-import DateAndCountChart from "../../elements/DateAndCountChart";
-import * as Markdown from "react-markdown";
-import { H2, H4 } from "../../elements/Headline";
-import Paper from "../../elements/Paper";
+import { Link } from 'react-router-dom';
+import { Row, Column } from '../../elements/Grid';
+import Congressman from '../../elements/Congressman';
+import DateAndCountChart from '../../elements/DateAndCountChart';
+import * as Markdown from 'react-markdown';
+import { H2, H4 } from '../../elements/Headline';
+import Paper from '../../elements/Paper';
 import {
     Congressman as CongressmanType,
-    Assembly as AssemblyType
+    Assembly as AssemblyType,
 } from '../../../../@types';
 
-type AssemblyIssueProps = {
+interface Props {
     issue?: {
         id?: number,
         assembly: AssemblyType,
@@ -30,49 +30,49 @@ type AssemblyIssueProps = {
         additionalInformation?: string,
         date?: string,
         proponents: CongressmanType[],
-        speakers?: {
+        speakers?: Array<{
             congressman: CongressmanType,
-            value?: number
-        }[],
-        voteRange?: {
+            value?: number,
+        }>,
+        voteRange?: Array<{
             count?: number,
-            date?: string
-        }[],
-        speechRange?: {
+            date?: string,
+        }>,
+        speechRange?: Array<{
             count?: number,
-            date?: string
-        }[]
-    },
-    progress?: {
+            date?: string,
+        }>,
+    };
+    progress?: Array<{
         issue?: {
-            id?: number
+            id?: number,
         },
         assembly?: {
-            id?: number
+            id?: number,
         },
         committee?: {
             id?: number
-            name?: string
+            name?: string,
         },
         speech?: {
-            id?: string
+            id?: string,
         },
         document?: {
-            id?: number
+            id?: number,
         },
         date?: string,
         title?: string,
         type?: string,
-        completed?: boolean
-    }[]
-};
+        completed?: boolean,
+    }>;
+}
 
-export default class AssemblyIssue extends React.Component<AssemblyIssueProps, {}> {
-    static defaultProps = {
+export default class AssemblyIssue extends React.Component<Props, {}> {
+    public static defaultProps = {
         issue: {
             id: undefined,
             assembly: {
-                id: undefined
+                id: undefined,
             },
             name: undefined,
             status: undefined,
@@ -91,11 +91,12 @@ export default class AssemblyIssue extends React.Component<AssemblyIssueProps, {
             proponents: [],
             speakers: [],
             voteRange: [],
-            speechRange: []
+            speechRange: [],
         },
-        progress: []
+        progress: [],
     };
-    render() {
+
+    public render() {
         return (
             <Row>
                 <Column>
@@ -114,7 +115,7 @@ export default class AssemblyIssue extends React.Component<AssemblyIssueProps, {
                                             congressman={congressman}
                                         />
                                     </li>
-                                )
+                                ),
                             )}
                         </ul>
                     </Paper>
@@ -133,15 +134,15 @@ export default class AssemblyIssue extends React.Component<AssemblyIssueProps, {
                     </ul>
                 </Column>
                 <Column>
-                    <Markdown source={this.props.issue.goal || ""} />
-                    <Markdown source={this.props.issue.majorChanges || ""} />
-                    <Markdown source={this.props.issue.changesInLaw || ""} />
+                    <Markdown source={this.props.issue.goal || ''} />
+                    <Markdown source={this.props.issue.majorChanges || ''} />
+                    <Markdown source={this.props.issue.changesInLaw || ''} />
                     <Markdown
-                        source={this.props.issue.costsAndRevenues || ""}
+                        source={this.props.issue.costsAndRevenues || ''}
                     />
-                    <Markdown source={this.props.issue.deliveries || ""} />
+                    <Markdown source={this.props.issue.deliveries || ''} />
                     <Markdown
-                        source={this.props.issue.additionalInformation || ""}
+                        source={this.props.issue.additionalInformation || ''}
                     />
 
                     <h4>Vote</h4>
@@ -188,7 +189,7 @@ export default class AssemblyIssue extends React.Component<AssemblyIssueProps, {
                                                     progress.committee.id
                                                 }`}
                                             >
-                                                {progress.title}{" "}
+                                                {progress.title}{' '}
                                                 {progress.committee.name}
                                             </Link>
                                         )}

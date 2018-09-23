@@ -1,36 +1,38 @@
 import * as React from 'react';
-import { pie, arc } from "d3-shape";
-import {Party as PartyType} from '../../../../@types'
+import { pie, arc } from 'd3-shape';
+import {Party as PartyType} from '../../../../@types';
 import './index.scss';
 
-type PartyPieChartProps = {
-    source: {
+interface PartyPieChartProps {
+    source: Array<{
         party: PartyType,
-        value?: number
-    }[],
-    formatValue?: (...args: any[]) => any
-};
+        value?: number,
+    }>;
+    formatValue?: (...args: any[]) => any;
+}
 
 export default class PartyPieChart extends React.Component<PartyPieChartProps, {}> {
-    static defaultProps = {
+    public static defaultProps = {
         source: [],
-        formatValue: v => v
+        formatValue: v => v,
     };
 
-    dimensions = {
+    public dimensions = {
         width: 620,
         height: 240,
-        gutter: 20
+        gutter: 20,
     };
 
     constructor(props) {
         super(props);
 
     }
-    midAngle(d) {
+
+    private midAngle(d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
     }
-    render() {
+
+    public render() {
         const pieData = pie<any>().value(d => d.value)(this.props.source); //@todo `any`
         const labelArc = arc()
             .innerRadius(40)
@@ -38,7 +40,7 @@ export default class PartyPieChart extends React.Component<PartyPieChartProps, {
         const path = arc()
             .innerRadius(40)
             .outerRadius(
-                this.dimensions.height / 2 - 2 * this.dimensions.gutter
+                this.dimensions.height / 2 - 2 * this.dimensions.gutter,
             );
         const arcs = pieData.map(item => {
             const [innerCentroidX, innerCentroidY] = path.centroid(item as any);
@@ -52,8 +54,8 @@ export default class PartyPieChart extends React.Component<PartyPieChartProps, {
                     endAngle: item.endAngle,
                     startAngle: item.startAngle,
                     index: item.index,
-                    padAngle: item.padAngle
-                }
+                    padAngle: item.padAngle,
+                },
             };
         });
         return (
@@ -63,18 +65,14 @@ export default class PartyPieChart extends React.Component<PartyPieChartProps, {
                 height={this.dimensions.height + 2 * this.dimensions.gutter}
                 viewBox={`0 0 ${this.dimensions.width +
                     2 * this.dimensions.gutter} ${this.dimensions.height +
-                    2 * this.dimensions.gutter}`}
-            >
-                >
+                    2 * this.dimensions.gutter}`}>
                 <g
                     transform={`translate(${this.dimensions.width / 2}, ${this
-                        .dimensions.height / 2})`}
-                >
+                        .dimensions.height / 2})`}>
                     {arcs.map(a => (
                         <g
                             key={`arch-${a.data.party.id}`}
-                            className="party-pie-chart__arch"
-                        >
+                            className="party-pie-chart__arch">
                             <path
                                 className="party-pie-chart__path"
                                 d={a.path}
@@ -90,8 +88,8 @@ export default class PartyPieChart extends React.Component<PartyPieChartProps, {
                             <text
                                 textAnchor={
                                     this.midAngle(a.dimensions) < Math.PI
-                                        ? "start"
-                                        : "end"
+                                        ? 'start'
+                                        : 'end'
                                 }
                                 x={a.dimensions.outerCentroid.x}
                                 y={a.dimensions.outerCentroid.y}

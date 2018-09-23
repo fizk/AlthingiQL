@@ -11,6 +11,7 @@ export default new GraphQLObjectType({
         id: {
             name: 'id',
             type: GraphQLInt,
+
             resolve(root) {
                 return root.session_id;
             },
@@ -26,6 +27,7 @@ export default new GraphQLObjectType({
         constituency: {
             name: 'constituency',
             type: Constituency,
+
             resolve(root, params, {client}) {
                 return client.get(`/kjordaemi/${root.constituency_id}`);
             },
@@ -33,6 +35,7 @@ export default new GraphQLObjectType({
         party: {
             name: 'party',
             type: Party,
+
             resolve(root, params, {client}) {
                 return client.get(`/thingflokkar/${root.party_id}`).catch(error => undefined);
             },

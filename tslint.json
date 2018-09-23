@@ -34,7 +34,9 @@
         "comma-spacing": [1, {
             "after": true
         }],
+        "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
         "no-empty": [true, "allow-empty-functions"],
+
         "semicolon": [true, "always", "ignore-bound-class-methods"],
         "member-ordering": [
             true,
@@ -51,7 +53,10 @@
                     "public-instance-method"
                 ]
             }
-        ]
+        ],
+        "lines-between-class-members": [true, 1]
     },
-    "rulesDirectory": []
+    "rulesDirectory": [
+        "node_modules/tslint-lines-between-class-members"
+    ]
 }

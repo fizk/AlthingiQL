@@ -1,11 +1,10 @@
-import * as React from "react";
-import Application from "../../elements/Application";
-import { Column, Grid, Row } from "../../elements/Grid";
+import * as React from 'react';
+import Application from '../../elements/Application';
+import {Column, Grid, Row} from '../../elements/Grid';
 import './index.scss';
 
 export default class Chrome extends React.Component<{}, {}> {
-
-    render() {
+    public render() {
         return (
             <Application>
                 <div className="chrome">

@@ -1,47 +1,47 @@
-import * as React from "react";
-import Congressman from "../../elements/Congressman";
+import * as React from 'react';
+import Congressman from '../../elements/Congressman';
 
 interface Picture {
-    templateSrc: string
+    templateSrc: string;
 }
 
 interface Party {
-    id: number
-    name: string
-    color: string
+    id: number;
+    name: string;
+    color: string;
 }
-type DocumentVote = {
-    id: number
-    voteId: number
-    vote: string
+interface DocumentVote {
+    id: number;
+    voteId: number;
+    vote: string;
     congressman: {
         id: number
         name: string
         avatar: Picture
-        party: Party
-    }
+        party: Party,
+    };
 }
 
-type DocumentCongressmanVotesProps = {
-    assembly?: number,
-    issue?: number,
-    vote?: number,
-    votes?: DocumentVote[]
-};
+interface DocumentCongressmanVotesProps {
+    assembly?: number;
+    issue?: number;
+    vote?: number;
+    votes?: DocumentVote[];
+}
 
 export default class DocumentCongressmanVotes extends React.Component<DocumentCongressmanVotesProps, {}> {
-    static defaultProps: DocumentCongressmanVotesProps = {
+    public static defaultProps: DocumentCongressmanVotesProps = {
         assembly: undefined,
         issue: undefined,
         vote: undefined,
-        votes: []
+        votes: [],
     };
 
-    voteSort(a: {vote: string}, b: {vote: string}) {
+    private voteSort(a: {vote: string}, b: {vote: string}) {
         return b.vote.localeCompare(a.vote);
     }
 
-    render() {
+    public render() {
         return (
             <ul>
                 {this.props.votes

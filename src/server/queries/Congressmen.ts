@@ -10,8 +10,8 @@ export default {
         type: {
             type: GraphQLString,
         },
-
     },
+
     resolve(root, {assembly, type}, {client}) {
         const query = (type)
             ? `?tegund=${type}`

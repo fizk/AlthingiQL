@@ -1,20 +1,6 @@
 import {graphql, compose, gql} from 'react-apollo';
 import IssueHeader from './IssueHeader';
-
-interface AssemblyIssue {
-    id: number;
-    assembly?: {id: number};
-    category?: string;
-    name: string;
-    subName?: string;
-    type?: string;
-    typeName: string;
-    typeSubName?: string;
-    status: string;
-    question?: string;
-    goal?: string;
-    date: string;
-}
+import {Issue as IssueType} from '../../../../@types';
 
 const assemblyQuery = gql`
     query assemblyIssue($assembly: Int! $issue: Int!) {
@@ -37,7 +23,7 @@ const assemblyQuery = gql`
 
 export default compose<any>( //@todo `any`
     graphql(assemblyQuery, {
-        props: (all: {data?: {loading: boolean, AssemblyIssue: AssemblyIssue}}) => ({
+        props: (all: {data?: {loading: boolean, AssemblyIssue: IssueType}}) => ({
             issue: all.data.loading === false ? all.data.AssemblyIssue : undefined,
             loading: all.data.loading,
         }),

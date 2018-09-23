@@ -33,6 +33,7 @@ export default {
             type: CursorInput,
         },
     },
+
     resolve(root, {issue, assembly, speech, cursor}, {client}) {
         return speech
             ? client.getPagination(`/loggjafarthing/${assembly}/thingmal/${issue}/raedur/${speech}`, cursor)

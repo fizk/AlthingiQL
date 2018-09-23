@@ -8,6 +8,7 @@ export default {
             type: new GraphQLNonNull(GraphQLInt),
         },
     },
+
     resolve(root, params, {client}) {
         return client.get(`/thingmenn/${params.id}`);
     },

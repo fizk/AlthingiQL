@@ -14,6 +14,7 @@ export default {
             type: new GraphQLNonNull(GraphQLString),
         },
     },
+
     resolve(root, {issue, assembly, query}, {client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmal/${issue}/raedur?leit=${encodeURI(query)}`);
     },

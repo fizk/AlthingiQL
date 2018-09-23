@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {StatelessComponent} from 'react';
-import Badge from "../Badge";
-import {Party as PartyType} from '../../../../@types'
+import Badge from '../Badge';
+import {Party as PartyType} from '../../../../@types';
 import './index.scss';
 
-type Props = {
-    parties: {
+interface Props {
+    parties: Array<{
         party: PartyType,
-        time?: number
-    }[]
+        time?: number,
+    }>;
 }
 
 const Component: StatelessComponent<Props> = ({children, parties}) => (
@@ -30,7 +30,7 @@ const Component: StatelessComponent<Props> = ({children, parties}) => (
                     <td className="party-speech-summary__badge">
                         <Badge color={obj.party.color}
                             title={obj.party.name}
-                            variations={["sm"]}
+                            variations={['sm']}
                         />
                     </td>
                     <td className="party-speech-summary__title">

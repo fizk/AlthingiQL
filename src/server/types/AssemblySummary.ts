@@ -121,6 +121,7 @@ export default new GraphQLObjectType({
                 fields: {
                     party: {
                         type: Party,
+
                         resolve(root) {
                             const {seat, results, ...party} = root;
                             return party;
@@ -138,6 +139,7 @@ export default new GraphQLObjectType({
                                 },
                             },
                         }),
+
                         resolve(root) {
                             const {seat, results, ...party} = root;
                             return {seats: seat, result: results};

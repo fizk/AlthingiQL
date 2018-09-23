@@ -1,33 +1,34 @@
-import * as React from "react";
-import {Fragment} from "react";
-import { Link } from "react-router-dom";
-import { H3 } from "../../elements/Headline";
+import * as React from 'react';
+import {Fragment} from 'react';
+import { Link } from 'react-router-dom';
+import { H3 } from '../../elements/Headline';
 
-type IssuesMenuProps = {
-    assembly?: number,
-    types?: {
+interface Props {
+    assembly?: number;
+    types?: Array<{
         count?: number,
         type?: string,
         typeName?: string,
-        typeSubName?: string
-    }[],
-    categories?: {
+        typeSubName?: string,
+    }>;
+    categories?: Array<{
         categoryId?: number,
         superCategoryId?: number,
         title?: string,
-        count?: number
-    }[],
-    loading?: boolean
-};
+        count?: number,
+    }>;
+    loading?: boolean;
+}
 
-export default class IssuesMenu extends React.Component<IssuesMenuProps, {}> {
-    static defaultProps = {
+export default class IssuesMenu extends React.Component<Props, {}> {
+    public static defaultProps = {
         assembly: undefined,
         types: [],
         categories: [],
-        loading: false
+        loading: false,
     };
-    render() {
+
+    public render() {
         return (
             <Fragment>
                 <H3>Málstegund</H3>

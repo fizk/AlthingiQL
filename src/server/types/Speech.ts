@@ -36,7 +36,6 @@ export default new GraphQLObjectType({
         period: {
             type: PeriodTime,
             resolve: root => ({from: root.from, to: root.to}),
-
         },
         text: {
             type: GraphQLString,

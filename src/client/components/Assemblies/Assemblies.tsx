@@ -1,37 +1,20 @@
-import * as React from "react";
-import AssemblyBadge from "../../elements/AssemblyBadge";
-import { ListSeparated, ListItem } from "../../elements/List";
+import * as React from 'react';
+import AssemblyBadge from '../../elements/AssemblyBadge';
+import {ListSeparated, ListItem} from '../../elements/List';
+import {AssemblyStatistics as AssemblyStatisticsType} from '../../../../@types';
 
-type IndexProps = {
-    assemblies: {
-        id: number,
-        period: {
-            from?: string,
-            to?: string
-        },
-        division: {
-            majority?: {
-                id?: number,
-                name?: string,
-                color?: string
-            }[],
-            minority: {
-                id?: number,
-                name?: string,
-                color?: string
-            }[]
-        }
-    }[]
-    loading?: boolean
-};
+interface Props {
+    assemblies: AssemblyStatisticsType[];
+    loading?: boolean;
+}
 
-export default class Index extends React.Component<IndexProps, {}> {
-    static defaultProps: IndexProps = {
+export default class Index extends React.Component<Props, {}> {
+    public static defaultProps = {
         assemblies: [],
-        loading: false
+        loading: false,
     };
 
-    render() {
+    public render() {
         return (
             <ListSeparated>
                 {this.props.assemblies.map(assembly => (

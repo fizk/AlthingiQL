@@ -1,22 +1,23 @@
 import * as React from 'react';
-import { Fragment } from "react";
-import AssemblyIssueNavigation from "../../elements/AssemblyIssueNavigation";
-import AssemblyHeader from "../../components/AssemblyHeader";
-import IssueHeader from "../../components/IssueHeader";
-import Helmet from "react-helmet";
-import Section from "../../elements/Section";
+import { Fragment } from 'react';
+import AssemblyIssueNavigation from '../../elements/AssemblyIssueNavigation';
+import AssemblyHeader from '../../components/AssemblyHeader';
+import IssueHeader from '../../components/IssueHeader';
+import Helmet from 'react-helmet';
+import Section from '../../elements/Section';
 
-type IssueProps = {
-    assembly?: number,
-    issue?: number
-};
+interface Props {
+    assembly?: number;
+    issue?: number;
+}
 
-export default class Issue extends React.Component<IssueProps, {}> {
-    static defaultProps = {
+export default class Issue extends React.Component<Props, {}> {
+    public static defaultProps = {
         assembly: undefined,
-        issue: undefined
+        issue: undefined,
     };
-    render() {
+
+    public render() {
         return (
             <Fragment>
                 <Helmet>

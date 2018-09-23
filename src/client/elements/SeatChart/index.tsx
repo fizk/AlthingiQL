@@ -1,39 +1,38 @@
 import * as React from 'react';
 import './index.scss';
+import {Party as PartyType} from '../../../../@types';
 
-type SeatChartProps = {
-    source?: {
-        party?: {
-            id?: number,
-            name?: string,
-            color?: string
-        },
-        value?: number
-    }[],
-    formatValue?: (...args: any[]) => any
-};
+interface Props {
+    source?: Array<{
+        party?: PartyType,
+        value?: number,
+    }>;
+    formatValue?: (...args: any[]) => any;
+}
 
-export default class SeatChart extends React.Component<SeatChartProps, {}> {
-    static defaultProps = {
+export default class SeatChart extends React.Component<Props, {}> {
+    public static defaultProps = {
         source: [],
-        formatValue: v => v
+        formatValue: v => v,
     };
 
-    dimensions = {
+    public dimensions = {
         width: 620,
         height: 240,
         gutter: 20,
-        radius: 10
+        radius: 10,
     };
 
     constructor(props) {
         super(props);
 
     }
-    render() {
+
+    public render() {
         const seatList = this.props.source
             .map(item => {
-                return Array.from({ ...item, length: item.value } as any).map(party => ({ color: item.party.color })); //@todo
+                return Array.from({ ...item, length: item.value } as any)
+                    .map(party => ({ color: item.party.color })); //@todo
             })
             .reduce((total, amount) => total.concat(amount), []);
         const perColumn = 10;
@@ -44,8 +43,8 @@ export default class SeatChart extends React.Component<SeatChartProps, {}> {
                 ...item,
                 position: {
                     x: rowCount,
-                    y: columnCount
-                }
+                    y: columnCount,
+                },
             };
             columnCount =
                 rowCount === perColumn - 1 ? columnCount + 1 : columnCount;
@@ -59,9 +58,7 @@ export default class SeatChart extends React.Component<SeatChartProps, {}> {
                 height={this.dimensions.height + 2 * this.dimensions.gutter}
                 viewBox={`0 0 ${this.dimensions.width +
                     2 * this.dimensions.gutter} ${this.dimensions.height +
-                    2 * this.dimensions.gutter}`}
-            >
-                >
+                    2 * this.dimensions.gutter}`}>
                 <g>
                     {seatPosition.map((item, i) => (
                         <circle

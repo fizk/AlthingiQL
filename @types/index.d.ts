@@ -18,6 +18,13 @@ export interface AssemblyStatistics extends Assembly {
     };
 }
 
+export interface AssemblyCategorySummary {
+    id: number;
+    superCategoryId: number;
+    title: string;
+    count: number;
+}
+
 export interface AssemblySummary {
     parties?: Array<{
         party: Party;
@@ -110,8 +117,13 @@ export interface Issue {
     typeSubName?: string;
     status?: string;
     goal?: string;
-    proponentsCount?: number;
+    majorChanges?: string;
+    changesInLaw?: string;
+    costsAndRevenues?: string;
+    deliveries?: string;
+    additionalInformation?: string;
     proponents?: Congressman[];
+    proponentsCount?: number;
 }
 
 export interface Speech {

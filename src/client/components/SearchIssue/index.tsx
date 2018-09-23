@@ -1,83 +1,60 @@
-import * as React from "react";
-import { Fragment } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { OptionsWithKeyBinding } from "../../elements/Form";
-import { issueSearchAction, issueClearAction } from "./redux";
-import { IssueSearchResult } from "../../elements/SearchResult";
+import * as React from 'react';
+import { Fragment } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { OptionsWithKeyBinding } from '../../elements/Form';
+import { issueSearchAction, issueClearAction } from './redux';
+import { IssueSearchResult } from '../../elements/SearchResult';
+import { Issue as IssueType } from '../../../../@types';
 
-type SearchIssueProps = {
-    assembly?: number,
-    result?: {
-        id?: number,
-        assembly?: {
-            id?: number
-        },
-        category?: string,
-        name?: string,
-        subName?: string,
-        type?: string,
-        typeName?: string,
-        typeSubName?: string,
-        status?: string,
-        question?: string,
-        goal?: string,
-        majorChanges?: string,
-        changesInLaw?: string,
-        costsAndRevenues?: string,
-        deliveries?: string,
-        additionalInformation?: string,
-        date?: string,
-        proponents?: {
-            id?: number,
-            name?: string,
-            party?: {
-                id?: number,
-                name?: string,
-                color?: string
-            }
-        }[]
-    }[],
-    isSearching?: boolean,
-    onSearch?: (...args: any[]) => any,
-    onClear?: (...args: any[]) => any
-};
+interface SearchIssueProps {
+    assembly?: number;
+    result?: IssueType[];
+    isSearching?: boolean;
+    onSearch?: (...args: any[]) => any;
+    onClear?: (...args: any[]) => any;
+}
 
-type SearchIssueState = {
-    redirect: any | undefined
-};
+interface SearchIssueState {
+    redirect: any | undefined;
+}
 
 export default class SearchIssue extends React.Component<SearchIssueProps, SearchIssueState> {
-    static defaultProps = {
+    public static defaultProps = {
         assembly: undefined,
         issue: undefined,
         result: [],
         isSearching: false,
         onSearch: () => {},
-        onClear: () => {}
+        onClear: () => {},
     };
-    constructor(props) {
+
+  constructor(props) {
         super(props);
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSelect = this.handleOnSelect.bind(this);
         this.handleOnClear = this.handleOnClear.bind(this);
         this.state = {
-            redirect: undefined
+            redirect: undefined,
         };
     }
-    handleOnChange(value) {
-        if (value.trim() !== "") {
+
+  public handleOnChange(value) {
+        if (value.trim() !== '') {
             this.props.onSearch(value);
         }
     }
-    handleOnSelect(value) {
+
+  public handleOnSelect(value) {
         this.props.onClear();
         this.setState({ redirect: value });
     }
-    handleOnClear() {
+
+  public handleOnClear() {
         this.props.onClear();
     }
-    render() {
+
+  public render() {
         return (
             <Fragment>
                 {this.state.redirect && (
@@ -109,25 +86,26 @@ export default class SearchIssue extends React.Component<SearchIssueProps, Searc
 const mapStateToProps = state => {
     return {
         result: state.issueSearch.result,
-        isSearching: state.issueSearch.loading
+        isSearching: state.issueSearch.loading,
     };
 };
 const mapDispatchToProps = () => {
     const throttleIssueSearchAction = issueSearchAction();
+
     return (dispatch, ownProps) => ({
         onSearch: query =>
             dispatch(
                 throttleIssueSearchAction(
                     ownProps.assembly,
                     ownProps.issue,
-                    query
-                )
+                    query,
+                ),
             ),
-        onClear: () => dispatch(issueClearAction())
+        onClear: () => dispatch(issueClearAction()),
     });
 };
 const SearchIssueWithStore = connect(
     mapStateToProps,
-    mapDispatchToProps()
+    mapDispatchToProps(),
 )(SearchIssue);
 export { SearchIssueWithStore };

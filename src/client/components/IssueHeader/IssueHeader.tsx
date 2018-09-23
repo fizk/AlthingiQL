@@ -3,13 +3,13 @@ import { H2, H3 } from '../../elements/Headline';
 import {Issue as IssueType} from '../../../../@types';
 import './index.scss';
 
-interface IssueHeaderProps {
+interface Props {
     issue?: IssueType & {date: string};
     loading?: boolean;
 }
 
-export default class IssueHeader extends React.Component<IssueHeaderProps, {}> {
-    public static defaultProps: IssueHeaderProps = {
+export default class IssueHeader extends React.Component<Props, {}> {
+    public static defaultProps = {
         issue: {
             id: undefined,
             name: undefined,

@@ -1,53 +1,26 @@
 import * as React from 'react';
-import * as Markdown from "react-markdown";
+import * as Markdown from 'react-markdown';
+import {Speech as SpeechType} from '../../../../@types';
 import './index.scss';
 
-type SpeechCardProps = {
-    speech?: {
-        id?: string,
-        assembly?: {
-            id?: number
-        },
-        issue?: {
-            id?: number
-        },
-        text?: string,
-        period?: {
-            from?: string,
-            to?: string
-        },
-        iteration?: string,
-        type?: string,
-        congressmanType?: string,
-        congressman?: {
-            id?: number,
-            name?: string,
-            avatar?: {
-                templateSrc?: string
-            },
-            party?: {
-                id?: number,
-                name?: string,
-                color?: string
-            }
-        }
-    }
-};
+interface SpeechCardProps {
+    speech?: SpeechType;
+}
 
 export default class SpeechCard extends React.Component<SpeechCardProps, {}> {
-    static defaultProps = {
+    public static defaultProps = {
         speech: {
             id: undefined,
             assembly: {
-                id: undefined
+                id: undefined,
             },
             issue: {
-                id: undefined
+                id: undefined,
             },
             text: undefined,
             period: {
                 from: undefined,
-                to: undefined
+                to: undefined,
             },
             iteration: undefined,
             type: undefined,
@@ -56,31 +29,32 @@ export default class SpeechCard extends React.Component<SpeechCardProps, {}> {
                 id: undefined,
                 name: undefined,
                 avatar: {
-                    templateSrc: undefined
+                    templateSrc: undefined,
                 },
                 party: {
                     id: undefined,
                     name: undefined,
-                    color: undefined
-                }
-            }
-        }
+                    color: undefined,
+                },
+            },
+        },
     };
-    render() {
+
+    public render() {
         const fromOptions = {
-            year: "numeric",
-            month: "short",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
         };
         const toOptions = {
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
         };
         return (
             <div className="speech-card">
@@ -94,18 +68,18 @@ export default class SpeechCard extends React.Component<SpeechCardProps, {}> {
                     </span>
                     <time className="speech-card__date">
                         {new Intl.DateTimeFormat(undefined, fromOptions).format(
-                            new Date(this.props.speech.period.from)
+                            new Date(this.props.speech.period.from),
                         )}
                     </time>
                     <time className="speech-card__date">
                         {new Intl.DateTimeFormat(undefined, toOptions).format(
-                            new Date(this.props.speech.period.to)
+                            new Date(this.props.speech.period.to),
                         )}
                     </time>
                 </div>
                 <Markdown
                     className="speech-card__text"
-                    source={this.props.speech.text || ""}
+                    source={this.props.speech.text || ''}
                 />
             </div>
         );
