@@ -1,0 +1,27 @@
+@import "../../config";
+
+.issue-menu__issue {
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+.issue-menu__issue-item {
+    text-transform: capitalize;
+}
+
+.issue-menu__issue-count {
+    font-size: map_get($font-size, xs);
+    padding: 0 map_get($space, xs);
+}
+
+.issue-menu__category {
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+.issue-menu__category-item {}
+
+.issue-menu__category-count {
+    font-size: map_get($font-size, xs);
+    padding: 0 map_get($space, xs);
+}

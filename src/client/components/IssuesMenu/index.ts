@@ -1,6 +1,6 @@
 import {graphql, compose, gql} from 'react-apollo';
 import IssuesMenu from './IssuesMenu';
-import {AssemblyCategorySummary} from '../../../../@types';
+// import {AssemblyCategorySummary} from '../../../../@types';
 
 const assemblyQuery = gql`
     query assemblyIssue($assembly: Int!) {
@@ -24,7 +24,8 @@ const assemblyQuery = gql`
 export default compose<any>( //@todo `any`
     graphql(assemblyQuery, {
         props: (all: {data?: {
-            loading: boolean, AssemblyCategorySummary: AssemblyCategorySummary, AssemblySummary: any,
+            // loading: boolean, AssemblyCategorySummary: AssemblyCategorySummary, AssemblySummary: any,
+            loading: boolean, AssemblyCategorySummary: any, AssemblySummary: any,
         }}) => ({ //@todo `any`
             types: all.data.loading === false ? all.data.AssemblySummary.types : undefined,
             categories: all.data.loading === false ? all.data.AssemblyCategorySummary : undefined,
