@@ -13,6 +13,7 @@ export default new GraphQLObjectType({
         period: {
             name: 'period',
             type: Period,
+
             resolve(root) {
                 return {
                     from: root.from,

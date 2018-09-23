@@ -8,7 +8,7 @@ describe('<DocumentCongressmanVotes />', () => {
         const tree = renderer.create(
             <Router >
                 <DocumentCongressmanVotes />
-            </Router>
+            </Router>,
         ).toJSON();
 
         expect(tree).toMatchSnapshot();
@@ -40,11 +40,9 @@ describe('<DocumentCongressmanVotes />', () => {
         const tree = renderer.create(
             <Router >
                 <DocumentCongressmanVotes {...data} />
-            </Router>
+            </Router>,
         ).toJSON();
 
         expect(tree).toMatchSnapshot();
     });
 });
-
-

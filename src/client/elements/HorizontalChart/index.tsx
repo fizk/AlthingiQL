@@ -1,32 +1,28 @@
 import * as React from 'react';
-import { scaleLinear } from "d3-scale";
+import { scaleLinear } from 'd3-scale';
 import './index.scss';
 
-type HorizontalChartProps = {
-    source?: {
+interface HorizontalChartProps {
+    source?: Array<{
         value?: number,
-        label?: string
-    }[]
-};
+        label?: string,
+    }>;
+}
 
 export default class HorizontalChart extends React.Component<HorizontalChartProps, {}> {
-    static defaultProps = {
-        source: []
+    public static defaultProps = {
+        source: [],
     };
 
-    dimensions = {
+    private dimensions = {
         width: 1024,
         height: 240,
         gutter: 20,
         labelSpace: 200,
-        barHeight: 20
+        barHeight: 20,
     };
 
-    constructor(props) {
-        super(props);
-
-    }
-    render() {
+    public render() {
         const values = this.props.source.map(item => item.value);
         const max = Math.max(...values);
         const height =
@@ -35,7 +31,7 @@ export default class HorizontalChart extends React.Component<HorizontalChartProp
             .domain([0, max])
             .range([
                 this.dimensions.gutter + this.dimensions.labelSpace,
-                this.dimensions.width
+                this.dimensions.width,
             ]);
         const xTicks = x.ticks();
         return (
@@ -45,8 +41,7 @@ export default class HorizontalChart extends React.Component<HorizontalChartProp
                 height={height + 3 * this.dimensions.gutter}
                 viewBox={`0 0 ${this.dimensions.width +
                     2 * this.dimensions.gutter} ${height +
-                    3 * this.dimensions.gutter}`}
-            >
+                    3 * this.dimensions.gutter}`}>
                 <g>
                     <line
                         className="horizontal-chart__baseline"

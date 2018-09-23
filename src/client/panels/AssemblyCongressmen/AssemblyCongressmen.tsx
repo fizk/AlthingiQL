@@ -1,27 +1,26 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
-import { Column, Row } from "../../elements/Grid";
-import Congressman from "../../elements/Congressman";
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { Column, Row } from '../../elements/Grid';
+import Congressman from '../../elements/Congressman';
 import {
     Congressman as CongressmanType,
-    Assembly as AssemblyType
+    Assembly as AssemblyType,
 } from '../../../../@types';
 
-type AssemblyCongressmenProps = {
-    assembly?: number,
-    congressmen: CongressmanType[],
-    substitutes: (CongressmanType & {assembly: AssemblyType})[]
-};
-export default class AssemblyCongressmen extends React.Component<
-    AssemblyCongressmenProps,
-    {}
-> {
-    static defaultProps = {
+interface Props {
+    assembly?: number;
+    congressmen: CongressmanType[];
+    substitutes: Array<CongressmanType & {assembly: AssemblyType}>;
+}
+
+export default class AssemblyCongressmen extends React.Component<Props, {}> {
+    public static defaultProps = {
         assembly: undefined,
         congressmen: [],
-        substitutes: []
+        substitutes: [],
     };
-    render() {
+
+    public render() {
         return (
             <Row>
                 <Column>

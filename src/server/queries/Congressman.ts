@@ -11,6 +11,7 @@ export default {
             type: new GraphQLNonNull(GraphQLInt),
         },
     },
+
     resolve(root, {congressman, assembly}, {client}) {
         return client.get(`/thingmenn/${congressman}`)
             .then(congressmanObject => ({

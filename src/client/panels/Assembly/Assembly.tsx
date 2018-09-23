@@ -1,18 +1,19 @@
+/* tslint:disable:max-line-length */
 import * as React from 'react';
-import {Fragment} from "react";
-import {Link} from "react-router-dom";
-import {Column, Row} from "../../elements/Grid";
-import DateAndCountChart from "../../elements/DateAndCountChart";
-import PartyPieChart from "../../elements/PartyPieChart";
-import SeatChart from "../../elements/SeatChart";
-import PieChart from "../../elements/PieChart";
-import Paper from "../../elements/Paper";
-import Congressman from "../../elements/Congressman";
-import {H2} from "../../elements/Headline";
-import Section from "../../elements/Section";
+import {Fragment} from 'react';
+import {Link} from 'react-router-dom';
+import {Column, Row} from '../../elements/Grid';
+import DateAndCountChart from '../../elements/DateAndCountChart';
+import PartyPieChart from '../../elements/PartyPieChart';
+import SeatChart from '../../elements/SeatChart';
+import PieChart from '../../elements/PieChart';
+import Paper from '../../elements/Paper';
+import Congressman from '../../elements/Congressman';
+import {H2} from '../../elements/Headline';
+import Section from '../../elements/Section';
 import IssueTypeSummary from '../../elements/IssueTypeSummary';
 import PartySpeechSummary from '../../elements/PartySpeechSummary';
-import {billsPerformance, reduceBillsByStatus, mapBillStatusToKey} from '../../utils/bills'
+import {billsPerformance, reduceBillsByStatus, mapBillStatusToKey} from '../../utils/bills';
 import {
     BillBadge,
     InquiryBadge,
@@ -21,53 +22,53 @@ import {
     ParliamentaryResolutionBadge,
     ReportBadge,
     RequestForReportBadge,
-    WrittenInquiryBadge
-} from "../../elements/IssueBadge";
+    WrittenInquiryBadge,
+} from '../../elements/IssueBadge';
 import {
     Assembly as AssemblyType,
     Congressman as CongressmanType,
     Issue as IssueType,
-    AssemblySummary as AssemblySummaryType
-} from '../../../../@types'
-import "./index.scss";
+    AssemblySummary as AssemblySummaryType,
+} from '../../../../@types';
+import './index.scss';
 
-type AssemblyProps = {
-    assembly: AssemblyType,
-    summary: AssemblySummaryType,
-    speakMost: {
+interface Props {
+    assembly: AssemblyType;
+    summary: AssemblySummaryType;
+    speakMost: Array<{
         congressman: CongressmanType,
-        value: number
-    }[],
-    speakLeast: {
+        value: number,
+    }>;
+    speakLeast: Array<{
         congressman: CongressmanType,
-        value: number
-    }[],
-    questioner: {
+        value: number,
+    }>;
+    questioner: Array<{
         congressman?: CongressmanType,
-        value: number
-    }[],
-    resolutionaries: {
+        value: number,
+    }>;
+    resolutionaries: Array<{
         congressman: CongressmanType,
-        value: number
-    }[],
-    bills: {
+        value: number,
+    }>;
+    bills: Array<{
         congressman: CongressmanType,
-        value: number
-    }[],
-    issues?: {
+        value: number,
+    }>;
+    issues?: Array<{
         issue?: IssueType,
-        value?: number
-    }[]
-};
+        value?: number,
+    }>;
+}
 
-export default class Assembly extends React.Component<AssemblyProps, {}> {
-    static defaultProps = {
+export default class Assembly extends React.Component<Props, {}> {
+    public static defaultProps = {
         assembly: {
             id: undefined,
             period: {
                 from: undefined,
-                to: undefined
-            }
+                to: undefined,
+            },
         },
         summary: {
             categories: [],
@@ -81,19 +82,19 @@ export default class Assembly extends React.Component<AssemblyProps, {}> {
                 id: undefined,
                 date: undefined,
                 title: undefined,
-                description: undefined
+                description: undefined,
             },
-            electionResults: []
+            electionResults: [],
         },
         speakMost: [],
         speakLeast: [],
         questioner: [],
         resolutionaries: [],
         bills: [],
-        issues: []
+        issues: [],
     };
 
-    render() {
+    public render() {
         return (
             <Fragment>
                 <section className="assembly-page-grid">
@@ -129,7 +130,7 @@ export default class Assembly extends React.Component<AssemblyProps, {}> {
                                         <h2>Stjórnarfrumvörp</h2>
                                         <PieChart source={Object.entries(reduceBillsByStatus(this.props.summary.governmentBills)).map(([key, value]) => ({
                                                 value: Number(value),
-                                                key: String(key)
+                                                key: String(key),
                                             }))}
                                         />
                                         <h2>
@@ -150,81 +151,79 @@ export default class Assembly extends React.Component<AssemblyProps, {}> {
                     </article>
                     <article className="assembly-page-grid__popular">
                         <ul className="assembly-issues-panel__list">
-                            {this.props.issues.map(
-                                issue =>
-                                    ({
-                                        a: (
-                                            <li key={`issue-${issue.issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
-                                                <ParliamentaryResolutionBadge issue={issue.issue}
-                                                    congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
-                                                    {issue.value}
-                                                </ParliamentaryResolutionBadge>
-                                            </li>
-                                        ),
-                                        b: (
-                                            <li key={`issue-${issue.issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
-                                                <RequestForReportBadge issue={issue.issue}
-                                                    congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
-                                                    {issue.value}
-                                                </RequestForReportBadge>
-                                            </li>
-                                        ),
-                                        f: (
-                                            <li key={`issue-${issue.issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
-                                                <MeetingPostponementBadge issue={issue.issue}
-                                                    congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
-                                                    {issue.value}
-                                                </MeetingPostponementBadge>
-                                            </li>
-                                        ),
-                                        l: (
-                                            <li key={`issue-${issue.issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--lg">
-                                                <BillBadge issue={issue.issue}
-                                                    congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
-                                                    {issue.value}
-                                                </BillBadge>
-                                            </li>
-                                        ),
-                                        m: (
-                                            <li key={`issue-${issue.issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
-                                                <InquiryBadge issue={issue.issue}
-                                                    congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
-                                                    {issue.value}
-                                                </InquiryBadge>
-                                            </li>
-                                        ),
-                                        n: (
-                                            <li key={`issue-${issue.issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
-                                                <OpinionBadge issue={issue.issue}>
-                                                    {issue.value}
-                                                </OpinionBadge>
-                                            </li>
-                                        ),
-                                        q: (
-                                            <li key={`issue-${issue.issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
-                                                <WrittenInquiryBadge issue={issue.issue}
-                                                    congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
-                                                    {issue.value}
-                                                </WrittenInquiryBadge>
-                                            </li>
-                                        ),
-                                        s: (
-                                            <li key={`issue-${issue.issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
-                                                <ReportBadge issue={issue.issue}
-                                                    congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
-                                                    {issue.value}
-                                                </ReportBadge>
-                                            </li>
-                                        )
-                                    }[issue.issue.type])
+                            {this.props.issues.map(issue => ({
+                                a: (
+                                    <li key={`issue-${issue.issue.id}`}
+                                        className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
+                                        <ParliamentaryResolutionBadge issue={issue.issue}
+                                            congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
+                                            {issue.value}
+                                        </ParliamentaryResolutionBadge>
+                                    </li>
+                                ),
+                                b: (
+                                    <li key={`issue-${issue.issue.id}`}
+                                        className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
+                                        <RequestForReportBadge issue={issue.issue}
+                                            congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
+                                            {issue.value}
+                                        </RequestForReportBadge>
+                                    </li>
+                                ),
+                                f: (
+                                    <li key={`issue-${issue.issue.id}`}
+                                        className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
+                                        <MeetingPostponementBadge issue={issue.issue}
+                                            congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
+                                            {issue.value}
+                                        </MeetingPostponementBadge>
+                                    </li>
+                                ),
+                                l: (
+                                    <li key={`issue-${issue.issue.id}`}
+                                        className="assembly-issues-panel__list-item assembly-issues-panel__list-item--lg">
+                                        <BillBadge issue={issue.issue}
+                                            congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
+                                            {issue.value}
+                                        </BillBadge>
+                                    </li>
+                                ),
+                                m: (
+                                    <li key={`issue-${issue.issue.id}`}
+                                        className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
+                                        <InquiryBadge issue={issue.issue}
+                                            congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
+                                            {issue.value}
+                                        </InquiryBadge>
+                                    </li>
+                                ),
+                                n: (
+                                    <li key={`issue-${issue.issue.id}`}
+                                        className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
+                                        <OpinionBadge issue={issue.issue}>
+                                            {issue.value}
+                                        </OpinionBadge>
+                                    </li>
+                                ),
+                                q: (
+                                    <li key={`issue-${issue.issue.id}`}
+                                        className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
+                                        <WrittenInquiryBadge issue={issue.issue}
+                                            congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
+                                            {issue.value}
+                                        </WrittenInquiryBadge>
+                                    </li>
+                                ),
+                                s: (
+                                    <li key={`issue-${issue.issue.id}`}
+                                        className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm">
+                                        <ReportBadge issue={issue.issue}
+                                            congressman={issue.issue.proponents.reduce((a, b) => b, undefined)}>
+                                            {issue.value}
+                                        </ReportBadge>
+                                    </li>
+                                ),
+                            }[issue.issue.type]),
                             )}
                         </ul>
                     </article>
@@ -237,7 +236,7 @@ export default class Assembly extends React.Component<AssemblyProps, {}> {
                                 value: party.time,
                                 key: party.party.name,
                                 label: party.party.name,
-                                color: `#${party.party.color}`
+                                color: `#${party.party.color}`,
                             }))}
                             formatValue={(label, value, total) => `${label} (${Math.round(value / total * 100)}%)`}
                         />
@@ -319,8 +318,8 @@ export default class Assembly extends React.Component<AssemblyProps, {}> {
                             source={this.props.summary.electionResults.map(
                                 item => ({
                                     party: item.party,
-                                    value: item.results.result
-                                })
+                                    value: item.results.result,
+                                }),
                             )}
                         />
                         <div>{this.props.summary.election && this.props.summary.election.title}</div>
@@ -331,7 +330,7 @@ export default class Assembly extends React.Component<AssemblyProps, {}> {
                         <H2>Sætaskipan</H2>
                         <SeatChart source={this.props.summary.electionResults.map(item => ({
                                 party: item.party,
-                                value: item.results.seats
+                                value: item.results.seats,
                             }))}
                         />
                     </article>

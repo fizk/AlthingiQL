@@ -11,6 +11,7 @@ export default {
             type: new GraphQLNonNull(GraphQLInt),
         },
     },
+
     resolve(root, {congressman, assembly}, {client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmenn/${congressman}/atvaedagreidslur`);
     },

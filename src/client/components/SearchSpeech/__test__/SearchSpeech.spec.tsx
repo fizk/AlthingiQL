@@ -8,11 +8,9 @@ describe('<SearchSpeech />', () => {
         const tree = renderer.create(
             <Router >
                 <SearchSpeech />
-            </Router>
+            </Router>,
         ).toJSON();
 
         expect(tree).toMatchSnapshot();
     });
 });
-
-

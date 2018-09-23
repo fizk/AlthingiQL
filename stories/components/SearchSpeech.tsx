@@ -104,16 +104,9 @@ const results = [
 storiesOf('SearchSpeech', module)
     .add('search result', () => (
         <SearchSpeech assembly={1}
-                      issue={2}
-                      result={results}
-                      onSearch={action('onSearch')}
-                      onClear={action('onClear')} />
+                      issue={2} />
     ))
     .add('searching', () => (
         <SearchSpeech assembly={1}
-                      issue={2}
-                      result={[]}
-                      isSearching={true}
-                      onSearch={action('onSearch')}
-                      onClear={action('onClear')} />
+                      issue={2} />
     ));

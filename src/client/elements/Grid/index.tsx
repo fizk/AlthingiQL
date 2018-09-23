@@ -8,14 +8,13 @@ export const Grid: StatelessComponent<{fluid?: boolean}> = ({children, fluid = t
     );
 };
 
-
-type RowType = {
-    align?: 'start' | 'center' | 'end' | undefined
-    justify?: 'start' | 'center' | 'end' | 'around' | 'between'| undefined,
-    tall?: boolean
+interface RowType {
+    align?: 'start' | 'center' | 'end' | undefined;
+    justify?: 'start' | 'center' | 'end' | 'around' | 'between'| undefined;
+    tall?: boolean;
 }
 
-export const Row: StatelessComponent<RowType> = ({children, align = undefined, justify = undefined, tall = false}) => {
+export const Row: StatelessComponent<RowType> = ({children, align, justify, tall = false}) => {
     const variationsArray = ['row'];
     if (tall) {
         variationsArray.push('row-tall');
@@ -34,16 +33,16 @@ export const Row: StatelessComponent<RowType> = ({children, align = undefined, j
     );
 };
 
-type ColumnType = {
-    xs?: number | 'auto'
-    sm?: number | 'auto'
-    md?: number | 'auto'
-    lg?: number | 'auto'
-    xl?: number | 'auto'
-    align?: 'start' | 'center' | 'end' | undefined
+interface ColumnType {
+    xs?: number | 'auto';
+    sm?: number | 'auto';
+    md?: number | 'auto';
+    lg?: number | 'auto';
+    xl?: number | 'auto';
+    align?: 'start' | 'center' | 'end' | undefined;
 }
 
-export const Column: StatelessComponent<ColumnType> = ({children, sm = undefined, md = undefined, lg = undefined, xl = undefined, align = undefined}) => {
+export const Column: StatelessComponent<ColumnType> = ({children, sm, md, lg, xl, align}) => {
     const variationsArray = ['col'];
 
     if (xl) {

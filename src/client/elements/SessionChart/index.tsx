@@ -1,46 +1,45 @@
 import * as React from 'react';
-import { scaleTime } from "d3-scale";
-import { timeMonth } from "d3-time";
+import { scaleTime } from 'd3-scale';
+import { timeMonth } from 'd3-time';
+import {Period as PeriodType} from '../../../../@types';
 import './index.scss';
 
 const Map = {
-    varamaður: "a6d1fd",
-    "með varamann": "bbbbbb",
-    þingmaður: "77bc48"
+    'varamaður': 'a6d1fd',
+    'með varamann': 'bbbbbb',
+    'þingmaður': '77bc48',
 };
 
-type SessionChartProps = {
-    source?: {
-        period?: {
-            from?: string,
-            to?: string
-        },
-        type?: string
-    }[]
-};
+interface SessionChartProps {
+    source?: Array<{
+        period?: PeriodType,
+        type?: string,
+    }>;
+}
 
 export default class SessionChart extends React.Component<SessionChartProps, {}> {
-    static defaultProps = {
-        source: []
+    public static defaultProps = {
+        source: [],
     };
 
-    dimensions = {
+    public dimensions = {
         width: 920,
         height: 240,
-        gutter: 20
+        gutter: 20,
     };
 
-    minMaxDates(list) {
+    private minMaxDates(list) {
         const fromDates = list.map(item => new Date(item.period.from));
         const toDates = list.map(
-            item => (item.period.to ? new Date(item.period.to) : new Date())
+            item => (item.period.to ? new Date(item.period.to) : new Date()),
         );
         return {
             min: new Date(Math.min.apply(null, fromDates)),
-            max: new Date(Math.max.apply(null, toDates))
+            max: new Date(Math.max.apply(null, toDates)),
         };
     }
-    render() {
+
+    public render() {
         const minMaxDates = this.minMaxDates(this.props.source);
         const x = scaleTime()
             .domain([minMaxDates.min, minMaxDates.max])
@@ -53,8 +52,7 @@ export default class SessionChart extends React.Component<SessionChartProps, {}>
                 height={this.dimensions.height + 3 * this.dimensions.gutter}
                 viewBox={`0 0 ${this.dimensions.width +
                     2 * this.dimensions.gutter} ${this.dimensions.height +
-                    3 * this.dimensions.gutter}`}
-            >
+                    3 * this.dimensions.gutter}`}>
                 <g>
                     <line
                         className="date-and-count-chart__baseline"
@@ -99,7 +97,7 @@ export default class SessionChart extends React.Component<SessionChartProps, {}>
                     {this.props.source.map((period, i) => (
                         <rect
                             key={`rect-${new Date(
-                                period.period.from
+                                period.period.from,
                             ).getTime()}-${i}`}
                             x={x(new Date(period.period.from))}
                             y="10"
@@ -109,7 +107,7 @@ export default class SessionChart extends React.Component<SessionChartProps, {}>
                                 x(
                                     period.period.to
                                         ? new Date(period.period.to)
-                                        : new Date()
+                                        : new Date(),
                                 ) - x(new Date(period.period.from))
                             }
                         />

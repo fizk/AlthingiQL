@@ -8,6 +8,7 @@ export default {
             type: new GraphQLNonNull(GraphQLInt),
         },
     },
+
     resolve(root, {assembly}, {client}) {
         return client.get(`/loggjafarthing/${assembly}/efnisflokkar`);
     },

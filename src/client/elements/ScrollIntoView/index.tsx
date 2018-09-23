@@ -1,21 +1,22 @@
 import * as React from 'react';
-type ScrollIntoViewProps = {
-    active?: boolean
-};
+interface ScrollIntoViewProps {
+    active?: boolean;
+}
 
 export default class ScrollIntoView extends React.Component<ScrollIntoViewProps, {}> {
-    static defaultProps = {
-        active: false
+    public static defaultProps = {
+        active: false,
     };
 
-    element: HTMLDivElement = undefined;
+    public element: HTMLDivElement = undefined;
 
-    componentDidMount() {
+    public componentDidMount() {
         if (this.props.active) {
-            this.element.scrollIntoView({ behavior: "smooth" });
+            this.element.scrollIntoView({ behavior: 'smooth' });
         }
     }
-    render() {
+
+  public render() {
         return (
             <div ref={element => (this.element = element)}>
                 {this.props.children}

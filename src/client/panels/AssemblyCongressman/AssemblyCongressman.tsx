@@ -1,41 +1,38 @@
 import * as React from 'react';
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
-import { Column, Row } from "../../elements/Grid";
-import Congressman from "../../elements/Congressman";
-import { H2 } from "../../elements/Headline";
-import HorizontalChart from "../../elements/HorizontalChart";
-import SessionChart from "../../elements/SessionChart";
-import VoteResultPieChart from "../../elements/VoteResultPieChart";
+import {Fragment} from 'react';
+import {Link} from 'react-router-dom';
+import {Column, Row} from '../../elements/Grid';
+import Congressman from '../../elements/Congressman';
+import {H2} from '../../elements/Headline';
+import HorizontalChart from '../../elements/HorizontalChart';
+import SessionChart from '../../elements/SessionChart';
+import VoteResultPieChart from '../../elements/VoteResultPieChart';
 import {
     Person as PersonType,
-    Congressman as CongressmanType
-} from '../../../../@types'
+    Period as PeriodType,
+} from '../../../../@types';
 
-type AssemblyCongressmanProps = {
-    assembly?: number,
-    congressman?: number,
-    person?: PersonType,
-    sessions?: {
+interface Props {
+    assembly?: number;
+    congressman?: number;
+    person?: PersonType;
+    sessions?: Array<{
         id?: number,
         type?: string,
         constituency?: {
             id?: number,
-            name?: string
+            name?: string,
         },
-        period?: {
-            from?: string,
-            to?: string
-        }
-    }[],
-    votes?: {
+        period?: PeriodType,
+    }>;
+    votes?: Array<{
         count?: number,
-        vote?: string
-    }[],
-    promotedIssues?: {
+        vote?: string,
+    }>;
+    promotedIssues?: Array<{
         id?: number,
         assembly?: {
-            id?: number
+            id?: number,
         },
         name?: string,
         status?: string,
@@ -44,74 +41,76 @@ type AssemblyCongressmanProps = {
         type?: string,
         typeName?: string,
         typeSubName?: string,
-        question?: string
-    }[],
-    issueCount?: {
+        question?: string,
+    }>;
+    issueCount?: Array<{
         order?: number,
         type?: string,
         typeName?: string,
         typeSubName?: string,
         documentType?: string,
-        count?: number
-    }[],
-    categorySpeechTimes?: {
+        count?: number,
+    }>;
+    categorySpeechTimes?: Array<{
         category?: {
-            id?: number
+            id?: number,
         },
         superCategory?: {
-            id?: number
+            id?: number,
         },
         title?: string,
-        time?: number
-    }[]
-};
+        time?: number,
+    }>;
+}
 
-export default class AssemblyCongressman extends React.Component<AssemblyCongressmanProps, {}> {
-    static defaultProps = {
+export default class AssemblyCongressman extends React.Component<Props, {}> {
+    public static defaultProps = {
         assembly: undefined,
         congressman: undefined,
         person: {
             id: undefined,
             name: undefined,
             avatar: {
-                templateSrc: undefined
-            }
+                templateSrc: undefined,
+            },
         },
         sessions: [],
         votes: [],
         promotedIssues: [],
         issueCount: [],
-        categorySpeechTimes: []
+        categorySpeechTimes: [],
     };
-    chartPersentage(data) {
+
+    private chartPersentage(data) {
         const yesNo = data.filter(
-            item => item.vote === "já" || item.vote === "nei"
+            item => item.vote === 'já' || item.vote === 'nei',
         );
         const impartial = data.filter(
-            item => item.vote === "greiðir ekki atkvæði"
+            item => item.vote === 'greiðir ekki atkvæði',
         );
         const notPresent = data.filter(
             item =>
-                item.vote === "fjarverandi" ||
-                item.vote === "f: óþekktur kóði" ||
-                item.vote === "boðaði fjarvist"
+                item.vote === 'fjarverandi' ||
+                item.vote === 'f: óþekktur kóði' ||
+                item.vote === 'boðaði fjarvist',
         );
         return [
             {
-                vote: "tók afstöðu",
-                value: yesNo.reduce((a, b) => a + b.count, 0)
+                vote: 'tók afstöðu',
+                value: yesNo.reduce((a, b) => a + b.count, 0),
             },
             {
-                vote: "greiðir ekki atkvæði",
-                value: impartial.reduce((a, b) => a + b.count, 0)
+                vote: 'greiðir ekki atkvæði',
+                value: impartial.reduce((a, b) => a + b.count, 0),
             },
             {
-                vote: "fjarverandi",
-                value: notPresent.reduce((a, b) => a + b.count, 0)
-            }
+                vote: 'fjarverandi',
+                value: notPresent.reduce((a, b) => a + b.count, 0),
+            },
         ];
     }
-    render() {
+
+    public render() {
         return (
             <Fragment>
                 <Row>
@@ -128,7 +127,7 @@ export default class AssemblyCongressman extends React.Component<AssemblyCongres
                                 }
                                 return total;
                             }, [])
-                            .join(", ")}
+                            .join(', ')}
                     </Column>
                 </Row>
                 <Row>
@@ -141,7 +140,7 @@ export default class AssemblyCongressman extends React.Component<AssemblyCongres
                         <VoteResultPieChart
                             source={this.props.votes.map(vote => ({
                                 value: vote.count,
-                                vote: vote.vote
+                                vote: vote.vote,
                             }))}
                         />
                     </Column>
@@ -227,8 +226,8 @@ export default class AssemblyCongressman extends React.Component<AssemblyCongres
                             source={this.props.categorySpeechTimes.map(
                                 item => ({
                                     label: item.title,
-                                    value: item.time
-                                })
+                                    value: item.time,
+                                }),
                             )}
                         />
                     </Column>

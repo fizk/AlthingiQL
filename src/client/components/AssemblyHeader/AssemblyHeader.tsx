@@ -1,49 +1,49 @@
-import * as React from "react";
-import { H1 } from "../../elements/Headline";
-import Badge from "../../elements/Badge";
+import * as React from 'react';
+import {H1} from '../../elements/Headline';
+import Badge from '../../elements/Badge';
 import './index.scss';
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 
-type AssemblyHeaderProps = {
+interface Props {
     assembly?: {
         id?: number,
         period?: {
             from?: string,
-            to?: string
+            to?: string,
         },
         division?: {
-            majority?: {
+            majority?: Array<{
                 id?: number,
                 name?: string,
-                color?: string
-            }[],
-            minority?: {
+                color?: string,
+            }>,
+            minority?: Array<{
                 id?: number,
                 name?: string,
-                color?: string
-            }[]
-        }
-    },
-    loading?: boolean
-};
+                color?: string,
+            }>,
+        },
+    };
+    loading?: boolean;
+}
 
-export default class AssemblyHeader extends React.Component<AssemblyHeaderProps, {}> {
-    static defaultProps = {
+export default class AssemblyHeader extends React.Component<Props, {}> {
+    public static defaultProps = {
         assembly: {
             id: undefined,
             period: {
                 from: undefined,
-                to: undefined
+                to: undefined,
             },
             division: {
                 majority: [],
-                minority: []
-            }
+                minority: [],
+            },
         },
-        loading: false
+        loading: false,
     };
 
-    render() {
+    public render() {
         return (
             <div className="assembly-header">
                 <div className="assembly-header__headline">

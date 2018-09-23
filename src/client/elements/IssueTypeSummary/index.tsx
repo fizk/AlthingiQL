@@ -1,66 +1,13 @@
 import * as React from 'react';
 import {StatelessComponent} from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import './index.scss';
-import {H2} from "../Headline";
+import {H2} from '../Headline';
+import {Assembly as AssemblyType, AssemblySummary as AssemblySummaryType} from '../../../../@types';
 
-type Props = {
-    assembly: {
-        id?: number,
-        period?: {
-            from?: string,
-            to?: string
-        }
-    },
-    summary?: {
-        parties?: {
-            party?: {
-                id?: number,
-                name?: string,
-                color?: string
-            },
-            time?: number
-        }[],
-        bills?: {
-            count?: number,
-            status?: string
-        }[],
-        governmentBills?: {
-            count?: number,
-            status?: string
-        }[],
-        types?: {
-            count?: number,
-            type?: string,
-            typeName?: string,
-            typeSubName?: string
-        }[],
-        votes?: {
-            count?: number,
-            date?: string
-        }[],
-        speeches?: {
-            count?: number,
-            date?: string
-        }[],
-        election?: {
-            id?: number,
-            date?: string,
-            title?: string,
-            description?: string
-        },
-        electionResults?: {
-            party?: {
-                id?: number,
-                name?: string,
-                color?: string
-            },
-            results?: {
-                seats?: number,
-                result?: number
-            }
-        }[]
-    },
+interface Props {
+    assembly: AssemblyType;
+    summary?: AssemblySummaryType;
 }
 
 const Component: StatelessComponent<Props> = ({children, assembly, summary}) => (
@@ -92,7 +39,9 @@ const Component: StatelessComponent<Props> = ({children, assembly, summary}) => 
         </tbody>
         <tfoot>
             <tr>
-                <td className="issue-type-summary__count">{summary.types.reduce((prev, current) => prev + current.count, 0)}</td>
+                <td className="issue-type-summary__count">
+                    {summary.types.reduce((prev, current) => prev + current.count, 0)}
+                </td>
                 <td className="issue-type-summary__title" >—</td>
             </tr>
         </tfoot>

@@ -1,60 +1,62 @@
 import * as React from 'react';
-import { Row, Column } from "../../elements/Grid";
-import Congressman from "../../elements/Congressman";
-import VoteResultPieChart from "../../elements/VoteResultPieChart";
-import DocumentCongressmanVotes from "../../components/DocumentCongressmanVotes";
-import {Congressman as CongressmanType} from "../../../../@types";
+import { Row, Column } from '../../elements/Grid';
+import Congressman from '../../elements/Congressman';
+import VoteResultPieChart from '../../elements/VoteResultPieChart';
+import DocumentCongressmanVotes from '../../components/DocumentCongressmanVotes';
+import {Congressman as CongressmanType} from '../../../../@types';
 
-type IssueDocumentsProps = {
-    assembly?: number,
-    issue?: number,
-    documents?: {
+interface Props {
+    assembly?: number;
+    issue?: number;
+    documents?: Array<{
         id?: number,
         url?: string,
         date?: string,
         type?: string,
         proponents: CongressmanType[],
-        votes?: {
+        votes?: Array<{
             id?: number,
             type?: string,
             outcome?: string,
             yes?: number,
             no?: number,
             inaction?: number,
-            committee?: string
-        }[]
-    }[]
-};
+            committee?: string,
+        }>,
+    }>;
+}
 
-export default class IssueDocuments extends React.Component<IssueDocumentsProps, {}> {
-    static defaultProps = {
+export default class IssueDocuments extends React.Component<Props, {}> {
+    public static defaultProps = {
         assembly: undefined,
         issue: undefined,
-        documents: []
+        documents: [],
     };
-    formatVoteResults(vote) {
+
+    private formatVoteResults(vote) {
         const value = [];
         if (vote.yes) {
             value.push({
-                vote: "já",
-                value: vote.yes
+                vote: 'já',
+                value: vote.yes,
             });
         }
         if (vote.no) {
             value.push({
-                vote: "nei",
-                value: vote.no
+                vote: 'nei',
+                value: vote.no,
             });
         }
         if (vote.inaction) {
             value.push({
-                vote: "greiðir ekki atkvæði",
-                value: vote.inaction
+                vote: 'greiðir ekki atkvæði',
+                value: vote.inaction,
             });
         }
         return value;
     }
-    render() {
+
+    public render() {
         return (
             <Row>
                 <Column>
@@ -62,7 +64,7 @@ export default class IssueDocuments extends React.Component<IssueDocumentsProps,
                         {this.props.documents.map(document => (
                             <li key={document.id}>
                                 <a href={document.url} target="_blank">
-                                    {" "}
+                                    {' '}
                                     {document.type}
                                 </a>
                                 <time>{document.date}</time>
@@ -93,7 +95,7 @@ export default class IssueDocuments extends React.Component<IssueDocumentsProps,
                                                 <td>
                                                     <VoteResultPieChart
                                                         source={this.formatVoteResults(
-                                                            vote
+                                                            vote,
                                                         )}
                                                         formatValue={value =>
                                                             ` ${value}`

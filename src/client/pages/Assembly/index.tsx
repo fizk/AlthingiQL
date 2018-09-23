@@ -1,18 +1,19 @@
 import * as React from 'react';
-import { Fragment } from "react";
-import { AssemblyNavigation } from "../../elements/AssemblyNavigation";
-import AssemblyHeader from "../../components/AssemblyHeader";
-import { Helmet } from "react-helmet";
+import { Fragment } from 'react';
+import { AssemblyNavigation } from '../../elements/AssemblyNavigation';
+import AssemblyHeader from '../../components/AssemblyHeader';
+import { Helmet } from 'react-helmet';
 
-type AssemblyProps = {
-    assembly?: number
-};
+interface Props {
+    assembly?: number;
+}
 
-export default class Assembly extends React.Component<AssemblyProps, {}> {
-    static defaultProps = {
-        assembly: undefined
+export default class Assembly extends React.Component<Props, {}> {
+    public static defaultProps = {
+        assembly: undefined,
     };
-    render() {
+
+    public render() {
         return (
             <Fragment>
                 <Helmet>

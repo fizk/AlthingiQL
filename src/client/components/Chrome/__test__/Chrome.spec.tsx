@@ -8,11 +8,9 @@ describe('<Chrome />', () => {
         const tree = renderer.create(
             <Router >
                 <Chrome />
-            </Router>
+            </Router>,
         ).toJSON();
 
         expect(tree).toMatchSnapshot();
     });
 });
-
-

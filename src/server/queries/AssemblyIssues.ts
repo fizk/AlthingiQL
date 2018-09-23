@@ -33,6 +33,7 @@ export default {
             type: GraphQLString,
         },
     },
+
     resolve(root, {assembly, cursor, type, category}, {client}) {
         const queries = [];
         if (type) {

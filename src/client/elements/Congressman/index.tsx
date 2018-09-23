@@ -1,27 +1,28 @@
-import * as React from "react";
-import Badge from "../Badge";
-import Avatar from "../Avatar";
-import { H3 } from "../Headline";
-import {Person as PersonType, Party as PartyType} from '../../../../@types'
+import * as React from 'react';
+import Badge from '../Badge';
+import Avatar from '../Avatar';
+import { H3 } from '../Headline';
+import {Person as PersonType, Party as PartyType} from '../../../../@types';
 import './index.scss';
 
-type CongressmanProps = {
-    congressman: PersonType,
-    party?: PartyType
-};
+interface Props {
+    congressman: PersonType;
+    party?: PartyType;
+}
 
-export default class Congressman extends React.Component<CongressmanProps, {}> {
-    static defaultProps = {
+export default class Congressman extends React.Component<Props, {}> {
+    public static defaultProps = {
         congressman: {
             id: undefined,
             name: undefined,
             avatar: {
-                templateSrc: undefined
-            }
+                templateSrc: undefined,
+            },
         },
-        party: undefined
+        party: undefined,
     };
-    render() {
+
+    public render() {
         return (
             <article className="congressman">
                 <header className="congressman__avatar">
@@ -39,7 +40,7 @@ export default class Congressman extends React.Component<CongressmanProps, {}> {
                     </div>
                 )}
                 <div className="congressman__body">
-                    <H3 variations={["ellipsis"]}>
+                    <H3 variations={['ellipsis']}>
                         {this.props.congressman.name}
                     </H3>
                     {this.props.children}

@@ -11,6 +11,7 @@ export default {
             type: new GraphQLNonNull(GraphQLInt),
         },
     },
+
     resolve(root, {issue, assembly}, {client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmal/${issue}/ferli`);
     },

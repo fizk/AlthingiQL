@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import './index.scss';
 
 export const NavTab = ({ children }) => (
@@ -11,8 +11,7 @@ export const NavTabItem = props => (
         exact={true}
         className="nav-tab__item"
         activeClassName="nav-tab__item nav-tab__item--active"
-        {...props}
-    >
+        {...props}>
         {props.children}
     </NavLink>
 );

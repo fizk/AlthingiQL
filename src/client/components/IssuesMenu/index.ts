@@ -1,12 +1,6 @@
 import {graphql, compose, gql} from 'react-apollo';
 import IssuesMenu from './IssuesMenu';
-
-interface AssemblyCategorySummary {
-    id: number;
-    superCategoryId: number;
-    title: string;
-    count: number;
-}
+import {AssemblyCategorySummary} from '../../../../@types';
 
 const assemblyQuery = gql`
     query assemblyIssue($assembly: Int!) {

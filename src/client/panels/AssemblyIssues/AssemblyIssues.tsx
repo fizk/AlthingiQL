@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Row, Column } from "../../elements/Grid";
-import { SearchIssueWithStore } from "../../components/SearchIssue";
-import Loading from "../../elements/Loading";
-import Blank from "../../elements/Blank";
-import IssuesMenu from "../../components/IssuesMenu";
+import { Row, Column } from '../../elements/Grid';
+import { SearchIssueWithStore } from '../../components/SearchIssue';
+import Loading from '../../elements/Loading';
+import Blank from '../../elements/Blank';
+import IssuesMenu from '../../components/IssuesMenu';
+import classVariations from '../../utils/classVariations';
 import {
     BillBadge,
     InquiryBadge,
@@ -12,13 +13,13 @@ import {
     ParliamentaryResolutionBadge,
     ReportBadge,
     RequestForReportBadge,
-    WrittenInquiryBadge
-} from "../../elements/IssueBadge";
-import {Congressman as CongressmanType, Assembly as AssemblyType} from '../../../../@types'
+    WrittenInquiryBadge,
+} from '../../elements/IssueBadge';
+import {Congressman as CongressmanType, Assembly as AssemblyType} from '../../../../@types';
 import './index.scss';
 
-type AssemblyIssuesProps = {
-    issues?: {
+interface Props {
+    issues?: Array<{
         id?: number,
         assembly: AssemblyType,
         name?: string,
@@ -27,146 +28,129 @@ type AssemblyIssuesProps = {
         goal?: string,
         typeName?: string,
         proponentsCount?: number,
-        proponents: CongressmanType[]
-    }[],
-    assembly?: number,
-    done?: boolean,
-    loadMore?: (...args: any[]) => any,
-    loading?: boolean,
+        proponents: CongressmanType[],
+    }>;
+    assembly?: number;
+    done?: boolean;
+    loadMore?: (...args: any[]) => any;
+    loading?: boolean;
     filter?: {
         type?: string,
-        category?: string
-    }
-};
+        category?: string,
+    };
+}
 
-export default class AssemblyIssues extends React.Component<AssemblyIssuesProps, {}> {
-    static defaultProps = {
+export default class AssemblyIssues extends React.Component<Props, {}> {
+    public static defaultProps = {
         issues: [],
         assembly: undefined,
         filter: {
             type: undefined,
-            category: undefined
+            category: undefined,
         },
         done: true,
         loadMore: () => {},
-        loading: false
+        loading: false,
     };
-    render() {
+
+    public render() {
         return (
             <Row>
                 <Column sm={12} md={8}>
                     {this.props.issues.length !== 0 && (
                         <ul className="assembly-issues-panel__list">
-                            {this.props.issues.map(
-                                issue =>
-                                    ({
-                                        a: (
-                                            <li
-                                                key={`issue-${issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--md"
-                                            >
-                                                <ParliamentaryResolutionBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a, b) => b,
-                                                        undefined
-                                                    )}
-                                                />
-                                            </li>
-                                        ),
-                                        b: (
-                                            <li
-                                                key={`issue-${issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm"
-                                            >
-                                                <RequestForReportBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a, b) => b,
-                                                        undefined
-                                                    )}
-                                                />
-                                            </li>
-                                        ),
-                                        f: (
-                                            <li
-                                                key={`issue-${issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm"
-                                            >
-                                                <MeetingPostponementBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a, b) => b,
-                                                        undefined
-                                                    )}
-                                                />
-                                            </li>
-                                        ),
-                                        l: (
-                                            <li
-                                                key={`issue-${issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--lg"
-                                            >
-                                                <BillBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a, b) => b,
-                                                        undefined
-                                                    )}
-                                                />
-                                            </li>
-                                        ),
-                                        m: (
-                                            <li
-                                                key={`issue-${issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm"
-                                            >
-                                                <InquiryBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a, b) => b,
-                                                        undefined
-                                                    )}
-                                                />
-                                            </li>
-                                        ),
-                                        n: (
-                                            <li
-                                                key={`issue-${issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm"
-                                            >
-                                                <OpinionBadge issue={issue} />
-                                            </li>
-                                        ),
-                                        q: (
-                                            <li
-                                                key={`issue-${issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm"
-                                            >
-                                                <WrittenInquiryBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a, b) => b,
-                                                        undefined
-                                                    )}
-                                                />
-                                            </li>
-                                        ),
-                                        s: (
-                                            <li
-                                                key={`issue-${issue.id}`}
-                                                className="assembly-issues-panel__list-item assembly-issues-panel__list-item--sm"
-                                            >
-                                                <ReportBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a, b) => b,
-                                                        undefined
-                                                    )}
-                                                />
-                                            </li>
-                                        )
-                                    }[issue.type])
+                            {this.props.issues.map(issue => ({
+                                a: (
+                                    <li className={classVariations('assembly-issues-panel__list-item', ['md'])}
+                                        key={`issue-${issue.id}`}>
+                                        <ParliamentaryResolutionBadge
+                                            issue={issue}
+                                            congressman={issue.proponents.reduce(
+                                                (a, b) => b,
+                                                undefined,
+                                            )}
+                                        />
+                                    </li>
+                                ),
+                                b: (
+                                    <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
+                                        key={`issue-${issue.id}`}>
+                                        <RequestForReportBadge
+                                            issue={issue}
+                                            congressman={issue.proponents.reduce(
+                                                (a, b) => b,
+                                                undefined,
+                                            )}
+                                        />
+                                    </li>
+                                ),
+                                f: (
+                                    <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
+                                        key={`issue-${issue.id}`} >
+                                        <MeetingPostponementBadge
+                                            issue={issue}
+                                            congressman={issue.proponents.reduce(
+                                                (a, b) => b,
+                                                undefined,
+                                            )}
+                                        />
+                                    </li>
+                                ),
+                                l: (
+                                    <li className={classVariations('assembly-issues-panel__list-item', ['lg'])}
+                                        key={`issue-${issue.id}`} >
+                                        <BillBadge
+                                            issue={issue}
+                                            congressman={issue.proponents.reduce(
+                                                (a, b) => b,
+                                                undefined,
+                                            )}
+                                        />
+                                    </li>
+                                ),
+                                m: (
+                                    <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
+                                        key={`issue-${issue.id}`} >
+                                        <InquiryBadge
+                                            issue={issue}
+                                            congressman={issue.proponents.reduce(
+                                                (a, b) => b,
+                                                undefined,
+                                            )}
+                                        />
+                                    </li>
+                                ),
+                                n: (
+                                    <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
+                                        key={`issue-${issue.id}`} >
+                                        <OpinionBadge issue={issue} />
+                                    </li>
+                                ),
+                                q: (
+                                    <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
+                                        key={`issue-${issue.id}`} >
+                                        <WrittenInquiryBadge
+                                            issue={issue}
+                                            congressman={issue.proponents.reduce(
+                                                (a, b) => b,
+                                                undefined,
+                                            )}
+                                        />
+                                    </li>
+                                ),
+                                s: (
+                                    <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
+                                        key={`issue-${issue.id}`} >
+                                        <ReportBadge
+                                            issue={issue}
+                                            congressman={issue.proponents.reduce(
+                                                (a, b) => b,
+                                                undefined,
+                                            )}
+                                        />
+                                    </li>
+                                ),
+                            }[issue.type]),
                             )}
                         </ul>
                     )}
@@ -178,7 +162,7 @@ export default class AssemblyIssues extends React.Component<AssemblyIssuesProps,
                     )}
                 </Column>
                 <Column sm={1} md={4}>
-                    <nav style={{ position: "sticky", top: 0 }}>
+                    <nav style={{ position: 'sticky', top: 0 }}>
                         <SearchIssueWithStore assembly={this.props.assembly} />
                         <IssuesMenu
                             assembly={this.props.assembly}

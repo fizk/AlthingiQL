@@ -1,5 +1,5 @@
-import * as React from "react";
-import {StatelessComponent} from "react";
+import * as React from 'react';
+import {StatelessComponent} from 'react';
 import './index.scss';
 
 export const ListHorizontal: StatelessComponent<{}> = ({ children }) => (

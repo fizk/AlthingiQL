@@ -13,6 +13,7 @@ export default new GraphQLObjectType({
         },
     },
 });
+
 export const CursorInput = new GraphQLInputObjectType({
     name: 'CursorInput',
     fields: {

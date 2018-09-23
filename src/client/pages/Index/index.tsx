@@ -1,8 +1,9 @@
 import * as React from 'react';
 
 export default class Index extends React.Component<{}, {}> {
-    static defaultProps = {};
-    render() {
+    public static defaultProps = {};
+
+    public render() {
         return <div>index</div>;
     }
 }

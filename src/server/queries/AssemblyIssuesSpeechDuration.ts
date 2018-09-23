@@ -1,6 +1,4 @@
-import {GraphQLBoolean, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
-import Issue from '../types/Issue';
-import Cursor, {CursorInput} from '../types/Cursor';
+import {GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLString} from 'graphql';
 import IssueValue from '../types/IssueValue';
 
 export default {
@@ -16,6 +14,7 @@ export default {
             type: GraphQLString,
         },
     },
+
     resolve(root, {assembly, size, order}, {client}) {
         const queryArray = [];
 

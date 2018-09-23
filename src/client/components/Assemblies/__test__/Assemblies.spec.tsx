@@ -8,7 +8,7 @@ describe('<Assemblies />', () => {
         const tree = renderer.create(
             <Router >
                 <Assemblies assemblies={undefined} />
-            </Router>
+            </Router>,
         ).toJSON();
 
         expect(tree).toMatchSnapshot();
@@ -31,17 +31,15 @@ describe('<Assemblies />', () => {
                     id: 2,
                     name: 'party',
                     color: '123123',
-                }]
-            }
+                }],
+            },
         }];
         const tree = renderer.create(
             <Router >
                 <Assemblies assemblies={assemblies} />
-            </Router>
+            </Router>,
         ).toJSON();
 
         expect(tree).toMatchSnapshot();
     });
 });
-
-

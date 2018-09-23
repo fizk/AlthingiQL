@@ -11,6 +11,7 @@ export default {
             type: new GraphQLNonNull(GraphQLString),
         },
     },
+
     resolve(root, {assembly, query}, {client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmal?leit=${encodeURI(query)}`);
     },

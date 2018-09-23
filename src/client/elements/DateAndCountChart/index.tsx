@@ -1,41 +1,43 @@
-import * as React from "react";
-import { scaleTime, scaleLinear } from "d3-scale";
-import { timeMonth } from "d3-time";
+import * as React from 'react';
+import { scaleTime, scaleLinear } from 'd3-scale';
+import { timeMonth } from 'd3-time';
 import './index.scss';
 
-type DateAndCountChartProps = {
-    source?: {
+interface Props {
+    source?: Array<{
         count?: number,
-        date?: string
-    }[]
-};
+        date?: string,
+    }>;
+}
 
-export default class DateAndCountChart extends React.Component<DateAndCountChartProps, {}> {
-    static defaultProps = {
-        source: []
+export default class DateAndCountChart extends React.Component<Props, {}> {
+    public static defaultProps = {
+        source: [],
     };
 
-    dimensions = {
+    public dimensions = {
         width: 920,
         height: 240,
-        gutter: 20
+        gutter: 20,
     };
 
-    minMaxCount(list) {
+    private minMaxCount(list) {
         const values = list.map(item => item.count);
         return {
             min: Math.min(...values),
-            max: Math.max(...values)
+            max: Math.max(...values),
         };
     }
-    minMaxDates(list) {
+
+    private minMaxDates(list) {
         const dates = list.map(item => new Date(item.date));
         return {
             min: new Date(Math.min.apply(null, dates)),
-            max: new Date(Math.max.apply(null, dates))
+            max: new Date(Math.max.apply(null, dates)),
         };
     }
-    render() {
+
+    public render() {
         const minMaxDates = this.minMaxDates(this.props.source);
         const minMaxCount = this.minMaxCount(this.props.source);
         const x = scaleTime()
@@ -53,8 +55,7 @@ export default class DateAndCountChart extends React.Component<DateAndCountChart
                 height={this.dimensions.height + 3 * this.dimensions.gutter}
                 viewBox={`0 0 ${this.dimensions.width +
                     2 * this.dimensions.gutter} ${this.dimensions.height +
-                    3 * this.dimensions.gutter}`}
-            >
+                    3 * this.dimensions.gutter}`}>
                 <g>
                     <line
                         className="date-and-count-chart__baseline"

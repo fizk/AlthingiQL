@@ -1,17 +1,18 @@
-import * as React from "react";
-import { NavTab, NavTabItem } from "../NavTab";
+import * as React from 'react';
+import { NavTab, NavTabItem } from '../NavTab';
 
-type AssemblyIssueNavigationProps = {
-    assembly?: number,
-    issue?: number
-};
+interface Props {
+    assembly?: number;
+    issue?: number;
+}
 
-export default class AssemblyIssueNavigation extends React.Component<AssemblyIssueNavigationProps, {}> {
-    static defaultProps = {
+export default class AssemblyIssueNavigation extends React.Component<Props, {}> {
+    public static defaultProps = {
         assembly: undefined,
-        issue: undefined
+        issue: undefined,
     };
-    render() {
+
+  public render() {
         return (
             <nav>
                 <NavTab>

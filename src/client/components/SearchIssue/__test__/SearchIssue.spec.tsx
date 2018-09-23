@@ -8,7 +8,7 @@ describe('<SearchIssue />', () => {
         const tree = renderer.create(
             <Router >
                 <SearchIssue />
-            </Router>
+            </Router>,
         ).toJSON();
 
         expect(tree).toMatchSnapshot();
@@ -20,7 +20,7 @@ describe('<SearchIssue />', () => {
             result: [{
                 id: 1,
                 assembly: {
-                    id: 2
+                    id: 2,
                 },
                 category: 'category',
                 name: 'name',
@@ -40,12 +40,15 @@ describe('<SearchIssue />', () => {
                 proponents: [{
                     id: 3,
                     name: 'name',
+                    avatar: {
+                        templateSrc: '',
+                    },
                     party: {
                         id: 4,
                         name: 'name',
                         color: '123123',
                     },
-                }]
+                }],
             }],
             isSearching: false,
             onSearch: () => {},
@@ -54,11 +57,9 @@ describe('<SearchIssue />', () => {
         const tree = renderer.create(
             <Router >
                 <SearchIssue {...data} />
-            </Router>
+            </Router>,
         ).toJSON();
 
         expect(tree).toMatchSnapshot();
     });
 });
-
-

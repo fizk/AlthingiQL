@@ -149,4 +149,5 @@ app.get('*', (request, response) => {
     // });
 });
 
+// tslint:disable-next-line:no-console
 app.listen(serverConfig.port, () => console.log(`Server started on ${serverConfig.port}`));
