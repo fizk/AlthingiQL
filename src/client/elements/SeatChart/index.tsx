@@ -1,8 +1,10 @@
 import * as React from 'react';
 import './index.scss';
+// import {Party as PartyType} from '../../../../@types';
 
 interface Props {
     source?: Array<{
+        // party?: PartyType,
         party?: any,
         value?: number,
     }>;

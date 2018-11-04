@@ -139,6 +139,13 @@ export interface Speech {
     iteration: string;
     position: number;
 }
+export interface Plenary {
+    id: string;
+    name: string;
+    assembly: Assembly;
+    from: string;
+    to: string;
+}
 
 declare global {
     interface Window {

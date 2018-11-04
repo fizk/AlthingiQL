@@ -9,9 +9,11 @@ import {default as AssemblyIssuePanel} from './panels/AssemblyIssue';
 import {default as AssemblyIssuesPanel} from './panels/AssemblyIssues';
 import {default as IssueDocumentsPanel} from './panels/IssueDocuments';
 import {default as IssueSpeechesPanel} from './panels/IssueSpeeches';
+import {default as AssemblyPlenariesPanel} from './panels/AssemblyPlenaries';
 import Assembly from './pages/Assembly';
 import Issue from './pages/Issue';
 import Index from './pages/Index';
+
 
 //@todo maybe move this to somewhere else and test it?
 const parse = (location: string) => {
@@ -63,6 +65,18 @@ export default () => (
                                 <Assembly  assembly={Number(match.params.assembly)}>
                                     <AssemblyIssuesPanel assembly={Number(match.params.assembly)}
                                         filter={parseIssueType(parse(location.search.slice(1)))} />
+                                </Assembly>
+                            )
+                        }/>
+                        <Route exact={true} path="/loggjafarthing/:assembly/thingfundir" render={({match, location }) => (
+                                <Assembly  assembly={Number(match.params.assembly)}>
+                                    <AssemblyPlenariesPanel assembly={Number(match.params.assembly)} />
+                                </Assembly>
+                            )
+                        }/>
+                        <Route exact={true} path="/loggjafarthing/:assembly/thingfundir/:plenary" render={({match, location }) => (
+                                <Assembly  assembly={Number(match.params.assembly)}>
+                                    <AssemblyPlenariesPanel assembly={Number(match.params.assembly)} />
                                 </Assembly>
                             )
                         }/>
