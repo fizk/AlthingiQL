@@ -2,41 +2,56 @@
 
 exports[`<IssuesMenu /> data 1`] = `
 Array [
-  <h4
-    className="headline-3"
+  <h3
+    className="headline-2"
   >
     Málstegund
-  </h4>,
-  <ul>
-    <li>
+  </h3>,
+  <ul
+    className="issue-menu__issue"
+  >
+    <li
+      className="issue-menu__issue-item"
+    >
       <a
         href="/loggjafarthing/1/thingmal?tegund=type"
         onClick={[Function]}
       >
-        type name
+        sub type name
       </a>
-      sub type name
-       - (
-      1
-      )
+      <span
+        className="issue-menu__issue-count"
+      >
+        (
+        1
+        )
+      </span>
     </li>
   </ul>,
-  <h4
-    className="headline-3"
+  <h3
+    className="headline-2"
   >
     Efnisflokkar
-  </h4>,
-  <ul>
-    <li>
+  </h3>,
+  <ul
+    className="issue-menu__category"
+  >
+    <li
+      className="issue-menu__category-item"
+    >
       <a
-        href="/loggjafarthing/1/thingmal?flokkur=2"
+        href="/loggjafarthing/1/thingmal?flokkur=undefined"
         onClick={[Function]}
       >
         title
       </a>
-      (
-      3
-      )
+      <span
+        className="issue-menu__category-count"
+      >
+        (
+        3
+        )
+      </span>
     </li>
   </ul>,
 ]
@@ -44,17 +59,21 @@ Array [
 
 exports[`<IssuesMenu /> default props 1`] = `
 Array [
-  <h4
-    className="headline-3"
+  <h3
+    className="headline-2"
   >
     Málstegund
-  </h4>,
-  <ul />,
-  <h4
-    className="headline-3"
+  </h3>,
+  <ul
+    className="issue-menu__issue"
+  />,
+  <h3
+    className="headline-2"
   >
     Efnisflokkar
-  </h4>,
-  <ul />,
+  </h3>,
+  <ul
+    className="issue-menu__category"
+  />,
 ]
 `;

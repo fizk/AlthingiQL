@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {Fragment} from 'react';
 import { Link } from 'react-router-dom';
-import { H3 } from '../../elements/Headline';
+import {H2} from '../../elements/Headline';
+import './index.scss';
 
 interface Props {
     assembly?: number;
@@ -12,7 +13,7 @@ interface Props {
         typeSubName?: string,
     }>;
     categories?: Array<{
-        categoryId?: number,
+        id?: number,
         superCategoryId?: number,
         title?: string,
         count?: number,
@@ -31,33 +32,30 @@ export default class IssuesMenu extends React.Component<Props, {}> {
     public render() {
         return (
             <Fragment>
-                <H3>Málstegund</H3>
-                <ul>
+                <H2>Málstegund</H2>
+                <ul className="issue-menu__issue">
                     {this.props.types.map(type => (
-                        <li key={`type-${type.type}`}>
-                            <Link
-                                to={`/loggjafarthing/${
-                                    this.props.assembly
-                                }/thingmal?tegund=${type.type}`}
-                            >
-                                {type.typeName}
+                        <li key={`type-${type.type}`} className="issue-menu__issue-item">
+                            <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?tegund=${type.type}`}>
+                                {type.typeSubName}
                             </Link>
-                            {type.typeSubName} - ({type.count})
+                            <span className="issue-menu__issue-count">
+                                ({type.count})
+                            </span>
                         </li>
                     ))}
                 </ul>
-                <H3>Efnisflokkar</H3>
-                <ul>
+
+                <H2>Efnisflokkar</H2>
+                <ul className="issue-menu__category">
                     {this.props.categories.map(category => (
-                        <li key={`category-${category.categoryId}`}>
-                            <Link
-                                to={`/loggjafarthing/${
-                                    this.props.assembly
-                                }/thingmal?flokkur=${category.categoryId}`}
-                            >
+                        <li key={`category-${category.id}`} className="issue-menu__category-item">
+                            <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?flokkur=${category.id}`}>
                                 {category.title}
                             </Link>
-                            ({category.count})
+                            <span className="issue-menu__category-count">
+                                ({category.count})
+                            </span>
                         </li>
                     ))}
                 </ul>

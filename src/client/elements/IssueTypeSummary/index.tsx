@@ -3,11 +3,16 @@ import {StatelessComponent} from 'react';
 import { Link } from 'react-router-dom';
 import './index.scss';
 import {H2} from '../Headline';
-import {Assembly as AssemblyType, AssemblySummary as AssemblySummaryType} from '../../../../@types';
+// import {Assembly as AssemblyType, AssemblySummary as AssemblySummaryType} from '../../../../@types';
+
+// interface Props {
+//     assembly: AssemblyType;
+//     summary?: AssemblySummaryType;
+// }
 
 interface Props {
-    assembly: AssemblyType;
-    summary?: AssemblySummaryType;
+    assembly: any;
+    summary?: any;
 }
 
 const Component: StatelessComponent<Props> = ({children, assembly, summary}) => (

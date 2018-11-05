@@ -1,29 +1,49 @@
 @import "../../config";
 
 .assembly-issues-panel {
-    //ref
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
 }
+
+.assembly-issues-panel__content {
+    grid-column: 1 / span 4;
+}
+
+.assembly-issues-panel__aside {
+    grid-column: 5 / span 2;
+}
+
 
 .assembly-issues-panel__list {
     display: grid;
-
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-
-    grid-column-gap: map_get($space, md);
-    grid-row-gap: map_get($space, md);
-
-    grid-auto-flow: dense;
-
-    @include breakpoint(md) {
-        grid-template-columns: 1fr 1fr;
-    }
+    grid-template-columns: 1fr 1fr;
+    grid-gap: map_get($space, md);
 }
 
-.assembly-issues-panel__list-item {
-    //ref
-}
 
+//
+//.assembly-issues-panel__list {
+//    display: grid;
+//
+//    grid-template-columns: 1fr;
+//    grid-template-rows: 1fr 1fr;
+//
+//    //grid-column-gap: map_get($space, md);
+//    //grid-row-gap: map_get($space, md);
+//    //
+//    //grid-auto-flow: dense;
+//    //
+//    //@include breakpoint(md) {
+//    //    grid-template-columns: 1fr 1fr;
+//    //}
+//}
+//
+//.assembly-issues-panel__list-item {
+//    //ref
+//}
+//
 .assembly-issues-panel__list-item--sm {
     grid-row: span 1;
 }
@@ -33,19 +53,19 @@
 .assembly-issues-panel__list-item--lg {
     grid-row: span 2;
 }
-
-
-// - - - - - @todo move this to somewhere else
-
-.issue-badge-grid {
-    display: grid;
-
-    grid-template-columns: 1fr;
-    grid-column-gap: map_get($space, lg);
-    grid-row-gap: map_get($space, lg);
-
-    @include breakpoint(md) {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-.issue-badge-grid__item {}
+//
+//
+//// - - - - - @todo move this to somewhere else
+//
+//.issue-badge-grid {
+//    display: grid;
+//
+//    grid-template-columns: 1fr;
+//    grid-column-gap: map_get($space, lg);
+//    grid-row-gap: map_get($space, lg);
+//
+//    @include breakpoint(md) {
+//        grid-template-columns: 1fr 1fr 1fr;
+//    }
+//}
+//.issue-badge-grid__item {}
