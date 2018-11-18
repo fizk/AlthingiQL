@@ -20,11 +20,10 @@ const assemblyIssueQuery = gql`
                 category
                 name
                 subName
-                type 
+                type
                 assembly {
                     id
                 }
-                
             }
             posedCongressman {
                 id
@@ -37,7 +36,6 @@ const assemblyIssueQuery = gql`
                 name
                 party {name}
                 avatar {templateSrc}
-                
             }
             counterAnswererCongressman {
                 id

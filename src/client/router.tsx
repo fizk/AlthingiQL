@@ -15,7 +15,6 @@ import Assembly from './pages/Assembly';
 import Issue from './pages/Issue';
 import Index from './pages/Index';
 
-
 //@todo maybe move this to somewhere else and test it?
 const parse = (location: string) => {
     return location.split('&').reduce((total, item) => {
