@@ -18,8 +18,8 @@
         "noImplicitAny": false,
         "strictNullChecks": false,
         "typeRoots": [
-            "node_modules/@types",
-            "@types"
+            "./node_modules/@types",
+            "./@types"
         ],
         "allowSyntheticDefaultImports": true
     },

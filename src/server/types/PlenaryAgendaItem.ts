@@ -54,8 +54,8 @@ export default new GraphQLObjectType({
             type: GraphQLInt,
             resolve: root => root.posed_id,
         },
-        posed: {
-            type: GraphQLInt,
+        answerer: {
+            type: GraphQLString,
         },
         issue: {
             type: Issue,
