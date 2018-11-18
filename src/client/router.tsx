@@ -9,6 +9,8 @@ import {default as AssemblyIssuePanel} from './panels/AssemblyIssue';
 import {default as AssemblyIssuesPanel} from './panels/AssemblyIssues';
 import {default as IssueDocumentsPanel} from './panels/IssueDocuments';
 import {default as IssueSpeechesPanel} from './panels/IssueSpeeches';
+import {default as AssemblyPlenariesPanel} from './panels/AssemblyPlenaries';
+import {default as AssemblyPlenaryPanel} from './panels/AssemblyPlenary';
 import Assembly from './pages/Assembly';
 import Issue from './pages/Issue';
 import Index from './pages/Index';
@@ -63,6 +65,20 @@ export default () => (
                                 <Assembly  assembly={Number(match.params.assembly)}>
                                     <AssemblyIssuesPanel assembly={Number(match.params.assembly)}
                                         filter={parseIssueType(parse(location.search.slice(1)))} />
+                                </Assembly>
+                            )
+                        }/>
+                        <Route exact={true} path="/loggjafarthing/:assembly/thingfundir" render={({match}) => (
+                                <Assembly  assembly={Number(match.params.assembly)}>
+                                    <AssemblyPlenariesPanel assembly={Number(match.params.assembly)} />
+                                </Assembly>
+                            )
+                        }/>
+                        <Route exact={true} path="/loggjafarthing/:assembly/thingfundir/:plenary" render={({match}) => (
+                                <Assembly  assembly={Number(match.params.assembly)}>
+                                    <AssemblyPlenaryPanel assembly={Number(match.params.assembly)}
+                                        plenary={Number(match.params.plenary)}
+                                    />
                                 </Assembly>
                             )
                         }/>

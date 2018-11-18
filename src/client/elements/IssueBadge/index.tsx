@@ -7,6 +7,7 @@ import ParliamentaryResolutionBadge from './ParliamentaryResolutionBadge';
 import ReportBadge from './ReportBadge';
 import RequestForReportBadge from './RequestForReportBadge';
 import WrittenInquiryBadge from './WrittenInquiryBadge';
+import PlenaryItem from './PlenaryItem';
 import './index.scss';
 
 export {
@@ -19,4 +20,5 @@ export {
     ReportBadge,
     RequestForReportBadge,
     WrittenInquiryBadge,
+    PlenaryItem,
 };

@@ -139,6 +139,32 @@ export interface Speech {
     iteration: string;
     position: number;
 }
+export interface Plenary {
+    id: string;
+    name: string;
+    assembly: Assembly;
+    from: string;
+    to: string;
+}
+
+export interface PlenaryItem {
+    answererCongressman?: Congressman;
+    assembly: Assembly;
+    category: string;
+    comment: string;
+    commentType?: string;
+    counterAnswererCongressman?: Congressman;
+    id: number;
+    instigatorCongressman?: Congressman;
+    issue: Issue;
+    iterationComment?: string;
+    iterationContinue?: string;
+    iterationType?: string;
+    plenaryId: number;
+    answerer?: string;
+    posedCongressman: Congressman;
+    posedId?: number;
+}
 
 declare global {
     interface Window {

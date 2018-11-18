@@ -4,6 +4,8 @@ import Assemblies from './Assemblies';
 import Congressman from './Congressman';
 import Congressmen from './Congressmen';
 import AssemblyIssue from './AssemblyIssue';
+import AssemblyPlenaries from './AssemblyPlenaries';
+import AssemblyPlenary from './AssemblyPlenary';
 import AssemblyIssueProgress from './AssemblyIssueProgress';
 import AssemblyIssues from './AssemblyIssues';
 import AssemblyIssuesSpeechDuration from './AssemblyIssuesSpeechDuration';
@@ -33,6 +35,8 @@ export default {
     Congressman,
     Congressmen,
     AssemblyIssue,
+    AssemblyPlenaries,
+    AssemblyPlenary,
     AssemblyIssueProgress,
     AssemblyIssues,
     AssemblyIssuesSpeechDuration,

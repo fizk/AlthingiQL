@@ -1,9 +1,10 @@
 import * as React from 'react';
+import {Party as PartyType} from '../../../../@types';
 import './index.scss';
 
 interface Props {
     source?: Array<{
-        party?: any,
+        party?: PartyType,
         value?: number,
     }>;
     formatValue?: (...args: any[]) => any;

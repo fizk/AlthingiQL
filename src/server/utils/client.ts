@@ -40,7 +40,7 @@ export const getPagination = (debug, config) => (url, cursor) => {
                     cpu: process.cpuUsage(),
                     memory: process.memoryUsage(),
                     time: process.hrtime(startTime),
-                }, null, 4));
+                }));
             } else {
                 const contentRange = String(response.headers['content-range']);
                 const [, , from, to, total] = contentRange.match(/(items )([0-9]*)-([0-9]*)\/([0-9]*)/);
@@ -64,7 +64,7 @@ export const getPagination = (debug, config) => (url, cursor) => {
                             cpu: process.cpuUsage(),
                             memory: process.memoryUsage(),
                             time: process.hrtime(startTime),
-                        }, null, 4));
+                        }));
                     } catch (error) {
                         response.resume();
                         reject(error);
@@ -76,7 +76,7 @@ export const getPagination = (debug, config) => (url, cursor) => {
                             cpu: process.cpuUsage(),
                             memory: process.memoryUsage(),
                             time: process.hrtime(startTime),
-                        }, null, 4));
+                        }));
                     }
                 });
             }
@@ -91,7 +91,7 @@ export const getPagination = (debug, config) => (url, cursor) => {
                 cpu: process.cpuUsage(),
                 memory: process.memoryUsage(),
                 time: process.hrtime(startTime),
-            }, null, 4));
+            }));
         });
         req.end();
     });
@@ -125,7 +125,7 @@ export const get = (debug, config) => url => {
                     cpu: process.cpuUsage(),
                     memory: process.memoryUsage(),
                     time: process.hrtime(startTime),
-                }, null, 4));
+                }));
             } else {
                 let body = '';
                 response.setEncoding('utf8');
@@ -140,7 +140,7 @@ export const get = (debug, config) => url => {
                             cpu: process.cpuUsage(),
                             memory: process.memoryUsage(),
                             time: process.hrtime(startTime),
-                        }, null, 4));
+                        }));
                     } catch (error) {
                         response.resume();
                         reject(error);
@@ -152,7 +152,7 @@ export const get = (debug, config) => url => {
                             cpu: process.cpuUsage(),
                             memory: process.memoryUsage(),
                             time: process.hrtime(startTime),
-                        }, null, 4));
+                        }));
                     }
                 });
             }
@@ -167,7 +167,7 @@ export const get = (debug, config) => url => {
                 cpu: process.cpuUsage(),
                 memory: process.memoryUsage(),
                 time: process.hrtime(startTime),
-            }, null, 4));
+            }));
         });
         req.end();
     });
