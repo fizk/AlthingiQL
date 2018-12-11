@@ -10,7 +10,11 @@ const assemblyQuery = gql`
                 to
             }
         }
-
+        Inflation (assembly: $assembly) {
+            id
+            date
+            value
+        }
         AssemblySummary(assembly: $assembly) {
             parties {
                 party {
@@ -120,6 +124,7 @@ export default compose<any>( //@todo `any`
         props: (all: {data?: {
                 loading: boolean,
                 Assembly: any,
+                Inflation: any,
                 AssemblySummary: any,
                 CongressmanSpeekMost: any,
                 CongressmanSpeekLeast: any,
@@ -129,6 +134,7 @@ export default compose<any>( //@todo `any`
                 AssemblyIssuesSpeechDuration: any,
             }}) => ({
             assembly: all.data.loading === false ? all.data.Assembly : undefined,
+            inflation: all.data.loading === false ? all.data.Inflation : undefined,
             summary: all.data.loading === false ? all.data.AssemblySummary : undefined,
             speakMost: all.data.loading === false ? all.data.CongressmanSpeekMost : undefined,
             speakLeast: all.data.loading === false ? all.data.CongressmanSpeekLeast : undefined,

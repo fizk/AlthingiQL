@@ -1,29 +1,12 @@
 import * as React from 'react';
-import {H1} from '../../elements/Headline';
+import {H1, H3} from '../../elements/Headline';
 import Badge from '../../elements/Badge';
-import './index.scss';
 import {Link} from 'react-router-dom';
+import {Assembly as AssemblyType} from '../../../../@types';
+import './index.scss';
 
 interface Props {
-    assembly?: {
-        id?: number,
-        period?: {
-            from?: string,
-            to?: string,
-        },
-        division?: {
-            majority?: Array<{
-                id?: number,
-                name?: string,
-                color?: string,
-            }>,
-            minority?: Array<{
-                id?: number,
-                name?: string,
-                color?: string,
-            }>,
-        },
-    };
+    assembly?: AssemblyType;
     loading?: boolean;
 }
 
@@ -38,6 +21,13 @@ export default class AssemblyHeader extends React.Component<Props, {}> {
             division: {
                 majority: [],
                 minority: [],
+            },
+            cabinet: {
+                title: undefined,
+                period: {
+                    from: undefined,
+                    to: undefined,
+                },
             },
         },
         loading: false,
@@ -56,6 +46,13 @@ export default class AssemblyHeader extends React.Component<Props, {}> {
                         {this.props.assembly.period.from}
                         {this.props.assembly.period.to}
                     </time>
+                    <H3>
+                        <Link to={`/raduneyti/${this.props.assembly.cabinet.id}`}>
+                            {this.props.assembly.cabinet.title}
+                        </Link>
+                        <time>{this.props.assembly.cabinet.period.from}</time> -
+                        <time>{this.props.assembly.cabinet.period.to}</time>
+                    </H3>
                 </div>
                 <div className="assembly-header__parties">
                     <ul className="assembly-header__party-list">

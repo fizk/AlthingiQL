@@ -1,6 +1,7 @@
 import {GraphQLObjectType, GraphQLInt} from 'graphql';
 import Period from './Period';
 import Division from './Division';
+import Cabinet from './Cabinet';
 
 export default new GraphQLObjectType({
     name: 'Assembly',
@@ -26,6 +27,10 @@ export default new GraphQLObjectType({
             type: Division,
             resolve: root => root.party,
         },
-
+        cabinet: {
+            name: 'cabinet',
+            type: Cabinet,
+            resolve: root => root.cabinet,
+        },
     },
 });

@@ -1,25 +1,6 @@
 import {graphql, compose, gql} from 'react-apollo';
 import AssemblyHeader from './AssemblyHeader';
-
-interface AssemblySummary {
-    id: number;
-    period: {
-        from?: string,
-        to?: string,
-    };
-    division: {
-        majority?: Array<{
-            id?: number,
-            name?: string,
-            color?: string,
-        }>,
-        minority: Array<{
-            id?: number,
-            name?: string,
-            color?: string,
-        }>,
-    };
-}
+import {Assembly as AssemblyType} from '../../../../@types';
 
 const assemblyQuery = gql`
     query assembly ($assembly: Int!) {
@@ -41,13 +22,18 @@ const assemblyQuery = gql`
                     color
                 }
             }
+            cabinet {
+                id
+                title
+                period {from to}
+            }
         }
     }
 `;
 
 export default compose<any>( //@todo `any`
     graphql(assemblyQuery, {
-        props: (all: {data?: {loading: boolean, Assembly: AssemblySummary}}) => ({
+        props: (all: {data?: {loading: boolean, Assembly: AssemblyType}}) => ({
             assembly: all.data.loading === false ? all.data.Assembly : undefined,
             loading: all.data.loading,
         }),
