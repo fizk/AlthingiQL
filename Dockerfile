@@ -11,10 +11,13 @@ RUN export GRAPHQL_SERVER=$GRAPHQL_SERVER
 
 WORKDIR /home/node/app
 
+COPY package*.json ./
+COPY tsconfig.json ./
+
+RUN npm install
+
 COPY . .
 
-RUN npm install \
-    && npm run build:server \
-    && npm run build:client.prod
+RUN npm run build:server && npm run build:client.prod
 
 CMD [ "./node_modules/.bin/pm2-runtime", "start", "./ecosystem.config.js" ]
