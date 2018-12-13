@@ -65,7 +65,7 @@ export default class InflationChart extends React.Component<Props, {}> {
                               ? new Date(this.props.period.to)
                               : new Date()) - x(new Date(this.props.period.from))}
                           height={this.dimensions.height + 3 * this.dimensions.gutter}
-                          fill="pink"
+                          fill="rgb(200, 200, 200)"
                     />
                 </g>
                 <g>
@@ -79,10 +79,8 @@ export default class InflationChart extends React.Component<Props, {}> {
                 <g>
 
                     {yTicks.map((item, i) => (
-                        <Fragment>
-                            <line
-                                key={`y-line-${i}`}
-                                stroke="black"
+                        <Fragment key={`y-line-${i}`}>
+                            <line stroke="black"
                                 strokeWidth="1"
                                 x1={this.dimensions.gutter}
                                 y1={y(item)}
@@ -96,12 +94,7 @@ export default class InflationChart extends React.Component<Props, {}> {
                         <text
                             key={`x-label-${i}`}
                             x={x(item)}
-                            y={
-                                this.dimensions.height +
-                                this.dimensions.gutter +
-                                this.dimensions.gutter
-                            }
-                        >
+                            y={this.dimensions.height + this.dimensions.gutter + this.dimensions.gutter}>
                             <tspan x={x(item)} dy="0">
                                 {item.getMonth() + 1}
                             </tspan>

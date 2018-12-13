@@ -101,7 +101,11 @@ export default class Assembly extends React.Component<Props, {}> {
     public render() {
         return (
             <Fragment>
-                <InflationChart inflation={this.props.inflation} period={this.props.assembly.period} />
+                {this.props.inflation.length !== 0 && (
+                    <div style={{maxWidth: 1024, margin: 'auto'}}>
+                        <InflationChart inflation={this.props.inflation} period={this.props.assembly.period} />
+                    </div>
+                )}
                 <section className="assembly-page-grid">
                     <article className="assembly-page-grid__header">
                         <Paper>

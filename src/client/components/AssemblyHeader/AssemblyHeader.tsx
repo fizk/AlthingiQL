@@ -46,13 +46,15 @@ export default class AssemblyHeader extends React.Component<Props, {}> {
                         {this.props.assembly.period.from}
                         {this.props.assembly.period.to}
                     </time>
-                    <H3>
-                        <Link to={`/raduneyti/${this.props.assembly.cabinet.id}`}>
-                            {this.props.assembly.cabinet.title}
-                        </Link>
-                        <time>{this.props.assembly.cabinet.period.from}</time> -
-                        <time>{this.props.assembly.cabinet.period.to}</time>
-                    </H3>
+                    {this.props.assembly.cabinet && (
+                        <H3>
+                            <Link to={`/raduneyti/${this.props.assembly.cabinet.id}`}>
+                                {this.props.assembly.cabinet.title}
+                            </Link>
+                            <time>{this.props.assembly.cabinet.period.from}</time> -
+                            <time>{this.props.assembly.cabinet.period.to}</time>
+                        </H3>
+                    )}
                 </div>
                 <div className="assembly-header__parties">
                     <ul className="assembly-header__party-list">
