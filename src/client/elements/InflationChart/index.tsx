@@ -109,7 +109,7 @@ export default class InflationChart extends React.Component<Props, {}> {
                               fill="none" stroke="black" />
                     {this.props.inflation.map(item => (
                         <circle cx={x(new Date(item.date))}
-                        onMouseOver={event => console.log(item.value)}
+                        onMouseOver={event => item.value}
                                 cy={
                             this.dimensions.height -
                             y(item.value) +

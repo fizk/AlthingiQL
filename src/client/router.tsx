@@ -40,7 +40,6 @@ export default () => (
         <Route exact={true} path="/" component={Index} />
         <Route path="/loggjafarthing" render={({history}) => (
             <Fragment>
-                {console.log(history)}
                 <Route path="/loggjafarthing/:id">
                     <Fragment>
                         <Route exact={true} path="/loggjafarthing/:assembly" render={({match }) => (

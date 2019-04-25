@@ -72,6 +72,7 @@ export default new GraphQLObjectType({
         },
         speakers: {
             type: new GraphQLList(CongressmanValue),
+
             resolve(root) {
                 return root.speakers.map(item => ({
                     congressman: item,

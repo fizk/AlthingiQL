@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Cabinet as CabinetType} from '../../../../@types';
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 
 interface Props {
     cabinet: CabinetType;

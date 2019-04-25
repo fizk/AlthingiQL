@@ -36,31 +36,31 @@ import './index.scss';
 
 interface Props {
     assembly: AssemblyType;
-    inflation: InflationType[],
+    inflation: InflationType[];
     summary: AssemblySummaryType;
     speakMost: Array<{
-        congressman: CongressmanType,
-        value: number,
+        congressman: CongressmanType;
+        value: number;
     }>;
     speakLeast: Array<{
-        congressman: CongressmanType,
-        value: number,
+        congressman: CongressmanType;
+        value: number;
     }>;
     questioner: Array<{
-        congressman?: CongressmanType,
-        value: number,
+        congressman?: CongressmanType;
+        value: number;
     }>;
     resolutionaries: Array<{
-        congressman: CongressmanType,
-        value: number,
+        congressman: CongressmanType;
+        value: number;
     }>;
     bills: Array<{
-        congressman: CongressmanType,
-        value: number,
+        congressman: CongressmanType;
+        value: number;
     }>;
     issues?: Array<{
-        issue?: IssueType,
-        value?: number,
+        issue?: IssueType;
+        value?: number;
     }>;
 }
 
