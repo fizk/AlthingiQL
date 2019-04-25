@@ -9,6 +9,7 @@ function loadStories() {
     require('../stories/components/SearchSpeech.tsx');
     require('../stories/elements/HorizontalChart.tsx');
     require('../stories/elements/PieChart/PieChart.tsx');
+    require('../stories/elements/InflationChart.tsx');
 }
 
 addDecorator((storyFn) => React.createElement('div', {style: {padding: 20}}, storyFn()));

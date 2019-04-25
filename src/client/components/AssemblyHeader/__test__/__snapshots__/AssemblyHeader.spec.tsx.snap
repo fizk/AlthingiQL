@@ -81,6 +81,17 @@ exports[`<AssemblyHeader /> default props 1`] = `
       . Löggjafarþing
     </h2>
     <time />
+    <h4
+      className="headline-3"
+    >
+      <a
+        href="/raduneyti/undefined"
+        onClick={[Function]}
+      />
+      <time />
+       -
+      <time />
+    </h4>
   </div>
   <div
     className="assembly-header__parties"

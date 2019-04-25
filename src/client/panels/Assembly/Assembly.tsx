@@ -13,6 +13,7 @@ import {H2} from '../../elements/Headline';
 import Section from '../../elements/Section';
 import IssueTypeSummary from '../../elements/IssueTypeSummary';
 import PartySpeechSummary from '../../elements/PartySpeechSummary';
+import InflationChart from '../../elements/InflationChart';
 import {billsPerformance, reduceBillsByStatus, mapBillStatusToKey} from '../../utils/bills';
 import {
     BillBadge,
@@ -29,35 +30,37 @@ import {
     Congressman as CongressmanType,
     Issue as IssueType,
     AssemblySummary as AssemblySummaryType,
+    Inflation as InflationType,
 } from '../../../../@types';
 import './index.scss';
 
 interface Props {
     assembly: AssemblyType;
+    inflation: InflationType[];
     summary: AssemblySummaryType;
     speakMost: Array<{
-        congressman: CongressmanType,
-        value: number,
+        congressman: CongressmanType;
+        value: number;
     }>;
     speakLeast: Array<{
-        congressman: CongressmanType,
-        value: number,
+        congressman: CongressmanType;
+        value: number;
     }>;
     questioner: Array<{
-        congressman?: CongressmanType,
-        value: number,
+        congressman?: CongressmanType;
+        value: number;
     }>;
     resolutionaries: Array<{
-        congressman: CongressmanType,
-        value: number,
+        congressman: CongressmanType;
+        value: number;
     }>;
     bills: Array<{
-        congressman: CongressmanType,
-        value: number,
+        congressman: CongressmanType;
+        value: number;
     }>;
     issues?: Array<{
-        issue?: IssueType,
-        value?: number,
+        issue?: IssueType;
+        value?: number;
     }>;
 }
 
@@ -70,6 +73,7 @@ export default class Assembly extends React.Component<Props, {}> {
                 to: undefined,
             },
         },
+        inflation: [],
         summary: {
             categories: [],
             parties: [],
@@ -97,6 +101,11 @@ export default class Assembly extends React.Component<Props, {}> {
     public render() {
         return (
             <Fragment>
+                {this.props.inflation.length !== 0 && (
+                    <div style={{maxWidth: 1024, margin: 'auto'}}>
+                        <InflationChart inflation={this.props.inflation} period={this.props.assembly.period} />
+                    </div>
+                )}
                 <section className="assembly-page-grid">
                     <article className="assembly-page-grid__header">
                         <Paper>

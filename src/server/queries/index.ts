@@ -25,6 +25,10 @@ import CongressmenAssemblyQuestions from './CongressmenAssemblyQuestions';
 import CongressmenAssemblyResolutions from './CongressmenAssemblyResolutions';
 import CongressmenAssemblyBills from './CongressmenAssemblyBills';
 import DocumentVotes from './DocumentVotes';
+import Inflation from './Inflation';
+import Inflations from './Inflations';
+import Cabinets from './Cabinets';
+import Cabinet from './Cabinet';
 
 export default {
     Person,
@@ -54,4 +58,8 @@ export default {
     CongressmenAssemblyResolutions,
     CongressmenAssemblyBills,
     DocumentVotes,
+    Inflation,
+    Inflations,
+    Cabinets,
+    Cabinet,
 };

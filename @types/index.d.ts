@@ -1,20 +1,17 @@
 export interface Assembly {
     id: number;
+    cabinet?: any;
+    division?: {
+        majority?: Party[],
+        minority?: Party[],
+    };
     period?: Period;
 }
 
 export interface AssemblyStatistics extends Assembly {
-    division: {
-        majority?: Array<{
-            id?: number;
-            name?: string;
-            color?: string;
-        }>,
-        minority: Array<{
-            id?: number;
-            name?: string;
-            color?: string;
-        }>;
+    division?: {
+        majority?: Party[],
+        minority?: Party[],
     };
 }
 
@@ -99,6 +96,14 @@ export interface Congressman extends Person {
     party: Party;
 }
 
+export interface Cabinet {
+    id: number;
+    title: string;
+    description?: string;
+    period?: Period;
+    assemblies?: Assembly[];
+}
+
 export interface DocumentVote {
     id: number;
     voteId: number;
@@ -139,6 +144,7 @@ export interface Speech {
     iteration: string;
     position: number;
 }
+
 export interface Plenary {
     id: string;
     name: string;
@@ -164,6 +170,12 @@ export interface PlenaryItem {
     answerer?: string;
     posedCongressman: Congressman;
     posedId?: number;
+}
+
+export interface Inflation {
+    id: number;
+    value: number;
+    date: string;
 }
 
 declare global {

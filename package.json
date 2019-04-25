@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test-update": "jest --updateSnapshot",
     "lint": "npm run lint:ts",
     "dev": "npm run build:client -- -w & npm run build:server -- -w & npm run dev-server & nodemon ./dist/server/index.js --watch dist & wait",
     "build:server": "./node_modules/.bin/babel ./src --out-dir ./dist --extensions \".ts,.tsx\"",
