@@ -1,9 +1,10 @@
-import {GraphQLInt, GraphQLObjectType, GraphQLString} from 'graphql';
+import {GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString} from 'graphql';
 import Period from './Period';
+import Assembly from './Assembly';
 
 export default new GraphQLObjectType({
     name: 'Cabinet',
-    fields: {
+    fields: () => ({
         id: {
             type: GraphQLInt,
             resolve: root => root.cabinet_id,
@@ -25,5 +26,13 @@ export default new GraphQLObjectType({
                 };
             },
         },
-    },
+        assemblies: {
+            name: 'assemblies',
+            type: new GraphQLList(Assembly),
+
+            resolve(root) {
+                return root.assemblies || [];
+            },
+        },
+    }),
 });

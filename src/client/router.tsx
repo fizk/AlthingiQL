@@ -14,6 +14,7 @@ import {default as AssemblyPlenaryPanel} from './panels/AssemblyPlenary';
 import Assembly from './pages/Assembly';
 import Issue from './pages/Issue';
 import Index from './pages/Index';
+import Cabinet from './pages/Cabinet';
 
 //@todo maybe move this to somewhere else and test it?
 const parse = (location: string) => {
@@ -37,77 +38,85 @@ const parseIssueType = object => {
 export default () => (
     <Chrome>
         <Route exact={true} path="/" component={Index} />
-        <Route path="/loggjafarthing">
+        <Route path="/loggjafarthing" render={({history}) => (
             <Fragment>
+                {console.log(history)}
                 <Route path="/loggjafarthing/:id">
                     <Fragment>
                         <Route exact={true} path="/loggjafarthing/:assembly" render={({match }) => (
-                                <Assembly assembly={Number(match.params.assembly)}>
-                                    <AssemblyPanel assembly={Number(match.params.assembly)} />
-                                </Assembly>
-                            )
+                            <Assembly assembly={Number(match.params.assembly)}>
+                                <AssemblyPanel assembly={Number(match.params.assembly)} />
+                            </Assembly>
+                        )
                         }/>
                         <Route exact={true} path="/loggjafarthing/:assembly/thingmenn/" render={({match }) => (
-                                <Assembly assembly={Number(match.params.assembly)}>
-                                    <AssemblyCongressmenPanel assembly={Number(match.params.assembly)} />
-                                </Assembly>
-                            )
+                            <Assembly assembly={Number(match.params.assembly)}>
+                                <AssemblyCongressmenPanel assembly={Number(match.params.assembly)} />
+                            </Assembly>
+                        )
                         }/>
                         <Route exact={true} path="/loggjafarthing/:assembly/thingmenn/:congressman"
-                            render={({match }) => (
-                                <Assembly assembly={Number(match.params.assembly)}>
-                                    <AssemblyCongressmanPanel congressman={Number(match.params.congressman)}
-                                        assembly={Number(match.params.assembly)} />
-                                </Assembly>
-                            )
-                        }/>
+                               render={({match }) => (
+                                   <Assembly assembly={Number(match.params.assembly)}>
+                                       <AssemblyCongressmanPanel congressman={Number(match.params.congressman)}
+                                                                 assembly={Number(match.params.assembly)} />
+                                   </Assembly>
+                               )
+                               }/>
                         <Route exact={true} path="/loggjafarthing/:assembly/thingmal" render={({match, location }) => (
-                                <Assembly  assembly={Number(match.params.assembly)}>
-                                    <AssemblyIssuesPanel assembly={Number(match.params.assembly)}
-                                        filter={parseIssueType(parse(location.search.slice(1)))} />
-                                </Assembly>
-                            )
+                            <Assembly  assembly={Number(match.params.assembly)}>
+                                <AssemblyIssuesPanel assembly={Number(match.params.assembly)}
+                                                     filter={parseIssueType(parse(location.search.slice(1)))} />
+                            </Assembly>
+                        )
                         }/>
                         <Route exact={true} path="/loggjafarthing/:assembly/thingfundir" render={({match}) => (
-                                <Assembly  assembly={Number(match.params.assembly)}>
-                                    <AssemblyPlenariesPanel assembly={Number(match.params.assembly)} />
-                                </Assembly>
-                            )
+                            <Assembly  assembly={Number(match.params.assembly)}>
+                                <AssemblyPlenariesPanel assembly={Number(match.params.assembly)} />
+                            </Assembly>
+                        )
                         }/>
                         <Route exact={true} path="/loggjafarthing/:assembly/thingfundir/:plenary" render={({match}) => (
-                                <Assembly  assembly={Number(match.params.assembly)}>
-                                    <AssemblyPlenaryPanel assembly={Number(match.params.assembly)}
-                                        plenary={Number(match.params.plenary)}
-                                    />
-                                </Assembly>
-                            )
+                            <Assembly  assembly={Number(match.params.assembly)}>
+                                <AssemblyPlenaryPanel assembly={Number(match.params.assembly)}
+                                                      plenary={Number(match.params.plenary)}
+                                />
+                            </Assembly>
+                        )
                         }/>
 
                         <Route exact={true} path="/loggjafarthing/:assembly/thingmal/:issue" render={({match }) => (
-                                <Issue assembly={Number(match.params.assembly)} issue={Number(match.params.issue)}>
-                                    <AssemblyIssuePanel issue={match.params.issue} assembly={match.params.assembly} />
-                                </Issue>
-                            )
+                            <Issue assembly={Number(match.params.assembly)} issue={Number(match.params.issue)}>
+                                <AssemblyIssuePanel issue={match.params.issue} assembly={match.params.assembly} />
+                            </Issue>
+                        )
                         }/>
                         <Route exact={true} path="/loggjafarthing/:assembly/thingmal/:issue/thingskjol"
-                            render={({match }) => (
-                                <Issue assembly={Number(match.params.assembly)} issue={Number(match.params.issue)}>
-                                    <IssueDocumentsPanel issue={Number(match.params.issue)}
-                                        assembly={Number(match.params.assembly)} />
-                                </Issue>
-                            )
-                        }/>
+                               render={({match }) => (
+                                   <Issue assembly={Number(match.params.assembly)} issue={Number(match.params.issue)}>
+                                       <IssueDocumentsPanel issue={Number(match.params.issue)}
+                                                            assembly={Number(match.params.assembly)} />
+                                   </Issue>
+                               )
+                               }/>
                         <Route exact={true} path="/loggjafarthing/:assembly/thingmal/:issue/raedur/:speech?"
-                            render={({match }) => (
-                                <Issue assembly={Number(match.params.assembly)} issue={Number(match.params.issue)}>
-                                    <IssueSpeechesPanel issue={Number(match.params.issue)}
-                                        assembly={Number(match.params.assembly)} speech={match.params.speech}/>
-                                </Issue>
-                            )
+                               render={({match }) => (
+                                   <Issue assembly={Number(match.params.assembly)} issue={Number(match.params.issue)}>
+                                       <IssueSpeechesPanel issue={Number(match.params.issue)}
+                                                           assembly={Number(match.params.assembly)}
+                                                           speech={match.params.speech}/>
+                                   </Issue>
+                               )
+                               }/>
+                        <Route path="/raduneyti" render={({match }) => (
+                            <Cabinet />
+                        )
                         }/>
                     </Fragment>
                 </Route>
             </Fragment>
+        )} >
+
         </Route>
     </Chrome>
 );

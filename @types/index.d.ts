@@ -101,6 +101,7 @@ export interface Cabinet {
     title: string;
     description?: string;
     period?: Period;
+    assemblies?: Assembly[];
 }
 
 export interface DocumentVote {
