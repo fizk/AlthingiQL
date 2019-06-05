@@ -7,7 +7,7 @@ import './index.scss';
 
 interface Props {
     assembly: AssemblyType;
-    summary?: AssemblySummaryType;
+    summary: AssemblySummaryType;
 }
 
 const Component: StatelessComponent<Props> = ({children, assembly, summary}) => (
@@ -30,8 +30,8 @@ const Component: StatelessComponent<Props> = ({children, assembly, summary}) => 
                     </td>
                     {/*<td>{type.typeName}</td>*/}
                     <td className="issue-type-summary__title">
-                        <Link to={`/loggjafarthing/${assembly.id}/thingmal?tegund=${type.type}`}>
-                            {type.typeSubName}
+                        <Link to={`/loggjafarthing/${assembly.id}/thingmal/${type.category.toLowerCase()}?tegund=${type.type}`}>
+                            {type.typeSubName || type.typeName}
                         </Link>
                     </td>
                 </tr>

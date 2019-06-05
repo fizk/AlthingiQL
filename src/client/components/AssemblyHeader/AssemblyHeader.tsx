@@ -6,8 +6,8 @@ import {Assembly as AssemblyType} from '../../../../@types';
 import './index.scss';
 
 interface Props {
-    assembly?: AssemblyType;
-    loading?: boolean;
+    assembly: AssemblyType;
+    loading: boolean;
 }
 
 export default class AssemblyHeader extends React.Component<Props, {}> {
@@ -43,8 +43,8 @@ export default class AssemblyHeader extends React.Component<Props, {}> {
                         </Link>. Löggjafarþing
                     </H1>
                     <time>
-                        {this.props.assembly.period.from}
-                        {this.props.assembly.period.to}
+                        {this.props.assembly.period!.from}
+                        {this.props.assembly.period!.to}
                     </time>
                     {this.props.assembly.cabinet && (
                         <H3>
@@ -58,7 +58,7 @@ export default class AssemblyHeader extends React.Component<Props, {}> {
                 </div>
                 <div className="assembly-header__parties">
                     <ul className="assembly-header__party-list">
-                        {this.props.assembly.division.majority.map(party => (
+                        {((this.props.assembly.division && this.props.assembly.division.majority) || []).map(party => (
                             <li key={`party-${party.id}`}
                                 className="assembly-header__party-list-item">
                                 <Badge title={party.name} color={party.color} />
@@ -66,7 +66,7 @@ export default class AssemblyHeader extends React.Component<Props, {}> {
                         ))}
                     </ul>
                     <ul className="assembly-header__party-list">
-                        {this.props.assembly.division.minority.map(party => (
+                        {((this.props.assembly.division && this.props.assembly.division.minority) || []).map(party => (
                             <li key={`party-${party.id}`}
                                 className="assembly-header__party-list-item">
                                 <Badge title={party.name} color={party.color} />

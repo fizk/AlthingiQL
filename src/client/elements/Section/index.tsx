@@ -1,4 +1,6 @@
-import * as React from 'react';
+import React, {FunctionComponent} from 'react';
 import './index.scss';
 
-export default ({ children }) => <section className="section">{children}</section>;
+const Section: FunctionComponent = ({ children }) => <section className="section">{children}</section>;
+
+export default Section;

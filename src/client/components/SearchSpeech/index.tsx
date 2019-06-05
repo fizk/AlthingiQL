@@ -21,7 +21,7 @@ interface State {
 }
 
 interface Context {
-    client: ApolloClient;
+    client: ApolloClient<any>;
 }
 
 export default class SearchSpeech extends React.Component<Props, State, Context> {
@@ -41,7 +41,7 @@ export default class SearchSpeech extends React.Component<Props, State, Context>
         isError: false,
     };
 
-    public constructor(props, context) {
+    public constructor(props: Props, context: Context) {
         super(props, context);
         this.handleOnChange = throttle<(value: string) => void>(500, false, this.handleOnChange);
     }
@@ -53,9 +53,9 @@ export default class SearchSpeech extends React.Component<Props, State, Context>
                 query: searchIssueSpeeches,
                 fetchPolicy: 'no-cache',
                 variables: {issue: this.props.issue, assembly: this.props.assembly, query: value},
-            }).then(response => response.data.SearchIssueSpeeches)
-                .then(json => this.setState({results: json, isSearching: false}))
-                .catch(error => {
+            }).then((response: any) => response.data.SearchIssueSpeeches)
+                .then((json: any) => this.setState({results: json, isSearching: false}))
+                .catch((error: any) => {
                     this.setState({results: [], isError: error.message});
                 });
         }
@@ -76,8 +76,8 @@ export default class SearchSpeech extends React.Component<Props, State, Context>
                     <Redirect
                         push={true}
                         to={`/loggjafarthing/${
-                            this.state.redirect.assembly.id
-                        }/thingmal/${this.state.redirect.issue.id}/raedur/${this.state.redirect.id}`}
+                            (this.state.redirect! as SpeechType).assembly.id
+                        }/thingmal/${(this.state.redirect! as SpeechType).issue.id}/raedur/${(this.state.redirect! as SpeechType).id}`}
                     />
                 )}
                 <OptionsWithKeyBinding
@@ -86,7 +86,7 @@ export default class SearchSpeech extends React.Component<Props, State, Context>
                     onClear={this.handleOnClear}
                     onChange={this.handleOnChange}
                     onSelect={this.handleOnSelect}>
-                    {this.state.results.map(result => (
+                    {(this.state.results as SpeechType[]).map(result => (
                         <SpeechSearchResult key={`speech-${result.id}`} value={result}/>
                     ))}
                 </OptionsWithKeyBinding>

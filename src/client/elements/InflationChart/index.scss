@@ -1,0 +1,21 @@
+.inflation-chart {
+
+}
+
+.inflation-chart__area {
+
+}
+
+.inflation-chart__y-lines {
+    stroke: rgb(200, 200, 200);
+    stroke-width: 1px;
+    stroke-dasharray: 2px, 4px;
+}
+.inflation-chart__x-lines {
+    stroke: rgb(200, 200, 200);
+    stroke-width: 1px;
+    stroke-dasharray: 2px, 4px;
+}
+
+.stop1 { stop-color: steelblue;  stop-opacity: 0.9;}
+.stop2 { stop-color: steelblue; stop-opacity: 0; }

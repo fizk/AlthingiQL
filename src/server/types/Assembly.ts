@@ -1,36 +1,32 @@
 import {GraphQLObjectType, GraphQLInt} from 'graphql';
+import {DataSource} from '../../../@types'
 import Period from './Period';
 import Division from './Division';
 import Cabinet from './Cabinet';
 
-export default new GraphQLObjectType({
+export default new GraphQLObjectType<DataSource.Assembly>({
     name: 'Assembly',
     fields: {
         id: {
             name: 'id',
             type: GraphQLInt,
-            resolve: (root) => root.assembly_id,
+            resolve: root => root.assembly_id,
         },
         period: {
             name: 'period',
             type: Period,
 
-            resolve(root) {
-                return {
-                    from: root.from,
-                    to: root.to,
-                };
-            },
+            resolve: ({from, to}) => ({from, to}),
         },
         division: {
             name: 'division',
             type: Division,
-            resolve: root => root.party,
+            resolve: ({party}) => party,
         },
         cabinet: {
             name: 'cabinet',
             type: Cabinet,
-            resolve: root => root.cabinet,
+            resolve: ({cabinet}) => cabinet,
         },
     },
 });

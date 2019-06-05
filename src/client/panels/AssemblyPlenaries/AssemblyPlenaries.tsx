@@ -18,7 +18,7 @@ export default class AssemblyPlenaries extends React.Component<Props, {}> {
         return (
             <Section>
                 <ul>
-                    {this.props.plenaries.map(plenary => (
+                    {(this.props.plenaries || []).map(plenary => (
                         <li key={plenary.id}>
                             <Link to={`/loggjafarthing/${plenary.assembly.id}/thingfundir/${plenary.id}`}>
                                 {plenary.name || '-'} {plenary.from}

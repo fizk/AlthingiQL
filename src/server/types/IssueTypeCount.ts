@@ -1,7 +1,4 @@
-import {GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLList} from 'graphql';
-import {GraphQLDateTime} from 'graphql-iso-date';
-import Assembly from './Assembly';
-import Congressman from './Congressman';
+import {GraphQLObjectType, GraphQLInt, GraphQLString} from 'graphql';
 
 export default new GraphQLObjectType({
     name: 'IssueTypeCount',

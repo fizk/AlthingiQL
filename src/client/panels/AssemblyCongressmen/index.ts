@@ -1,5 +1,7 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql, compose, ChildDataProps} from 'react-apollo';
+import gql from 'graphql-tag';
 import AssemblyCongressmen from './AssemblyCongressmen';
+import {Congressman as CongressmanType} from "../../../../@types";
 
 const assemblyCongressmanQuery = gql`
     query ($assembly: Int!) {
@@ -32,14 +34,34 @@ const assemblyCongressmanQuery = gql`
     }
 `;
 
-export default compose<any>( //@todo `any`
-    graphql(assemblyCongressmanQuery, {
-        props: (all: {data?: {loading: boolean, Congressmen: any, Substitutes: any}}) => ({
-            congressmen: all.data.loading === false ? all.data.Congressmen : undefined,
-            substitutes: all.data.loading === false ? all.data.Substitutes : undefined,
-            loading: all.data.loading,
+type Response = {
+    Congressmen: CongressmanType[];
+    Substitutes: CongressmanType[];
+};
+
+type InputProps = {
+    assembly: number
+};
+
+type Variables = {
+    assembly: number,
+};
+
+interface Props {
+    // loading?: any;
+    // error?: any;
+    congressmen: CongressmanType[];
+    substitutes: CongressmanType[];
+}
+
+export default compose(
+    graphql<InputProps, Response, Variables, Props>(assemblyCongressmanQuery, {
+        props: ({data: {loading, Congressmen, Substitutes}}: any) => ({
+            congressmen: loading === false ? Congressmen : undefined,
+            substitutes: loading === false ? Substitutes : undefined,
+            loading: loading,
         }),
-        options: ({assembly}: {assembly: number}) => ({
+        options: ({assembly}) => ({
             variables: {
                 assembly,
             },

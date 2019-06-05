@@ -22,11 +22,11 @@ export default class IssueSearchResult extends React.Component<Props, {}> {
 
     public render() {
         const variations = this.props.isSelected
-            ? this.props.variations.concat(['active'])
+            ? (this.props.variations || []).concat(['active'])
             : this.props.variations;
         return (
             <div className={classVariations('options-list__item', variations)}
-                onClick={() => this.props.onSelect(this.props.value)}>
+                onClick={() => this.props.onSelect && this.props.onSelect(this.props.value)}>
                 <SpeechCard speech={this.props.value}>
                     <Congressman
                         congressman={this.props.value.congressman}

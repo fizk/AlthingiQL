@@ -3,9 +3,9 @@ import { scaleLinear } from 'd3-scale';
 import './index.scss';
 
 interface HorizontalChartProps {
-    source?: Array<{
-        value?: number,
-        label?: string,
+    source: Array<{
+        value: number,
+        label: string,
     }>;
 }
 

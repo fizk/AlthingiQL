@@ -1,5 +1,7 @@
-import {GraphQLInt, GraphQLNonNull} from 'graphql';
+import {GraphQLInt, GraphQLNonNull, GraphQLString} from 'graphql';
 import Issue from '../types/Issue';
+import {Client} from "../../../@types";
+
 
 export default {
     type: Issue,
@@ -10,9 +12,12 @@ export default {
         assembly: {
             type: new GraphQLNonNull(GraphQLInt),
         },
+        category: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
     },
 
-    resolve(root, {issue, assembly}, {client}) {
-        return client.get(`/loggjafarthing/${assembly}/thingmal/${issue}`);
+    resolve(root: any, {issue, assembly, category}: {issue: number, assembly: number, category: string}, {client}: {client: Client}) {
+        return client.get(`/loggjafarthing/${assembly}/thingmal/${category}/${issue}`);
     },
 };

@@ -8,11 +8,11 @@ export default class ScrollIntoView extends React.Component<ScrollIntoViewProps,
         active: false,
     };
 
-    public element: HTMLDivElement = undefined;
+    public element: HTMLDivElement | null = null;
 
     public componentDidMount() {
         if (this.props.active) {
-            this.element.scrollIntoView({ behavior: 'smooth' });
+            this.element && this.element.scrollIntoView({ behavior: 'smooth' });
         }
     }
 

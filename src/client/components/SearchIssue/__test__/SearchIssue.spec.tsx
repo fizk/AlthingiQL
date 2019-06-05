@@ -2,12 +2,16 @@ import * as React from 'react';
 import SearchIssue from '../index';
 import renderer from 'react-test-renderer';
 import {BrowserRouter as Router} from 'react-router-dom';
+import {Issue} from '../../../../../@types';
+
+type Partial<T> = { [P in keyof T]?: T[P]; };
+type PartialIssue = Partial<Issue>;
 
 describe('<SearchIssue />', () => {
     test('default props', () => {
         const tree = renderer.create(
             <Router >
-                <SearchIssue />
+                <SearchIssue assembly={1} />
             </Router>,
         ).toJSON();
 
@@ -15,48 +19,48 @@ describe('<SearchIssue />', () => {
     });
 
     test('data', () => {
-        const data = {
-            assembly: 1,
-            result: [{
-                id: 1,
-                assembly: {
-                    id: 2,
-                },
-                category: 'category',
+
+        const result: PartialIssue[] = [{
+            id: 1,
+            assembly: {
+                id: 2,
+            },
+            category: 'a',
+            name: 'name',
+            subName: 'sub name',
+            type: 'a',
+            typeName: 'type name',
+            typeSubName: 'type sub name',
+            status: 'status',
+            question: 'question',
+            goal: 'goal',
+            majorChanges: 'major change',
+            changesInLaw: 'changes in law',
+            costsAndRevenues: 'costs',
+            deliveries: 'deliveries',
+            additionalInformation: 'additionalInformation',
+            date: '2001-01-01',
+            proponents: [{
+                id: 3,
                 name: 'name',
-                subName: 'sub name',
-                type: 'type',
-                typeName: 'type name',
-                typeSubName: 'type sub name',
-                status: 'status',
-                question: 'question',
-                goal: 'goal',
-                majorChanges: 'major change',
-                changesInLaw: 'changes in law',
-                costsAndRevenues: 'costs',
-                deliveries: 'deliveries',
-                additionalInformation: 'additionalInformation',
-                date: '2001-01-01',
-                proponents: [{
-                    id: 3,
+                avatar: {
+                    src: '',
+                    templateSrc: '',
+                },
+                party: {
+                    id: 4,
                     name: 'name',
-                    avatar: {
-                        templateSrc: '',
-                    },
-                    party: {
-                        id: 4,
-                        name: 'name',
-                        color: '123123',
-                    },
-                }],
+                    color: '123123',
+                },
             }],
-            isSearching: false,
-            onSearch: () => {},
-            onClear: () => {},
-        };
+        }];
         const tree = renderer.create(
             <Router >
-                <SearchIssue {...data} />
+                <SearchIssue assembly={1}
+                             result={result as Issue[]}
+                             isSearching={false}
+                             onSearch={() => {}}
+                             onClear={() => {}}/>
             </Router>,
         ).toJSON();
 

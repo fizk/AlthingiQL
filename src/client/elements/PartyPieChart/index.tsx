@@ -3,18 +3,20 @@ import { pie, arc } from 'd3-shape';
 import {Party as PartyType} from '../../../../@types';
 import './index.scss';
 
-interface PartyPieChartProps {
-    source: Array<{
-        party: PartyType,
-        value?: number,
-    }>;
+interface Props {
+    source: Source[];
     formatValue?: (...args: any[]) => any;
 }
 
-export default class PartyPieChart extends React.Component<PartyPieChartProps, {}> {
+interface Source {
+    party: PartyType,
+    value?: number,
+}
+
+export default class PartyPieChart extends React.Component<Props, {}> {
     public static defaultProps = {
         source: [],
-        formatValue: v => v,
+        formatValue: (v: any) => v,
     };
 
     public dimensions = {
@@ -23,12 +25,12 @@ export default class PartyPieChart extends React.Component<PartyPieChartProps, {
         gutter: 20,
     };
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
     }
 
-    private midAngle(d) {
+    private midAngle(d: any) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
     }
 
@@ -75,7 +77,7 @@ export default class PartyPieChart extends React.Component<PartyPieChartProps, {
                             className="party-pie-chart__arch">
                             <path
                                 className="party-pie-chart__path"
-                                d={a.path}
+                                d={a.path || undefined}
                                 fill={`#${a.data.party.color}`}
                             />
                             <line
@@ -96,7 +98,7 @@ export default class PartyPieChart extends React.Component<PartyPieChartProps, {
                             >
                                 <tspan>{a.data.party.name}</tspan>
                                 <tspan>
-                                    {this.props.formatValue(a.data.value)}
+                                    {this.props.formatValue && this.props.formatValue(a.data.value)}
                                 </tspan>
                             </text>
                         </g>

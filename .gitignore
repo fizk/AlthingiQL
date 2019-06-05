@@ -152,3 +152,5 @@ public/javascripts/
 public/stylesheets/
 !public/stylesheets/.gitkeep
 dist
+public/app.css
+public/bundle.js

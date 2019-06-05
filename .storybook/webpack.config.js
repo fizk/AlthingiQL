@@ -1,4 +1,4 @@
-// const path = require('path');
+const path = require('path');
 // const webpack = require('webpack');
 //
 // module.exports = {
@@ -43,30 +43,57 @@
 //
 //
 
-const genDefaultConfig = require("@storybook/react/dist/server/config/defaults/webpack.config.js");
+// const genDefaultConfig = require("@storybook/react/dist/server/config/defaults/webpack.config.js");
+//
+// module.exports = (baseConfig, env, defaultConfig) => {
+//     const config = genDefaultConfig(baseConfig, env);
+//     config.module.rules = [
+//         {
+//             test: /\.tsx?$/,
+//             use: 'ts-loader',
+//             exclude: /node_modules/,
+//         },
+//         {
+//             test: /\.scss$/,
+//             use: [
+//                 "style-loader", // creates style nodes from JS strings
+//                 "css-loader", // translates CSS into CommonJS
+//                 "sass-loader" // compiles Sass to CSS
+//             ]
+//         }
+//     ];
+//
+//     config.resolve.extensions.push(".tsx");
+//     config.resolve.extensions.push(".ts");
+//     config.resolve.extensions.push(".js");
+//     config.resolve.extensions.push(".jsx");
+//
+//     return config;
+// };
 
-module.exports = (baseConfig, env, defaultConfig) => {
-    const config = genDefaultConfig(baseConfig, env);
-    config.module.rules = [
-        {
-            test: /\.tsx?$/,
-            use: 'ts-loader',
-            exclude: /node_modules/,
-        },
-        {
-            test: /\.scss$/,
-            use: [
-                "style-loader", // creates style nodes from JS strings
-                "css-loader", // translates CSS into CommonJS
-                "sass-loader" // compiles Sass to CSS
-            ]
-        }
-    ];
 
-    config.resolve.extensions.push(".tsx");
-    config.resolve.extensions.push(".ts");
-    config.resolve.extensions.push(".js");
-    config.resolve.extensions.push(".jsx");
-
+module.exports = ({ config }) => {
+    config.module.rules.push({
+        test: /\.(sa|sc|c)ss$/,
+        include: path.resolve(__dirname, '../'),
+        use: [
+            'style-loader',
+            'css-loader',
+            'sass-loader',
+        ],
+    });
+    config.module.rules.push({
+        test: /\.(ts|tsx)$/,
+        use: [
+            {
+                loader: require.resolve('awesome-typescript-loader'),
+            },
+            // Optional
+            // {
+            //     loader: require.resolve('react-docgen-typescript-loader'),
+            // },
+        ],
+    });
+    config.resolve.extensions.push('.ts', '.tsx');
     return config;
 };

@@ -1,5 +1,6 @@
 import {GraphQLInt, GraphQLList, GraphQLNonNull} from 'graphql';
 import IssueTypeCount from '../types/IssueTypeCount';
+import {Client} from "../../../@types";
 
 export default {
     type: new GraphQLList(IssueTypeCount),
@@ -12,7 +13,7 @@ export default {
         },
     },
 
-    resolve(root, {congressman, assembly}, {client}) {
+    resolve(root: any, {congressman, assembly}: {congressman: number, assembly: number}, {client}: {client: Client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmenn/${congressman}/thingmal-samantekt`);
     },
 };

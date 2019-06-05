@@ -1,4 +1,5 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql, compose} from 'react-apollo';
+import gql from 'graphql-tag';
 import AssemblyPlenary from './AssemblyPlenary';
 
 const assemblyIssueQuery = gql`
@@ -53,12 +54,32 @@ const assemblyIssueQuery = gql`
     }
 `;
 
+type Response = {
+    AssemblyPlenary: any[];
+};
+
+type InputProps = {
+    assembly: number
+    plenary: number
+};
+
+type Variables = {
+    assembly: number
+    plenary: number
+};
+
+interface Props {
+    // loading?: any;
+    // error?: any;
+    plenaryItems: any[];
+}
+
 export default compose(
-    graphql(assemblyIssueQuery, {
-        props: (all: {ownProps: any, data?: {fetchMore: any, loading: boolean, AssemblyPlenary: any}}) => {
+    graphql<InputProps, Response, Variables, Props>(assemblyIssueQuery, {
+        props: ({data: {loading, AssemblyPlenary}}: any) => {
             return {
-                plenaryItems: all.data.loading === false ? all.data.AssemblyPlenary : undefined,
-                loading: all.data.loading,
+                plenaryItems: loading === false ? AssemblyPlenary : undefined,
+                loading: loading,
             };
         },
         options: ({assembly, plenary}) => ({

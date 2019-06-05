@@ -2,12 +2,13 @@ import * as React from 'react';
 import {Fragment} from 'react';
 import {Inflation, Period} from '../../../../@types';
 import {scaleLinear, scaleTime} from 'd3-scale';
-import {timeMonth} from 'd3-time';
-// import './index.scss';
+import {area} from 'd3-shape';
+import {timeMonth, timeYear} from 'd3-time';
+import './index.scss';
 
 interface Props {
     inflation: Inflation[];
-    period: Period;
+    period: Partial<Period>;
 }
 
 export default class InflationChart extends React.Component<Props, {}> {
@@ -28,93 +29,103 @@ export default class InflationChart extends React.Component<Props, {}> {
     private minMaxDates(list: Inflation[], period: Period) {
         const dates = list.map(item => new Date(item.date));
         return {
+            // @ts-ignore @todo
             min: new Date(Math.min.apply(null, [...dates, period.from ? new Date(period.from) : new Date()])),
+            // @ts-ignore @todo
             max: new Date(Math.max.apply(null, [...dates, period.to ? new Date(period.to) : new Date()])),
         };
     }
 
     public render() {
+
+
         const minMaxCount = this.minMaxCount(this.props.inflation);
-        const minMaxDates = this.minMaxDates(this.props.inflation, this.props.period);
+        const minMaxDates = this.minMaxDates(this.props.inflation, (this.props.period as Period));
         const x = scaleTime()
             .domain([minMaxDates.min, minMaxDates.max])
-            .range([this.dimensions.gutter, this.dimensions.width]);
+            .range([0, this.dimensions.width - (this.dimensions.gutter * 2)]);
         const y = scaleLinear()
-            .domain([0, minMaxCount.max])
-            .range([0, this.dimensions.height]);
-        const xTicks = x.ticks(timeMonth.every(1));
+            .domain([minMaxCount.max + 1, 0]).nice()
+            .range([0, this.dimensions.height - (this.dimensions.gutter * 2)]);
+        //@ts-ignore
+        const xTicksMonth = x.ticks(timeMonth.every(1));
+        //@ts-ignore
+        const xTicksYear = x.ticks(timeYear.every(1));
         const yTicks = y.ticks(10);
 
-        const polyline = this.props.inflation.reduce((accumulator, current) => {
-            return accumulator +
-                `${x(new Date(current.date))}, ${this.dimensions.height - y(current.value) + this.dimensions.gutter} `;
-        }, '');
+
+
+
+        const a = area<Inflation>()
+            .x(d => x(new Date(d.date)))
+            .y0(y(0))
+            .y1(d => y(d.value));
+
 
         return (
-            <svg
-                className="date-and-count-chart"
-                width={this.dimensions.width + 2 * this.dimensions.gutter}
-                height={this.dimensions.height + 3 * this.dimensions.gutter}
-                viewBox={`0 0 ${this.dimensions.width +
-                2 * this.dimensions.gutter} ${this.dimensions.height +
-                3 * this.dimensions.gutter}`}>
-                <g>
-                    <rect x={x(new Date(this.props.period.from))}
-                          y={0}
-                          width={x(this.props.period.to
-                              ? new Date(this.props.period.to)
-                              : new Date()) - x(new Date(this.props.period.from))}
-                          height={this.dimensions.height + 3 * this.dimensions.gutter}
-                          fill="rgb(200, 200, 200)"
-                    />
-                </g>
-                <g>
-                    <line
-                        x1="0"
-                        y1={this.dimensions.height + this.dimensions.gutter}
-                        x2={this.dimensions.width + 2 * this.dimensions.gutter}
-                        y2={this.dimensions.height + this.dimensions.gutter}
-                    />
-                </g>
-                <g>
+            <svg viewBox={`0 0 ${this.dimensions.width} ${this.dimensions.height}`}
+                 width={this.dimensions.width}
+                 height={this.dimensions.height}
+                 style={{border: '1px solid gray'}}>
+                <linearGradient id="area-gradient" x1="0" x2="0" y1="0" y2="1">
+                    <stop className="stop1" offset="0%"/>
+                    <stop className="stop2" offset="100%"/>
+                </linearGradient>
 
+
+                <g>
+                    <g transform={`translate(${this.dimensions.gutter * 2} 0)`}>
+                        {xTicksMonth.map((item: Date, i: number) => (
+                            <line className="inflation-chart__y-lines" key={`x-c-${i}`} x1={x(item)} x2={x(item)} y1="0" y2={this.dimensions.height - (this.dimensions.gutter * 2)} shapeRendering="crispEdges"/>
+                        ))}
+                    </g>
+                    <g transform={`translate(${this.dimensions.gutter * 2} 0)`}>
+                        {yTicks.map((item, i) => (
+                            <line key={`y-line-${i}`}
+                                  className="inflation-chart__x-lines"
+                                  x1={0}
+                                  y1={y(item)}
+                                  x2={this.dimensions.width - (this.dimensions.gutter * 2)}
+                                  y2={y(item)}
+                            />),
+                        )}
+                    </g>
+                </g>
+
+                <g transform={`translate(${this.dimensions.gutter * 2} 0)`}>
+                    <path className="inflation-chart__area" fill="url(#area-gradient)" d={String(a(this.props.inflation))} />
+                </g>
+
+                <g>
                     {yTicks.map((item, i) => (
-                        <Fragment key={`y-line-${i}`}>
-                            <line stroke="black"
-                                strokeWidth="1"
-                                x1={this.dimensions.gutter}
-                                y1={y(item)}
-                                x2={this.dimensions.gutter + this.dimensions.width}
-                                y2={y(item)}
-                            />
-                            <text x={0} y={y(item)}>{item}</text>
-                        </Fragment>),
-                    )}
-                    {xTicks.map((item, i) => (
+                        <text x={0} y={y(item)} key={`y-line-${i}`}>{item}</text>
+                    ))}
+                </g>
+
+                <g transform={`translate(${this.dimensions.gutter * 2} ${this.dimensions.height - this.dimensions.gutter})`}>
+                    {xTicksMonth.map((item: Date, i: number) => (
                         <text
                             key={`x-label-${i}`}
                             x={x(item)}
-                            y={this.dimensions.height + this.dimensions.gutter + this.dimensions.gutter}>
-                            <tspan x={x(item)} dy="0">
+                            y={0}
+                            textAnchor="middle">
+
                                 {item.getMonth() + 1}
-                            </tspan>
+
+                        </text>
+                    ))}
+                </g>
+                <g transform={`translate(${this.dimensions.gutter * 2} ${this.dimensions.height - this.dimensions.gutter})`}>
+                    {xTicksYear.map((item: Date, i: number) => (
+                        <text
+                            key={`x-label-${i}`}
+                            x={x(item)}
+                            y={0}
+                            textAnchor="middle">
                             <tspan x={x(item)} dy="15">
                                 {item.getFullYear()}
                             </tspan>
                         </text>
-                    ))}
-                </g>
-                <g>
-                    <polyline points={polyline}
-                              fill="none" stroke="black" />
-                    {this.props.inflation.map(item => (
-                        <circle cx={x(new Date(item.date))}
-                        onMouseOver={event => item.value}
-                                cy={
-                            this.dimensions.height -
-                            y(item.value) +
-                            this.dimensions.gutter
-                        } r="5"/>
                     ))}
                 </g>
             </svg>

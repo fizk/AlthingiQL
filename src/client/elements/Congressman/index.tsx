@@ -1,12 +1,13 @@
 import * as React from 'react';
 import Badge from '../Badge';
 import Avatar from '../Avatar';
-import { H3 } from '../Headline';
+import classVariations from '../../utils/classVariations';
 import {Person as PersonType, Party as PartyType} from '../../../../@types';
 import './index.scss';
 
 interface Props {
     congressman: PersonType;
+    variations?: string[];
     party?: PartyType;
 }
 
@@ -20,29 +21,28 @@ export default class Congressman extends React.Component<Props, {}> {
             },
         },
         party: undefined,
+        variations: []
     };
 
     public render() {
         return (
-            <article className="congressman">
+            <article className={classVariations('congressman', this.props.variations)}>
                 <header className="congressman__avatar">
-                    <Avatar
+                    <Avatar variations={this.props.variations}
                         src={this.props.congressman.avatar.templateSrc}
                         title={`Ljósmynd af ${this.props.congressman.name}`}
                     />
                 </header>
                 {this.props.party && (
                     <div className="congressman__party">
-                        <Badge
+                        <Badge variations={this.props.variations}
                             title={this.props.party.name}
                             color={this.props.party.color}
                         />
                     </div>
                 )}
                 <div className="congressman__body">
-                    <H3 variations={['ellipsis']}>
-                        {this.props.congressman.name}
-                    </H3>
+                    <h3 className="congressman__title">{this.props.congressman.name}</h3>
                     {this.props.children}
                 </div>
             </article>

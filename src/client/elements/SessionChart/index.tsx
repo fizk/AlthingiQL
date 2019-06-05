@@ -4,20 +4,22 @@ import { timeMonth } from 'd3-time';
 import {Period as PeriodType} from '../../../../@types';
 import './index.scss';
 
-const Map = {
+const Map: {[key: string]: string} = {
     'varamaður': 'a6d1fd',
     'með varamann': 'bbbbbb',
     'þingmaður': '77bc48',
 };
 
-interface SessionChartProps {
-    source?: Array<{
-        period?: PeriodType,
-        type?: string,
-    }>;
+interface Source {
+    period: PeriodType,
+    type: string,
 }
 
-export default class SessionChart extends React.Component<SessionChartProps, {}> {
+interface Props {
+    source: Source[];
+}
+
+export default class SessionChart extends React.Component<Props, {}> {
     public static defaultProps = {
         source: [],
     };
@@ -28,13 +30,15 @@ export default class SessionChart extends React.Component<SessionChartProps, {}>
         gutter: 20,
     };
 
-    private minMaxDates(list) {
+    private minMaxDates(list: Source[]) {
         const fromDates = list.map(item => new Date(item.period.from));
         const toDates = list.map(
             item => (item.period.to ? new Date(item.period.to) : new Date()),
         );
         return {
+            // @ts-ignore @todo
             min: new Date(Math.min.apply(null, fromDates)),
+            // @ts-ignore @todo
             max: new Date(Math.max.apply(null, toDates)),
         };
     }
@@ -44,7 +48,8 @@ export default class SessionChart extends React.Component<SessionChartProps, {}>
         const x = scaleTime()
             .domain([minMaxDates.min, minMaxDates.max])
             .range([this.dimensions.gutter, this.dimensions.width]);
-        const xTicks = x.ticks(timeMonth.every(1));
+        // @ts-ignore @todo
+        const xTicks: Date[] = x.ticks(timeMonth.every(1));
         return (
             <svg
                 className="date-and-count-chart"
@@ -63,7 +68,7 @@ export default class SessionChart extends React.Component<SessionChartProps, {}>
                     />
                 </g>
                 <g>
-                    {xTicks.map((item, i) => (
+                    {xTicks.map((item, i: number) => (
                         <line
                             className="date-and-count-chart__line"
                             key={`x-line-${i}`}
@@ -73,7 +78,7 @@ export default class SessionChart extends React.Component<SessionChartProps, {}>
                             y2={this.dimensions.height + this.dimensions.gutter}
                         />
                     ))}
-                    {xTicks.map((item, i) => (
+                    {xTicks.map((item, i: number) => (
                         <text
                             className="date-and-count-chart__line"
                             key={`x-label-${i}`}

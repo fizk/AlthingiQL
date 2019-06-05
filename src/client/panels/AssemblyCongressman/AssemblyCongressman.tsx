@@ -9,58 +9,21 @@ import SessionChart from '../../elements/SessionChart';
 import VoteResultPieChart from '../../elements/VoteResultPieChart';
 import {
     Person as PersonType,
-    Period as PeriodType,
+    Session as SessionType,
+    Issue as IssueType,
+    IssueA,
+    VoteSummary as VoteSummaryType, IssueCount, CategorySpeechTime,
 } from '../../../../@types';
 
 interface Props {
-    assembly?: number;
-    congressman?: number;
+    assembly: number;
+    congressman: number;
     person?: PersonType;
-    sessions?: Array<{
-        id?: number,
-        type?: string,
-        constituency?: {
-            id?: number,
-            name?: string,
-        },
-        period?: PeriodType,
-    }>;
-    votes?: Array<{
-        count?: number,
-        vote?: string,
-    }>;
-    promotedIssues?: Array<{
-        id?: number,
-        assembly?: {
-            id?: number,
-        },
-        name?: string,
-        status?: string,
-        goal?: string,
-        subName?: string,
-        type?: string,
-        typeName?: string,
-        typeSubName?: string,
-        question?: string,
-    }>;
-    issueCount?: Array<{
-        order?: number,
-        type?: string,
-        typeName?: string,
-        typeSubName?: string,
-        documentType?: string,
-        count?: number,
-    }>;
-    categorySpeechTimes?: Array<{
-        category?: {
-            id?: number,
-        },
-        superCategory?: {
-            id?: number,
-        },
-        title?: string,
-        time?: number,
-    }>;
+    sessions?: SessionType[];
+    votes?: VoteSummaryType[];
+    promotedIssues?: IssueType[];
+    issueCount?: IssueCount[];
+    categorySpeechTimes?: CategorySpeechTime[];
 }
 
 export default class AssemblyCongressman extends React.Component<Props, {}> {
@@ -81,7 +44,7 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
         categorySpeechTimes: [],
     };
 
-    private chartPersentage(data) {
+    private chartPersentage(data: VoteSummaryType[]) {
         const yesNo = data.filter(
             item => item.vote === 'já' || item.vote === 'nei',
         );
@@ -115,13 +78,13 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
             <Fragment>
                 <Row>
                     <Column>
-                        <Congressman congressman={this.props.person} />
+                        <Congressman congressman={this.props.person!} />
                     </Column>
                 </Row>
                 <Row>
                     <Column>
-                        {this.props.sessions.map(session => session.constituency.name)
-                            .reduce((total, item) => {
+                        {(this.props.sessions || []).map(session => session.constituency.name)
+                            .reduce((total: any[], item: string) => {
                                 if (total.indexOf(item) < 0) {
                                     total.push(item);
                                 }
@@ -132,13 +95,13 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
                 </Row>
                 <Row>
                     <Column>
-                        <SessionChart source={this.props.sessions} />
+                        <SessionChart source={this.props.sessions || []} />
                     </Column>
                 </Row>
                 <Row>
                     <Column>
                         <VoteResultPieChart
-                            source={this.props.votes.map(vote => ({
+                            source={(this.props.votes || []).map(vote => ({
                                 value: vote.count,
                                 vote: vote.vote,
                             }))}
@@ -146,7 +109,7 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
                     </Column>
                     <Column>
                         <VoteResultPieChart
-                            source={this.chartPersentage(this.props.votes)}
+                            source={this.chartPersentage(this.props.votes || [])}
                             formatValue={(value, total) =>
                                 ` ${((value / total) * 100).toFixed(2)}%`
                             }
@@ -166,7 +129,7 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.promotedIssues.map(issue => (
+                                {(this.props.promotedIssues || []).map(issue => (
                                     <tr key={`issue-${issue.id}`}>
                                         <td>
                                             <Link
@@ -178,8 +141,8 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
                                             </Link>
                                         </td>
                                         <td>{issue.typeName}</td>
-                                        <td>{issue.typeSubName}</td>
-                                        <td>{issue.status}</td>
+                                        <td>{(issue as IssueA).typeSubName}</td>
+                                        <td>{(issue as IssueA).status}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -201,7 +164,7 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.issueCount.map(issue => (
+                                {(this.props.issueCount || []).map(issue => (
                                     <tr
                                         key={`issue-${issue.order}-${
                                             issue.type
@@ -223,7 +186,7 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
                     <Column>
                         <H2>Rædutimi a málaflokka</H2>
                         <HorizontalChart
-                            source={this.props.categorySpeechTimes.map(
+                            source={(this.props.categorySpeechTimes || []).map(
                                 item => ({
                                     label: item.title,
                                     value: item.time,

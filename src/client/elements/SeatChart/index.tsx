@@ -3,17 +3,19 @@ import {Party as PartyType} from '../../../../@types';
 import './index.scss';
 
 interface Props {
-    source?: Array<{
-        party?: PartyType,
-        value?: number,
-    }>;
+    source: Source[];
     formatValue?: (...args: any[]) => any;
+}
+
+interface Source {
+    party: PartyType,
+    value: number,
 }
 
 export default class SeatChart extends React.Component<Props, {}> {
     public static defaultProps = {
         source: [],
-        formatValue: v => v,
+        formatValue: (v: any) => v,
     };
 
     public dimensions = {
@@ -23,7 +25,7 @@ export default class SeatChart extends React.Component<Props, {}> {
         radius: 10,
     };
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
     }

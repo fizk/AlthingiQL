@@ -13,16 +13,16 @@ export default class Input extends React.Component<Props & React.HTMLProps<HTMLI
     };
 
     public render() {
-        const props = { ...this.props };
-        delete props.variations;
-        delete props.isError;
+
+        const {variations, isError, ...rest} = this.props;
+
         return (
             <input
-                {...props}
+                {...rest}
                 className={classVariations(
                     'input',
-                    this.props.variations.concat(
-                        this.props.isError ? ['error'] : [],
+                    (variations || []).concat(
+                        isError ? ['error'] : [],
                     ),
                 )}
             />

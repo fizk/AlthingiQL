@@ -2,8 +2,8 @@
 
 .avatar {
     @include circle;
-    width: map_get($space, xxl);
-    height: map_get($space, xxl);
+    width: map_get($space, xl);
+    height: map_get($space, xl);
     background-position: center;
     background-size: cover;
     background-color: map_get($color, gray-light-ultra);

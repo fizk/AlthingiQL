@@ -4,8 +4,13 @@
 @mixin rounded {
     border-radius: 5px;
 }
+
 @mixin rounded-top {
     border-radius: 5px 5px 0 0;
+}
+
+@mixin rounded-bottom {
+    border-radius: 0 0 5px 5px;
 }
 
 @mixin shadow ($x: 0, $y: 10px, $blur: 50px) {
@@ -49,22 +54,50 @@ $color-secondary: (
 );
 
 $space: (
-    xxs:  4px,
-    xs:  8px,
-    sm:  11px,
-    md:  16px,
-    lg:  23px,
-    xl:  32px,
-    xxl:  46px,
+    //xxs:  4px,
+    //xs:  8px,
+    //sm:  11px,
+    //md:  16px,
+    //lg:  23px,
+    //xl:  32px,
+    //xxl:  46px,
+
+    xxs:  4px, //@todo
+    xs:  0.512rem,
+    sm:  0.64rem,
+    md:  1rem,
+    lg:  1.563rem,
+    xl:  1.953rem,
+    xxl:  3.052rem,
 );
 
+
+
+
+//3.052em   (48.83px)	A Visual Type Scale
+//2.441em   (39.06px)	A Visual Type Scale
+//1.953em   (31.25px)	A Visual Type Scale
+//1.563em   (25.00px)	A Visual Type Scale
+//1.25em    (20.00px)	A Visual Type Scale
+//1em       (16.00px)	A Visual Type Scale
+//0.8em     (12.80px)	A Visual Type Scale
+//0.64em    (10.24px)	A Visual Type Scale
+//0.512em   (8.19px)	A Visual Type Scale
+
 $font-size: (
-    xs: 11px,
-    sm: 14px,
-    md: 16px,
-    lg: 22px,
-    xl: 32px,
-    xxl: 46px,
+    //xs: 11px,
+    //sm: 14px,
+    //md: 16px,
+    //lg: 22px,
+    //xl: 32px,
+    //xxl: 46px,
+
+    xs: 0.64rem,
+    sm: 0.8rem,
+    md: 1rem,
+    lg: 1.563rem,
+    xl: 1.953rem,
+    xxl: 3.052rem,
 );
 
 $color: (

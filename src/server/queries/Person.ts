@@ -1,5 +1,6 @@
 import Person from '../types/Person';
 import {GraphQLInt, GraphQLNonNull} from 'graphql';
+import {Client} from "../../../@types";
 
 export default {
     type: Person,
@@ -9,7 +10,8 @@ export default {
         },
     },
 
-    resolve(root, params, {client}) {
-        return client.get(`/thingmenn/${params.id}`);
+    // resolve(root: null, {id}: {id: number}, {client}: {client: Client}) {
+    resolve(root: null, {id}:  {id: number}, {client}: {client: Client}) {
+        return client.get(`/thingmenn/${id}`);
     },
 };

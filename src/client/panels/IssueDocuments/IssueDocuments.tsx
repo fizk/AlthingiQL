@@ -3,27 +3,12 @@ import { Row, Column } from '../../elements/Grid';
 import Congressman from '../../elements/Congressman';
 import VoteResultPieChart from '../../elements/VoteResultPieChart';
 import DocumentCongressmanVotes from '../../components/DocumentCongressmanVotes';
-import {Congressman as CongressmanType} from '../../../../@types';
+import {Document as DocumentType, VoteResult} from '../../../../@types';
 
 interface Props {
-    assembly?: number;
-    issue?: number;
-    documents?: Array<{
-        id?: number,
-        url?: string,
-        date?: string,
-        type?: string,
-        proponents: CongressmanType[],
-        votes?: Array<{
-            id?: number,
-            type?: string,
-            outcome?: string,
-            yes?: number,
-            no?: number,
-            inaction?: number,
-            committee?: string,
-        }>,
-    }>;
+    assembly: number;
+    issue: number;
+    documents: DocumentType[];
 }
 
 export default class IssueDocuments extends React.Component<Props, {}> {
@@ -33,7 +18,7 @@ export default class IssueDocuments extends React.Component<Props, {}> {
         documents: [],
     };
 
-    private formatVoteResults(vote) {
+    private formatVoteResults(vote: VoteResult) {
         const value = [];
         if (vote.yes) {
             value.push({

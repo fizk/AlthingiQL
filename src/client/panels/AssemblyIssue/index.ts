@@ -1,10 +1,16 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql, compose} from 'react-apollo';
+import gql from 'graphql-tag';
 import AssemblyIssue from './AssemblyIssue';
 
 const assemblyIssueQuery = gql`
-    query ($assembly: Int! $issue: Int!) {
-        AssemblyIssueProgress (assembly: $assembly, issue: $issue) {
-            issue {id}
+    query ($assembly: Int! $issue: Int! $category: String!) {
+        AssemblyIssueProgress (assembly: $assembly, issue: $issue category: $category) {
+            issue {
+                ... on IssueInterface {
+                    id
+                    category
+                }
+            }
             assembly {id}
             committee {id name}
             speech {id}
@@ -14,71 +20,100 @@ const assemblyIssueQuery = gql`
             type
             completed
         }
-        AssemblyIssue(assembly: $assembly issue: $issue) {
-            id
-            assembly {
-                id
-            }
-            name
-            status
-            goal
-            subName
-            type
-            typeName
-            typeSubName
-            question
-            majorChanges
-            changesInLaw
-            costsAndRevenues
-            deliveries
-            additionalInformation
-            date
-            proponents {
+        AssemblyIssue (assembly: $assembly issue: $issue category: $category) {
+            __typename
+            ... on IssueInterface {
                 id
                 name
-                avatar {templateSrc}
-                party {
-                    id
-                    name
-                    color
-                }
-            }
-            speakers {
-                congressman {
-                    id
-                    name
-                    avatar {templateSrc}
-                    party {
+                type
+                typeName
+                assembly {id}
+                speakers {
+                    congressman {
                         id
                         name
-                        color
+                        avatar {templateSrc}
+                        party {
+                            id
+                            name
+                            color
+                        }
                     }
+                    value
                 }
-                value
+                speechRange {
+                    count
+                    date
+                }
             }
-            voteRange {
-                count
-                date
+            ... on IssueA {...moreissueA}
+
+        }
+    }
+    fragment moreissueA on IssueA {
+        status
+        goal
+        subName
+        typeSubName
+        question
+        majorChanges
+        changesInLaw
+        costsAndRevenues
+        deliveries
+        additionalInformation
+        date
+        proponents {
+            id
+            name
+            avatar {templateSrc}
+            party {
+                id
+                name
+                color
             }
-            speechRange {
-                count
-                date
-            }
+        }
+        voteRange {
+            count
+            date
         }
     }
 `;
 
-export default compose<any>( //@todo `any`
-    graphql(assemblyIssueQuery, {
-        props: (all: {data?: {loading: boolean, AssemblyIssue: any, AssemblyIssueProgress: any}}) => ({ //@todo `any`
-            issue: all.data.loading === false ? all.data.AssemblyIssue : undefined,
-            progress: all.data.loading === false ? all.data.AssemblyIssueProgress : undefined,
-            loading: all.data.loading,
+type Response = {
+    IssueSpeeches: any[];
+};
+
+type InputProps = {
+    issue: number;
+    assembly: number;
+    category: string;
+};
+
+type Variables = {
+    issue: number;
+    assembly: number;
+    category: string;
+};
+
+interface Props {
+    // loading?: any;
+    // error?: any;
+    issue: any[];
+    progress: any[];
+}
+
+export default compose(
+    graphql<InputProps, Response, Variables, Props>(assemblyIssueQuery, {
+        props: ({data: {loading, AssemblyIssue, AssemblyIssueProgress}}: any) => ({ //@todo `any`
+            issue: loading === false ? AssemblyIssue : undefined,
+            progress: loading === false ? AssemblyIssueProgress : undefined,
+            loading: loading,
         }),
-        options: ({issue, assembly}: {issue: number, assembly: number}) => ({
+        options: ({issue, assembly, category}) => ({
             variables: {
                 issue,
                 assembly,
+                category,
             },
         }),
     }),

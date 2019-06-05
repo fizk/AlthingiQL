@@ -3,8 +3,8 @@ import classVariations from '../../utils/classVariations';
 import './index.scss';
 
 interface Props {
-    variations?: any[];
     color?: string;
+    variations?: any[];
 }
 
 export default class Badge extends React.Component<Props & React.HTMLProps<HTMLDivElement>, {}> {

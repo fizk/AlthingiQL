@@ -2,12 +2,13 @@ import * as React from 'react';
 import IssuesMenu from '../IssuesMenu';
 import renderer from 'react-test-renderer';
 import {BrowserRouter as Router} from 'react-router-dom';
+import {CategorySummary, IssueSummary} from "../../../../../@types";
 
 describe('<IssuesMenu />', () => {
     test('default props', () => {
         const tree = renderer.create(
             <Router >
-                <IssuesMenu />
+                <IssuesMenu assembly={1}  />
             </Router>,
         ).toJSON();
 
@@ -15,25 +16,21 @@ describe('<IssuesMenu />', () => {
     });
 
     test('data', () => {
-        const data = {
-            assembly: 1,
-            types: [{
-                count: 1,
-                type: 'type',
-                typeName: 'type name',
-                typeSubName: 'sub type name',
-            }],
-            categories: [{
-                categoryId: 2,
-                superCategoryId: 3,
-                title: 'title',
-                count: 3,
-            }],
-            loading: false,
-        };
+        const types: IssueSummary[] = [{
+            count: 1,
+            type: 'type',
+            typeName: 'type name',
+            typeSubName: 'sub type name',
+        }];
+        const categories: CategorySummary[] = [{
+            id: 2,
+            superCategoryId: 3,
+            title: 'title',
+            count: 3,
+        }];
         const tree = renderer.create(
             <Router >
-                <IssuesMenu {...data} />
+                <IssuesMenu assembly={1} categories={categories} types={types}/>
             </Router>,
         ).toJSON();
 

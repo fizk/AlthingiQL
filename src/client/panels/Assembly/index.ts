@@ -1,20 +1,9 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql, compose} from 'react-apollo';
+import gql from 'graphql-tag';
 import Assembly from './Assembly';
 
-const assemblyQuery = gql`
-    query assembly ($assembly: Int!) {
-        Assembly(assembly: $assembly) {
-            id
-            period {
-                from
-                to
-            }
-        }
-        Inflation (assembly: $assembly) {
-            id
-            date
-            value
-        }
+const queryAssemblySummary = gql`
+    query queryAssemblySummary ($assembly: Int!) {
         AssemblySummary(assembly: $assembly) {
             parties {
                 party {
@@ -34,6 +23,7 @@ const assemblyQuery = gql`
             }
             types {
                 count
+                category
                 type
                 typeName
                 typeSubName
@@ -46,6 +36,7 @@ const assemblyQuery = gql`
                 count
                 date
             }
+            averageAge
             election {
                 id
                 date
@@ -64,6 +55,40 @@ const assemblyQuery = gql`
                 }
             }
         }
+    }
+`;
+
+const queryIssueDuration = gql`
+    query AssemblyIssuesSpeechDuration ($assembly: Int!) {
+        AssemblyIssuesSpeechDuration (assembly: $assembly size: 6 order: "desc") {
+            issue {
+                __typename
+                ... on IssueInterface {
+                    id
+                    category
+                    name
+                    type
+                    typeName
+                    assembly {id}
+                }
+                ... on IssueA {...issueA}
+            }
+            value
+        }
+    }
+    fragment issueA on IssueA {
+        proponentsCount
+        proponents(count: 1) {
+            id
+            name
+            avatar {templateSrc}
+            party {id name color}
+        }
+    }
+`;
+
+const queryCongressmanPerformance = gql`
+    query queryCongressmanPerformance ($assembly: Int!) {
         CongressmanSpeekLeast: CongressmenAssemblySpeechTime (assembly: $assembly order: "asc" size: 5) {
             ... congressmanWithValue
         }
@@ -79,33 +104,6 @@ const assemblyQuery = gql`
         CongressmenAssemblyBills (assembly: $assembly order: "desc" size: 5) {
             ... congressmanWithValue
         }
-        AssemblyIssuesSpeechDuration (assembly: $assembly size: 6 order: "desc") {
-            issue {
-                id
-                assembly {id}
-                category
-                name
-                type
-                subName
-                type
-                typeName
-                typeSubName
-                status
-                goal
-                proponentsCount
-                proponents (count: 1) {
-                    id
-                    name
-                    avatar {templateSrc}
-                    party {
-                        id
-                        name
-                        color
-                    }
-                }
-            }
-            value
-        }
     }
     fragment congressmanWithValue on CongressmanValue  {
         value
@@ -119,29 +117,55 @@ const assemblyQuery = gql`
     }
 `;
 
-export default compose<any>( //@todo `any`
-    graphql(assemblyQuery, {
-        props: (all: {data?: {
-                loading: boolean,
-                Assembly: any,
-                Inflation: any,
-                AssemblySummary: any,
-                CongressmanSpeekMost: any,
-                CongressmanSpeekLeast: any,
-                CongressmenAssemblyQuestions: any,
-                CongressmenAssemblyResolutions: any,
-                CongressmenAssemblyBills: any,
-                AssemblyIssuesSpeechDuration: any,
-            }}) => ({
-            assembly: all.data.loading === false ? all.data.Assembly : undefined,
-            inflation: all.data.loading === false ? all.data.Inflation : undefined,
-            summary: all.data.loading === false ? all.data.AssemblySummary : undefined,
+const queryAssembly = gql`
+    query assembly ($assembly: Int!) {
+        Assembly(assembly: $assembly) {
+            id
+            division {
+                majority {color}
+                minority {color}
+            }
+            cabinet {
+                title
+                period {from to}
+            }
+            period {
+                from
+                to
+            }
+        }
+        Inflation (assembly: $assembly) {
+            id
+            date
+            value
+        }
+    }
+`;
+
+export default compose(
+    graphql(queryCongressmanPerformance, {
+        props: (all: any) => ({
             speakMost: all.data.loading === false ? all.data.CongressmanSpeekMost : undefined,
             speakLeast: all.data.loading === false ? all.data.CongressmanSpeekLeast : undefined,
             questioner: all.data.loading === false ? all.data.CongressmenAssemblyQuestions : undefined,
             resolutionaries: all.data.loading === false ? all.data.CongressmenAssemblyResolutions : undefined,
-            bills: all.data.loading === false ? all.data.CongressmenAssemblyBills : undefined,
+        }),
+    }),
+    graphql(queryIssueDuration, {
+        props: (all: any) => ({
             issues: all.data.loading === false ? all.data.AssemblyIssuesSpeechDuration : undefined,
+        }),
+    }),
+    graphql(queryAssemblySummary, {
+        props: (all: any) => ({
+            summary: all.data.loading === false ? all.data.AssemblySummary : undefined,
+        }),
+    }),
+    graphql(queryAssembly, {
+        props: (all: any) => ({
+            assembly: all.data.loading === false ? all.data.Assembly : undefined,
+            inflation: all.data.loading === false ? all.data.Inflation : undefined,
+            bills: all.data.loading === false ? all.data.CongressmenAssemblyBills : undefined,
             loading: all.data.loading,
         }),
         options: ({assembly}: {assembly: number}) => ({

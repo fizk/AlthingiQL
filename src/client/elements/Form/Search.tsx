@@ -20,32 +20,32 @@ export default class Search extends React.Component<Props & React.HTMLProps<HTML
         isSearching: false,
     };
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
     }
 
-    private handleChange(event) {
+    private handleChange(event: any) { //@todo
         if (event.target.value.trim() === '') {
-            this.props.onClear(event);
+            this.props.onClear && this.props.onClear(event);
         }
-        this.props.onChange(event);
+        this.props.onChange && this.props.onChange(event);
     }
 
-    private handleFocus(event) {
-        this.props.onFocus(event);
+    private handleFocus(event: any) { //@todo
+        this.props.onFocus && this.props.onFocus(event);
     }
 
     public render() {
         const {variations, onClear, onChange, onFocus, isError, isSearching, ...rest} = this.props;
 
-        variations.push('search');
+        (variations || []).push('search');
         if (isError) {
-            variations.push('error');
+            (variations || []).push('error');
         }
         if (isSearching) {
-            variations.push('is-searching');
+            (variations || []).push('is-searching');
         }
         return (
             <input

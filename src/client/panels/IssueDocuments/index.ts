@@ -1,5 +1,7 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql, compose} from 'react-apollo';
+import gql from 'graphql-tag';
 import IssueDocuments from './IssueDocuments';
+import {Vote as VoteType} from "../../../../@types";
 
 const issueDocumentsQuery = gql`
     query ($assembly: Int! $issue: Int!) {
@@ -31,16 +33,39 @@ const issueDocumentsQuery = gql`
     }
 `;
 
-export default compose<any>( //@todo `any`
-    graphql(issueDocumentsQuery, {
-        props: (all: {data?: {loading: boolean, IssueDocuments: any}}) => ({ //@todo `any`
-            documents: all.data.loading === false ? all.data.IssueDocuments : undefined,
-            loading: all.data.loading,
+
+type Response = {
+    IssueDocuments: any[];
+};
+
+type InputProps = {
+    issue: number,
+    assembly: number
+};
+
+type Variables = {
+    issue: number;
+    assembly: number;
+    category: 'A' | 'B',
+};
+
+interface Props {
+    // loading?: any;
+    // error?: any;
+    documents: any[];
+}
+
+export default compose(
+    graphql<InputProps, Response, Variables, Props>(issueDocumentsQuery, {
+        props: ({data: {loading, IssueDocuments}}: any) => ({ //@todo `any`
+            documents: loading === false ? IssueDocuments : undefined,
+            loading: loading,
         }),
-        options: ({issue, assembly}: {issue: number, assembly: number}) => ({
+        options: ({issue, assembly}) => ({
             variables: {
                 issue,
                 assembly,
+                category: 'A',
             },
         }),
     }),

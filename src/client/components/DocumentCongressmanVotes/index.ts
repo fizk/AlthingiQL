@@ -1,29 +1,7 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql, compose} from 'react-apollo';
+import gql from 'graphql-tag';
 import DocumentCongressmanVotes from './DocumentCongressmanVotes';
-
-interface Picture {
-    templateSrc: string;
-}
-
-interface Party {
-    id: number;
-    name: string;
-    color: string;
-}
-
-interface Congressman {
-    id: number;
-    name: string;
-    avatar: Picture;
-    party: Party;
-}
-
-interface DocumentVote {
-    id: number;
-    voteId: number;
-    vote: string;
-    congressman: Congressman;
-}
+import {Vote as VoteType} from '../../../../@types';
 
 const documentVotesQuery = gql`
     query documentVotes($assembly: Int! $issue: Int! $vote: Int!) {
@@ -45,13 +23,35 @@ const documentVotesQuery = gql`
     }
 `;
 
-export default compose<any>( //@todo `any`
-    graphql(documentVotesQuery, {
-        props: (all: {data?: {loading: boolean, DocumentVotes: DocumentVote}}) => ({
-            votes: all.data.loading === false ? all.data.DocumentVotes : undefined,
-            loading: all.data.loading,
+type Response = {
+    DocumentVotes: VoteType[];
+};
+
+type InputProps = {
+    assembly: number,
+    issue: number,
+    vote: number
+};
+
+type Variables = {
+    assembly: number,
+    issue: number,
+    vote: number
+};
+
+interface Props {
+    // loading?: any;
+    // error?: any;
+    votes: VoteType[];
+}
+
+export default compose(
+    graphql<InputProps, Response, Variables, Props>(documentVotesQuery, {
+        props: ({data: {loading, DocumentVotes}}: any) => ({ //@todo
+            votes: loading === false ? DocumentVotes : undefined,
+            loading: loading,
         }),
-        options: ({assembly, issue, vote}: {assembly: number, issue: number, vote: number}) => ({
+        options: ({assembly, issue, vote}) => ({
             variables: {
                 assembly,
                 issue,

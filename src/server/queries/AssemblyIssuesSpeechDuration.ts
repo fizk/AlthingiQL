@@ -1,5 +1,6 @@
 import {GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLString} from 'graphql';
 import IssueValue from '../types/IssueValue';
+import {Client} from "../../../@types";
 
 export default {
     type: new GraphQLList(IssueValue),
@@ -15,7 +16,7 @@ export default {
         },
     },
 
-    resolve(root, {assembly, size, order}, {client}) {
+    resolve(root: any, {assembly, size, order}: {assembly: number, size: number, order: string}, {client}: {client: Client}) {
         const queryArray = [];
 
         if (order) {
@@ -31,7 +32,7 @@ export default {
             : '';
 
         return client.get(`/loggjafarthing/${assembly}/thingmal/raedutimar${queryString}`)
-            .then(json => json.map(item => ({
+            .then(json => (json as Array<any>).map(item => ({
                 issue: item,
                 value: item.value,
             })));

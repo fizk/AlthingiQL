@@ -41,6 +41,9 @@ export default new GraphQLObjectType({
                     type: {
                         type: GraphQLString,
                     },
+                    category: {
+                        type: GraphQLString,
+                    },
                     typeName: {
                         type: GraphQLString,
                         resolve: (root) => root.type_name,
@@ -77,6 +80,10 @@ export default new GraphQLObjectType({
                     },
                 },
             })),
+        },
+        averageAge: {
+            type: GraphQLFloat,
+            resolve: ({average_age}) => average_age,
         },
         parties: {
             type: new GraphQLList(new GraphQLObjectType({

@@ -2,11 +2,11 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 import {H3, H5} from '../Headline';
 import Congressman from '../Congressman';
-import {Congressman as CongressmanType, Issue as IssueType} from '../../../../@types';
+import {Congressman as CongressmanType, IssueA as IssueType} from '../../../../@types';
 
 interface Props {
     issue: IssueType;
-    congressman: CongressmanType;
+    congressman?: CongressmanType;
 }
 
 export default class ParliamentaryResolutionBadge extends React.Component<Props, {}> {
@@ -16,6 +16,7 @@ export default class ParliamentaryResolutionBadge extends React.Component<Props,
             assembly: {
                 id: undefined,
             },
+            category: 'a',
             name: undefined,
             subName: undefined,
             type: undefined,
@@ -37,7 +38,7 @@ export default class ParliamentaryResolutionBadge extends React.Component<Props,
         },
     };
 
-    private count(count) {
+    private count(count: number) {
         return count - 1 > 1 ? (
             <div className="issue-badge__congressman-count">
                 <span> +{count - 1}</span>
@@ -48,9 +49,7 @@ export default class ParliamentaryResolutionBadge extends React.Component<Props,
     public render() {
         return (
             <Link
-                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
-                    this.props.issue.id
-                    }`}>
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.category.toLowerCase()}/${this.props.issue.id}`}>
                 <article className="issue-badge issue-badge--resolution">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
@@ -63,16 +62,18 @@ export default class ParliamentaryResolutionBadge extends React.Component<Props,
                             {this.props.issue.type}
                         </div>
                     </header>
-                    <section className="issue-badge__body">
-                        <div className="issue-badge__congressman">
-                            <Congressman
-                                key={`proponent-${this.props.congressman.id}`}
-                                congressman={this.props.congressman}
-                                party={this.props.congressman.party}
-                            />
-                        </div>
-                        {this.count(this.props.issue.proponentsCount)}
-                    </section>
+                    {this.props.congressman && (
+                        <section className="issue-badge__body">
+                            <div className="issue-badge__congressman">
+                                <Congressman
+                                    key={`proponent-${this.props.congressman.id}`}
+                                    congressman={this.props.congressman}
+                                    party={this.props.congressman.party}
+                                />
+                            </div>
+                            {this.count(this.props.issue.proponentsCount)}
+                        </section>
+                    )}
                     <footer className="issue-badge__footer">
                         <div className="issue-badge__type-name">
                             <H5>{this.props.issue.typeName}</H5>

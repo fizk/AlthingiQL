@@ -34,6 +34,7 @@
         "comma-spacing": [1, {
             "after": true
         }],
+        "max-line-length": [true, 320],
         "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
         "no-empty": [true, "allow-empty-functions"],
 

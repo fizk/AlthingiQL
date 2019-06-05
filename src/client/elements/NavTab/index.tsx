@@ -1,12 +1,12 @@
-import * as React from 'react';
+import React, {FunctionComponent} from 'react';
 import { NavLink } from 'react-router-dom';
 import './index.scss';
 
-export const NavTab = ({ children }) => (
+export const NavTab: FunctionComponent = ({ children }) => (
     <div className="nav-tab">{children}</div>
 );
 
-export const NavTabItem = props => (
+export const NavTabItem: FunctionComponent<{to: any}> = props => (
     <NavLink
         exact={true}
         className="nav-tab__item"

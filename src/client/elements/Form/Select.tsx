@@ -14,7 +14,7 @@ interface Props {
     variations?: any[];
 }
 
-export default class Select extends React.Component<Props, {}> {
+export default class Select extends React.Component<Props> {
     public static defaultProps = {
         onSelect: () => {},
         onFocus: () => {},
@@ -32,7 +32,7 @@ export default class Select extends React.Component<Props, {}> {
         height: 0,
     };
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnClear = this.handleOnClear.bind(this);
@@ -40,20 +40,20 @@ export default class Select extends React.Component<Props, {}> {
         this.handleOnSelect = this.handleOnSelect.bind(this);
     }
 
-    private handleOnChange(event) {
-        this.props.onChange(event.target.value);
+    private handleOnChange(event: any) { //@todo
+        this.props.onChange && this.props.onChange(event.target.value);
     }
 
-    private handleOnClear(event) {
-        this.props.onClear(event);
+    private handleOnClear(event: any) { //@todo
+        this.props.onClear && this.props.onClear(event);
     }
 
-    private handleOnFocus(event) {
-        this.props.onFocus(event);
+    private handleOnFocus(event: any) { //@todo
+        this.props.onFocus && this.props.onFocus(event);
     }
 
-    private handleOnSelect(event) {
-        this.props.onSelect(event);
+    private handleOnSelect(event: any) { //@todo
+        this.props.onSelect && this.props.onSelect(event);
     }
 
     public render() {
@@ -61,7 +61,7 @@ export default class Select extends React.Component<Props, {}> {
             <div style={{ position: 'relative' }}>
                 <div className={classVariations(
                         'select__input',
-                        this.props.variations.length
+                        (this.props.variations || []).length
                             ? this.props.variations
                             : ['md'],
                     )}

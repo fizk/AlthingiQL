@@ -14,7 +14,7 @@ interface Props {
 }
 
 interface State {
-    period: PeriodType;
+    period: Partial<PeriodType>;
 }
 
 export default class Cabinets extends React.Component<Props, State> {

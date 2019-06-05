@@ -5,7 +5,7 @@ import classVariations from '../../utils/classVariations';
 import './index.scss';
 
 interface Props {
-    source?: Array<{
+    source: Array<{
         bill?: {
             status?: string,
         },
@@ -17,7 +17,7 @@ interface Props {
 export default class StatusPieChart extends React.Component<Props, {}> {
     public static defaultProps = {
         source: [],
-        formatValue: v => v,
+        formatValue: (v: any) => v,
     };
 
     public dimensions = {
@@ -26,7 +26,7 @@ export default class StatusPieChart extends React.Component<Props, {}> {
         gutter: 20,
     };
 
-    private midAngle(d) {
+    private midAngle(d: any) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
     }
 
@@ -78,7 +78,7 @@ export default class StatusPieChart extends React.Component<Props, {}> {
                                     'status-pie-chart__path',
                                     [ISSUE_STATUS[a.data.bill.status]],
                                 )}
-                                d={a.path}
+                                d={a.path || undefined}
                             />
                         </g>
                     ))}

@@ -19,6 +19,7 @@ export default class AssemblyPlenary extends React.Component<Props, {}> {
     public render() {
         return (
             <Section>
+                THINGFUNDUR {this.props.plenary}
                 <ul>
                     {this.props.plenaryItems.map(item => (
                         <li key={item.id}>

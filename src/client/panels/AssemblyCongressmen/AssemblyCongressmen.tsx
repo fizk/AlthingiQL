@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Section from '../../elements/Section';
-import { Column, Row } from '../../elements/Grid';
+import {Column, Row} from '../../elements/Grid';
 import Congressman from '../../elements/Congressman';
-import {
-    Congressman as CongressmanType,
-    Assembly as AssemblyType,
-} from '../../../../@types';
+import {Congressman as CongressmanType} from '../../../../@types';
 
 interface Props {
     assembly?: number;
     congressmen: CongressmanType[];
-    substitutes: Array<CongressmanType & {assembly: AssemblyType}>;
+    substitutes: CongressmanType[];
 }
 
 export default class AssemblyCongressmen extends React.Component<Props, {}> {

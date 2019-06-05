@@ -1,5 +1,6 @@
 import {GraphQLInt, GraphQLNonNull, GraphQLList} from 'graphql';
 import PlenaryAgendaItem from '../types/PlenaryAgendaItem';
+import {Client} from "../../../@types";
 
 export default {
     type: new GraphQLList(PlenaryAgendaItem),
@@ -12,7 +13,7 @@ export default {
         },
     },
 
-  resolve(root, {assembly, plenary}, {client}) {
+  resolve(root: any, {assembly, plenary}: {assembly: number, plenary: number}, {client}: {client: Client}) {
       return client.get(`/loggjafarthing/${assembly}/thingfundir/${plenary}/lidir`);
     },
 };

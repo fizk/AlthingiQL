@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom';
 import {H3, H5} from '../Headline';
-import Congressman from '../Congressman';
-import {Congressman as CongressmanType, Issue as IssueType} from '../../../../@types';
+import {Issue as IssueType, IssueA} from '../../../../@types';
 
 interface Props {
     issue: IssueType;
@@ -15,6 +14,7 @@ export default class PlenaryItem extends React.Component<Props, {}> {
             assembly: {
                 id: undefined,
             },
+            category: 'a',
             name: undefined,
             subName: undefined,
             type: undefined,
@@ -27,13 +27,13 @@ export default class PlenaryItem extends React.Component<Props, {}> {
     public render() {
         return (
             <Link
-                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.id}`}>
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.category.toLowerCase()}/${this.props.issue.id}`}>
                 <article className="issue-badge issue-badge--inquiry">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">
                             <H3>
                                 {this.props.issue.id}. {this.props.issue.name},{' '}
-                                {this.props.issue.subName}
+                                {(this.props.issue as IssueA).subName}
                             </H3>
                         </div>
                         <div className="issue-badge__type">

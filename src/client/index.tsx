@@ -2,43 +2,26 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {ApolloProvider} from 'react-apollo';
-import {ApolloClient, createNetworkInterface} from 'apollo-client';
+import {ApolloClient} from 'apollo-client';
 import Routers from './router';
-import {createStore, combineReducers, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
-import reducers from './reducers';
+import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
+import {InMemoryCache} from 'apollo-cache-inmemory';
+import { HttpLink} from 'apollo-link-http';
+import {ApolloLink} from 'apollo-link';
+import introspectionQueryResultData from './fragments';
 
-declare const __GRAPHQL_SERVER__: string;
+const fragmentMatcher = new IntrospectionFragmentMatcher({introspectionQueryResultData});
+const cache = new InMemoryCache({fragmentMatcher});
 
 const client = new ApolloClient({
-    networkInterface: createNetworkInterface({
-        uri: __GRAPHQL_SERVER__ || 'http://localhost:3000/graphql',
-    }),
+    cache,
+    link: ApolloLink.from([new HttpLink({uri: '/graphql'})]),
 });
 
-const combinedReducer = combineReducers({
-    ...reducers,
-    apollo: client.reducer(),
-});
-
-const store = createStore(
-    combinedReducer,
-    window.__APOLLO_STATE__,
-    applyMiddleware(client.middleware(), thunk),
-);
-
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// const store = composeEnhancers(
-//     applyMiddleware(
-//         client.middleware(),
-//         thunk
-//     )
-// )(createStore)(combinedReducer);
-
-ReactDOM.render(
-    <ApolloProvider client={client} store={store}>
+ReactDOM.hydrate(
+    <ApolloProvider client={client}>
         <Router>
-            <Routers />
+            <Routers/>
         </Router>
     </ApolloProvider>,
     document.querySelector('[data-react]'),

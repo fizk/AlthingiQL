@@ -11,7 +11,7 @@ export default class SimpleRequestProgress extends React.Component<SimpleRequest
         status: undefined,
     };
 
-    private status = {
+    private status: {[key: string]: string} = {
         'undefined': '',
         'Fyrirspurnin var felld niður vegna ráðherraskipta': 'dismissed',
         'Fyrirspurninni var ekki svarað': 'not-answered',
@@ -28,7 +28,7 @@ export default class SimpleRequestProgress extends React.Component<SimpleRequest
                 viewBox="0 0 18 18"
                 role="img"
                 className={classVariations('simple-request-progress', [
-                    this.status[this.props.status],
+                    this.status[this.props.status || 'undefined'],
                 ])}
             >
                 >

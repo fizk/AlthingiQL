@@ -27,8 +27,8 @@ export default class Cabinet extends React.Component<Props, {}> {
                     {this.props.cabinet.assemblies.map(assembly => (
                         <li key={`${this.props.cabinet}-${assembly.id}`}>
                             <Link to={`/loggjafarthing/${assembly.id}`}>{assembly.id}</Link>
-                            <time>{assembly.period.from}</time>
-                            <time>{assembly.period.to}</time>
+                            <time>{assembly && assembly.period && assembly.period.from}</time>
+                            <time>{assembly && assembly.period && assembly.period.to}</time>
                         </li>
                     ))}
                 </ul>

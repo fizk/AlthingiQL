@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { scaleTime, scaleLinear } from 'd3-scale';
-import { timeMonth } from 'd3-time';
+import {scaleTime, scaleLinear} from 'd3-scale';
+import {timeMonth} from 'd3-time';
 import './index.scss';
 
 interface Props {
-    source?: Array<{
-        count?: number,
-        date?: string,
-    }>;
+    source: Source[];
+}
+
+interface Source {
+    count: number,
+    date: string,
 }
 
 export default class DateAndCountChart extends React.Component<Props, {}> {
@@ -21,7 +23,7 @@ export default class DateAndCountChart extends React.Component<Props, {}> {
         gutter: 20,
     };
 
-    private minMaxCount(list) {
+    private minMaxCount(list: Source[]) {
         const values = list.map(item => item.count);
         return {
             min: Math.min(...values),
@@ -29,10 +31,12 @@ export default class DateAndCountChart extends React.Component<Props, {}> {
         };
     }
 
-    private minMaxDates(list) {
+    private minMaxDates(list: Source[]) {
         const dates = list.map(item => new Date(item.date));
         return {
+            // @ts-ignore @todo
             min: new Date(Math.min.apply(null, dates)),
+            // @ts-ignore @todo
             max: new Date(Math.max.apply(null, dates)),
         };
     }
@@ -46,6 +50,7 @@ export default class DateAndCountChart extends React.Component<Props, {}> {
         const y = scaleLinear()
             .domain([0, minMaxCount.max])
             .range([0, this.dimensions.height]);
+        //@ts-ignore
         const xTicks = x.ticks(timeMonth.every(1));
         const yTicks = y.ticks(10);
         return (
@@ -66,7 +71,7 @@ export default class DateAndCountChart extends React.Component<Props, {}> {
                     />
                 </g>
                 <g>
-                    {xTicks.map((item, i) => (
+                    {xTicks.map((item: number, i: number) => (
                         <line
                             className="date-and-count-chart__line"
                             key={`x-line-${i}`}
@@ -76,7 +81,7 @@ export default class DateAndCountChart extends React.Component<Props, {}> {
                             y2={this.dimensions.height + this.dimensions.gutter}
                         />
                     ))}
-                    {yTicks.map((item, i) => (
+                    {yTicks.map((item: number, i: number) => (
                         <line
                             className="date-and-count-chart__line"
                             key={`y-line-${i}`}
@@ -86,7 +91,7 @@ export default class DateAndCountChart extends React.Component<Props, {}> {
                             y2={y(item)}
                         />
                     ))}
-                    {xTicks.map((item, i) => (
+                    {xTicks.map((item: Date, i: number) => (
                         <text
                             className="date-and-count-chart__line"
                             key={`x-label-${i}`}

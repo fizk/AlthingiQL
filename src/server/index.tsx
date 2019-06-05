@@ -4,13 +4,12 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import schema from './schema';
 import {client} from './utils/client';
-import debug from 'debug';
-import {ApolloClient, createNetworkInterface, ApolloProvider, renderToStringWithData} from 'react-apollo';
+import {ApolloClient} from 'apollo-client';
 import {StaticRouter} from 'react-router';
 import 'isomorphic-fetch';
-import {createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import reducers from '../client/reducers';
+// import {createStore, combineReducers, applyMiddleware } from 'redux';
+// import thunk from 'redux-thunk';
+// import reducers from '../client/reducers';
 import Routers from '../client/router';
 import Chrome from '../client/components/Chrome';
 import Helmet from 'react-helmet';
@@ -34,7 +33,7 @@ app.use('/graphql', graphqlHTTP({
     schema,
     graphiql: true,
     context: {
-        client: client(debug('server-log'), clientConfig),
+        client: client(clientConfig),
     },
 }));
 

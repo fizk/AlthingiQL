@@ -1,0 +1,68 @@
+@import "./config";
+
+@mixin page-header {
+    @include shadow;
+    @include rounded-bottom;
+
+    grid-area: app__header;
+    background-color: map_get($color, orange);
+    padding: 1rem 1rem 1rem 1rem;
+}
+
+@mixin link {
+    & {
+        text-decoration: none;
+    }
+    &:hover {
+        text-decoration: underline;
+    }
+    &:active {}
+    &:visited {}
+}
+
+
+
+@mixin headline-1 ($ellipsis: false) {
+    font-size: map_get($font-size, xl);
+    font-weight: 400;
+
+    @if $ellipsis {
+        @include ellipsis;
+    }
+}
+
+@mixin headline-2 ($ellipsis: false) {
+    font-size: map_get($font-size, lg);
+    font-weight: 400;
+
+    @if $ellipsis {
+        @include ellipsis;
+    }
+}
+
+@mixin headline-3 ($ellipsis: false) {
+    font-size: map_get($font-size, md);
+    font-weight: 400;
+
+    @if $ellipsis {
+        @include ellipsis;
+    }
+}
+
+@mixin headline-4 ($ellipsis: false) {
+    font-size: map_get($font-size, sm);
+    font-weight: 400;
+
+    @if $ellipsis {
+        @include ellipsis;
+    }
+}
+
+@mixin headline-5 ($ellipsis: false) {
+    font-size: map_get($font-size, xs);
+    font-weight: 400;
+
+    @if $ellipsis {
+        @include ellipsis;
+    }
+}

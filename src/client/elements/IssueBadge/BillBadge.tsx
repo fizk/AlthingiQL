@@ -3,11 +3,11 @@ import {Link} from 'react-router-dom';
 import {H3, H5} from '../Headline';
 import SimpleBillProgress from '../SimpleBillProgress';
 import Badge from '../Badge';
-import {Congressman as CongressmanType, Issue as IssueType} from '../../../../@types';
+import {Congressman as CongressmanType, IssueA as IssueType} from '../../../../@types';
 
 interface Props {
     issue: IssueType;
-    congressman: CongressmanType;
+    congressman?: CongressmanType;
 }
 
 export default class BillBadge extends React.Component<Props, {}> {
@@ -17,6 +17,7 @@ export default class BillBadge extends React.Component<Props, {}> {
             assembly: {
                 id: undefined,
             },
+            category: 'a',
             name: undefined,
             subName: undefined,
             status: undefined,
@@ -39,7 +40,7 @@ export default class BillBadge extends React.Component<Props, {}> {
         },
     };
 
-    private count(count) {
+    private count(count: number) {
         return count - 1 > 1 ? (
             <div className="issue-badge__congressman-count">
                 <span> +{count - 1}</span>
@@ -47,39 +48,38 @@ export default class BillBadge extends React.Component<Props, {}> {
         ) : null;
     }
 
-    private url(url) {
+    private url(url: string) {
         return (url || '').replace('{size}', '400x300');
     }
 
     public render() {
         return (
             <Link
-                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
-                    this.props.issue.id
-                    }`}
-            >
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.category.toLowerCase()}/${this.props.issue.id}`}>
                 <article className="issue-badge issue-badge--bill">
-                    <header
-                        className="issue-badge__header"
-                        style={{
-                            backgroundImage: `url(${this.url(
-                                this.props.congressman.avatar.templateSrc,
-                            )})`,
-                        }}
-                    >
-                        <div className="issue-badge__congressman">
-                            <div className="issue-badge__congressman-badge">
-                                <Badge
-                                    title={this.props.congressman.party.name}
-                                    color={this.props.congressman.party.color}
-                                />
+                    {this.props.congressman && (
+                        <header
+                            className="issue-badge__header"
+                            style={{
+                                backgroundImage: `url(${this.url(
+                                    this.props.congressman.avatar.templateSrc,
+                                )})`,
+                            }}
+                        >
+                            <div className="issue-badge__congressman">
+                                <div className="issue-badge__congressman-badge">
+                                    <Badge
+                                        title={this.props.congressman.party.name}
+                                        color={this.props.congressman.party.color}
+                                    />
+                                </div>
+                                <H3 variations={['ellipsis']}>
+                                    {this.props.congressman.name}
+                                </H3>
+                                {this.count(this.props.issue.proponentsCount)}
                             </div>
-                            <H3 variations={['ellipsis']}>
-                                {this.props.congressman.name}
-                            </H3>
-                            {this.count(this.props.issue.proponentsCount)}
-                        </div>
-                    </header>
+                        </header>
+                    )}
                     <aside className="issue-badge__body">
                         <div className="issue-badge__headline">
                             <H3>

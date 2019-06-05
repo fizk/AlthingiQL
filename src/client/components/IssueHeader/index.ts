@@ -1,36 +1,71 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql, compose} from 'react-apollo';
+import gql from 'graphql-tag';
 import IssueHeader from './IssueHeader';
-import {Issue as IssueType} from '../../../../@types';
+import {
+    CategorySpeechTime,
+    Issue as IssueType, IssueCount,
+    Person as PersonType,
+    Session as SessionType,
+    VoteSummary as VoteSummaryType
+} from '../../../../@types';
 
 const assemblyQuery = gql`
-    query assemblyIssue($assembly: Int! $issue: Int!) {
-        AssemblyIssue (assembly: $assembly issue: $issue) {
-            id
-            assembly {id}
-            category
-            name
-            subName
-            type
-            typeName
-            typeSubName
-            status
-            question
-            goal
-            date
+    query assemblyIssue($assembly: Int! $issue: Int! $category: String!) {
+        AssemblyIssue (assembly: $assembly issue: $issue category: $category) {
+            __typename
+            ...on IssueInterface {
+                id
+                assembly {id}
+                category
+                name
+                type
+                typeName
+            }
+            ... on IssueA {
+                subName
+                typeSubName
+                status
+                question
+                goal
+                date
+            }
         }
     }
 `;
 
-export default compose<any>( //@todo `any`
-    graphql(assemblyQuery, {
-        props: (all: {data?: {loading: boolean, AssemblyIssue: IssueType}}) => ({
-            issue: all.data.loading === false ? all.data.AssemblyIssue : undefined,
-            loading: all.data.loading,
+type Response = {
+    AssemblyIssue: any; //@todo
+};
+
+type InputProps = {
+    assembly: number;
+    issue: number;
+    category: string;
+};
+
+type Variables = {
+    assembly: number;
+    issue: number;
+    category: string;
+};
+
+interface Props {
+    // loading?: any;
+    // error?: any;
+    issue: any; //@todo
+}
+
+export default compose(
+    graphql<InputProps, Response, Variables, Props>(assemblyQuery, {
+        props: ({data: {loading, AssemblyIssue}}: any) => ({
+            issue: loading === false ? AssemblyIssue : undefined,
+            loading: loading,
         }),
-        options: ({assembly, issue}: {assembly: number, issue: number}) => ({
+        options: ({assembly, issue, category}) => ({
             variables: {
                 assembly,
                 issue,
+                category,
             },
         }),
     }),

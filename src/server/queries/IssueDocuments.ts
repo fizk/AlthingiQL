@@ -1,5 +1,6 @@
 import {GraphQLInt, GraphQLList, GraphQLNonNull} from 'graphql';
 import Document from '../types/Document';
+import {Client} from "../../../@types";
 
 export default {
     type: new GraphQLList(Document),
@@ -12,7 +13,7 @@ export default {
         },
     },
 
-    resolve(root, {issue, assembly}, {client}) {
-        return client.get(`/loggjafarthing/${assembly}/thingmal/${issue}/thingskjal`);
+    resolve(root: any, {issue, assembly}: {issue: number, assembly: number}, {client}: {client: Client}) {
+        return client.get(`/loggjafarthing/${assembly}/thingmal/a/${issue}/thingskjal`);
     },
 };

@@ -1,15 +1,11 @@
 import * as React from 'react';
-import { Fragment } from 'react';
-import { Helmet } from 'react-helmet';
+import {Fragment} from 'react';
+import {Helmet} from 'react-helmet';
 import {default as CabinetsPanel} from '../../panels/Cabinets';
 import {default as CabinetPanel} from '../../panels/Cabinet';
 import {Route} from 'react-router';
 
-interface Props {
-    assembly?: number;
-}
-
-export default class Cabinet extends React.Component<Props, {}> {
+export default class Cabinet extends React.Component {
     public render() {
         return (
             <Fragment>
@@ -20,7 +16,7 @@ export default class Cabinet extends React.Component<Props, {}> {
                         href={`/raduneyti`}
                     />
                 </Helmet>
-                <Route exact={true} path="/raduneyti" render={({match }) => (
+                <Route exact={true} path="/raduneyti" render={() => (
                         <CabinetsPanel />
                     )
                 }/>

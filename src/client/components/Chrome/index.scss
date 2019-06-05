@@ -1,23 +1,8 @@
 @import "../../config";
+@import "../../reset";
 
 .chrome {
-    //ref
-}
-
-.chrome__header {
-    margin: auto;
-    background-color: map_get($color-primary, dark);
-    background-image: linear-gradient(to right, #973999, #f8598b, #f7bf00);
-    padding: map_get($space, md) 0;
-}
-
-.chrome__header-container {
-    //max-width: 1024px;
-    margin: auto;
-}
-
-.chrome__main {
-    //max-width: 1024px;
+    max-width: 1280px;
     margin: auto;
 }
 
@@ -25,3 +10,38 @@
     padding: map_get($space, xxl);
 }
 
+
+@font-face {
+    font-family: 'tt-webfont';
+    src: url('/fonts/tt-regular-webfont.woff2') format('woff2');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'tt-webfont';
+    src: url('/fonts/tt-medium-webfont.woff2') format('woff2');
+    font-weight: bold;
+}
+
+body {
+    font-family: 'tt-webfont', sans-serif;
+    line-height: 1.25;
+    background-color: #fafafa;
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-variant-ligatures: none;
+    -webkit-font-variant-ligatures: none;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    color: #496274;
+}
+
+a,
+a:hover,
+a:visited,
+a:active {
+    //color: #0000ee;
+    text-decoration: inherit;
+}

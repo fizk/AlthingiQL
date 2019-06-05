@@ -2,7 +2,7 @@ import * as React from 'react';
 import {pie, arc} from 'd3-shape';
 import './index.scss';
 
-const Map = {
+const Map: {[key: string]: string} = {
     'fjarverandi': '888888',
     'greiðir ekki atkvæði': 'ece773',
     'já': '68cf68',
@@ -10,18 +10,20 @@ const Map = {
     'tók afstöðu': '123456',
 };
 
+interface Source {
+    vote: string,
+    value: number,
+}
+
 interface Props {
-    source?: Array<{
-        vote?: string,
-        value?: number,
-    }>;
+    source: Source[];
     formatValue?: (...args: any[]) => any;
 }
 
 export default class VoteResultPieChart extends React.Component<Props, {}> {
     public static defaultProps = {
         source: [],
-        formatValue: v => v,
+        formatValue: (v: any) => v,
     };
 
     public dimensions = {
@@ -30,7 +32,7 @@ export default class VoteResultPieChart extends React.Component<Props, {}> {
         gutter: 20,
     };
 
-    private midAngle(d) {
+    private midAngle(d: any) { //@todo
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
     }
 
@@ -79,7 +81,7 @@ export default class VoteResultPieChart extends React.Component<Props, {}> {
                         >
                             <path
                                 className="party-pie-chart__path"
-                                d={a.path}
+                                d={a.path || undefined}
                                 fill={`#${Map[a.data.vote]}`}
                             />
                             <line
@@ -100,7 +102,7 @@ export default class VoteResultPieChart extends React.Component<Props, {}> {
                             >
                                 <tspan>{a.data.vote}</tspan>
                                 <tspan>
-                                    {this.props.formatValue(
+                                    {this.props.formatValue && this.props.formatValue(
                                         a.data.value,
                                         total,
                                     )}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom';
 import {H3, H5} from '../Headline';
-import {Issue as IssueType} from '../../../../@types';
+import {IssueA as IssueType} from '../../../../@types';
 
 interface Props {
     issue: IssueType;
@@ -14,6 +14,7 @@ export default class OpinionBadge extends React.Component<Props, {}> {
             assembly: {
                 id: undefined,
             },
+            category: 'a',
             name: undefined,
             subName: undefined,
             type: undefined,
@@ -25,10 +26,7 @@ export default class OpinionBadge extends React.Component<Props, {}> {
     public render() {
         return (
             <Link
-                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${
-                    this.props.issue.id
-                    }`}
-            >
+                to={`/loggjafarthing/${this.props.issue.assembly.id}/thingmal/${this.props.issue.category.toLowerCase()}/${this.props.issue.id}`}>
                 <article className="issue-badge issue-badge--opinion">
                     <header className="issue-badge__header">
                         <div className="issue-badge__headline">

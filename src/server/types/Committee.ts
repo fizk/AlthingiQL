@@ -1,15 +1,18 @@
 import {GraphQLInt, GraphQLObjectType, GraphQLString} from 'graphql';
+import {DataSource} from '../../../@types'
 
-export default new GraphQLObjectType({
+const Committee: GraphQLObjectType =  new GraphQLObjectType<DataSource.Committee>({
     name: 'Committee',
-    fields: {
+    fields: () => ({
         id: {
             type: GraphQLInt,
-            resolve: root => root.committee_id,
+            resolve: ({committee_id}) => committee_id,
         },
         name: {
             type: GraphQLString,
-            resolve: root => root.committee_name,
+            resolve: ({name}) => name,
         },
-    },
+    }),
 });
+
+export default Committee;

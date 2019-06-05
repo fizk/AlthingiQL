@@ -5,18 +5,14 @@ import classVariations from '../../utils/classVariations';
 import './index.scss';
 
 interface Props {
-    source?: Array<{
-        value: number,
-        key?: string,
-        color?: string
-        label?: string,
-    }>;
-    formatValue?: (label: string, value: number, total: number) => string;
+    source: Data[];
+    formatValue?: (...args: any[]) => any;
+    variations?: string[];
 }
 
 interface State {
     isLabel: boolean;
-    label: string;
+    label: string | undefined;
     position: {
         top: number
         left: number,
@@ -33,11 +29,8 @@ interface Data {
 export default class PieChart extends React.PureComponent<Props, State> {
     public static defaultProps = {
         source: [],
-        formatValue: label => label,
-    };
-
-    public dimensions = {
-        width: 100,
+        formatValue: (v: any) => v,
+        variations: [],
     };
 
     public state = {
@@ -52,7 +45,7 @@ export default class PieChart extends React.PureComponent<Props, State> {
     public handleEnter = (event: MouseEvent<SVGPathElement>, data: Data): void => {
         this.setState({
             isLabel: true,
-            label: this.props.formatValue(data.label, data.value, this.props.source.reduce((p, c) => p + c.value, 0)),
+            label: this.props.formatValue && this.props.formatValue(data.label, data.value, this.props.source.reduce((p, c) => p + c.value, 0)),
             position: {
                 left: event.clientX - event.currentTarget.getBoundingClientRect().left,
                 top: event.clientY - event.currentTarget.getBoundingClientRect().top,
@@ -62,7 +55,7 @@ export default class PieChart extends React.PureComponent<Props, State> {
 
     public handleLeave = (): void => {
         this.setState({
-            isLabel: true,
+            isLabel: false,
             label: undefined,
             position: {
                 left: 0,
@@ -72,10 +65,17 @@ export default class PieChart extends React.PureComponent<Props, State> {
     };
 
     public render() {
+
+        const size: number = Number(Object.entries({
+            23: (this.props.variations || []).indexOf('sm') >= 0,
+            32: (this.props.variations || []).indexOf('md') >= 0,
+            46: (this.props.variations || []).indexOf('lg') >= 0,
+        }).reduce((prev, [key, value]) => (value ? String(key) : prev), '46'));
+
         const pieData = pie<any>().value(d => d.value)(this.props.source); //@todo `any`
         const path = arc()
-            .innerRadius(30)
-            .outerRadius(this.dimensions.width / 2);
+            .innerRadius(size / 2)
+            .outerRadius(size / 4);
         const arcs = pieData.map(item => {
             const [innerCentroidX, innerCentroidY] = path.centroid(item as any);
             return {
@@ -98,18 +98,17 @@ export default class PieChart extends React.PureComponent<Props, State> {
                         {this.state.label}
                     </div>
                 )}
-                <svg
-                    width={this.dimensions.width}
-                    height={this.dimensions.width}
-                    viewBox={`0 0 ${this.dimensions.width} ${this.dimensions.width}`}>
-                    <g transform={`translate(${this.dimensions.width / 2}, ${this.dimensions.width / 2})`}>
+                <svg width={size}
+                    height={size}
+                    viewBox={`0 0 ${size} ${size}`}>
+                    <g transform={`translate(${size / 2}, ${size / 2})`}>
                         {arcs.map(a => (
                             <g key={`arch-${a.data.value}-${a.data.key}-${a.data.color}`} className="pie-chart__arch">
                                 <path fill={a.data.color}
                                     onMouseOver={event => this.handleEnter(event, a.data)}
                                     onMouseOut={() => this.handleLeave()}
                                     className={classVariations('pie-chart__path', [a.data.key])}
-                                    d={a.path}
+                                    d={a.path || undefined}
                                 />
                             </g>
                         ))}
