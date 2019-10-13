@@ -73,7 +73,7 @@ The application is configured via:
 | API_PROTOCOL    | http          |
 | API_HOST        | localhost     |
 | API_PORT        | 8080          |
-
+| IMAGE_SERVER    | /images       |
 All of these values are already set in the `docker-compose` file.
 
 If you then want to send other values into the docker container the the `docker-compose` runs, you can set
@@ -87,6 +87,7 @@ environment variables in your host system
 | ENV_API_PROTOCOL    | http                  |
 | ENV_API_HOST        | host.docker.internal  |
 | ENV_API_PORT        | 8080                  |
+| ENV_IMAGE_SERVER    | /images               |
 
 ## How it fits all together.
 

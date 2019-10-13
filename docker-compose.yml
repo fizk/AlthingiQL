@@ -15,6 +15,7 @@ services:
             - API_PROTOCOL=${ENV_API_PROTOCOL:-http}
             - API_HOST=${ENV_API_HOST:-host.docker.internal}
             - API_PORT=${ENV_API_PORT:-8080}
+            - IMAGE_SERVER=${ENV_IMAGE_SERVER:-/images}
             #- ASSETS_SERVER=http://static-server
         volumes:
             - ./@types:/usr/src/app/@types
