@@ -1,14 +1,17 @@
-import {graphql, compose} from 'react-apollo';
+import {graphql} from 'react-apollo';
+import compose from '../../utils/compose';
 import gql from 'graphql-tag';
 import AssemblyIssue from './AssemblyIssue';
 
 const assemblyIssueQuery = gql`
-    query ($assembly: Int! $issue: Int! $category: String!) {
+    query ($assembly: Int! $issue: Int! $category: IssueCategory!) {
         AssemblyIssueProgress (assembly: $assembly, issue: $issue category: $category) {
             issue {
                 ... on IssueInterface {
                     id
-                    category
+                    type {
+                        category
+                    }
                 }
             }
             assembly {id}
@@ -25,8 +28,10 @@ const assemblyIssueQuery = gql`
             ... on IssueInterface {
                 id
                 name
-                type
-                typeName
+                type {
+                    typeName
+                    category
+                }
                 assembly {id}
                 speakers {
                     congressman {
@@ -41,10 +46,6 @@ const assemblyIssueQuery = gql`
                     }
                     value
                 }
-                speechRange {
-                    count
-                    date
-                }
             }
             ... on IssueA {...moreissueA}
 
@@ -54,7 +55,9 @@ const assemblyIssueQuery = gql`
         status
         goal
         subName
-        typeSubName
+        type {
+            typeSubName    
+        }
         question
         majorChanges
         changesInLaw
@@ -72,47 +75,65 @@ const assemblyIssueQuery = gql`
                 color
             }
         }
-        voteRange {
-            count
-            date
+    }
+`;
+
+const queryAssembly = gql`
+    query assembly ($assembly: Int!) {
+        Assembly(assembly: $assembly) {
+            id
+            division {
+                majority {color}
+                minority {color}
+            }
+            cabinet {
+                title
+                period {from to}
+            }
+            period {
+                from
+                to
+            }
         }
     }
 `;
 
-type Response = {
-    IssueSpeeches: any[];
-};
-
-type InputProps = {
-    issue: number;
-    assembly: number;
-    category: string;
-};
-
-type Variables = {
-    issue: number;
-    assembly: number;
-    category: string;
-};
-
-interface Props {
-    // loading?: any;
-    // error?: any;
-    issue: any[];
-    progress: any[];
-}
-
 export default compose(
-    graphql<InputProps, Response, Variables, Props>(assemblyIssueQuery, {
+    graphql(queryAssembly, {
+        props: ({data: {loading, error, Assembly}}: any) => ({
+            assemblyProperties: {
+                assembly: loading === false ? Assembly : {
+                    id: undefined,
+                    period: {
+                        from: undefined,
+                        to: undefined,
+                    },
+                    division: [],
+                    cabinet: {
+                        title: undefined,
+                        period: {from: undefined, to: undefined}
+                    }
+                },
+                loading,
+                error,
+            }
+        }),
+        options: ({assembly}: {assembly: number}) => ({
+            variables: {
+                assembly: Number(assembly),
+            },
+        }),
+    }),
+    graphql(assemblyIssueQuery, {
         props: ({data: {loading, AssemblyIssue, AssemblyIssueProgress}}: any) => ({ //@todo `any`
             issue: loading === false ? AssemblyIssue : undefined,
             progress: loading === false ? AssemblyIssueProgress : undefined,
             loading: loading,
         }),
-        options: ({issue, assembly, category}) => ({
+        options: ({issue, assembly, category}: any) => ({
             variables: {
-                issue,
-                assembly,
+                issue: Number(issue),
+                assembly: Number(assembly),
                 category,
             },
         }),

@@ -1,4 +1,5 @@
-import {graphql, compose} from 'react-apollo';
+import {graphql} from 'react-apollo';
+import compose from '../../utils/compose';
 import gql from 'graphql-tag';
 import Assemblies from './Assemblies';
 

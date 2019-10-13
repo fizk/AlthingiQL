@@ -8,6 +8,7 @@ import Index from './pages/Index';
 import Cabinet from './pages/Cabinet';
 import Plenaries from './pages/Plenaries';
 import Assembly from './pages/Assembly';
+import AssemblyParty from './pages/AssemblyParty';
 
 export default () => (
     <Chrome>
@@ -23,6 +24,10 @@ export default () => (
 
                     <Route path="/loggjafarthing/:assembly([0-9]*)/thingmenn" render={({match }) => (
                         <AssemblyCongressman assembly={Number(match.params.assembly)} />
+                    )}/>
+
+                    <Route path="/loggjafarthing/:assembly([0-9]*)/thingflokkar/:party([0-9]*)" render={({match }) => (
+                        <AssemblyParty assembly={match.params.assembly} party={match.params.party} />
                     )}/>
 
                     <Route path="/loggjafarthing/:assembly([0-9]*)/thingmal" render={({match}) => (

@@ -1,6 +1,7 @@
-import {GraphQLInt, GraphQLNonNull, GraphQLList, GraphQLString} from 'graphql';
+import {GraphQLInt, GraphQLNonNull, GraphQLList} from 'graphql';
 import IssueProgress from '../types/IssueProgress';
 import {Client} from "../../../@types";
+import IssueCategory from "../types/IssueCategory";
 
 export default {
     type: new GraphQLList(IssueProgress),
@@ -12,7 +13,7 @@ export default {
             type: new GraphQLNonNull(GraphQLInt),
         },
         category: {
-            type: new GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(IssueCategory),
         },
     },
 

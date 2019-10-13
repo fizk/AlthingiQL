@@ -2,7 +2,7 @@ import * as React from 'react';
 import IssuesMenu from '../IssuesMenu';
 import renderer from 'react-test-renderer';
 import {BrowserRouter as Router} from 'react-router-dom';
-import {CategorySummary, IssueSummary} from "../../../../../@types";
+import {CategorySummary, IssueSummary, TypeCount} from "../../../../../@types";
 
 describe('<IssuesMenu />', () => {
     test('default props', () => {
@@ -16,11 +16,15 @@ describe('<IssuesMenu />', () => {
     });
 
     test('data', () => {
-        const types: IssueSummary[] = [{
+        const types: TypeCount[] = [{
             count: 1,
-            type: 'type',
-            typeName: 'type name',
-            typeSubName: 'sub type name',
+            type: {
+                category: 'A',
+                type: 'type',
+                typeName: 'type name',
+                typeSubName: 'sub type name',
+            }
+
         }];
         const categories: CategorySummary[] = [{
             id: 2,

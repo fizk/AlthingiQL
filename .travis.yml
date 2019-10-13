@@ -1,18 +1,10 @@
 language: node_js
 node_js:
-  - "8"
+    - "8"
 
-install:
-    - npm install
+services:
+    - docker
 
 script:
-    - npm test
-    - npm run lint
-
-notifications:
-    webhooks:
-        urls:
-            - https://loggjafarthing-api.einarvalur.co/client.php
-        on_success: always
-        on_failure: never
-        on_start: never
+    - docker-compose build test
+    - docker-compose run test

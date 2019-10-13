@@ -1,119 +1,95 @@
-import {graphql, compose} from 'react-apollo';
+import {graphql} from 'react-apollo';
+import compose from '../../utils/compose';
 import gql from 'graphql-tag';
 import Assembly from './Assembly';
 
 const queryAssemblySummary = gql`
-    query queryAssemblySummary ($assembly: Int!) {
+    query assemblySummary ($assembly: Int!) {
         AssemblySummary(assembly: $assembly) {
             parties {
-                party {
-                    id
-                    name
-                    color
-                }
+                party {id name color}
                 time
             }
-            bills {
-                count
-                status
-            }
-            governmentBills {
-                count
-                status
-            }
-            types {
-                count
-                category
-                type
-                typeName
-                typeSubName
-            }
-            votes {
-                count
-                date
-            }
-            speeches {
-                count
-                date
-            }
             averageAge
-            election {
-                id
-                date
-                title
-                description
-            }
-            electionResults {
-                party {
-                    id
-                    name
-                    color
-                }
-                results {
-                    seats
-                    result
-                }
-            }
         }
-    }
+    }  
 `;
 
-const queryIssueDuration = gql`
-    query AssemblyIssuesSpeechDuration ($assembly: Int!) {
-        AssemblyIssuesSpeechDuration (assembly: $assembly size: 6 order: "desc") {
-            issue {
-                __typename
-                ... on IssueInterface {
-                    id
-                    category
-                    name
-                    type
-                    typeName
-                    assembly {id}
-                }
-                ... on IssueA {...issueA}
-            }
-            value
+const queryAssemblyIssuesSummary = gql`
+    query assemblyIssuesSummary ($assembly: Int!) {
+        AssemblyIssuesSummary (assembly: $assembly) {
+            bills {count status}
+            governmentBills {count status}
+            proposals {count status}
+            types {count type {type typeName category typeSubName}}
+            categories {count category {id title}}
         }
-    }
-    fragment issueA on IssueA {
-        proponentsCount
-        proponents(count: 1) {
-            id
-            name
-            avatar {templateSrc}
-            party {id name color}
-        }
-    }
+    }  
 `;
 
-const queryCongressmanPerformance = gql`
-    query queryCongressmanPerformance ($assembly: Int!) {
-        CongressmanSpeekLeast: CongressmenAssemblySpeechTime (assembly: $assembly order: "asc" size: 5) {
-            ... congressmanWithValue
-        }
-        CongressmanSpeekMost: CongressmenAssemblySpeechTime (assembly: $assembly order: "desc" size: 5) {
-            ... congressmanWithValue
+const queryCongressmenPerformance = gql`
+    query congressmenAssemblyBills ($assembly: Int!) {
+        CongressmenAssemblyBills (assembly: $assembly order: "desc" size: 5) {
+            ...congressmanValue
         }
         CongressmenAssemblyQuestions (assembly: $assembly order: "desc" size: 5) {
-            ... congressmanWithValue
+            ...congressmanValue
         }
         CongressmenAssemblyResolutions (assembly: $assembly order: "desc" size: 5) {
-            ... congressmanWithValue
+            ...congressmanValue
         }
-        CongressmenAssemblyBills (assembly: $assembly order: "desc" size: 5) {
-            ... congressmanWithValue
+        CongressmenAssemblySpeechTime (assembly: $assembly order: "desc" size: 5) {
+            ...congressmanValue
         }
     }
-    fragment congressmanWithValue on CongressmanValue  {
+
+    fragment congressmanValue on CongressmanValue {
         value
         congressman {
             id
             name
             avatar {templateSrc}
-            assembly {id}
             party {id name color}
+            constituency {id name abbr_short}
         }
+    }
+`;
+
+const queryAssemblyIssuesSpeechDuration = gql`
+    query AssemblyIssuesSpeechDuration ($assembly: Int!) {
+        AssemblyIssuesSpeechDuration (assembly: $assembly order: "desc" size: 5){
+            issue {
+                ... on IssueInterface {
+                    ...issueInterface
+                }
+                ... on IssueA {
+                    ... issueA
+                }
+            }
+            value
+        }
+    }
+
+    fragment issueInterface on IssueInterface {
+        id
+        name
+        type {type category typeName typeSubName}
+        speechCount
+        speechTime
+        assembly {id}
+    }
+
+    fragment issueA on IssueA {
+        subName
+        status
+        proponents(count: 1) {
+            id
+            name
+            avatar {templateSrc}
+            party {id name color}
+            constituency {id name abbr_short}
+        }
+        proponentsCount
     }
 `;
 
@@ -143,34 +119,101 @@ const queryAssembly = gql`
 `;
 
 export default compose(
-    graphql(queryCongressmanPerformance, {
-        props: (all: any) => ({
-            speakMost: all.data.loading === false ? all.data.CongressmanSpeekMost : undefined,
-            speakLeast: all.data.loading === false ? all.data.CongressmanSpeekLeast : undefined,
-            questioner: all.data.loading === false ? all.data.CongressmenAssemblyQuestions : undefined,
-            resolutionaries: all.data.loading === false ? all.data.CongressmenAssemblyResolutions : undefined,
+    graphql(queryAssemblyIssuesSummary, {
+        props: ({data: {error, loading, AssemblyIssuesSummary}}: any) => {
+            return {
+                issuesSummary: {
+                    error,
+                    loading,
+                    bills: loading === false ? AssemblyIssuesSummary.bills : [],
+                    governmentBills: loading === false ? AssemblyIssuesSummary.governmentBills : [],
+                    proposals: loading === false ? AssemblyIssuesSummary.proposals : [],
+                    types: loading === false ? AssemblyIssuesSummary.types : [],
+                    categories: loading === false ? AssemblyIssuesSummary.categories : [],
+                }
+            }
+        },
+        options: ({assembly}: any) => ({
+            variables: {
+                assembly: Number(assembly),
+            },
         }),
     }),
-    graphql(queryIssueDuration, {
-        props: (all: any) => ({
-            issues: all.data.loading === false ? all.data.AssemblyIssuesSpeechDuration : undefined,
+    graphql(queryAssemblyIssuesSpeechDuration, {
+        props: ({data: {error, loading, AssemblyIssuesSpeechDuration}}: any) => {
+            return {
+                issues: {
+                    error,
+                    loading,
+                    issues: loading === false ? AssemblyIssuesSpeechDuration : [],
+                }
+            }
+        },
+        options: ({assembly}: any) => ({
+            variables: {
+                assembly: Number(assembly),
+            },
+        }),
+    }),
+    graphql(queryCongressmenPerformance, {
+        props: ({data: {error, loading, CongressmenAssemblyBills, CongressmenAssemblyQuestions, CongressmenAssemblyResolutions, CongressmenAssemblySpeechTime}}: any) => {
+            return {
+                congressmenPerformance: {
+                    error,
+                    loading,
+                    bills: loading === false ? CongressmenAssemblyBills : [],
+                    questions: loading === false ? CongressmenAssemblyQuestions : [],
+                    resolutions: loading === false ? CongressmenAssemblyResolutions : [],
+                    speeches: loading === false ? CongressmenAssemblySpeechTime : [],
+                }
+            }
+        },
+        options: ({assembly}: any) => ({
+            variables: {
+                assembly,
+            },
         }),
     }),
     graphql(queryAssemblySummary, {
-        props: (all: any) => ({
-            summary: all.data.loading === false ? all.data.AssemblySummary : undefined,
+        props: ({data: {error, loading, AssemblySummary}}: any) => {
+            return {
+                assemblySummary: {
+                    error,
+                    loading,
+                    averageAge: loading === false ? AssemblySummary.averageAge : 0,
+                    parties: loading === false ? AssemblySummary.parties : [],
+                }
+            }
+        },
+        options: ({assembly}: any) => ({
+            variables: {
+                assembly: Number(assembly),
+            },
         }),
     }),
     graphql(queryAssembly, {
-        props: (all: any) => ({
-            assembly: all.data.loading === false ? all.data.Assembly : undefined,
-            inflation: all.data.loading === false ? all.data.Inflation : undefined,
-            bills: all.data.loading === false ? all.data.CongressmenAssemblyBills : undefined,
-            loading: all.data.loading,
+        props: ({data: {loading, error, Assembly, Inflation}}: any) => ({
+            assemblyProperties: {
+                assembly: loading === false ? Assembly : {
+                    id: undefined,
+                    period: {
+                        from: undefined,
+                        to: undefined,
+                    },
+                    division: [],
+                    cabinet: {
+                        title: undefined,
+                        period: {from: undefined, to: undefined}
+                    }
+                },
+                inflation: loading === false ? Inflation : [],
+                loading,
+                error,
+            }
         }),
         options: ({assembly}: {assembly: number}) => ({
             variables: {
-                assembly,
+                assembly: Number(assembly),
             },
         }),
     }),

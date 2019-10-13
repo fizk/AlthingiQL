@@ -5,7 +5,7 @@
     @include rounded-bottom;
 
     grid-area: app__header;
-    background-color: map_get($color, orange);
+    background-color: map_get($color, renameme);
     padding: 1rem 1rem 1rem 1rem;
 }
 

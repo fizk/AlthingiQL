@@ -35,7 +35,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
-    color: #496274;
+    color: map_get($font-color, main);
 }
 
 a,

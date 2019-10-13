@@ -1,7 +1,7 @@
 import {GraphQLInt, GraphQLString, GraphQLList, GraphQLInterfaceType} from 'graphql';
 import Assembly from './Assembly';
 import CongressmanValue from './CongressmanValue';
-import SpeechRange from './SpeechRange';
+import Type from "./Type";
 
 export default new GraphQLInterfaceType({
     name: 'IssueInterface',
@@ -13,28 +13,21 @@ export default new GraphQLInterfaceType({
         assembly: {
             type: Assembly,
         },
-        category: {
-            type: GraphQLString,
+        type: {
+            type: Type,
+            resolve: (root) => ({...root}),
         },
         name: {
             type: GraphQLString,
         },
-        type: {
-            type: GraphQLString,
+        speechCount: {
+            type: GraphQLInt,
         },
-        typeName: {
-            type: GraphQLString,
-            resolve: (root) => root.type_name,
-        },
-        date: {
-            type: GraphQLString,
-            // type: GraphQLDateTime,
+        speechTime: {
+            type: GraphQLInt,
         },
         speakers: {
             type: new GraphQLList(CongressmanValue),
-        },
-        speechRange: {
-            type: new GraphQLList(SpeechRange),
         },
     },
 });

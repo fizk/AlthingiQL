@@ -19,21 +19,21 @@ describe('<IssueHeader />', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    test('data', () => {
-        const issue: PartialIssue = {
-            id: 1,
-            name: 'name',
-            category: 'a',
-            typeName: 'type name',
-            status: 'status',
-            date: '2001-01-01',
-        };
-        const tree = renderer.create(
-            <Router >
-                <IssueHeader issue={issue as Issue} loading={false} />
-            </Router>,
-        ).toJSON();
-
-        expect(tree).toMatchSnapshot();
-    });
+    // test('data', () => {
+    //     const issue: PartialIssue = {
+    //         id: 1,
+    //         name: 'name',
+    //         category: 'a',
+    //         typeName: 'type name',
+    //         status: 'status',
+    //         date: '2001-01-01',
+    //     };
+    //     const tree = renderer.create(
+    //         <Router >
+    //             <IssueHeader issue={issue as Issue} loading={false} />
+    //         </Router>,
+    //     ).toJSON();
+    //
+    //     expect(tree).toMatchSnapshot();
+    // });
 });

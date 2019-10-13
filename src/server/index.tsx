@@ -14,18 +14,18 @@ import Routers from '../client/router';
 import Chrome from '../client/components/Chrome';
 import Helmet from 'react-helmet';
 
-const assetsServer = process.env.ASSETS_SERVER || ''; // 'http://localhost:3001';
+const assetsServer = process.env.ASSETS_SERVER || '';
 
 const app = express();
 const serverConfig = {
     protocol: process.env.SERVER_PROTOCOL || 'http',
     host: process.env.SERVER_HOST || 'localhost',
-    port: process.env.PORT || 3000,
+    port: process.env.SERVER_PORT || 3000,
 };
 const clientConfig = {
-    protocol: process.env.CLIENT_PROTOCOL || 'http',
-    host: process.env.CLIENT_HOST || 'localhost',
-    port: process.env.CLIENT_PORT || 8080,
+    protocol: process.env.API_PROTOCOL || 'http',
+    host: process.env.API_HOST || 'localhost',
+    port: process.env.API_PORT || 8080,
 };
 
 app.use(express.static('public'));
@@ -44,11 +44,11 @@ app.get('*', (request, response) => {
              <html lang="is">
                  <head>
                      <meta name="viewport" content="width=device-width, initial-scale=1">
-                     <link rel="stylesheet" type="text/css" href="${assetsServer}/stylesheets/application.css" />
+                     <link rel="stylesheet" type="text/css" href="${assetsServer}/app.css" />
                  </head>
                  <body>
                      <div data-react></div>
-                     <script src="${assetsServer}/javascripts/application.js"></script>
+                     <script src="${assetsServer}/bundle.js"></script>
                  </body>
              </html>`);
     response.end();

@@ -1,0 +1,94 @@
+
+.assembly-issue-documents-panel {
+    max-width: 1280px;
+    padding: 0 1.953rem;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1.953rem;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issue-documents-panel {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+.assembly-issue-documents-panel__user {
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 1;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issue-documents-panel__user {
+        grid-column: 2 / span 1;
+    }
+}
+
+.assembly-issue-documents-panel__nav {
+    grid-column: 1 / span 1;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issue-documents-panel__nav {
+        grid-column: 2 / span 1;
+    }
+}
+
+.assembly-issue-documents-panel__header {
+    background-color: #E1EFFA;
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issue-documents-panel__header {
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 2;
+    }
+}
+
+.assembly-issue-documents-panel__aside {
+
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issue-documents-panel__aside {
+        grid-column: 2 / span 1;
+        grid-row: 3 / span 1;
+    }
+}
+
+.assembly-issue-documents-panel__items {
+    grid-column: 1 / span 1;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issue-documents-panel__items {
+        grid-column: 1 / span 2;
+    }
+}
+
+.assembly-issue-documents-panel_stats {
+    grid-column: 1 / span 1;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issue-documents-panel_stats {
+        grid-column: 1 / span 2;
+    }
+}

@@ -1,7 +1,13 @@
-import {GraphQLInt, GraphQLNonNull, GraphQLString} from 'graphql';
+import {GraphQLInt, GraphQLNonNull} from 'graphql';
 import Issue from '../types/Issue';
-import {Client} from "../../../@types";
+import IssueCategory from '../types/IssueCategory';
+import {Client} from '../../../@types';
 
+interface Arguments {
+    issue: number;
+    assembly: number;
+    category: string;
+}
 
 export default {
     type: Issue,
@@ -13,11 +19,11 @@ export default {
             type: new GraphQLNonNull(GraphQLInt),
         },
         category: {
-            type: new GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(IssueCategory),
         },
     },
 
-    resolve(root: any, {issue, assembly, category}: {issue: number, assembly: number, category: string}, {client}: {client: Client}) {
+    resolve(root: any, {issue, assembly, category}: Arguments, {client}: {client: Client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmal/${category}/${issue}`);
     },
 };

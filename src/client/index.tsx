@@ -4,9 +4,9 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import {ApolloProvider} from 'react-apollo';
 import {ApolloClient} from 'apollo-client';
 import Routers from './router';
-import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
+import {IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import {InMemoryCache} from 'apollo-cache-inmemory';
-import { HttpLink} from 'apollo-link-http';
+import {HttpLink} from 'apollo-link-http';
 import {ApolloLink} from 'apollo-link';
 import introspectionQueryResultData from './fragments';
 

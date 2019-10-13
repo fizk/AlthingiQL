@@ -8,72 +8,55 @@
     max-width: 100%;
 }
 
-
-.congressman__party {
-    flex: 0 0 (map_get($space, xl) + map_get($space, xs));
-    align-self: flex-start;
-    line-height: 0;
-
-    .congressman--sm & {
-        flex: 0 0 (map_get($space, md) + map_get($space, xs));
-    }
-
-    .congressman--md & {
-        flex: 0 0 (map_get($space, xl) + map_get($space, xs));
-    }
+.congressman__badge {
+    @include circle;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 1px solid white;
+    height: map_get($space, md);
+    width: map_get($space, md);
 
     .congressman--lg & {
-        flex: 0 0 (map_get($space, xxl) + map_get($space, xs));
+        height: map_get($space, lg);
+        width: map_get($space, lg);
     }
 }
 
 .congressman__avatar {
-    flex: 0 0 (map_get($space, xl) + map_get($space, xs));
+    flex: 0 0 (map_get($space, xl) + (map_get($space, md) / 2));
     align-self: flex-start;
     line-height: 0;
-
-    .congressman--sm & {
-        flex: 0 0 (map_get($space, md) + map_get($space, xs));
-    }
-
-    .congressman--md & {
-        flex: 0 0 (map_get($space, xl) + map_get($space, xs));
-    }
+    position: relative;
 
     .congressman--lg & {
-        flex: 0 0 (map_get($space, xxl) + map_get($space, xs));
+        flex: 0 0 (map_get($space, xxl) + (map_get($space, lg) / 2));
     }
 }
 
 .congressman__body {
-    max-width: calc(100% - #{map_get($space, xl) + map_get($space, xs)} - #{map_get($space, xxl) + map_get($space, xs)});
+    max-width: calc(100% - #{map_get($space, xl) + (map_get($space, md) / 2)});
     flex-grow: 1;
-
-    .congressman--sm & {
-        max-width: calc(100% - #{map_get($space, md) + map_get($space, xs)} - #{map_get($space, md) + map_get($space, xs)});
-    }
-
-    .congressman--md & {
-        max-width: calc(100% - #{map_get($space, xl) + map_get($space, xs)} - #{map_get($space, xl) + map_get($space, xs)});
-    }
+    padding: 0 map_get($space, xs);
 
     .congressman--lg & {
-        max-width: calc(100% - #{map_get($space, xxl) + map_get($space, xs)} - #{map_get($space, xxl) + map_get($space, xs)});
+        max-width: calc(100% - #{map_get($space, xxl) + (map_get($space, lg) / 2)});
     }
 }
 
 .congressman__title {
     @include headline-3($ellipsis: true);
 
-    .congressman--sm & {
-        @include headline-4($ellipsis: true);
-    }
-
-    .congressman--md & {
-        @include headline-3($ellipsis: true);
-    }
-
     .congressman--lg & {
         @include headline-2($ellipsis: true);
     }
+
+    //+ * {
+    //    margin-top: map_get($space, xxs); //@todo questionable
+    //}
+}
+
+.congressman__constituency {
+    @include headline-5;
+    vertical-align: middle;
 }

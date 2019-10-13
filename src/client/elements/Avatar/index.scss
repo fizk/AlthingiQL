@@ -2,24 +2,19 @@
 
 .avatar {
     @include circle;
-    width: map_get($space, xl);
-    height: map_get($space, xl);
-    background-position: center;
-    background-size: cover;
+    display: inline-block;
     background-color: map_get($color, gray-light-ultra);
 }
 
-.avatar--sm {
-    width: map_get($space, md);
-    height: map_get($space, md);
+.avatar__image {
+    @include circle;
+    transition: opacity .2s;
 }
 
-.avatar--md {
-    width: map_get($space, xl);
-    height: map_get($space, xl);
+.avatar__image--hidden {
+    opacity: 0;
 }
 
-.avatar--lg {
-    width: map_get($space, xxl);
-    height: map_get($space, xxl);
+.avatar__image--visible {
+    opacity: 1;
 }

@@ -1,7 +1,7 @@
-import {graphql, compose, ChildDataProps} from 'react-apollo';
+import {graphql} from 'react-apollo';
+import compose from '../../utils/compose';
 import gql from 'graphql-tag';
 import AssemblyCongressmen from './AssemblyCongressmen';
-import {Congressman as CongressmanType} from "../../../../@types";
 
 const assemblyCongressmanQuery = gql`
     query ($assembly: Int!) {
@@ -34,34 +34,60 @@ const assemblyCongressmanQuery = gql`
     }
 `;
 
-type Response = {
-    Congressmen: CongressmanType[];
-    Substitutes: CongressmanType[];
-};
-
-type InputProps = {
-    assembly: number
-};
-
-type Variables = {
-    assembly: number,
-};
-
-interface Props {
-    // loading?: any;
-    // error?: any;
-    congressmen: CongressmanType[];
-    substitutes: CongressmanType[];
-}
+const queryAssembly = gql`
+    query assembly ($assembly: Int!) {
+        Assembly(assembly: $assembly) {
+            id
+            division {
+                majority {color}
+                minority {color}
+            }
+            cabinet {
+                title
+                period {from to}
+            }
+            period {
+                from
+                to
+            }
+        }
+    }
+`;
 
 export default compose(
-    graphql<InputProps, Response, Variables, Props>(assemblyCongressmanQuery, {
-        props: ({data: {loading, Congressmen, Substitutes}}: any) => ({
+    graphql(queryAssembly, {
+        props: ({data: {loading, error, Assembly}}: any) => ({
+            assemblyProperties: {
+                assembly: loading === false ? Assembly : {
+                    id: undefined,
+                    period: {
+                        from: undefined,
+                        to: undefined,
+                    },
+                    division: [],
+                    cabinet: {
+                        title: undefined,
+                        period: {from: undefined, to: undefined}
+                    }
+                },
+                loading,
+                error,
+            }
+        }),
+        options: ({assembly}: {assembly: number}) => ({
+            variables: {
+                assembly: Number(assembly),
+            },
+        }),
+    }),
+    graphql(assemblyCongressmanQuery, {
+        props: ({data: {loading, error, Congressmen, Substitutes}}: any) => ({
             congressmen: loading === false ? Congressmen : undefined,
             substitutes: loading === false ? Substitutes : undefined,
-            loading: loading,
+            loading,
+            error,
         }),
-        options: ({assembly}) => ({
+        options: ({assembly}: any) => ({
             variables: {
                 assembly,
             },

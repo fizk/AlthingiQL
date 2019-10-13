@@ -13,16 +13,16 @@ export class AssemblyNavigation extends React.Component<Props, {}> {
     public render() {
         return (
             <NavTab>
-                <NavTabItem to={`/loggjafarthing/${this.props.assembly}`}>
+                <NavTabItem to={`/loggjafarthing/${this.props.assembly}`} exact={true}>
                     Samantekt
                 </NavTabItem>
-                <NavTabItem to={`/loggjafarthing/${this.props.assembly}/thingmal`}>
+                <NavTabItem to={`/loggjafarthing/${this.props.assembly}/thingmal`} exact={false}>
                     Þingmál
                 </NavTabItem>
-                <NavTabItem to={`/loggjafarthing/${this.props.assembly}/thingfundir`}>
+                <NavTabItem to={`/loggjafarthing/${this.props.assembly}/thingfundir`} exact={false}>
                     Þingfundir
                 </NavTabItem>
-                <NavTabItem to={`/loggjafarthing/${this.props.assembly}/thingmenn`}>
+                <NavTabItem to={`/loggjafarthing/${this.props.assembly}/thingmenn`} exact={false}>
                     Þingmenn
                 </NavTabItem>
             </NavTab>

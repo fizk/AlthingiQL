@@ -1,71 +1,175 @@
 @import "../../config";
 
+
 .assembly-issues-panel {
+    max-width: 1280px;
+    padding: 0 map_get($space, lg);
+    margin: auto;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-column-gap: 16px;
-    grid-row-gap: 16px;
+    grid-template-columns: 1fr;
+    grid-gap: map_get($space, lg);
 }
 
-.assembly-issues-panel__content {
-    grid-column: 1 / span 4;
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issues-panel {
+        grid-template-columns: 1fr 2fr;
+    }
 }
 
-.assembly-issues-panel__aside {
-    grid-column: 5 / span 2;
+.assembly-issues-panel__user {
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 1;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issues-panel__user {
+        grid-column: 2 / span 1;
+    }
+}
+
+.assembly-issues-panel__nav {
+    grid-column: 1 / span 1;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issues-panel__nav {
+        grid-column: 2 / span 1;
+    }
+}
+
+.assembly-issues-panel__header {
+    background-color: #E1EFFA;
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issues-panel__header {
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 2;
+    }
 }
 
 
-.assembly-issues-panel__list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: map_get($space, md);
+.assembly-issues-panel__issues {
+    grid-column: 1 / span 1;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issues-panel__issues {
+        grid-column: 2 / span 1;
+    }
+}
+
+.assembly-issues-panel_stats {
+    grid-column: 1 / span 1;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issues-panel_stats {
+        grid-column: 1 / span 1;
+    }
 }
 
 
+.assembly-issues-panel__congressmen {
+    grid-column: 1 / span 1;
+}
+
+@media screen
+and (min-device-width: 640px)
+{
+    .assembly-issues-panel__congressmen {
+        grid-column: 2 / span 1;
+
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: map_get($space, lg);
+        grid-template-rows: minmax(1fr, auto);
+    }
+}
+
+
+//
+//.assembly-issues-panel {
+//    display: grid;
+//    grid-template-columns: repeat(6, 1fr);
+//    grid-column-gap: 16px;
+//    grid-row-gap: 16px;
+//}
+//
+//.assembly-issues-panel__content {
+//    grid-column: 1 / span 4;
+//}
+//
+//.assembly-issues-panel__aside {
+//    grid-column: 5 / span 2;
+//}
+//
 //
 //.assembly-issues-panel__list {
 //    display: grid;
-//
-//    grid-template-columns: 1fr;
-//    grid-template-rows: 1fr 1fr;
-//
-//    //grid-column-gap: map_get($space, md);
-//    //grid-row-gap: map_get($space, md);
-//    //
-//    //grid-auto-flow: dense;
-//    //
-//    //@include breakpoint(md) {
-//    //    grid-template-columns: 1fr 1fr;
-//    //}
+//    grid-template-columns: 1fr 1fr;
+//    grid-gap: map_get($space, md);
 //}
 //
-//.assembly-issues-panel__list-item {
-//    //ref
+//
+////
+////.assembly-issues-panel__list {
+////    display: grid;
+////
+////    grid-template-columns: 1fr;
+////    grid-template-rows: 1fr 1fr;
+////
+////    //grid-column-gap: map_get($space, md);
+////    //grid-row-gap: map_get($space, md);
+////    //
+////    //grid-auto-flow: dense;
+////    //
+////    //@include breakpoint(md) {
+////    //    grid-template-columns: 1fr 1fr;
+////    //}
+////}
+////
+////.assembly-issues-panel__list-item {
+////    //ref
+////}
+////
+//.assembly-issues-panel__list-item--sm {
+//    grid-row: span 1;
 //}
-//
-.assembly-issues-panel__list-item--sm {
-    grid-row: span 1;
-}
-.assembly-issues-panel__list-item--md {
-    grid-row: span 1;
-}
-.assembly-issues-panel__list-item--lg {
-    grid-row: span 2;
-}
-//
-//
-//// - - - - - @todo move this to somewhere else
-//
-//.issue-badge-grid {
-//    display: grid;
-//
-//    grid-template-columns: 1fr;
-//    grid-column-gap: map_get($space, lg);
-//    grid-row-gap: map_get($space, lg);
-//
-//    @include breakpoint(md) {
-//        grid-template-columns: 1fr 1fr 1fr;
-//    }
+//.assembly-issues-panel__list-item--md {
+//    grid-row: span 1;
 //}
-//.issue-badge-grid__item {}
+//.assembly-issues-panel__list-item--lg {
+//    grid-row: span 2;
+//}
+////
+////
+////// - - - - - @todo move this to somewhere else
+////
+////.issue-badge-grid {
+////    display: grid;
+////
+////    grid-template-columns: 1fr;
+////    grid-column-gap: map_get($space, lg);
+////    grid-row-gap: map_get($space, lg);
+////
+////    @include breakpoint(md) {
+////        grid-template-columns: 1fr 1fr 1fr;
+////    }
+////}
+////.issue-badge-grid__item {}

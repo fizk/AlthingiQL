@@ -28,7 +28,7 @@ export default class IssueSearchResult extends React.Component<Props> {
                 onClick={() => this.props.onSelect && this.props.onSelect(this.props.issue)}>
                 <h3>{this.props.issue.name}</h3>
                 <h4>{(this.props.issue as IssueA).subName}</h4>
-                <h5>{this.props.issue.typeName}</h5>
+                <h5>{this.props.issue.type.typeName}</h5>
                 <span>{(this.props.issue as IssueA).status}</span>
                 <ReactMarkdown source={(this.props.issue as IssueA).goal || ''} />
                 <ReactMarkdown source={(this.props.issue as IssueA).majorChanges || ''} />

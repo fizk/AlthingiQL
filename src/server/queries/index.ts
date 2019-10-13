@@ -8,12 +8,14 @@ import AssemblyPlenaries from './AssemblyPlenaries';
 import AssemblyPlenary from './AssemblyPlenary';
 import AssemblyIssueProgress from './AssemblyIssueProgress';
 import AssemblyIssues from './AssemblyIssues';
+import AssemblyPartyIssues from './AssemblyPartyIssues';
 import AssemblyIssuesSpeechDuration from './AssemblyIssuesSpeechDuration';
 import IssueDocuments from './IssueDocuments';
 import IssueSpeeches from './IssueSpeeches';
 import SearchIssueSpeeches from './SearchIssueSpeeches';
 import SearchAssemblyIssue from './SearchAssemblyIssue';
 import AssemblySummary from './AssemblySummary';
+import AssemblyIssuesSummary from './AssemblyIssuesSummary';
 import AssemblyCategorySummary from './AssemblyCategorySummary';
 import CongressmanAssemblySessions from './CongressmanAssemblySessions';
 import CongressmanAssemblyPromote from './CongressmanAssemblyPromote';
@@ -29,11 +31,13 @@ import Inflation from './Inflation';
 import Inflations from './Inflations';
 import Cabinets from './Cabinets';
 import Cabinet from './Cabinet';
+import Party from './Party';
 
 export default {
     Person,
     Assembly,
     AssemblySummary,
+    AssemblyIssuesSummary,
     AssemblyCategorySummary,
     Assemblies,
     Congressman,
@@ -43,6 +47,7 @@ export default {
     AssemblyPlenary,
     AssemblyIssueProgress,
     AssemblyIssues,
+    AssemblyPartyIssues,
     AssemblyIssuesSpeechDuration,
     IssueDocuments,
     IssueSpeeches,
@@ -62,4 +67,5 @@ export default {
     Inflations,
     Cabinets,
     Cabinet,
+    Party,
 };

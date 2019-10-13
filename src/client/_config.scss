@@ -54,50 +54,54 @@ $color-secondary: (
 );
 
 $space: (
-    //xxs:  4px,
-    //xs:  8px,
-    //sm:  11px,
-    //md:  16px,
-    //lg:  23px,
-    //xl:  32px,
-    //xxl:  46px,
-
-    xxs:  4px, //@todo
-    xs:  0.512rem,
-    sm:  0.64rem,
-    md:  1rem,
-    lg:  1.563rem,
-    xl:  1.953rem,
-    xxl:  3.052rem,
+    //      7.451rem,  // (119.21px)
+    //      5.96rem,   // ( 95.37px)
+    //      4.768rem,  // ( 76.29px)
+    xxl:    3.815rem,  // ( 61.04px)
+    //      3.052rem,  // ( 48.83px)
+    xl:     2.441rem,  // ( 39.06px)
+    //      1.953rem,  // ( 31.25px)
+    lg:     1.563rem,  // ( 25.00px)
+    //      1.25rem,   // ( 20.00px)
+    md:     1rem,      // ( 16.00px)
+    //      0.8rem,    // ( 12.80px)
+    sm:     0.64rem,   // ( 10.24px)
+    //      0.512rem,  // (  8.19px)
+    xs:     0.41rem,   // (  6.55px)
+    //      0.328rem,  // (  5.24px)
+    xxs:    0.262rem,  // (  4.19px)
 );
 
 
-
-
-//3.052em   (48.83px)	A Visual Type Scale
-//2.441em   (39.06px)	A Visual Type Scale
-//1.953em   (31.25px)	A Visual Type Scale
-//1.563em   (25.00px)	A Visual Type Scale
-//1.25em    (20.00px)	A Visual Type Scale
-//1em       (16.00px)	A Visual Type Scale
-//0.8em     (12.80px)	A Visual Type Scale
-//0.64em    (10.24px)	A Visual Type Scale
-//0.512em   (8.19px)	A Visual Type Scale
+//        7.451em (119.21px)
+//        5.96em   (95.37px)
+//        4.768em  (76.29px)
+//xxl     3.815em  (61.04px)
+//        3.052em  (48.83px)
+//xl      2.441em  (39.06px)
+//        1.953em  (31.25px)
+//lg      1.563em  (25.00px)
+//        1.25em   (20.00px)
+//md      1em      (16.00px)
+//        0.8em    (12.80px)
+//sm      0.64em   (10.24px)
+//        0.512em   (8.19px)
+//xs      0.41em    (6.55px)
+//        0.328em   (5.24px)
 
 $font-size: (
-    //xs: 11px,
-    //sm: 14px,
-    //md: 16px,
-    //lg: 22px,
-    //xl: 32px,
-    //xxl: 46px,
+    xxxl :   2.441rem,  // (39.06px)
+    xxl  :   1.953rem,  // (31.25px)
+    xl   :   1.563rem,  // (25.00px)
+    lg   :   1.25rem,   // (20.00px)
+    md   :   1rem,      // (16.00px)
+    sm   :   0.8rem,    // (12.80px)
+    xs   :   0.64rem,   // (10.24px)
+    xxs  :   0.512rem,  // ( 8.19px)
+);
 
-    xs: 0.64rem,
-    sm: 0.8rem,
-    md: 1rem,
-    lg: 1.563rem,
-    xl: 1.953rem,
-    xxl: 3.052rem,
+$font-color: (
+    main: #496274,
 );
 
 $color: (
@@ -119,4 +123,6 @@ $color: (
     text-main: #000,
     text-light: #000,
     text-disabled: #000,
+
+    renameme: #E1EFFA,
 );

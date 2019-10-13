@@ -1,48 +1,39 @@
 import {GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLList} from 'graphql';
+import {GraphQLDateTime} from 'graphql-iso-date';
 import Assembly from './Assembly';
 import Congressman from './Congressman';
 import CongressmanValue from './CongressmanValue';
 import IssueInterface from './IssueInterface';
-import SpeechRange from './SpeechRange';
-import VoteRange from './VoteRange';
-import {DataSource} from "../../../@types";
-
+import {DataSource} from '../../../@types';
+import IssueCategory from './IssueCategory';
+import IssueType from './IssueType';
+import Category from "./Category";
+import Type from "./Type";
+import Proponent from "./Proponent";
 
 const IssueA: GraphQLObjectType = new GraphQLObjectType<DataSource.Issue>({
     name: 'IssueA',
     interfaces: [IssueInterface],
-    fields: {
+    fields: () => ({
         id: {
             name: 'id',
             type: GraphQLInt,
-            resolve: (root) => root.issue_id,
+            resolve: ({issue_id}) => issue_id,
         },
         assembly: {
             type: Assembly,
-            resolve: (root) => ({
-                assembly_id: root.assembly_id,
-            }),
-        },
-        category: {
-            type: GraphQLString,
+            resolve: ({assembly_id}) => ({assembly_id}),
         },
         name: {
             type: GraphQLString,
         },
         subName: {
             type: GraphQLString,
-            resolve: (root) => root.sub_name,
+            resolve: ({sub_name}) => sub_name,
         },
         type: {
-            type: GraphQLString,
-        },
-        typeName: {
-            type: GraphQLString,
-            resolve: (root) => root.type_name,
-        },
-        typeSubName: {
-            type: GraphQLString,
-            resolve: (root) => root.type_subname,
+            type: Type,
+            resolve: (root) => ({...root}),
         },
         status: {
             type: GraphQLString,
@@ -55,60 +46,68 @@ const IssueA: GraphQLObjectType = new GraphQLObjectType<DataSource.Issue>({
         },
         majorChanges: {
             type: GraphQLString,
-            resolve: (root) => root.major_changes,
+            resolve: ({major_changes}) => major_changes,
         },
         changesInLaw: {
             type: GraphQLString,
-            resolve: (root) => root.changes_in_law,
+            resolve: ({changes_in_law}) => changes_in_law,
         },
         costsAndRevenues: {
             type: GraphQLString,
-            resolve: (root) => root.costs_and_revenues,
+            resolve: ({costs_and_revenues}) => costs_and_revenues,
         },
         deliveries: {
             type: GraphQLString,
         },
         additionalInformation: {
             type: GraphQLString,
-            resolve: (root) => root.additional_information,
+            resolve: ({additional_information}) => additional_information,
         },
         date: {
-            type: GraphQLString,
-            // type: GraphQLDateTime,
+            type: GraphQLDateTime,
+        },
+        speechCount: {
+            type: GraphQLInt,
+            resolve: ({speech_count}) => speech_count
+        },
+        speechTime: {
+            type: GraphQLInt,
+            resolve: ({speech_time}) => speech_time
         },
         speakers: {
             type: new GraphQLList(CongressmanValue),
-
             resolve(root) {
                 return root.speakers.map(item => ({
                     congressman: item,
-                    value: item.time,
+                    value: item.value,
                 }));
             },
         },
         proponents: {
-            type: new GraphQLList(Congressman),
+            type: new GraphQLList(Proponent),
             args: {
                 count: {
                     type: GraphQLInt,
                     defaultValue: undefined,
                 },
             },
-            resolve: (root, {count}) => {
-                return (root.proponents || []).slice(0, count);
+            resolve: ({proponents}, {count}) => {
+                return (proponents || []).slice(0, count);
             },
         },
         proponentsCount: {
             type: GraphQLInt,
-            resolve: root => (root.proponents || []).length,
+            resolve: ({proponents}) => (proponents || []).length,
         },
-        voteRange: {
-            type: new GraphQLList(VoteRange),
-        },
-        speechRange: {
-            type: new GraphQLList(SpeechRange),
-        },
-    },
+        links: {
+            type: new GraphQLList(IssueA),
+            resolve: (root, _, {client}) => {
+                return Promise.all(root.issue_links.map((item) => {
+                    return client.get(`/loggjafarthing/${item.assembly_id}/thingmal/${item.category}/${item.issue_id}`)
+                }))
+            }
+        }
+    }),
 });
 
 export default IssueA;

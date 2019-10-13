@@ -1,7 +1,7 @@
-import {graphql, compose} from 'react-apollo';
+import {graphql} from 'react-apollo';
+import compose from '../../utils/compose';
 import gql from 'graphql-tag';
 import AssemblyHeader from './AssemblyHeader';
-import {Assembly as AssemblyType} from '../../../../@types';
 
 const assemblyQuery = gql`
     query assembly ($assembly: Int!) {
@@ -32,32 +32,13 @@ const assemblyQuery = gql`
     }
 `;
 
-
-type Response = {
-    Assembly: any[];
-};
-
-type InputProps = {
-    assembly: number;
-};
-
-type Variables = {
-    assembly: number;
-};
-
-interface Props {
-    // loading?: any;
-    // error?: any;
-    assembly: any;
-}
-
 export default compose(
-    graphql<InputProps, Response, Variables, Props>(assemblyQuery, {
+    graphql(assemblyQuery, {
         props: ({data: {loading, Assembly}}: any) => ({
             assembly: loading === false ? Assembly : undefined,
             loading: loading,
         }),
-        options: ({assembly}) => ({
+        options: ({assembly}: any) => ({
             variables: {
                 assembly,
             },

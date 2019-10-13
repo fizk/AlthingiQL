@@ -1,12 +1,14 @@
-import {GraphQLBoolean, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import {GraphQLBoolean, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType,} from 'graphql';
 import Issue from '../types/Issue';
 import Cursor, {CursorInput} from '../types/Cursor';
-import {Client} from "../../../@types";
+import IssueCategory from '../types/IssueCategory';
+import IssueType from '../types/IssueType';
+import {Client} from '../../../@types';
 
 interface Arguments {
     assembly: number;
     cursor: {from: string, to: string}
-    type: string;
+    types: string[];
     category: string;
 }
 
@@ -34,22 +36,17 @@ export default {
         cursor: {
             type: CursorInput,
         },
-        type: {
-            type: GraphQLString,
+        types: {
+            type: new GraphQLList(IssueType),
         },
         category: {
-            type: GraphQLString,
+            type: IssueCategory,
         },
     },
 
-    resolve(root: any, {assembly, cursor, type, category}: Arguments, {client}: {client: Client}) {
-        const queries = [];
-        if (type) {
-            queries.push(`type=${type}`);
-        }
-
-        const queryString = queries.length > 0
-            ? `?${queries.join('&')}`
+    resolve(root: any, {assembly, cursor, types, category}: Arguments, {client}: {client: Client}) {
+        const queryString = (types || []).length > 0
+            ? `?type=${types.join(',')}`
             : '';
 
         const categoryParam = category ? `/${category}` : '';

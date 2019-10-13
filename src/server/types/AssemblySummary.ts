@@ -1,85 +1,16 @@
 import {GraphQLObjectType, GraphQLInt, GraphQLList, GraphQLString, GraphQLFloat} from 'graphql';
 import Party from './Party';
+import DateCount from "./DateCount";
 
 export default new GraphQLObjectType({
     name: 'AssemblyStatistics',
     fields: {
-        bills: {
-            type: new GraphQLList(new GraphQLObjectType({
-                name: 'Bills',
-                fields: {
-                    count: {
-                        type: GraphQLInt,
-                    },
-                    status: {
-                        type: GraphQLString,
-                    },
-                },
-            })),
-        },
-        governmentBills: {
-            type: new GraphQLList(new GraphQLObjectType({
-                name: 'GovernmentBills',
-                fields: {
-                    count: {
-                        type: GraphQLInt,
-                    },
-                    status: {
-                        type: GraphQLString,
-                    },
-                },
-            })),
-            resolve: root => root.government_bills,
-        },
-        types:  {
-            type: new GraphQLList(new GraphQLObjectType({
-                name: 'Types',
-                fields: {
-                    count: {
-                        type: GraphQLInt,
-                    },
-                    type: {
-                        type: GraphQLString,
-                    },
-                    category: {
-                        type: GraphQLString,
-                    },
-                    typeName: {
-                        type: GraphQLString,
-                        resolve: (root) => root.type_name,
-                    },
-                    typeSubName: {
-                        type: GraphQLString,
-                        resolve: (root) => root.type_subname,
-                    },
-                },
-            })),
-        },
+
         votes: {
-            type: new GraphQLList(new GraphQLObjectType({
-                name: 'Votes',
-                fields: {
-                    count: {
-                        type: GraphQLInt,
-                    },
-                    date: {
-                        type: GraphQLString,
-                    },
-                },
-            })),
+            type: new GraphQLList(DateCount),
         },
         speeches: {
-            type: new GraphQLList(new GraphQLObjectType({
-                name: 'SpeechCount',
-                fields: {
-                    count: {
-                        type: GraphQLInt,
-                    },
-                    date: {
-                        type: GraphQLString,
-                    },
-                },
-            })),
+            type: new GraphQLList(DateCount),
         },
         averageAge: {
             type: GraphQLFloat,

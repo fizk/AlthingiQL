@@ -32,15 +32,38 @@ export interface Party {
     color?: string;
 }
 
+export interface PartyTime {
+    party: Party;
+    time: number;
+}
+
+export interface Category {
+    id: number,
+    description: string,
+    superId: number,
+    title: string;
+}
+
+export interface CategoryCount {
+    count: number;
+    category: Category;
+}
+
+export interface SuperCategory {
+    id: number,
+    title: string;
+}
+
 export interface IssueType {
     id: number;
     assembly: Assembly;
-    category: 'a' | 'b';
     name: string;
-    typeName: string;
+    type: Type
     date: string;
     speakers: CongressmanValue[];
-    speechRange: SpeechRange[];
+    // speechRange: SpeechRange[];
+    speechCount: number | null;
+    speechTime: number | null;
 }
 
 export interface IssueCount {
@@ -53,10 +76,7 @@ export interface IssueCount {
 }
 
 export interface IssueA extends IssueType {
-    category: 'a';
-    type: 'n' | 'b' | 'l' | 'm' | 'q' | 's' | 'v' | 'a' | 'f';
     subName: string;
-    typeSubName: string;
     status: string;
     question: string;
     goal: string;
@@ -65,17 +85,36 @@ export interface IssueA extends IssueType {
     costsAndRevenues: string;
     deliveries: string;
     additionalInformation: string;
-    proponents: Congressman[];
+    proponents: Proponent[];
     proponentsCount: number;
-    voteRange: VoteRange[];
+    // voteRange: VoteRange[];
+    categories: Category[],
+    superCategories: SuperCategory[],
+    governmentIssue: boolean,
 }
 
 export interface IssueB extends IssueType {
-    category: 'b';
-    type: 'ff' | 'ft' | 'um' | 'ud' | 'uu';
+
+}
+
+export interface Type {
+    type:  string;//'n' | 'b' | 'l' | 'm' | 'q' | 's' | 'v' | 'a' | 'f' | /**/ 'ff' | 'ft' | 'um' | 'ud' | 'uu';
+    category: string;//'a' | 'b'
+    typeName: string
+    typeSubName: string
+}
+
+export interface TypeCount {
+    count: number;
+    type: Type;
 }
 
 export type Issue = IssueA | IssueB;
+
+export interface IssueValue {
+    value: number,
+    issue: Issue
+}
 
 export interface CongressmanValue {
     congressman: Congressman;
@@ -110,6 +149,12 @@ export interface Person {
 export interface Congressman extends Person {
     party: Party;
     assembly?: Assembly;
+    constituency?: Constituency
+}
+
+export interface Proponent extends Congressman {
+    order: number;
+    minister: string | null
 }
 
 export interface Vote {
@@ -125,7 +170,7 @@ export interface VoteRange {
 }
 
 export interface Picture {
-    src: string;
+    src?: string;
     templateSrc: string;
 }
 
@@ -180,50 +225,6 @@ export interface Constituency {
     abbr_short: string; //todo fix naming
     abbr_long: string; //todo fix naming
     description: string;
-}
-
-export interface AssemblySummary {
-    parties: Array<{
-        party: Party;
-        time: number;
-    }>;
-    bills: Array<{
-        count: number;
-        status: string;
-    }>;
-    governmentBills: Array<{
-        count: number;
-        status: string;
-    }>;
-    types: Array<{
-        count: number;
-        type: string;
-        category: string;
-        typeName: string;
-        typeSubName: string;
-    }>;
-    votes: Array<{
-        count: number;
-        date: string;
-    }>;
-    speeches: Array<{
-        count: number;
-        date: string;
-    }>;
-    election: {
-        id: number;
-        date: string;
-        title: string;
-        description: string;
-    };
-    averageAge: number,
-    electionResults: Array<{
-        party: Party;
-        results: {
-            seats: number;
-            result: number;
-        };
-    }>;
 }
 
 export interface CategorySummary {
@@ -282,6 +283,16 @@ export interface VoteResult {
     committee: string;
 }
 
+export interface StatusCount {
+    count: number,
+    status: string
+}
+
+export interface ServerFetchStatus {
+    error: any;
+    loading: boolean;
+}
+
 export interface Progress {
     issue: {
         id: number;
@@ -305,7 +316,6 @@ export interface Progress {
     type: string;
     completed: boolean;
 }
-
 
 export interface ClientCursor {
     to: number;
@@ -360,11 +370,19 @@ export declare namespace DataSource {
         abbr_short: string;
     }
     
+    export interface Constituency {
+        abbr_long: string;
+        abbr_short: string;
+        constituency_id: number;
+        description: string;
+        name: string;
+    }
+    
     export interface Issue {
         issue_id: number;
         assembly_id: number;
         congressman_id: number;
-        category: string;
+        category: 'A' | 'B';
         name: string;
         sub_name: string;
         type: string;
@@ -378,15 +396,22 @@ export declare namespace DataSource {
         costs_and_revenues: string;
         deliveries: string;
         additional_information: string;
-
         date: string;
-        proponents: string;
-        voteRange: DateAndCount[];
-        speechRange: DateAndCount[];
-        speakers: CongressmanAndDateRange[]
-        governmentIssue: boolean
+        proponents: Proponent[];
+        // voteRange: DateAndCount[];
+        // speechRange: DateAndCount[];
+        speakers: CongressmanValue[]
         categories: Category;
-        superCategories: SuperCategory[]
+        super_categories: SuperCategory[]
+        government_issue: boolean,
+        speech_count: number,
+        speech_time: number,
+        issue_links: {
+            assembly_id: number;
+            issue_id: number;
+            category: 'A' | 'B';
+            type: string;
+        }[]
     }
     
     export interface DateAndCount {
@@ -394,12 +419,26 @@ export declare namespace DataSource {
         count: number;
     }
 
-    export interface Congressman {
+    export interface Person {
         congressman_id: number;
         name: string;
         birth: string;
         death: string;
         abbreviation: string;
+    }
+    
+    export interface Congressman extends Person {
+        constituency: Constituency;
+        party: Party;
+    }
+
+    export interface Proponent extends Congressman {
+        minister: string | null;
+        order: number;
+    }
+
+    export interface CongressmanValue extends Congressman {
+        value: number;
     }
 
     export interface CongressmanAndDateRange extends Congressman{

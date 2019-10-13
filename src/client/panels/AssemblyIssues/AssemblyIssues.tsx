@@ -1,42 +1,53 @@
 import * as React from 'react';
-import {Fragment} from 'react';
-import { Row, Column } from '../../elements/Grid';
-import SearchIssue from '../../components/SearchIssue';
-import Loading from '../../elements/Loading';
-import Blank from '../../elements/Blank';
-import IssuesMenu from '../../components/IssuesMenu';
-import classVariations from '../../utils/classVariations';
-import {
-    BillBadge,
-    InquiryBadge,
-    MeetingPostponementBadge,
-    OpinionBadge,
-    ParliamentaryResolutionBadge,
-    ReportBadge,
-    RequestForReportBadge,
-    WrittenInquiryBadge,
-} from '../../elements/IssueBadge';
-import {Issue as IssueType} from '../../../../@types';
-import Section from '../../elements/Section';
-import './index.scss';
 import {Link} from 'react-router-dom';
+import Issue, {IssueGrid, IssueGridItem} from "../../elements/Issue";
+import {
+    Assembly as AssemblyType,
+    CategoryCount,
+    Issue as IssueType,
+    ServerFetchStatus,
+    TypeCount
+} from '../../../../@types';
+import {Spinner} from "../../elements/Icons";
+import {AssemblyNavigation} from "../../elements/AssemblyNavigation";
+import './index.scss';
 
-interface Props {
+interface Props extends ServerFetchStatus {
     assembly: number;
+    assemblyProperties: ServerFetchStatus & {
+        assembly: AssemblyType;
+    };
     issues: IssueType[];
     done?: boolean;
     loadMore?: (...args: any[]) => any;
-    loading?: boolean;
     filter?: {
         type?: string,
         category?: string,
     };
+    types: TypeCount[];
+    categories: CategoryCount[];
 }
 
 export default class AssemblyIssues extends React.Component<Props, {}> {
     public static defaultProps = {
-        issues: [],
         assembly: undefined,
+        assemblyProperties: {
+            error: undefined,
+            loading: false,
+            assembly: {
+                id: undefined,
+                period: {
+                    from: undefined,
+                    to: undefined,
+                },
+                division: [],
+                cabinet: {
+                    title: undefined,
+                    period: {from: undefined, to: undefined}
+                }
+            },
+        },
+        issues: [],
         filter: {
             type: undefined,
             category: undefined,
@@ -44,173 +55,106 @@ export default class AssemblyIssues extends React.Component<Props, {}> {
         done: true,
         loadMore: () => {},
         loading: false,
+        error: undefined,
+        types: [],
+        categories: [],
     };
 
     public render() {
         return (
-            <Section>
-                <div className="assembly-issues-panel">
-                    <article className="assembly-issues-panel__content">
-                        {this.props.issues.length !== 0 && (
-                            <ul className="assembly-issues-panel__list">
-                                {this.props.issues.map(issue => (
-                                    <Fragment key={`${issue.assembly.id}${issue.id}${issue.category}`}>
-                                        {issue.type === 'a' && (
-                                            <li className={classVariations('assembly-issues-panel__list-item', ['md'])}
-                                                key={`issue-${issue.id}`}>
-                                                <ParliamentaryResolutionBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a: any, b) => b,
-                                                        undefined,
-                                                    )}
-                                                />
-                                            </li>
-                                        )}
-                                        {issue.type === 'b' && (
-                                            <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
-                                                key={`issue-${issue.id}`}>
-                                                <RequestForReportBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a: any, b) => b,
-                                                        undefined,
-                                                    )}
-                                                />
-                                            </li>
-                                        )}
-                                        {issue.type === 'f' && (
-                                            <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
-                                                key={`issue-${issue.id}`} >
-                                                <MeetingPostponementBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a: any, b) => b,
-                                                        undefined,
-                                                    )}
-                                                />
-                                            </li>
-                                        )}
-                                        {issue.type === 'l' && (
-                                            <li className={classVariations('assembly-issues-panel__list-item', ['lg'])}
-                                                key={`issue-${issue.id}`} >
-                                                <BillBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a: any, b) => b,
-                                                        undefined,
-                                                    )}
-                                                />
-                                            </li>
-                                        )}
-                                        {issue.type === 'm' && (
-                                            <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
-                                                key={`issue-${issue.id}`} >
-                                                <InquiryBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a: any, b) => b,
-                                                        undefined,
-                                                    )}
-                                                />
-                                            </li>
-                                        )}
-                                        {issue.type === 'n' && (
-                                            <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
-                                                key={`issue-${issue.id}`} >
-                                                <OpinionBadge issue={issue} />
-                                            </li>
-                                        )}
-                                        {issue.type === 'q' && (
-                                            <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
-                                                key={`issue-${issue.id}`} >
-                                                <WrittenInquiryBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a: any, b) => b,
-                                                        undefined,
-                                                    )}
-                                                />
-                                            </li>
-                                        )}
-                                        {issue.type === 's' && (
-                                            <li className={classVariations('assembly-issues-panel__list-item', ['sm'])}
-                                                key={`issue-${issue.id}`} >
-                                                <ReportBadge
-                                                    issue={issue}
-                                                    congressman={issue.proponents.reduce(
-                                                        (a: any, b) => b,
-                                                        undefined,
-                                                    )}
-                                                />
-                                            </li>
-                                        )}
-                                        {issue.type === 'v' && (
-                                            <li>
-                                                <Link to={`/loggjafarthing/${issue.assembly.id}/thingmal/${issue.category}/${issue.id}`} >
-                                                {issue.name} | {issue.type}
-                                                </Link>
-                                            </li>
-                                        )}
-                                        {issue.type === 'ff' && (
-                                            <li>
-                                                <Link to={`/loggjafarthing/${issue.assembly.id}/thingmal/${issue.category}/${issue.id}`} >
-                                                    {issue.name} | {issue.type}
-                                                </Link>
-                                            </li>
-                                        )}
-                                        {issue.type === 'ft' && (
-                                            <li>
-                                                <Link to={`/loggjafarthing/${issue.assembly.id}/thingmal/${issue.category}/${issue.id}`} >
-                                                    {issue.name} | {issue.type}
-                                                </Link>
-                                            </li>
-                                        )}
+            <>
+                <main className="assembly-issues-panel">
+                    <section className="assembly-issues-panel__user">search and avatar</section>
+                    <nav className="assembly-issues-panel__nav">
+                        <AssemblyNavigation assembly={this.props.assembly} />
+                    </nav>
+                    <header className="assembly-issues-panel__header">
+                        <h1>{this.props.assemblyProperties.assembly.id}. Löggjafarþing</h1>
+                        <h2>{this.props.assemblyProperties.assembly.cabinet!.title}</h2>
+                    </header>
+                    <aside>
+                        <h3>Mal</h3>
+                        <ul>
+                            {this.props.types.map(type => (
+                                <li key={type.type.type}>
+                                    <span>{type.count} </span>
+                                    <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?tegund=${type.type.type}`}>
+                                        {type.type.typeSubName || type.type.typeName}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                        <h3>Mal</h3>
+                        <ul>
 
-                                        {issue.type === 'um' && (
-                                            <li>
-                                                <Link to={`/loggjafarthing/${issue.assembly.id}/thingmal/${issue.category}/${issue.id}`} >
-                                                    {issue.name} | {issue.type}
-                                                </Link>
-                                            </li>
-                                        )}
-                                        {issue.type === 'ud' && (
-                                            <li>
-                                                <Link to={`/loggjafarthing/${issue.assembly.id}/thingmal/${issue.category}/${issue.id}`} >
-                                                    {issue.name} | {issue.type}
-                                                </Link>
-                                            </li>
-                                        )}
-                                        {issue.type === 'uu' && (
-                                            <li>
-                                                <Link to={`/loggjafarthing/${issue.assembly.id}/thingmal/${issue.category}/${issue.id}`} >
-                                                    {issue.name} | {issue.type}
-                                                </Link>
-                                            </li>
-                                        )}
-                                    </Fragment>
-                                ))}
+                            {this.props.categories.map((category, i) => (
+                                <li key={`categories-${i}`}>
+                                    <span>{category.count} </span>
+                                    <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?flokkur=${category.category.id}`}>
+                                        {category.category.title}
+                                    </Link>
+                                </li>
+                            ))}
 
-                            </ul>
-                        )}
-                        {this.props.loading === false &&
-                            this.props.issues.length === 0 && <Blank />}
-                        {this.props.loading === true && <Loading />}
-                        {!this.props.done && (
-                            <button onClick={this.props.loadMore}>load more</button>
-                        )}
-                    </article>
-                    <aside className="assembly-issues-panel__aside">
-                        <nav style={{ position: 'sticky', top: 16 }}>
-                            <SearchIssue assembly={this.props.assembly} />
-                            <IssuesMenu
-                                assembly={this.props.assembly}
-                                filter={this.props.filter}
-                            />
-                        </nav>
+                        </ul>
                     </aside>
-                </div>
-            </Section>
+                    <section className="assembly-issues-panel__issues">
+                        {!this.props.loading && (
+                            <>
+                                <IssueGrid>
+                                    {this.props.issues.map((issue) => (
+                                        <IssueGridItem type={issue.type.type}>
+                                            <Link to={`/loggjafarthing/${issue.assembly.id}/thingmal/${issue.type.category}/${issue.id}`}>
+                                                <Issue issue={issue}/>
+                                            </Link>
+                                        </IssueGridItem>
+                                    ))}
+                                </IssueGrid>
+                                {!this.props.done && (
+                                    <button onClick={this.props.loadMore}>[more]</button>
+                                )}
+                            </>
+                        )}
+                        {this.props.loading && (
+                            <Spinner/>
+                        )}
+                    </section>
+                    <section className="assembly-issues-panel_stats"></section>
+                </main>
+                {/*<Section>*/}
+                    {/*<div className="assembly-issues-panel">*/}
+                        {/*{!this.props.loading && (*/}
+                            {/*<>*/}
+                                {/*<IssueGrid>*/}
+                                    {/*{this.props.issues.map((issue) => (*/}
+                                        {/*<IssueGridItem type={issue.type.type}>*/}
+                                            {/*<Link to={`/loggjafarthing/${issue.assembly.id}/thingmal/${issue.type.category}/${issue.id}`}>*/}
+                                                {/*<Issue issue={issue}/>*/}
+                                            {/*</Link>*/}
+                                        {/*</IssueGridItem>*/}
+                                    {/*))}*/}
+                                {/*</IssueGrid>*/}
+                                {/*{!this.props.done && (*/}
+                                    {/*<button onClick={this.props.loadMore}>[more]</button>*/}
+                                {/*)}*/}
+                            {/*</>*/}
+                        {/*)}*/}
+                        {/*{this.props.loading && (*/}
+                            {/*<Spinner/>*/}
+                        {/*)}*/}
+
+                        {/*<aside className="assembly-issues-panel__aside">*/}
+                            {/*<nav style={{ position: 'sticky', top: 16 }}>*/}
+                                {/*<SearchIssue assembly={this.props.assembly} />*/}
+                                {/*<IssuesMenu*/}
+                                    {/*assembly={this.props.assembly}*/}
+                                    {/*filter={this.props.filter}*/}
+                                {/*/>*/}
+                            {/*</nav>*/}
+                        {/*</aside>*/}
+                    {/*</div>*/}
+                {/*</Section>*/}
+            </>
         );
     }
 }

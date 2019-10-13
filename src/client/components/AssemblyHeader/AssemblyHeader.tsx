@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {H1, H3} from '../../elements/Headline';
 import Badge from '../../elements/Badge';
 import {Link} from 'react-router-dom';
 import {Assembly as AssemblyType} from '../../../../@types';
@@ -37,37 +36,37 @@ export default class AssemblyHeader extends React.Component<Props, {}> {
         return (
             <div className="assembly-header">
                 <div className="assembly-header__headline">
-                    <H1>
+                    <h1>
                         <Link to={`/loggjafarthing/${this.props.assembly.id}`}>
                             {this.props.assembly.id}
                         </Link>. Löggjafarþing
-                    </H1>
+                    </h1>
                     <time>
                         {this.props.assembly.period!.from}
                         {this.props.assembly.period!.to}
                     </time>
                     {this.props.assembly.cabinet && (
-                        <H3>
+                        <h3>
                             <Link to={`/raduneyti/${this.props.assembly.cabinet.id}`}>
                                 {this.props.assembly.cabinet.title}
                             </Link>
                             <time>{this.props.assembly.cabinet.period.from}</time> -
                             <time>{this.props.assembly.cabinet.period.to}</time>
-                        </H3>
+                        </h3>
                     )}
                 </div>
                 <div className="assembly-header__parties">
                     <ul className="assembly-header__party-list">
-                        {((this.props.assembly.division && this.props.assembly.division.majority) || []).map(party => (
-                            <li key={`party-${party.id}`}
+                        {((this.props.assembly.division && this.props.assembly.division.majority) || []).map((party, i) => (
+                            <li key={`party-${i}-majority`}
                                 className="assembly-header__party-list-item">
                                 <Badge title={party.name} color={party.color} />
                             </li>
                         ))}
                     </ul>
                     <ul className="assembly-header__party-list">
-                        {((this.props.assembly.division && this.props.assembly.division.minority) || []).map(party => (
-                            <li key={`party-${party.id}`}
+                        {((this.props.assembly.division && this.props.assembly.division.minority) || []).map((party, i) => (
+                            <li key={`party-${i}-minority`}
                                 className="assembly-header__party-list-item">
                                 <Badge title={party.name} color={party.color} />
                             </li>

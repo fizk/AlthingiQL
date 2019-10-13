@@ -2,7 +2,6 @@ import * as React from 'react';
 import classVariations from '../../utils/classVariations';
 import SpeechCard from '../SpeechCard';
 import Congressman from '../Congressman';
-import {H4} from '../Headline';
 import {Speech as SpeechType} from '../../../../@types';
 
 interface Props {
@@ -31,7 +30,7 @@ export default class IssueSearchResult extends React.Component<Props, {}> {
                     <Congressman
                         congressman={this.props.value.congressman}
                         party={this.props.value.congressman.party}>
-                        <H4>{this.props.value.congressmanType}</H4>
+                        <h4>{this.props.value.congressmanType}</h4>
                     </Congressman>
                 </SpeechCard>
             </div>

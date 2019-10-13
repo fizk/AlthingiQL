@@ -2,55 +2,48 @@ import {GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLList} from 'graphql
 import Assembly from './Assembly';
 import CongressmanValue from './CongressmanValue';
 import IssueInterface from './IssueInterface';
-import SpeechRange from './SpeechRange';
 import {DataSource} from "../../../@types";
+import IssueCategory from './IssueCategory';
+import IssueType from './IssueType';
+import Type from "./Type";
 
 const IssueB: GraphQLObjectType = new GraphQLObjectType<DataSource.Issue>({
     name: 'IssueB',
     interfaces: [IssueInterface],
-    fields: {
+    fields: () => ({
         id: {
-            name: 'id',
             type: GraphQLInt,
-            resolve: (root) => root.issue_id,
+            resolve: ({issue_id}) => issue_id,
         },
         assembly: {
             type: Assembly,
-            resolve: (root) => ({
-                assembly_id: root.assembly_id,
-            }),
-        },
-        category: {
-            type: GraphQLString,
+            resolve: ({assembly_id}) => ({assembly_id}),
         },
         name: {
             type: GraphQLString,
         },
         type: {
-            type: GraphQLString,
-        },
-        typeName: {
-            type: GraphQLString,
-            resolve: (root) => root.type_name,
-        },
-        date: {
-            type: GraphQLString,
-            // type: GraphQLDateTime,
+            type: Type,
+            resolve: (root) => ({...root}),
         },
         speakers: {
             type: new GraphQLList(CongressmanValue),
-
-            resolve(root) {
-                return root.speakers.map(item => ({
+            resolve({speakers}) {
+                return speakers.map(item => ({
                     congressman: item,
-                    value: item.time,
+                    value: item.value,
                 }));
             },
         },
-        speechRange: {
-            type: new GraphQLList(SpeechRange),
+        speechCount: {
+            type: GraphQLInt,
+            resolve: ({speech_count}) => speech_count
         },
-    },
+        speechTime: {
+            type: GraphQLInt,
+            resolve: ({speech_time}) => speech_time
+        },
+    }),
 });
 
 export default IssueB;

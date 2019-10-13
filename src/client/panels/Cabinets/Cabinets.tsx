@@ -6,7 +6,7 @@ import {
     Period as PeriodType,
 } from '../../../../@types';
 import {Link} from 'react-router-dom';
-import InflationChart from '../../elements/InflationChart';
+import InflationChart from '../../charts/InflationChart';
 
 interface Props {
     cabinets: CabinetType[];

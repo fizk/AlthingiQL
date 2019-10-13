@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Fragment } from 'react';
 import AssemblyIssueNavigation from '../../elements/AssemblyIssueNavigation';
 import IssueHeader from '../../components/IssueHeader';
-import Helmet from 'react-helmet';
+import * as Helmet from 'react-helmet';
 import Section from '../../elements/Section';
 import {Route} from 'react-router';
 import {default as AssemblyIssuesPanel} from '../../panels/AssemblyIssues';
@@ -12,12 +12,9 @@ import {default as IssueSpeechesPanel} from '../../panels/IssueSpeeches';
 
 //@todo maybe move this to somewhere else and test it?
 const parse = (location: string) => {
-    return location.split('&').reduce((total, item) => {
-        const [key, value ] = item.split('=');
-        return {
-            ...total,
-            [key]: value,
-        };
+    return Array.from(new URLSearchParams(location) as unknown as ArrayLike<any>).reduce((previous, current) => {
+        previous[current[0]] = current[1];
+        return previous;
     }, {});
 };
 
@@ -45,27 +42,20 @@ export default class Issue extends React.Component<Props> {
     public render() {
         return (
             <Fragment>
-                <Helmet>
-                    <title>{`Löggjafarþing ${this.props.assembly}`}</title>
-                    <link rel="canonical"
-                        href={`/loggjafarthing/${this.props.assembly}`}
-                    />
-                </Helmet>
+                {/*<Helmet>*/}
+                    {/*<title>{`Löggjafarþing ${this.props.assembly}`}</title>*/}
+                    {/*<link rel="canonical"*/}
+                        {/*href={`/loggjafarthing/${this.props.assembly}`}*/}
+                    {/*/>*/}
+                {/*</Helmet>*/}
                 <Section>
 
                     <Route exact={true} path="/loggjafarthing/:assembly([0-9]*)/thingmal" render={({match}) => (
-                        <AssemblyIssuesPanel assembly={Number(match.params.assembly)}
-                            filter={parseIssueType(parse(location.search.slice(1)))} />
+                        <AssemblyIssuesPanel assembly={Number(match.params.assembly)} filter={parse(location.search)}/>
                     )}/>
 
 
                     <Route exact={true} path="/loggjafarthing/:assembly([0-9]*)/thingmal/:category([ab])/:issue([0-9]*)"
-                           render={({match}) => (
-                               <AssemblyIssuePanel issue={match.params.issue}
-                                    assembly={match.params.assembly}
-                                    category={match.params.category} />
-                           )}/>
-                    <Route exact={true} path="/loggjafarthing/:assembly([0-9]*)/thingmal/:category([ab])/:issue([0-9]*)/thingskjol"
                            render={({match}) => (
                                <Fragment>
                                    <AssemblyIssueNavigation
@@ -73,13 +63,19 @@ export default class Issue extends React.Component<Props> {
                                        issue={match.params.issue}
                                        category={match.params.category}
                                    />
-                                   <IssueHeader
-                                       assembly={match.params.assembly}
-                                       issue={match.params.issue}
+                                   <AssemblyIssuePanel issue={match.params.issue}
+                                    assembly={match.params.assembly}
+                                    category={match.params.category} />
+                               </Fragment>
+                           )}/>
+                    <Route exact={true} path="/loggjafarthing/:assembly([0-9]*)/thingmal/:category([ab])/:issue([0-9]*)/thingskjol"
+                           render={({match}) => (
+                               <Fragment>
+                                   <IssueDocumentsPanel
                                        category={match.params.category}
+                                       issue={Number(match.params.issue)}
+                                       assembly={Number(match.params.assembly)}
                                    />
-                               <IssueDocumentsPanel issue={Number(match.params.issue)}
-                                    assembly={Number(match.params.assembly)} />
                                </Fragment>
                            )}/>
                     <Route exact={true} path="/loggjafarthing/:assembly([0-9]*)/thingmal/:category([ab])/:issue([0-9]*)/raedur/:speech?"

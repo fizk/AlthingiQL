@@ -1,0 +1,78 @@
+@import "../../config";
+
+.issue-status {
+    fill: map_get($color, gray-light);
+}
+
+.issue-status--green {
+    fill: map_get($color, green);
+}
+.issue-status--yellow {
+    fill: map_get($color, orange);
+}
+.issue-status--red {
+    fill: map_get($color, red);
+}
+.issue-status--blue {
+    fill: map_get($color, purple);
+}
+
+.issue-status--committee-1 {
+    .issue-status__item:nth-child(1) {
+        fill: map_get($color, green);
+    }
+    .issue-status__item:nth-child(2) {
+        fill: map_get($color, orange);
+    }
+}
+
+.issue-status--committee-2 {
+    .issue-status__item:nth-child(1) {
+        fill: map_get($color, green);
+    }
+    .issue-status__item:nth-child(2) {
+        fill: map_get($color, green);
+    }
+    .issue-status__item:nth-child(3) {
+        fill: map_get($color, green);
+    }
+    .issue-status__item:nth-child(4) {
+        fill: map_get($color, orange);
+    }
+}
+
+.issue-status--debate-1 {
+    .issue-status__item:nth-child(1) {
+        fill: map_get($color, orange);
+    }
+}
+
+.issue-status--debate-2 {
+    .issue-status__item:nth-child(1) {
+        fill: map_get($color, green);
+    }
+    .issue-status__item:nth-child(2) {
+        fill: map_get($color, green);
+    }
+    .issue-status__item:nth-child(3) {
+        fill: map_get($color, orange);
+    }
+}
+
+.issue-status--debate-3 {
+    .issue-status__item:nth-child(1) {
+        fill: map_get($color, green);
+    }
+    .issue-status__item:nth-child(2) {
+        fill: map_get($color, green);
+    }
+    .issue-status__item:nth-child(3) {
+        fill: map_get($color, green);
+    }
+    .issue-status__item:nth-child(4) {
+        fill: map_get($color, green);
+    }
+    .issue-status__item:nth-child(5) {
+        fill: map_get($color, orange);
+    }
+}
