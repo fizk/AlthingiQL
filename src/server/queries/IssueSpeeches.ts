@@ -8,7 +8,7 @@ interface Arguments {
     assembly: number;
     category: string;
     speech: string;
-    cursor: {from: string, to: string};
+    cursor: {from: string; to: string};
 }
 
 export default {

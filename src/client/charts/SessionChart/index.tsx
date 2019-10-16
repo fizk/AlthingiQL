@@ -11,8 +11,8 @@ const Map: {[key: string]: string} = {
 };
 
 interface Source {
-    period: PeriodType,
-    type: string,
+    period: PeriodType;
+    type: string;
 }
 
 interface Props {

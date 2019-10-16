@@ -13,7 +13,7 @@ export default {
         },
     },
 
-  resolve(root: any, {assembly, plenary}: {assembly: number, plenary: number}, {client}: {client: Client}) {
+  resolve(root: any, {assembly, plenary}: {assembly: number; plenary: number}, {client}: {client: Client}) {
       return client.get(`/loggjafarthing/${assembly}/thingfundir/${plenary}/lidir`);
     },
 };

@@ -4,7 +4,7 @@ import {StatusCount} from "../../../../@types";
 import './index.scss';
 
 interface Props {
-    source: StatusCount[]
+    source: StatusCount[];
 }
 
 const map: {[key: string]: string} = {

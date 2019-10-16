@@ -6,7 +6,7 @@ import './index.scss';
 
 interface Props {
     assembly: number;
-    types?: TypeCount[]
+    types?: TypeCount[];
     categories?: CategorySummary[];
     loading?: boolean;
 }

@@ -13,7 +13,7 @@ export default {
         },
     },
 
-    resolve(root: any, {assembly, type}: {assembly: number, type: string}, {client}: {client: Client}) {
+    resolve(root: any, {assembly, type}: {assembly: number; type: string}, {client}: {client: Client}) {
         const query = (type)
             ? `?tegund=${type}`
             : '';

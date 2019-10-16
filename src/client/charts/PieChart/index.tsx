@@ -7,8 +7,8 @@ interface Props {
     source: Data[];
     formatValue?: (...args: any[]) => any;
     variations?: string[];
-    onEnter?: (event: React.SyntheticEvent<SVGPathElement>, data: Data, total: number) => void
-    onLeave?: (event: React.SyntheticEvent<SVGPathElement>, data: Data, total: number) => void
+    onEnter?: (event: React.SyntheticEvent<SVGPathElement>, data: Data, total: number) => void;
+    onLeave?: (event: React.SyntheticEvent<SVGPathElement>, data: Data, total: number) => void;
 }
 
 interface Data {
@@ -30,7 +30,7 @@ export default class PieChart extends React.PureComponent<Props> {
 
         const total = this.props.source.reduce((acc, value) => acc + value.value, 0);
 
-        const size: number = Number(Object.entries({
+        const size = Number(Object.entries({
             31: (this.props.variations || []).indexOf('sm') >= 0,
             39: (this.props.variations || []).indexOf('md') >= 0,
             48: (this.props.variations || []).indexOf('lg') >= 0,

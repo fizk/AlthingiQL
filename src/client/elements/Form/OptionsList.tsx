@@ -20,7 +20,7 @@ export default class OptionsList extends React.Component<Props, {}> {
             <div className={classVariations('options-list', this.props.variations)}>
                 {this.props.children &&
                 React.Children.map(this.props.children, (element, i) => {
-                    return React.cloneElement(element as ReactElement<{onSelect: any, isSelected: boolean}>, {
+                    return React.cloneElement(element as ReactElement<{onSelect: any; isSelected: boolean}>, {
                         onSelect: this.props.onSelect,
                         isSelected: i === this.props.index,
                     });

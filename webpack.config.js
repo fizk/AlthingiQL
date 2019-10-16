@@ -40,7 +40,23 @@ module.exports = {
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
             {
                 test: /\.tsx?$/,
-                loader: "awesome-typescript-loader",
+                loader: 'babel-loader',
+                query:{
+                    "presets": [
+                        ["@babel/preset-env", {
+                            targets: {
+                                browsers: ["last 2 versions", "safari >= 7"]
+                            }
+                        }],
+                        "@babel/preset-react",
+                        "@babel/preset-typescript"
+                    ],
+                    "plugins": [
+                        "@babel/proposal-class-properties",
+                        "@babel/proposal-object-rest-spread",
+                        "transform-es2015-modules-commonjs",
+                    ]
+                }
             },
 
             // // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.

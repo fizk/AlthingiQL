@@ -16,7 +16,7 @@ export default {
         },
     },
 
-    resolve(root: any, {assembly, issue, vote}: {assembly: number, issue: number, vote: number}, {client}: {client: Client}) {
+    resolve(root: any, {assembly, issue, vote}: {assembly: number; issue: number; vote: number}, {client}: {client: Client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmal/${issue}/atkvaedagreidslur/${vote}/atkvaedi`);
     },
 };

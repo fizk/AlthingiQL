@@ -3,7 +3,7 @@ import {scaleTime, scaleLinear, scaleOrdinal, scaleQuantize} from 'd3-scale'
 import {TimeInterval, timeYear, timeDay} from 'd3-time'
 
 interface Props {
-    data: any[]
+    data: any[];
 }
 
 interface State {
@@ -14,7 +14,7 @@ interface Math {
     min(...values: Date[]): number;
     floor(x: number): number;
 }
-declare var Math: Math;
+declare let Math: Math;
 
 export default class ProgressChart extends React.Component<Props, State> {
 

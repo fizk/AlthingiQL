@@ -8,8 +8,8 @@ interface Props {
 }
 
 interface Source {
-    count: number,
-    date: string,
+    count: number;
+    date: string;
 }
 
 export default class DateAndCountChart extends React.Component<Props, {}> {

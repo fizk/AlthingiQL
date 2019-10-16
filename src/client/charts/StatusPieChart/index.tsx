@@ -7,9 +7,9 @@ import './index.scss';
 interface Props {
     source: Array<{
         bill?: {
-            status?: string,
-        },
-        value?: number,
+            status?: string;
+        };
+        value?: number;
     }>;
     formatValue?: (...args: any[]) => any;
 }

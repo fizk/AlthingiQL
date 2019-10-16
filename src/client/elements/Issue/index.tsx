@@ -7,7 +7,7 @@ import {Issue as IssueType, IssueA} from "../../../../@types";
 import './index.scss';
 
 interface Props {
-    issue: IssueType
+    issue: IssueType;
 }
 
 export default class Issue extends React.Component<Props> {

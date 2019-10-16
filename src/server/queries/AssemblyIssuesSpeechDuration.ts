@@ -16,7 +16,7 @@ export default {
         },
     },
 
-    resolve(root: any, {assembly, size, order}: {assembly: number, size: number, order: string}, {client}: {client: Client}) {
+    resolve(root: any, {assembly, size, order}: {assembly: number; size: number; order: string}, {client}: {client: Client}) {
         const queryArray = [];
 
         if (order) {

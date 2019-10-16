@@ -11,8 +11,8 @@ const Map: {[key: string]: string} = {
 };
 
 interface Source {
-    vote: string,
-    value: number,
+    vote: string;
+    value: number;
 }
 
 interface Props {

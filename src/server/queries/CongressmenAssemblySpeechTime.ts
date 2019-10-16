@@ -16,7 +16,7 @@ export default {
         },
     },
 
-    resolve(root: any, {assembly, order, size}: {assembly: number, order: string, size: number}, {client}: {client: Client}) {
+    resolve(root: any, {assembly, order, size}: {assembly: number; order: string; size: number}, {client}: {client: Client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmenn/raedutimar?rod=${order}&fjoldi=${size}`)
             .then(json => (json as Array<any>).map(congressman => ({
                 congressman,

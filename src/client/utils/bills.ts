@@ -1,7 +1,7 @@
 
 export const reduceBillsByStatus = (
-    bills: Array<{count: number, status: string}>,
-): {unapproved: number | undefined, approved: number | undefined} => {
+    bills: Array<{count: number; status: string}>,
+): {unapproved: number | undefined; approved: number | undefined} => {
     return bills.reduce((accumulator, currentValue) => {
         if (currentValue.status === 'Samþykkt sem lög frá Alþingi') {
             accumulator.approved = currentValue.count;
@@ -12,13 +12,13 @@ export const reduceBillsByStatus = (
     }, {unapproved: 0, approved: 0});
 };
 
-export const billsPerformance = (value: {unapproved: number| undefined, approved: number| undefined}): number => {
+export const billsPerformance = (value: {unapproved: number| undefined; approved: number| undefined}): number => {
     return Math.round(((value.approved || 0) / ((value.unapproved || 0) + (value.approved || 0))) * 100) || 0;
 };
 
 export const mapBillStatusToKey = (
-    bill: {count: number, status: string},
-): {count: number, key: string, label: string} => {
+    bill: {count: number; status: string},
+): {count: number; key: string; label: string} => {
     const map: {[key: string]: string} = {
         'Bíður 1. umræðu': 'iteration-one',
         'Bíður 2. umræðu': 'iteration-two',

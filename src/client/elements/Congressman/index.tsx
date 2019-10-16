@@ -3,11 +3,12 @@ import Avatar from '../Avatar';
 import classVariations from '../../utils/classVariations';
 import {Person as PersonType, Party as PartyType, Constituency} from '../../../../@types';
 import './index.scss';
+import {ReactNode} from "react";
 
 interface Props {
     congressman: PersonType;
     party?: PartyType;
-    constituency?: Constituency
+    constituency?: Constituency;
     variations?: string[];
 }
 
@@ -25,7 +26,7 @@ export default class Congressman extends React.Component<Props> {
         variations: []
     };
 
-    public render() {
+    public render(): ReactNode {
 
         const size = (this.props.variations || []).reduce((previous, current) => {
             if (current === 'md') return 39;

@@ -47,7 +47,7 @@ interface Props {
         speeches: CongressmanValue[];
     };
     issues: ServerFetchStatus & {
-        issues: IssueValue[],
+        issues: IssueValue[];
     };
 }
 

@@ -24,7 +24,7 @@ export const getPagination = (config: ClientConfig) => (url: string, cursor?: Cl
             Range: `0-`,
         };
     }
-    return new Promise<{data: any, cursor: ClientCursor, done: boolean}>((resolve, reject) => {
+    return new Promise<{data: any; cursor: ClientCursor; done: boolean}>((resolve, reject) => {
         const req = http.request(options, response => {
             if (response.statusCode !== 206) {
                 response.resume();

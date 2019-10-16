@@ -13,7 +13,7 @@ export default {
         },
     },
 
-    resolve(root: any, {issue, assembly}: {issue: number, assembly: number}, {client}: {client: Client}) {
+    resolve(root: any, {issue, assembly}: {issue: number; assembly: number}, {client}: {client: Client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmal/a/${issue}/thingskjal`);
     },
 };

@@ -13,7 +13,7 @@ export default {
         },
     },
 
-    resolve(root: any, {congressman, assembly}: {congressman: number, assembly: number}, {client}: {client: Client}) {
+    resolve(root: any, {congressman, assembly}: {congressman: number; assembly: number}, {client}: {client: Client}) {
         return client.get(`/thingmenn/${congressman}`)
             .then(congressmanObject => ({
                     ...congressmanObject,

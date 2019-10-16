@@ -1,8 +1,9 @@
 import classVariations from '../../utils/classVariations';
 import * as React from 'react';
+import {ReactNode} from "react";
 
 interface Props {
-    variations?: any[];
+    variations?: string[];
     isError?: boolean;
 }
 
@@ -12,7 +13,7 @@ export default class Input extends React.Component<Props & React.HTMLProps<HTMLI
         isError: false,
     };
 
-    public render() {
+    public render(): ReactNode {
 
         const {variations, isError, ...rest} = this.props;
 

@@ -8,8 +8,8 @@ interface Props {
 }
 
 interface Source {
-    party: PartyType,
-    value: number,
+    party: PartyType;
+    value: number;
 }
 
 export default class SeatChart extends React.Component<Props, {}> {

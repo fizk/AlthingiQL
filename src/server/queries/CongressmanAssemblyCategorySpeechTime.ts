@@ -13,7 +13,7 @@ export default {
         },
     },
 
-    resolve(root: any, {congressman, assembly}: {congressman: number, assembly: number}, {client}: {client: Client}) {
+    resolve(root: any, {congressman, assembly}: {congressman: number; assembly: number}, {client}: {client: Client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmenn/${congressman}/malaflokkar`);
     },
 };

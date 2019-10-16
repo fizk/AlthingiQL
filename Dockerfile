@@ -10,8 +10,11 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY tsconfig.json ./
 COPY webpack.config.js ./
-COPY .babelrc ./
+COPY .server.babelrc ./
 COPY .eslintrc.js ./
+
+# questionable
+COPY ./public/fonts ./public/fonts
 
 # a little hack so nodemon can start
 RUN mkdir -p ./dist/server && touch ./dist/server/index.js

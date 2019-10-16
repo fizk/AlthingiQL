@@ -7,7 +7,7 @@ import {Client} from '../../../@types';
 
 interface Arguments {
     assembly: number;
-    cursor: {from: string, to: string}
+    cursor: {from: string; to: string};
     types: string[];
     category: string;
 }

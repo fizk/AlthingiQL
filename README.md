@@ -93,3 +93,45 @@ environment variables in your host system
 
 This system is the blue box in this diagram:
 ![loggjafarthing-schema](https://user-images.githubusercontent.com/386336/33863159-9212c998-df3a-11e7-882d-859b1da96bf0.png)
+
+
+## More technical bla bla.
+This applications is really _two-in-one_.
+
+It's the GraphQL (BFF) that provides data (sourced from the [API](https://github.com/fizk/Loggjafarthing)) and send that 
+back to the client.
+
+Then it's the React client that displays data from the BFF along with interaction.
+
+But there is also this bit in the middle, where this application works as an isomorphic application, as in, it can do the work
+of the GraphQL and the React on the server side and send the client back a full HTML populated with data.
+
+  
+The code is split up into `src/client` and `src/server`. 
+
+Since the application is written in TypeScript, there needs to be process where the server-side code is compiled down to
+what ever Node can use to run the GraphQL part of it. This part of the code does'nt need any polyfilling, we know exactly
+the environment that it's gonna run in (Node 10) so we just strip TypeScript annotations from the code and change the file
+extensions to *.js.
+
+The client side of the code needs to be converted from TypeScript into JavaScript, then from JSX syntax to JS syntax, then
+polyfilled, then bundled into a single bundle.js file.
+
+These are quite different. so there are two different pipelines. One for the client, defined in a Webpack config, and another
+for the server, defined in the tsconfig.json file.
+
+Then for the tricky part: The server code actually also needs to run React code for the isomorphic part of it, so it to needs
+the JSX to JS part as well.
+
+Lastly: since there are statement in the code like these `import './index.scss'`, these need to be stripped out for the server,
+as it will not find any `*.scss` files. But the client code actually needs these imports as it will use it to create the
+bundled *.css file. The pipelines become pretty similar:
+
+server: tsx -> jsx -> js -> strip scss imports -> save
+client: tsx -> jsx -> js -> use scss imports -> bundle (webpack)
+
+That's why where are two Babel config. One stored as `.server.babelrc` used for the Server and one embedded in the `webpack.config.js`.
+The only difference between them is that the Server one strip out `import './index.scss'`, the other one does'nt.
+
+The obviously, the Server process stores the compiled versions as is, while the client one creates a bundle out of everything
+and stores it as a single file.

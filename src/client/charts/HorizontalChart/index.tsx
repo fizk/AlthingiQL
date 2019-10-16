@@ -4,8 +4,8 @@ import './index.scss';
 
 interface HorizontalChartProps {
     source: Array<{
-        value: number,
-        label: string,
+        value: number;
+        label: string;
     }>;
 }
 

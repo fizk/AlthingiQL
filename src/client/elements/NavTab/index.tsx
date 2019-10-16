@@ -6,7 +6,7 @@ export const NavTab: FunctionComponent = ({ children }) => (
     <div className="nav-tab">{children}</div>
 );
 
-export const NavTabItem: FunctionComponent<{to: any, exact: boolean}> = props => (
+export const NavTabItem: FunctionComponent<{to: any; exact: boolean}> = props => (
     <NavLink
         exact={props.exact}
         className="nav-tab__item"

@@ -9,8 +9,8 @@ interface Props {
 }
 
 interface Source {
-    party: PartyType,
-    value?: number,
+    party: PartyType;
+    value?: number;
 }
 
 export default class PartyPieChart extends React.Component<Props, {}> {

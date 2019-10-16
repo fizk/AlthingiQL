@@ -13,7 +13,7 @@ export default {
         },
     },
 
-    resolve(root: any, {assembly, query}: {assembly: number, query: string}, {client}: {client: Client}) {
+    resolve(root: any, {assembly, query}: {assembly: number; query: string}, {client}: {client: Client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmal?leit=${encodeURI(query)}`);
     },
 };

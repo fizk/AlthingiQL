@@ -8,7 +8,6 @@ services:
             dockerfile: Dockerfile
         environment:
             - NODE_ENV=development
-            #- NODE_ENV=production
             - SERVER_PROTOCOL=${ENV_SERVER_PROTOCOL:-http}
             - SERVER_HOST=${ENV_SERVER_HOST:-localhost}
             - SERVER_PORT=${ENV_SERVER_PORT:-3000}
@@ -23,7 +22,6 @@ services:
         ports:
           - 3000:3000
         command: bash -c "npm run dev"
-        #command: bash -c "npm start"
 
     test:
         container_name: ql-test

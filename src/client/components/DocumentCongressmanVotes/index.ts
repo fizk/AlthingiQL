@@ -29,15 +29,15 @@ type Response = {
 };
 
 type InputProps = {
-    assembly: number,
-    issue: number,
-    vote: number
+    assembly: number;
+    issue: number;
+    vote: number;
 };
 
 type Variables = {
-    assembly: number,
-    issue: number,
-    vote: number
+    assembly: number;
+    issue: number;
+    vote: number;
 };
 
 interface Props {

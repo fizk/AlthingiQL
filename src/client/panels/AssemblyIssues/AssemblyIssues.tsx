@@ -21,8 +21,8 @@ interface Props extends ServerFetchStatus {
     done?: boolean;
     loadMore?: (...args: any[]) => any;
     filter?: {
-        type?: string,
-        category?: string,
+        type?: string;
+        category?: string;
     };
     types: TypeCount[];
     categories: CategoryCount[];

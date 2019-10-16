@@ -16,7 +16,7 @@ export default {
         },
     },
 
-    resolve(root: any, {issue, assembly, query}: {issue: number, assembly: number, query: string}, {client}: {client: Client}) {
+    resolve(root: any, {issue, assembly, query}: {issue: number; assembly: number; query: string}, {client}: {client: Client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmal/${issue}/raedur?leit=${encodeURI(query)}`);
     },
 };

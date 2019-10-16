@@ -17,7 +17,7 @@ export default {
         },
     },
 
-    resolve(root: any, {issue, assembly, category}: {issue: number, assembly: number, category: string}, {client}: {client: Client}) {
+    resolve(root: any, {issue, assembly, category}: {issue: number; assembly: number; category: string}, {client}: {client: Client}) {
         return client.get(`/loggjafarthing/${assembly}/thingmal/${category}/${issue}/ferli`);
     },
 };

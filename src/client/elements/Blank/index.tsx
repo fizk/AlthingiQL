@@ -2,4 +2,5 @@ import * as React from 'react';
 import { Empty } from '../Icons';
 import './index.scss';
 
-export default () => (<div className="blank"><Empty /></div>);
+const Blank: React.FunctionComponent = () => (<div className="blank"><Empty /></div>);
+export default Blank;
