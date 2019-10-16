@@ -1,25 +1,25 @@
 import * as React from 'react';
 import { Fragment } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { OptionsWithKeyBinding } from '../../elements/Form';
-import { issueSearchAction, issueClearAction } from './redux';
+// import { issueSearchAction, issueClearAction } from './redux';
 import { IssueSearchResult } from '../../elements/SearchResult';
 import { Issue as IssueType } from '../../../../@types';
 
-interface SearchIssueProps {
-    assembly?: number;
+interface Props {
+    assembly: number;
     result?: IssueType[];
     isSearching?: boolean;
     onSearch?: (...args: any[]) => any;
     onClear?: (...args: any[]) => any;
 }
 
-interface SearchIssueState {
+interface State {
     redirect: any | undefined;
 }
 
-export default class SearchIssue extends React.Component<SearchIssueProps, SearchIssueState> {
+export default class SearchIssue extends React.Component<Props, State> {
     public static defaultProps = {
         assembly: undefined,
         issue: undefined,
@@ -29,7 +29,7 @@ export default class SearchIssue extends React.Component<SearchIssueProps, Searc
         onClear: () => {},
     };
 
-  constructor(props) {
+  constructor(props: Props) {
         super(props);
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSelect = this.handleOnSelect.bind(this);
@@ -39,19 +39,19 @@ export default class SearchIssue extends React.Component<SearchIssueProps, Searc
         };
     }
 
-  public handleOnChange(value) {
+  public handleOnChange(value: string) {
         if (value.trim() !== '') {
-            this.props.onSearch(value);
+            this.props.onSearch && this.props.onSearch(value);
         }
     }
 
-  public handleOnSelect(value) {
-        this.props.onClear();
+  public handleOnSelect(value: any | undefined) {
+      this.props.onClear && this.props.onClear();
         this.setState({ redirect: value });
     }
 
   public handleOnClear() {
-        this.props.onClear();
+      this.props.onClear && this.props.onClear();
     }
 
   public render() {
@@ -67,12 +67,12 @@ export default class SearchIssue extends React.Component<SearchIssueProps, Searc
                 )}
                 <OptionsWithKeyBinding
                     isError={false}
-                    isSearching={this.props.isSearching}
+                    isSearching={this.props.isSearching || false}
                     onClear={this.handleOnClear}
                     onChange={this.handleOnChange}
                     onSelect={this.handleOnSelect}
                 >
-                    {this.props.result.map(result => (
+                    {(this.props.result || []).map(result => (
                         <IssueSearchResult
                             key={`search-result-${result.id}`}
                             issue={result}
@@ -83,29 +83,29 @@ export default class SearchIssue extends React.Component<SearchIssueProps, Searc
         );
     }
 }
-const mapStateToProps = state => {
-    return {
-        result: state.issueSearch.result,
-        isSearching: state.issueSearch.loading,
-    };
-};
-const mapDispatchToProps = () => {
-    const throttleIssueSearchAction = issueSearchAction();
-
-    return (dispatch, ownProps) => ({
-        onSearch: query =>
-            dispatch(
-                throttleIssueSearchAction(
-                    ownProps.assembly,
-                    ownProps.issue,
-                    query,
-                ),
-            ),
-        onClear: () => dispatch(issueClearAction()),
-    });
-};
-const SearchIssueWithStore = connect(
-    mapStateToProps,
-    mapDispatchToProps(),
-)(SearchIssue);
-export { SearchIssueWithStore };
+// const mapStateToProps = state => {
+//     return {
+//         result: state.issueSearch.result,
+//         isSearching: state.issueSearch.loading,
+//     };
+// };
+// const mapDispatchToProps = () => {
+//     const throttleIssueSearchAction = issueSearchAction();
+//
+//     return (dispatch, ownProps) => ({
+//         onSearch: query =>
+//             dispatch(
+//                 throttleIssueSearchAction(
+//                     ownProps.assembly,
+//                     ownProps.issue,
+//                     query,
+//                 ),
+//             ),
+//         onClear: () => dispatch(issueClearAction()),
+//     });
+// };
+// const SearchIssueWithStore = connect(
+//     mapStateToProps,
+//     mapDispatchToProps(),
+// )(SearchIssue);
+// export { SearchIssueWithStore };

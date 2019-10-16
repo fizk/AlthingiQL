@@ -11,7 +11,7 @@ export default class SimpleBillProgress extends React.Component<SimpleBillProgre
         status: undefined,
     };
 
-    private status = {
+    private status: {[key: string]: string} = {
         'undefined': '',
         'Bíður 1. umræðu': 'await-one',
         'Bíður 2. umræðu': 'await-two',
@@ -29,7 +29,7 @@ export default class SimpleBillProgress extends React.Component<SimpleBillProgre
                 viewBox="0 0 90 18"
                 role="img"
                 className={classVariations('simple-bill-progress', [
-                    this.status[this.props.status],
+                    this.status[this.props.status || 'undefined'],
                 ])}
             >
                 >

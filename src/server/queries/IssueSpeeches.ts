@@ -1,6 +1,15 @@
 import {GraphQLBoolean, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 import Speech from '../types/Speech';
 import Cursor, {CursorInput} from '../types/Cursor';
+import {Client} from "../../../@types";
+
+interface Arguments {
+    issue: number;
+    assembly: number;
+    category: string;
+    speech: string;
+    cursor: {from: string; to: string};
+}
 
 export default {
     type: new GraphQLObjectType({
@@ -26,6 +35,9 @@ export default {
         assembly: {
             type: new GraphQLNonNull(GraphQLInt),
         },
+        category: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
         speech: {
             type: GraphQLString,
         },
@@ -34,9 +46,9 @@ export default {
         },
     },
 
-    resolve(root, {issue, assembly, speech, cursor}, {client}) {
+    resolve(root: any, {issue, assembly, category, speech, cursor}: Arguments, {client}: {client: Client}) {
         return speech
-            ? client.getPagination(`/loggjafarthing/${assembly}/thingmal/${issue}/raedur/${speech}`, cursor)
-            : client.getPagination(`/loggjafarthing/${assembly}/thingmal/${issue}/raedur`, cursor);
+            ? client.getPagination(`/loggjafarthing/${assembly}/thingmal/${category}/${issue}/raedur/${speech}`, cursor)
+            : client.getPagination(`/loggjafarthing/${assembly}/thingmal/${category}/${issue}/raedur`, cursor);
     },
 };

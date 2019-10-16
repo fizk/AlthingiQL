@@ -7,7 +7,7 @@ describe('<Assemblies />', () => {
     test('default props', () => {
         const tree = renderer.create(
             <Router >
-                <Assemblies assemblies={undefined} />
+                <Assemblies assemblies={undefined} loading={false} />
             </Router>,
         ).toJSON();
 
@@ -36,7 +36,7 @@ describe('<Assemblies />', () => {
         }];
         const tree = renderer.create(
             <Router >
-                <Assemblies assemblies={assemblies} />
+                <Assemblies assemblies={assemblies} loading={false} />
             </Router>,
         ).toJSON();
 

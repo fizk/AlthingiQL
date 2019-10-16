@@ -7,7 +7,7 @@ describe('<SearchSpeech />', () => {
     test('default props', () => {
         const tree = renderer.create(
             <Router >
-                <SearchSpeech />
+                <SearchSpeech assembly={1} issue={2} />
             </Router>,
         ).toJSON();
 

@@ -1,4 +1,6 @@
 import * as React from 'react';
+import {ComponentClass} from "react";
+import {PropsWithChildren} from "react";
 
 interface Props {
     onSelect: (value: any) => void;
@@ -9,12 +11,12 @@ interface Props {
 }
 
 interface State {
-    index: number;
+    index: number | undefined;
 }
 
-export default  Component => {
+export default  (Component: ComponentClass<{index: number | undefined}>) => {
     return class extends React.Component<Props, State> {
-        constructor(props) {
+        constructor(props: Props) {
             super(props);
             this.handleKeyListening = this.handleKeyListening.bind(this);
             this.state = {
@@ -22,7 +24,7 @@ export default  Component => {
             };
         }
 
-        private handleKeyListening(event) {
+        private handleKeyListening(event: any) { //@todo
             let index;
             const keyCode = event.code || event.key || event.keyIdentifier; //Chrome || IE || Safari
             switch (keyCode) {
@@ -51,6 +53,7 @@ export default  Component => {
                     break;
                 case 'Enter':
                     index = this.state.index;
+                    // @ts-ignore //@todo
                     this.props.onSelect(this.props.children[index].props.value);
                     this.setState({ index: undefined });
                     break;
@@ -61,9 +64,9 @@ export default  Component => {
             }
         }
 
-        public componentWillReceiveProps(nextProps) {
+        public componentWillReceiveProps(nextProps: PropsWithChildren<Props>) {
             if (
-                (nextProps.children || []).length > 0 &&
+                (React.Children.toArray(nextProps.children) || []).length > 0 &&
                 this.state.index === undefined
             ) {
                 this.setState({ index: 0 });

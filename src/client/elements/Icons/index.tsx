@@ -35,10 +35,19 @@ export const Spinner = () => (
 );
 
 export const Empty = () => (
-    <svg width="100px" height="100px" viewBox="0 0 100 100">
-        <path
-            fill="#CCCCCC"
-            d="M21.378,14.398v71.203h57.243V14.398H21.378z M74.424,80.38H25.576V19.62h48.848V80.38z"
-        />
+    <svg width="100" height="100" viewBox="0 0 100 100">
+        <g strokeWidth="10" fill="none" fillRule="evenodd">
+            <path stroke="#CCC" d="M20 10h60v80H20z"/>
+            <path d="M9 82l79-62" stroke="#999" strokeLinecap="square"/>
+        </g>
     </svg>
 );
+//
+// export const Empty = () => (
+//     <svg width="100px" height="100px" viewBox="0 0 100 100">
+//         <path
+//             fill="#CCCCCC"
+//             d="M21.378,14.398v71.203h57.243V14.398H21.378z M74.424,80.38H25.576V19.62h48.848V80.38z"
+//         />
+//     </svg>
+// );

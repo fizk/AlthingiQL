@@ -1,4 +1,4 @@
-export const ISSUE_STATUS = {
+export const ISSUE_STATUS: {[key: string]: string} = {
     'Bíður 1. umræðu': 'wait-1',
     'Bíður 2. umræðu': 'wait-2',
     'Fyrirspurnin var felld niður vegna ráðherraskipta': 'question-void',

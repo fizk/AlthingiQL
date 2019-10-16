@@ -1,11 +1,11 @@
 import * as React from 'react';
 import AssemblyBadge from '../../elements/AssemblyBadge';
 import {ListSeparated, ListItem} from '../../elements/List';
-import {AssemblyStatistics as AssemblyStatisticsType} from '../../../../@types';
+import {Assembly as AssemblyType} from '../../../../@types';
 
 interface Props {
-    assemblies: AssemblyStatisticsType[];
-    loading?: boolean;
+    assemblies: AssemblyType[];
+    loading: boolean;
 }
 
 export default class Index extends React.Component<Props, {}> {

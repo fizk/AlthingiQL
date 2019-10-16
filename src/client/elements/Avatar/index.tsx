@@ -2,32 +2,84 @@ import * as React from 'react';
 import classVariations from '../../utils/classVariations';
 import './index.scss';
 
-interface Props {
-    variations?: any[];
-    src?: string;
-    title?: string;
+interface Props extends React.HTMLProps<HTMLImageElement> {
+    src: string;
+    size?: number;
 }
 
-export default class Avatar extends React.Component<Props, {}> {
+export default class Avatar extends React.Component<Props> {
     public static defaultProps = {
-        variations: [],
+        size: 32,
         src: undefined,
-        title: undefined,
     };
 
-    private fillTemplateSrc(src) {
-        return (src || '').replace('{size}', '60x60');
+    private myRef = React.createRef<HTMLImageElement>();
+
+    private observer: IntersectionObserver;
+
+    private options = {
+        rootMargin: '0px',
+        threshold: 1.0
+    };
+
+    public constructor(props: Props) {
+        super(props);
+        this.observer = new IntersectionObserver(this.observerCallback, this.options);
+    }
+
+    public componentDidMount(): void {
+        this.observer.observe(this.myRef.current as HTMLImageElement);
+        this.myRef.current!.addEventListener('load', (event) => {
+            (event.target as HTMLImageElement).classList.replace(
+                'avatar__image--hidden',
+                'avatar__image--visible'
+            );
+        });
+    }
+
+    public componentWillReceiveProps(nextProps: Readonly<Props>): void {
+        if (this.props.src !== nextProps.src ) {
+            if (this.isViewPort(this.myRef.current!)) {
+                this.myRef.current!.src = nextProps.src;
+            } else {
+                this.myRef.current!.removeAttribute('src');
+                this.myRef.current!.classList.replace(
+                    'avatar__image--visible',
+                    'avatar__image--hidden'
+                );
+            }
+        }
+    }
+
+    private observerCallback = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach(item => {
+            if (item.intersectionRatio > 0.9 && !(item.target as HTMLImageElement).src) {
+                (item.target as HTMLImageElement).src = this.props.src;
+            }
+        });
+    };
+
+    private isViewPort (element: HTMLImageElement): boolean {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
     }
 
     public render() {
-        const { src, variations, ...rest } = this.props;
+        const { src, size, ...rest } = this.props;
         return (
-            <div
-                role="image"
-                style={{ backgroundImage: `url(${this.fillTemplateSrc(src)})` }}
-                className={classVariations('avatar', variations)}
-                {...rest}
-            />
+            <div role="image" style={{height: size, width: size}} className={classVariations('avatar')}>
+                <img className={classVariations('avatar__image', ['hidden'])}
+                     height={size}
+                     width={size}
+                     src={undefined}
+                     ref={this.myRef}
+                     {...rest as any}/>
+            </div>
         );
     }
 }

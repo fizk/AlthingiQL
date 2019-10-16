@@ -1,5 +1,6 @@
-import {GraphQLInt, GraphQLList, GraphQLNonNull} from 'graphql';
+import {GraphQLInt, GraphQLNonNull} from 'graphql';
 import Cabinet from '../types/Cabinet';
+import {Client} from "../../../@types";
 
 export default {
     type: Cabinet,
@@ -9,7 +10,7 @@ export default {
         },
     },
 
-    resolve(root, {cabinet}, {client}) {
+    resolve(root: any, {cabinet}: {cabinet: number}, {client}: {client: Client}) {
         return client.get(`/raduneyti/${cabinet}`);
     },
 };

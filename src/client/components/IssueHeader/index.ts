@@ -1,36 +1,52 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql} from 'react-apollo';
+import compose from '../../utils/compose';
+import gql from 'graphql-tag';
 import IssueHeader from './IssueHeader';
-import {Issue as IssueType} from '../../../../@types';
+import {
+    CategorySpeechTime,
+    Issue as IssueType, IssueCount,
+    Person as PersonType,
+    Session as SessionType,
+    VoteSummary as VoteSummaryType
+} from '../../../../@types';
 
 const assemblyQuery = gql`
-    query assemblyIssue($assembly: Int! $issue: Int!) {
-        AssemblyIssue (assembly: $assembly issue: $issue) {
-            id
-            assembly {id}
-            category
-            name
-            subName
-            type
-            typeName
-            typeSubName
-            status
-            question
-            goal
-            date
+    query assemblyIssue($assembly: Int! $issue: Int! $category:  IssueCategory!) {
+        AssemblyIssue (assembly: $assembly issue: $issue category: $category) {
+            __typename
+            ...on IssueInterface {
+                id
+                assembly {id}
+                name
+                type {
+                    category
+                    type
+                    typeName
+                    typeSubName
+                }
+            }
+            ... on IssueA {
+                subName
+                status
+                question
+                goal
+                date
+            }
         }
     }
 `;
 
-export default compose<any>( //@todo `any`
+export default compose(
     graphql(assemblyQuery, {
-        props: (all: {data?: {loading: boolean, AssemblyIssue: IssueType}}) => ({
-            issue: all.data.loading === false ? all.data.AssemblyIssue : undefined,
-            loading: all.data.loading,
+        props: ({data: {loading, AssemblyIssue}}: any) => ({
+            issue: loading === false ? AssemblyIssue : undefined,
+            loading: loading,
         }),
-        options: ({assembly, issue}: {assembly: number, issue: number}) => ({
+        options: ({assembly, issue, category}: any) => ({
             variables: {
-                assembly,
-                issue,
+                assembly: Number(assembly),
+                issue: Number(issue),
+                category,
             },
         }),
     }),

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import * as Markdown from 'react-markdown';
+import Markdown from 'react-markdown';
 import {Speech as SpeechType} from '../../../../@types';
 import './index.scss';
 
 interface SpeechCardProps {
-    speech?: SpeechType;
+    speech: SpeechType;
 }
 
 export default class SpeechCard extends React.Component<SpeechCardProps, {}> {

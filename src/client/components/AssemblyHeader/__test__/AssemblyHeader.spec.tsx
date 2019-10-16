@@ -2,12 +2,16 @@ import * as React from 'react';
 import AssemblyHeader from '../AssemblyHeader';
 import renderer from 'react-test-renderer';
 import {BrowserRouter as Router} from 'react-router-dom';
+import {Assembly} from '../../../../../@types';
 
 describe('<AssemblyHeader />', () => {
     test('default props', () => {
+        const assembly: Assembly = {
+            id: 1,
+        };
         const tree = renderer.create(
             <Router >
-                <AssemblyHeader />
+                <AssemblyHeader assembly={assembly} loading={false} />
             </Router>,
         ).toJSON();
 
@@ -36,7 +40,7 @@ describe('<AssemblyHeader />', () => {
         };
         const tree = renderer.create(
             <Router >
-                <AssemblyHeader assembly={assembly} />
+                <AssemblyHeader assembly={assembly} loading={false} />
             </Router>,
         ).toJSON();
 

@@ -1,5 +1,6 @@
 import Plenary from '../types/Plenary';
 import {GraphQLInt, GraphQLNonNull, GraphQLList} from 'graphql';
+import {Client} from "../../../@types";
 
 export default {
     type: new GraphQLList(Plenary),
@@ -9,7 +10,7 @@ export default {
         },
     },
 
-  resolve(root, {assembly}, {client}) {
+    resolve(root: any, {assembly}: {assembly: number}, {client}: {client: Client}) {
         return client.get(`/loggjafarthing/${assembly}/thingfundir`);
     },
 };

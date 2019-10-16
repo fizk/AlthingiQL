@@ -1,16 +1,18 @@
 import * as React from 'react';
-import Badge from '../Badge';
 import Avatar from '../Avatar';
-import { H3 } from '../Headline';
-import {Person as PersonType, Party as PartyType} from '../../../../@types';
+import classVariations from '../../utils/classVariations';
+import {Person as PersonType, Party as PartyType, Constituency} from '../../../../@types';
 import './index.scss';
+import {ReactNode} from "react";
 
 interface Props {
     congressman: PersonType;
     party?: PartyType;
+    constituency?: Constituency;
+    variations?: string[];
 }
 
-export default class Congressman extends React.Component<Props, {}> {
+export default class Congressman extends React.Component<Props> {
     public static defaultProps = {
         congressman: {
             id: undefined,
@@ -20,29 +22,36 @@ export default class Congressman extends React.Component<Props, {}> {
             },
         },
         party: undefined,
+        constituency: undefined,
+        variations: []
     };
 
-    public render() {
+    public render(): ReactNode {
+
+        const size = (this.props.variations || []).reduce((previous, current) => {
+            if (current === 'md') return 39;
+            if (current === 'lg') return 61;
+            return previous;
+        }, 39);
+
         return (
-            <article className="congressman">
+            <article className={classVariations('congressman', this.props.variations)}>
                 <header className="congressman__avatar">
-                    <Avatar
-                        src={this.props.congressman.avatar.templateSrc}
+                    <Avatar size={size}
+                        src={(this.props.congressman.avatar.templateSrc || '').replace('{size}', `${size}x${size}`)}
                         title={`Ljósmynd af ${this.props.congressman.name}`}
                     />
+                    {this.props.party && (
+                        <div className="congressman__badge"
+                             title={this.props.party.name}
+                             style={{backgroundColor: `#${this.props.party.color}`}} />
+                    )}
                 </header>
-                {this.props.party && (
-                    <div className="congressman__party">
-                        <Badge
-                            title={this.props.party.name}
-                            color={this.props.party.color}
-                        />
-                    </div>
-                )}
+
                 <div className="congressman__body">
-                    <H3 variations={['ellipsis']}>
-                        {this.props.congressman.name}
-                    </H3>
+                    <h3 className="congressman__title">
+                        {this.props.congressman.name} {this.props.constituency && (<span className="congressman__constituency">{this.props.constituency.abbr_short}</span>)}
+                    </h3>
                     {this.props.children}
                 </div>
             </article>

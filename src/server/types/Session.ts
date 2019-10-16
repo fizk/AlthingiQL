@@ -37,7 +37,7 @@ export default new GraphQLObjectType({
             type: Party,
 
             resolve(root, params, {client}) {
-                return client.get(`/thingflokkar/${root.party_id}`).catch(error => undefined);
+                return client.get(`/thingflokkar/${root.party_id}`);
             },
         },
         period: {

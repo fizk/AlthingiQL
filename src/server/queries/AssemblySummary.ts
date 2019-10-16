@@ -1,5 +1,6 @@
 import {GraphQLInt, GraphQLNonNull} from 'graphql';
 import AssemblySummary from '../types/AssemblySummary';
+import {Client} from "../../../@types";
 
 export default {
     type: AssemblySummary,
@@ -9,7 +10,7 @@ export default {
         },
     },
 
-    resolve(root, {assembly}, {client}) {
+    resolve(root: any, {assembly}: {assembly: number}, {client}: {client: Client}) {
         return client.get(`/loggjafarthing/${assembly}/samantekt`);
     },
 };

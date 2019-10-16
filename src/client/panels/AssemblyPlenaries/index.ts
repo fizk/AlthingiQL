@@ -1,4 +1,6 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql} from 'react-apollo';
+import compose from '../../utils/compose';
+import gql from 'graphql-tag';
 import AssemblyPlenaries from './AssemblyPlenaries';
 
 const assemblyIssueQuery = gql`
@@ -15,15 +17,60 @@ const assemblyIssueQuery = gql`
     }
 `;
 
+const queryAssembly = gql`
+    query assembly ($assembly: Int!) {
+        Assembly(assembly: $assembly) {
+            id
+            division {
+                majority {color}
+                minority {color}
+            }
+            cabinet {
+                title
+                period {from to}
+            }
+            period {
+                from
+                to
+            }
+        }
+    }
+`;
+
 export default compose(
+    graphql(queryAssembly, {
+        props: ({data: {loading, error, Assembly}}: any) => ({
+            assemblyProperties: {
+                assembly: loading === false ? Assembly : {
+                    id: undefined,
+                    period: {
+                        from: undefined,
+                        to: undefined,
+                    },
+                    division: [],
+                    cabinet: {
+                        title: undefined,
+                        period: {from: undefined, to: undefined}
+                    }
+                },
+                loading,
+                error,
+            }
+        }),
+        options: ({assembly}: {assembly: number}) => ({
+            variables: {
+                assembly: Number(assembly),
+            },
+        }),
+    }),
     graphql(assemblyIssueQuery, {
-        props: (all: {ownProps: any, data?: {fetchMore: any, loading: boolean, AssemblyPlenaries: any}}) => {
+        props: ({data: {loading, AssemblyPlenaries}}: any) => {
             return {
-                plenaries: all.data.loading === false ? all.data.AssemblyPlenaries : undefined,
-                loading: all.data.loading,
+                plenaries: loading === false ? AssemblyPlenaries : undefined,
+                loading: loading,
             };
         },
-        options: ({assembly}) => ({
+        options: ({assembly}: any) => ({
             variables: {
                 assembly,
             },

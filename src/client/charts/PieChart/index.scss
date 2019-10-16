@@ -1,0 +1,72 @@
+@import "../../config";
+
+.pie-chart {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.pie-chart__arch {
+    //ref
+}
+
+.pie-chart__label {
+    @include shadow($blur: 5px);
+
+    padding: map_get($space, xxs);
+    position: absolute;
+    pointer-events: none;
+    background: white;
+    white-space: nowrap;
+
+}
+
+.pie-chart__path {
+    stroke: white;
+    stroke-width: 1px;
+}
+
+
+.pie-chart__path--unapproved {
+    fill: #bbbbbb;
+}
+.pie-chart__path--approved {
+    fill: #74bb72;
+}
+
+.pie-chart__path--iteration-one {
+    fill: yellow;
+}
+
+.pie-chart__path--iteration-two {
+    fill: orange;
+}
+
+.pie-chart__path--committee-one {
+    fill: #E68787;
+}
+
+.pie-chart__path--committee-two {
+    fill: #E68787;
+}
+
+.pie-chart__path--await-one {
+    fill: #E68787;
+}
+
+.pie-chart__path--await-two {
+    fill: #E68787;
+}
+
+
+
+.pie-chart__path--yellow {fill: #e4e62e;}
+.pie-chart__path--peach {fill: #FFE5B4;}
+.pie-chart__path--orange {fill: #e6762d;}
+.pie-chart__path--light-blue {fill: #93d5e6;}
+.pie-chart__path--blue {fill: #5892e6;}
+.pie-chart__path--red {fill: #e6474c;}
+.pie-chart__path--pink {fill: #e68787;}
+.pie-chart__path--green {fill: #5fb869;}
+.pie-chart__path--light-gray {fill: rgba(72, 70, 59, 0.24);}

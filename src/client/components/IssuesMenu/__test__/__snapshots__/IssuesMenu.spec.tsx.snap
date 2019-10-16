@@ -2,11 +2,9 @@
 
 exports[`<IssuesMenu /> data 1`] = `
 Array [
-  <h3
-    className="headline-2"
-  >
+  <h2>
     Málstegund
-  </h3>,
+  </h2>,
   <ul
     className="issue-menu__issue"
   >
@@ -28,11 +26,9 @@ Array [
       </span>
     </li>
   </ul>,
-  <h3
-    className="headline-2"
-  >
+  <h2>
     Efnisflokkar
-  </h3>,
+  </h2>,
   <ul
     className="issue-menu__category"
   >
@@ -40,7 +36,7 @@ Array [
       className="issue-menu__category-item"
     >
       <a
-        href="/loggjafarthing/1/thingmal?flokkur=undefined"
+        href="/loggjafarthing/1/thingmal?flokkur=2"
         onClick={[Function]}
       >
         title
@@ -59,19 +55,15 @@ Array [
 
 exports[`<IssuesMenu /> default props 1`] = `
 Array [
-  <h3
-    className="headline-2"
-  >
+  <h2>
     Málstegund
-  </h3>,
+  </h2>,
   <ul
     className="issue-menu__issue"
   />,
-  <h3
-    className="headline-2"
-  >
+  <h2>
     Efnisflokkar
-  </h3>,
+  </h2>,
   <ul
     className="issue-menu__category"
   />,

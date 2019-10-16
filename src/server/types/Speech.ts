@@ -1,5 +1,4 @@
 import {GraphQLObjectType, GraphQLInt, GraphQLString} from 'graphql';
-import {GraphQLDateTime} from 'graphql-iso-date';
 import Congressman from './Congressman';
 import PeriodTime from './PeriodTime';
 import Assembly from './Assembly';

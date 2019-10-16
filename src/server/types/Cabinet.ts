@@ -1,8 +1,9 @@
 import {GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString} from 'graphql';
 import Period from './Period';
 import Assembly from './Assembly';
+import {DataSource} from '../../../@types'
 
-export default new GraphQLObjectType({
+const Cabinet: GraphQLObjectType = new GraphQLObjectType<DataSource.Cabinet>({
     name: 'Cabinet',
     fields: () => ({
         id: {
@@ -18,21 +19,14 @@ export default new GraphQLObjectType({
         period: {
             name: 'period',
             type: Period,
-
-            resolve(root) {
-                return {
-                    from: root.from,
-                    to: root.to,
-                };
-            },
+            resolve: ({from, to}) => ({from, to}),
         },
         assemblies: {
             name: 'assemblies',
             type: new GraphQLList(Assembly),
-
-            resolve(root) {
-                return root.assemblies || [];
-            },
+            resolve: ({assemblies}) => (assemblies || []),
         },
     }),
 });
+
+export default Cabinet;

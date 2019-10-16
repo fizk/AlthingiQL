@@ -1,5 +1,14 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql} from 'react-apollo';
+import compose from '../../utils/compose';
+import gql from 'graphql-tag';
 import IssuesMenu from './IssuesMenu';
+import {
+    CategorySpeechTime,
+    Issue as IssueType, IssueCount,
+    Person as PersonType,
+    Session as SessionType,
+    VoteSummary as VoteSummaryType
+} from "../../../../@types";
 // import {AssemblyCategorySummary} from '../../../../@types';
 
 const assemblyQuery = gql`
@@ -10,26 +19,19 @@ const assemblyQuery = gql`
             title
             count
         }
-        AssemblySummary(assembly: $assembly) {
-            types {
-                count
-                type
-                typeName
-                typeSubName
-            }
+        AssemblyIssuesSummary (assembly: $assembly) {
+            types {count type {type typeName category typeSubName}}
         }
     }
 `;
 
-export default compose<any>( //@todo `any`
+
+export default compose(
     graphql(assemblyQuery, {
-        props: (all: {data?: {
-            // loading: boolean, AssemblyCategorySummary: AssemblyCategorySummary, AssemblySummary: any,
-            loading: boolean, AssemblyCategorySummary: any, AssemblySummary: any,
-        }}) => ({ //@todo `any`
-            types: all.data.loading === false ? all.data.AssemblySummary.types : undefined,
-            categories: all.data.loading === false ? all.data.AssemblyCategorySummary : undefined,
-            loading: all.data.loading,
+        props: ({data: {loading, AssemblyIssuesSummary, AssemblyCategorySummary}}: any) => ({ //@todo `any`
+            types: loading === false ? AssemblyIssuesSummary.types : undefined,
+            categories: loading === false ? AssemblyCategorySummary : undefined,
+            loading: loading,
         }),
         options: ({assembly}: {assembly: number}) => ({
             variables: {

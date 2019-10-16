@@ -2,7 +2,6 @@ import * as React from 'react';
 import classVariations from '../../utils/classVariations';
 import SpeechCard from '../SpeechCard';
 import Congressman from '../Congressman';
-import {H4} from '../Headline';
 import {Speech as SpeechType} from '../../../../@types';
 
 interface Props {
@@ -22,16 +21,16 @@ export default class IssueSearchResult extends React.Component<Props, {}> {
 
     public render() {
         const variations = this.props.isSelected
-            ? this.props.variations.concat(['active'])
+            ? (this.props.variations || []).concat(['active'])
             : this.props.variations;
         return (
             <div className={classVariations('options-list__item', variations)}
-                onClick={() => this.props.onSelect(this.props.value)}>
+                onClick={() => this.props.onSelect && this.props.onSelect(this.props.value)}>
                 <SpeechCard speech={this.props.value}>
                     <Congressman
                         congressman={this.props.value.congressman}
                         party={this.props.value.congressman.party}>
-                        <H4>{this.props.value.congressmanType}</H4>
+                        <h4>{this.props.value.congressmanType}</h4>
                     </Congressman>
                 </SpeechCard>
             </div>

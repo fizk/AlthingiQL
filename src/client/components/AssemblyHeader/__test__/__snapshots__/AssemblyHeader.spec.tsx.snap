@@ -7,9 +7,7 @@ exports[`<AssemblyHeader /> data 1`] = `
   <div
     className="assembly-header__headline"
   >
-    <h2
-      className="headline-1"
-    >
+    <h1>
       <a
         href="/loggjafarthing/1"
         onClick={[Function]}
@@ -17,7 +15,7 @@ exports[`<AssemblyHeader /> data 1`] = `
         1
       </a>
       . Löggjafarþing
-    </h2>
+    </h1>
     <time>
       2001-01-01
       2001-01-01
@@ -71,27 +69,16 @@ exports[`<AssemblyHeader /> default props 1`] = `
   <div
     className="assembly-header__headline"
   >
-    <h2
-      className="headline-1"
-    >
+    <h1>
       <a
-        href="/loggjafarthing/undefined"
+        href="/loggjafarthing/1"
         onClick={[Function]}
-      />
+      >
+        1
+      </a>
       . Löggjafarþing
-    </h2>
+    </h1>
     <time />
-    <h4
-      className="headline-3"
-    >
-      <a
-        href="/raduneyti/undefined"
-        onClick={[Function]}
-      />
-      <time />
-       -
-      <time />
-    </h4>
   </div>
   <div
     className="assembly-header__parties"

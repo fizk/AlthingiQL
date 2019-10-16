@@ -4,29 +4,28 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import schema from './schema';
 import {client} from './utils/client';
-import debug from 'debug';
-import {ApolloClient, createNetworkInterface, ApolloProvider, renderToStringWithData} from 'react-apollo';
+import {ApolloClient} from 'apollo-client';
 import {StaticRouter} from 'react-router';
 import 'isomorphic-fetch';
-import {createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import reducers from '../client/reducers';
+// import {createStore, combineReducers, applyMiddleware } from 'redux';
+// import thunk from 'redux-thunk';
+// import reducers from '../client/reducers';
 import Routers from '../client/router';
 import Chrome from '../client/components/Chrome';
 import Helmet from 'react-helmet';
 
-const assetsServer = process.env.ASSETS_SERVER || ''; // 'http://localhost:3001';
+const assetsServer = process.env.ASSETS_SERVER || '';
 
 const app = express();
 const serverConfig = {
     protocol: process.env.SERVER_PROTOCOL || 'http',
     host: process.env.SERVER_HOST || 'localhost',
-    port: process.env.PORT || 3000,
+    port: process.env.SERVER_PORT || 3000,
 };
 const clientConfig = {
-    protocol: process.env.CLIENT_PROTOCOL || 'http',
-    host: process.env.CLIENT_HOST || 'localhost',
-    port: process.env.CLIENT_PORT || 8080,
+    protocol: process.env.API_PROTOCOL || 'http',
+    host: process.env.API_HOST || 'localhost',
+    port: process.env.API_PORT || 8080,
 };
 
 app.use(express.static('public'));
@@ -34,7 +33,7 @@ app.use('/graphql', graphqlHTTP({
     schema,
     graphiql: true,
     context: {
-        client: client(debug('server-log'), clientConfig),
+        client: client(clientConfig),
     },
 }));
 
@@ -45,11 +44,11 @@ app.get('*', (request, response) => {
              <html lang="is">
                  <head>
                      <meta name="viewport" content="width=device-width, initial-scale=1">
-                     <link rel="stylesheet" type="text/css" href="${assetsServer}/stylesheets/application.css" />
+                     <link rel="stylesheet" type="text/css" href="${assetsServer}/app.css" />
                  </head>
                  <body>
                      <div data-react></div>
-                     <script src="${assetsServer}/javascripts/application.js"></script>
+                     <script src="${assetsServer}/bundle.js"></script>
                  </body>
              </html>`);
     response.end();

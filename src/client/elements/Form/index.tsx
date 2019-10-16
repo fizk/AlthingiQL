@@ -8,7 +8,9 @@ import Select from './Select';
 import withKeyBinding from './withKeyBinding';
 import './index.scss';
 
+//@ts-ignore
 const OptionsWithKeyBinding = withKeyBinding(Options);
+//@ts-ignore
 const SelectWithKeyBinding = withKeyBinding(Select);
 
 export {

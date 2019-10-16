@@ -1,4 +1,9 @@
-import * as React from 'react';
+import React, {FunctionComponent} from 'react';
 import './index.scss';
 
-export default ({ children }) => <div className="paper">{children}</div>;
+
+const Paper: FunctionComponent = ({children}) => (
+    <div className="paper">{children}</div>
+);
+
+export default Paper;

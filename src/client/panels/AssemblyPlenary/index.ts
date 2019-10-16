@@ -1,4 +1,6 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql} from 'react-apollo';
+import compose from '../../utils/compose';
+import gql from 'graphql-tag';
 import AssemblyPlenary from './AssemblyPlenary';
 
 const assemblyIssueQuery = gql`
@@ -16,13 +18,11 @@ const assemblyIssueQuery = gql`
             posedId
             answerer
             issue {
-                id
-                category
-                name
-                subName
-                type
-                assembly {
-                    id
+                ... on IssueInterface {
+                    ...issueInterface
+                }
+                ... on IssueA {
+                    ... issueA
                 }
             }
             posedCongressman {
@@ -51,17 +51,84 @@ const assemblyIssueQuery = gql`
             }
         }
     }
+
+    fragment issueInterface on IssueInterface {
+        id
+        name
+        type {type category typeName typeSubName}
+        speechCount
+        speechTime
+        assembly {id}
+    }
+
+    fragment issueA on IssueA {
+        subName
+        status
+        proponents(count: 1) {
+            id
+            name
+            avatar {templateSrc}
+            party {id name color}
+            constituency {id name abbr_short}
+        }
+        proponentsCount
+    }
+`;
+
+const queryAssembly = gql`
+    query assembly ($assembly: Int!) {
+        Assembly(assembly: $assembly) {
+            id
+            division {
+                majority {color}
+                minority {color}
+            }
+            cabinet {
+                title
+                period {from to}
+            }
+            period {
+                from
+                to
+            }
+        }
+    }
 `;
 
 export default compose(
+    graphql(queryAssembly, {
+        props: ({data: {loading, error, Assembly}}: any) => ({
+            assemblyProperties: {
+                assembly: loading === false ? Assembly : {
+                    id: undefined,
+                    period: {
+                        from: undefined,
+                        to: undefined,
+                    },
+                    division: [],
+                    cabinet: {
+                        title: undefined,
+                        period: {from: undefined, to: undefined}
+                    }
+                },
+                loading,
+                error,
+            }
+        }),
+        options: ({assembly}: {assembly: number}) => ({
+            variables: {
+                assembly: Number(assembly),
+            },
+        }),
+    }),
     graphql(assemblyIssueQuery, {
-        props: (all: {ownProps: any, data?: {fetchMore: any, loading: boolean, AssemblyPlenary: any}}) => {
+        props: ({data: {loading, AssemblyPlenary}}: any) => {
             return {
-                plenaryItems: all.data.loading === false ? all.data.AssemblyPlenary : undefined,
-                loading: all.data.loading,
+                plenaryItems: loading === false ? AssemblyPlenary : undefined,
+                loading: loading,
             };
         },
-        options: ({assembly, plenary}) => ({
+        options: ({assembly, plenary}: any) => ({
             variables: {
                 assembly,
                 plenary,

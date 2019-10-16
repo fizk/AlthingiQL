@@ -1,0 +1,155 @@
+@import "../../config";
+@import "../../elements";
+
+.issue {
+    @include shadow;
+    @include rounded;
+    display: flex;
+    flex-direction: column;
+    height: 100%; //@todo remove this...
+    background-color: map_get($color, white);
+    text-decoration: none;
+}
+
+.issue__poster {
+    @include rounded-top;
+    background-color: map_get($color, gray-light-ultra);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+    color: map_get($color, white);
+    text-shadow: 1px 1px 4px map_get($color, black);
+    position: relative;
+}
+
+.issue__poster-titles {
+    position: absolute;
+    padding: map_get($space, md);
+    display: flex;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+.issue__poster-party {
+    @include circle;
+    height: map_get($space, lg);
+    width: map_get($space, lg);
+    align-self: center;
+}
+
+.issue__poster-name {
+    flex-grow: 1;
+    align-self: center;
+    padding: 0 map_get($space, sm);
+    @include ellipsis;
+
+    .issue__type-title {
+        @include ellipsis;
+    }
+}
+
+.issue__poster-count {
+    align-self: center;
+}
+
+.issue__header {
+    padding: 0 map_get($space, md);
+    margin: map_get($space, md) 0;
+    flex-grow: 1;
+
+    .issue__type-subtitle + .issue__type-title {
+        padding-top: map_get($space, md);
+    }
+
+    .issue__type-title + .issue__type-title{
+        padding-top: map_get($space, xs);
+    }
+}
+
+.issue__proponents {
+    padding: 0 map_get($space, md);
+    margin-bottom: map_get($space, md);
+}
+
+.issue__proponent {
+    display: flex;
+    align-items: center;
+    color: map_get($font-color, main);
+}
+
+.issue__proponents-title {
+    @include headline-4;
+}
+
+.issue__footer {
+    padding: 0 map_get($space, md);
+    margin-bottom: map_get($space, md);
+    display: flex;
+    color: map_get($font-color, main);
+
+    .issue__type-status {
+        flex-grow: 1;
+    }
+}
+
+.issue__type-subtitle {
+    @include headline-4;
+}
+
+.issue__type-title {
+    @include headline-3;
+}
+
+.issue__type-status {
+    @include headline-4;
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+.issue-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    grid-gap: map_get($space, lg);
+
+    grid-auto-flow: dense;
+
+    @include breakpoint(md) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.issue-grid--sm {
+    @include breakpoint(md) {
+        grid-template-columns: 1fr;
+    }
+}
+.issue-grid--md {
+    @include breakpoint(md) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+.issue-grid--lg {
+    @include breakpoint(md) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.issue-grid__item {}
+
+.issue-grid__item--sm {
+    grid-row: span 1;
+}
+
+.issue-grid__item--md {
+    grid-row: span 2;
+}
+
+.issue-grid__item--lg {
+    grid-row: span 3;
+}

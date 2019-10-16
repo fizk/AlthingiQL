@@ -1,4 +1,6 @@
-import {graphql, compose, gql} from 'react-apollo';
+import {graphql} from 'react-apollo';
+import compose from '../../utils/compose';
+import gql from 'graphql-tag';
 import Cabinet from './Cabinet';
 
 const cabinetsQuery = gql`
@@ -15,13 +17,32 @@ const cabinetsQuery = gql`
     }
 `;
 
-export default compose<any>( //@todo `any`
-    graphql(cabinetsQuery, {
-        props: (all: {data?: {loading: boolean, Cabinet: any}}) => ({ //@todo `any`
-            cabinet: all.data.loading === false ? all.data.Cabinet : undefined,
-            loading: all.data.loading,
+type Response = {
+    Cabinets: any[];
+    Inflations: any[];
+};
+
+type InputProps = {
+    id: number;
+};
+
+type Variables = {
+    cabinet: number;
+};
+
+interface Props {
+    // loading?: any;
+    // error?: any;
+    cabinet: any;
+}
+
+export default compose(
+    graphql<InputProps, Response, Variables, Props>(cabinetsQuery, {
+        props: ({data: {loading, Cabinet}}: any) => ({ //@todo `any`
+            cabinet: loading === false ? Cabinet : undefined,
+            loading: loading,
         }),
-        options: ({id}: {id: number}) => ({
+        options: ({id}) => ({
             variables: {
                 cabinet: id,
             },

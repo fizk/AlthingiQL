@@ -1,19 +1,18 @@
 import * as React from 'react';
-import {Assembly as AssemblyType, AssemblySummary as AssemblySummaryType} from '../../../../@types';
+import {Assembly as AssemblyType, TypeCount} from '../../../../@types';
 import {StatelessComponent} from 'react';
 import { Link } from 'react-router-dom';
-import {H2} from '../Headline';
 import './index.scss';
 
 interface Props {
     assembly: AssemblyType;
-    summary?: AssemblySummaryType;
+    summary: TypeCount[];
 }
 
 const Component: StatelessComponent<Props> = ({children, assembly, summary}) => (
     <table className="issue-type-summary">
         <caption className="issue-type-summary__caption">
-            <H2>Málstegundir</H2>
+            <h2>Málstegundir</h2>
         </caption>
         <thead className="issue-type-summary__head">
             <tr>
@@ -23,15 +22,15 @@ const Component: StatelessComponent<Props> = ({children, assembly, summary}) => 
             </tr>
         </thead>
         <tbody className="issue-type-summary__body">
-            {summary.types.map(type => (
-                <tr key={`type-${type.type}`}>
+            {summary.map(type => (
+                <tr key={`type-${type.type.type}`}>
                     <td className="issue-type-summary__count">
                         {type.count}
                     </td>
                     {/*<td>{type.typeName}</td>*/}
                     <td className="issue-type-summary__title">
-                        <Link to={`/loggjafarthing/${assembly.id}/thingmal?tegund=${type.type}`}>
-                            {type.typeSubName}
+                        <Link to={`/loggjafarthing/${assembly.id}/thingmal?tegund=${type.type.type}`}>
+                            {type.type.typeSubName || type.type.typeName}
                         </Link>
                     </td>
                 </tr>
@@ -40,7 +39,7 @@ const Component: StatelessComponent<Props> = ({children, assembly, summary}) => 
         <tfoot>
             <tr>
                 <td className="issue-type-summary__count">
-                    {summary.types.reduce((prev, current) => prev + current.count, 0)}
+                    {summary.reduce((prev, current) => prev + current.count, 0)}
                 </td>
                 <td className="issue-type-summary__title" >—</td>
             </tr>

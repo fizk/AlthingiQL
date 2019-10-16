@@ -2,11 +2,11 @@
 
 .nav-tab {
     display: flex;
-    background-color: map_get($color-primary, middle);
+    //background-color: map_get($color-primary, middle);
 }
 
 .nav-tab__item {
-    color: map_get($color, white);
+    color: map_get($color, gray-dark);
     text-decoration: none;
     padding: map_get($space, md);
     border-bottom: 4px solid transparent;

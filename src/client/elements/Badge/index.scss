@@ -1,27 +1,28 @@
+@import "../../config";
+
 .badge {
-    width: 32px;
-    height: 32px;
+    width: map_get($space, xl);
+    height: map_get($space, xl);
     border-radius: 50%;
     display: inline-block;
 }
 
 .badge--xs {
-    width: 8px;
-    height: 8px;
+    width: map_get($space, sm);
+    height: map_get($space, sm);
 }
 
 .badge--sm {
-    width: 16px;
-    height: 16px;
+    width: map_get($space, md);
+    height: map_get($space, md);
 }
 
 .badge--md {
-    width: 32px;
-    height: 32px;
+    width: map_get($space, xl);
+    height: map_get($space, xl);
 }
 
-
 .badge--lg {
-    width: 60px;
-    height: 60px;
+    width: map_get($space, xxl);
+    height: map_get($space, xxl);
 }

@@ -1,7 +1,8 @@
 import * as http from 'http';
 import {RequestOptions} from 'http';
+import {Client, ClientConfig, ClientCursor} from "../../../@types";
 
-export const getPagination = (debug, config) => (url, cursor) => {
+export const getPagination = (config: ClientConfig) => (url: string, cursor?: ClientCursor) => {
     const startTime = process.hrtime();
     const options: RequestOptions = {
         hostname: config.host,
@@ -23,7 +24,7 @@ export const getPagination = (debug, config) => (url, cursor) => {
             Range: `0-`,
         };
     }
-    return new Promise<{data: object, cursor: {from: number, to: number}, done: boolean}>((resolve, reject) => {
+    return new Promise<{data: any; cursor: ClientCursor; done: boolean}>((resolve, reject) => {
         const req = http.request(options, response => {
             if (response.statusCode !== 206) {
                 response.resume();
@@ -31,7 +32,6 @@ export const getPagination = (debug, config) => (url, cursor) => {
                     code: response.statusCode,
                     message: response.statusMessage,
                 };
-                reject(error);
                 // tslint:disable-next-line
                 console.error(JSON.stringify({
                     request: options,
@@ -41,9 +41,10 @@ export const getPagination = (debug, config) => (url, cursor) => {
                     memory: process.memoryUsage(),
                     time: process.hrtime(startTime),
                 }));
+                reject(`${error.code} ${error.message} ${options.path}`);
             } else {
                 const contentRange = String(response.headers['content-range']);
-                const [, , from, to, total] = contentRange.match(/(items )([0-9]*)-([0-9]*)\/([0-9]*)/);
+                const [, , from, to, total] = (contentRange.match(/(items )([0-9]*)-([0-9]*)\/([0-9]*)/) || [null, null, null, null, null]);
                 const size = Number(to) - Number(from);
 
                 const nextCursor = {
@@ -56,6 +57,7 @@ export const getPagination = (debug, config) => (url, cursor) => {
                 response.on('end', () => {
                     try {
                         const data = JSON.parse(body);
+                        //@ts-ignore
                         resolve({data, cursor: nextCursor, done: Number(to) >= Number(total)});
                         // tslint:disable-next-line
                         console.log(JSON.stringify({
@@ -67,7 +69,6 @@ export const getPagination = (debug, config) => (url, cursor) => {
                         }));
                     } catch (error) {
                         response.resume();
-                        reject(error);
                         // tslint:disable-next-line
                         console.error(JSON.stringify({
                             request: options,
@@ -77,12 +78,12 @@ export const getPagination = (debug, config) => (url, cursor) => {
                             memory: process.memoryUsage(),
                             time: process.hrtime(startTime),
                         }));
+                        reject(`${error.name} ${error.message} ${options.path}`);
                     }
                 });
             }
         });
         req.on('error', error => {
-            reject(error);
             // tslint:disable-next-line
             console.error(JSON.stringify({
                 request: options,
@@ -92,12 +93,13 @@ export const getPagination = (debug, config) => (url, cursor) => {
                 memory: process.memoryUsage(),
                 time: process.hrtime(startTime),
             }));
+            reject(`${error.name} ${error.message} ${options.path}`);
         });
         req.end();
     });
 };
 
-export const get = (debug, config) => url => {
+export const get = (config: ClientConfig) => (url: string) => {
     const startTime = process.hrtime();
     const options: RequestOptions = {
         hostname: config.host,
@@ -110,13 +112,13 @@ export const get = (debug, config) => url => {
     };
     return new Promise<object>((resolve, reject) => {
         const req = http.request(options, response => {
-            if (Math.floor(response.statusCode / 100) !== 2) {
+            if (Math.floor((response.statusCode || 0) / 100) !== 2) {
                 response.resume();
                 const error = {
                     code: response.statusCode,
                     message: response.statusMessage,
                 };
-                reject(error);
+
                 // tslint:disable-next-line
                 console.error(JSON.stringify({
                     request: options,
@@ -126,13 +128,13 @@ export const get = (debug, config) => url => {
                     memory: process.memoryUsage(),
                     time: process.hrtime(startTime),
                 }));
+                reject(`${error.code} ${error.message} ${options.path}`);
             } else {
                 let body = '';
                 response.setEncoding('utf8');
                 response.on('data', chunk => body += chunk);
                 response.on('end', () => {
                     try {
-                        resolve(JSON.parse(body));
                         // tslint:disable-next-line
                         console.log(JSON.stringify({
                             request: options,
@@ -141,9 +143,9 @@ export const get = (debug, config) => url => {
                             memory: process.memoryUsage(),
                             time: process.hrtime(startTime),
                         }));
+                        resolve(JSON.parse(body));
                     } catch (error) {
                         response.resume();
-                        reject(error);
                         // tslint:disable-next-line
                         console.error(JSON.stringify({
                             request: options,
@@ -153,12 +155,12 @@ export const get = (debug, config) => url => {
                             memory: process.memoryUsage(),
                             time: process.hrtime(startTime),
                         }));
+                        reject(`${error.name} ${error.message} ${options.path}`);
                     }
                 });
             }
         });
         req.on('error', error => {
-            reject(error);
             // tslint:disable-next-line
             console.error(JSON.stringify({
                 request: options,
@@ -168,12 +170,13 @@ export const get = (debug, config) => url => {
                 memory: process.memoryUsage(),
                 time: process.hrtime(startTime),
             }));
+            reject(`${error.name} ${error.message} ${options.path}`);
         });
         req.end();
     });
 };
 
-export const client = (debug, config) => ({
-    getPagination: getPagination(debug, config),
-    get: get(debug, config),
+export const client = (config: any): Client => ({
+    getPagination: getPagination(config),
+    get: get(config),
 });
