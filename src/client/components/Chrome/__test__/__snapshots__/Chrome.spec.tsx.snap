@@ -2,47 +2,12 @@
 
 exports[`<Chrome /> default props 1`] = `
 <div
-  className="application"
+  className="chrome"
 >
-  <div
-    className="chrome"
+  <footer
+    className="chrome__footer"
   >
-    <header
-      className="chrome__header"
-      role="banner"
-    >
-      <div
-        className="chrome__header-container"
-      >
-        <div
-          className="container-fluid"
-        >
-          <div
-            className="row"
-          >
-            <div
-              className="col"
-            >
-              <nav>
-                <input
-                  aria-label="Aðalleit"
-                  type="search"
-                />
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <main
-      className="chrome__main"
-      role="main"
-    />
-    <footer
-      className="chrome__footer"
-    >
-      @loggjafarthing
-    </footer>
-  </div>
+    @loggjafarthing
+  </footer>
 </div>
 `;

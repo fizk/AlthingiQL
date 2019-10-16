@@ -29,7 +29,7 @@ export default class IssueHeader extends React.Component<Props, {}> {
                     <h3>{(this.props.issue as IssueA).subName}</h3>
                 </div>
                 <div className="issue-header__state">
-                    <h3>{this.props.issue.type.typeName}</h3>
+                    <h3>{this.props.issue.type && this.props.issue.type.typeName}</h3>
                     <h3>{(this.props.issue as IssueA).status}</h3>
                     <time>{this.props.issue.date}</time>
                 </div>

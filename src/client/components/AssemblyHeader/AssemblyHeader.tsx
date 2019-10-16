@@ -42,8 +42,8 @@ export default class AssemblyHeader extends React.Component<Props, {}> {
                         </Link>. Löggjafarþing
                     </h1>
                     <time>
-                        {this.props.assembly.period!.from}
-                        {this.props.assembly.period!.to}
+                        {this.props.assembly.period && this.props.assembly.period!.from}
+                        {this.props.assembly.period && this.props.assembly.period!.to}
                     </time>
                     {this.props.assembly.cabinet && (
                         <h3>
