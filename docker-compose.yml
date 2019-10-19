@@ -1,6 +1,16 @@
 version: '3.4'
 
 services:
+
+    #
+    #   Starts the service without any dependencies in development mode.
+    #
+    #   This is great for development. Either set API_HOST
+    #   to loggjafarthing.einarvalur.co to use production service
+    #
+    #   ...or leave it to use API Service running on your local
+    #   system.
+    #
     run:
         container_name: ql-run
         build:

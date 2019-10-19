@@ -1,4 +1,4 @@
-import {GraphQLInt, GraphQLObjectType} from 'graphql';
+import {GraphQLInt, GraphQLObjectType, GraphQLString} from 'graphql';
 
 export default new GraphQLObjectType({
     name: 'SuperCategory',
@@ -7,5 +7,8 @@ export default new GraphQLObjectType({
             type: GraphQLInt,
             resolve: root => root.super_category_id,
         },
+        title: {
+            type: GraphQLString,
+        }
     },
 });

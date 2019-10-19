@@ -1,5 +1,4 @@
-import {GraphQLObjectType, GraphQLInt, GraphQLList, GraphQLString, GraphQLFloat} from 'graphql';
-import Party from './Party';
+import {GraphQLObjectType, GraphQLInt, GraphQLList} from 'graphql';
 import Category from "./Category";
 import Type from "./Type";
 import StatusValue from "./StatusValue";
@@ -9,13 +8,15 @@ export default new GraphQLObjectType({
     fields: {
         bills: {
             type: new GraphQLList(StatusValue),
+            resolve: ({bills}) => bills || []
         },
         governmentBills: {
             type: new GraphQLList(StatusValue),
-            resolve: ({government_bills}) => government_bills,
+            resolve: ({government_bills}) => government_bills || [],
         },
         proposals: {
             type: new GraphQLList(StatusValue),
+            resolve: ({proposals}) => proposals || []
         },
         types:  {
             type: new GraphQLList(new GraphQLObjectType({
@@ -30,6 +31,7 @@ export default new GraphQLObjectType({
                     }
                 },
             })),
+            resolve: ({types}) => types || [],
         },
         categories: {
             type: new GraphQLList(new GraphQLObjectType({
@@ -43,7 +45,8 @@ export default new GraphQLObjectType({
                         resolve: (root) => ({...root}),
                     }
                 }
-            }))
+            })),
+            resolve: ({categories}) => categories || []
         }
     },
 });

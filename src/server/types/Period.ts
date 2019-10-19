@@ -7,7 +7,6 @@ export default new GraphQLObjectType({
         from: {
             name: 'from',
             type: GraphQLDate,
-
             resolve(root) {
                 return root.from ? new Date(root.from) : null;
             },
@@ -15,7 +14,6 @@ export default new GraphQLObjectType({
         to: {
             name: 'to',
             type: GraphQLDate,
-
             resolve(root) {
                 return root.to ? new Date(root.to) : null;
             },

@@ -245,6 +245,14 @@ export interface CategorySpeechTime {
     time: number,
 }
 
+export interface SuperCategorySpeechTime {
+    superCategory: {
+        id: number,
+        title: string,
+    },
+    time: number,
+}
+
 export interface IssueSummary {
     count: number;
     type: string;
@@ -322,7 +330,7 @@ export interface ClientCursor {
     from: number;
 }
 
-export interface ClientConfig {
+export interface Config {
     host: string;
     port: string | number;
 }

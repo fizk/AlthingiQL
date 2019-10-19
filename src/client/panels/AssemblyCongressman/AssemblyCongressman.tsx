@@ -10,7 +10,7 @@ import {
     Issue as IssueType,
     VoteSummary as VoteSummaryType,
     IssueCount,
-    CategorySpeechTime,
+    SuperCategorySpeechTime,
     Division,
     Cabinet,
     Period,
@@ -32,7 +32,7 @@ interface Props {
     votes?: VoteSummaryType[];
     promotedIssues?: IssueType[];
     issueCount?: IssueCount[];
-    categorySpeechTimes?: CategorySpeechTime[];
+    categorySpeechTimes?: SuperCategorySpeechTime[];
     division: Division;
     cabinet: Cabinet;
     period: Period;
@@ -90,35 +90,6 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
         },
     };
 
-    private chartPersentage(data: VoteSummaryType[]) {
-        const yesNo = data.filter(
-            item => item.vote === 'já' || item.vote === 'nei',
-        );
-        const impartial = data.filter(
-            item => item.vote === 'greiðir ekki atkvæði',
-        );
-        const notPresent = data.filter(
-            item =>
-                item.vote === 'fjarverandi' ||
-                item.vote === 'f: óþekktur kóði' ||
-                item.vote === 'boðaði fjarvist',
-        );
-        return [
-            {
-                vote: 'tók afstöðu',
-                value: yesNo.reduce((a, b) => a + b.count, 0),
-            },
-            {
-                vote: 'greiðir ekki atkvæði',
-                value: impartial.reduce((a, b) => a + b.count, 0),
-            },
-            {
-                vote: 'fjarverandi',
-                value: notPresent.reduce((a, b) => a + b.count, 0),
-            },
-        ];
-    }
-
     public render() {
         return (
             <main className="assembly-congressman-panel">
@@ -147,12 +118,7 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
                             vote: vote.vote,
                         }))}
                     />
-                    <VoteResultPieChart
-                        source={this.chartPersentage(this.props.votes || [])}
-                        formatValue={(value, total) =>
-                            ` ${((value / total) * 100).toFixed(2)}%`
-                        }
-                    />
+
                 </aside>
                 <section className="assembly-congressman-panel__items">
                     <h2>Fyrsti flutingsmadur</h2>
@@ -167,7 +133,7 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
                     </IssueGrid>
                 </section>
                 <section className="assembly-congressman-panel_stats">
-                    <h2>Med-flutingsmadur</h2>
+                    <h2>Flutningsmadur eftir flokkum</h2>
                     <table>
                         <thead>
                         <tr>
@@ -201,7 +167,7 @@ export default class AssemblyCongressman extends React.Component<Props, {}> {
                     <HorizontalChart
                         source={(this.props.categorySpeechTimes || []).map(
                             item => ({
-                                label: item.title,
+                                label: item.superCategory.title,
                                 value: item.time,
                             }),
                         )}

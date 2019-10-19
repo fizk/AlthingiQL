@@ -2,13 +2,6 @@ import {graphql} from 'react-apollo';
 import compose from '../../utils/compose';
 import gql from 'graphql-tag';
 import AssemblyCongressman from './AssemblyCongressman';
-import {
-    CategorySpeechTime,
-    Congressman as CongressmanType, Issue as IssueType, IssueCount,
-    Person as PersonType,
-    Session as SessionType,
-    VoteSummary as VoteSummaryType
-} from "../../../../@types";
 
 const assembliesQuery = gql`
     query congressmanAssemblySessions ($congressman: Int! $assembly: Int!) {
@@ -44,13 +37,10 @@ const assembliesQuery = gql`
             count
         }
         CongressmanAssemblyCategorySpeechTime (assembly: $assembly congressman: $congressman) {
-            category {
-                id
-            }
             superCategory {
                 id
+                title
             }
-            title
             time
         }
     }

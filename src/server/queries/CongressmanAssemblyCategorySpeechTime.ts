@@ -1,9 +1,9 @@
 import {GraphQLInt, GraphQLList, GraphQLNonNull} from 'graphql';
-import CategorySpeechTime from '../types/CategorySpeechTime';
+import SuperCategorySpeechTime from '../types/SuperCategorySpeechTime';
 import {Client} from "../../../@types";
 
 export default {
-    type: new GraphQLList(CategorySpeechTime),
+    type: new GraphQLList(SuperCategorySpeechTime),
     args: {
         congressman: {
             type: new GraphQLNonNull(GraphQLInt),
