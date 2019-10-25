@@ -9,8 +9,6 @@ export default {
             type: new GraphQLNonNull(GraphQLInt),
         },
     },
-
-    // resolve(root: null, {id}: {id: number}, {client}: {client: Client}) {
     resolve(root: null, {id}:  {id: number}, {client}: {client: Client}) {
         return client.get(`/thingmenn/${id}`);
     },

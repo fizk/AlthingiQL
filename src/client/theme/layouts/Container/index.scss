@@ -1,0 +1,33 @@
+.app {
+    display: grid;
+    grid-template-columns: minmax(200px, auto) 1fr 1fr;
+    grid-template-rows: auto 1fr;
+
+    grid-template-areas:
+        'aside header user'
+        'aside main main'
+        'aside footer footer'
+    ;
+
+}
+.app__aside {
+    background-color: var(--color-white);
+    min-height: 100vh;
+    grid-area: aside;
+}
+.app__header {
+    color: var(--font-color-secondary);
+    background-color: var(--primary-color-middle);
+    grid-area: header;
+}
+.app__user {
+    grid-area: user;
+}
+
+.app__main {
+    grid-area: main;
+}
+.app__footer {
+    background-color: var(--primary-color-dark);
+    grid-area: footer;
+}

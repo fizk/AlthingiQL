@@ -1,6 +1,7 @@
 import Congressman from '../types/Congressman';
-import {GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLString} from 'graphql';
+import {GraphQLInt, GraphQLList, GraphQLNonNull} from 'graphql';
 import {Client} from "../../../@types";
+import CongressmanSessionType from "../types/CongressmanSessionType";
 
 export default {
     type: new GraphQLList(Congressman),
@@ -9,13 +10,13 @@ export default {
             type: new GraphQLNonNull(GraphQLInt),
         },
         type: {
-            type: GraphQLString,
+            type: CongressmanSessionType,
         },
     },
 
     resolve(root: any, {assembly, type}: {assembly: number; type: string}, {client}: {client: Client}) {
         const query = (type)
-            ? `?tegund=${type}`
+            ? `?tegund=${encodeURIComponent(type)}`
             : '';
         return client.get(`/loggjafarthing/${assembly}/thingmenn${query}`);
     },

@@ -1,0 +1,92 @@
+
+@font-face {
+    font-family: 'tt-webfont';
+    src: url('/fonts/tt-commons-thin.woff2') format('woff2');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'tt-webfont';
+    src: url('/fonts/tt-commons-regular.woff2') format('woff2');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'tt-webfont';
+    src: url('/fonts/tt-commons-demibold.woff2') format('woff2');
+    font-weight: 500;
+}
+
+:root {
+    --color-white: #FFFFFF;
+    --primary-color-light: #FEF8F3;
+    --primary-color-middle: #F0755B;
+    --primary-color-dark: #228833;
+
+    --primary-color-text: #0a1223;
+
+    --primary-color-default: rgb(176, 176, 176);
+
+    --secondary-color-light: #228833;
+    --secondary-color-middle: #228833;
+    --secondary-color-dark: #228833;
+
+    --secondary-color-text: #FEF8F3;
+
+    --space-s: .64rem;
+    --space-m: 1rem;
+    --space-l: 1.953rem;
+
+    --size-xxs: 0.262rem;
+    --size-xs: 0.41rem;
+    --size-s: 0.64rem;
+    --size-m: 1rem;
+    --size-l: 1.563rem;
+    --size-xl: 2.441rem;
+    --size-xxl: 3.815rem;
+
+    --font-size-s: 0.8rem;
+    --font-size-m: 1rem;
+    --font-size-l: 1.563rem;
+
+    --font-color-primary: var(--primary-color-text);
+    --font-color-shaded: var(--secondary-color-text);
+    --font-color-secondary: var(--secondary-color-text);
+}
+
+html, body {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'tt-webfont', sans-serif;
+    line-height: 1.25;
+    background-color: var(--primary-color-light);
+    font-size: 100%;
+    font-weight: 300;
+    -webkit-text-size-adjust: 100%;
+    font-variant-ligatures: none;
+    -webkit-font-variant-ligatures: none;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    color: var(--primary-color-text);
+}
+
+
+
+
+a,
+a:hover,
+a:visited,
+a:active {
+    //color: #0000ee;
+    text-decoration: inherit;
+}

@@ -5,7 +5,7 @@ import AssemblyCongressmen from './AssemblyCongressmen';
 
 const assemblyCongressmanQuery = gql`
     query ($assembly: Int!) {
-        Congressmen(assembly: $assembly type: "thingmadur") {
+        Congressmen(assembly: $assembly type: mp) {
             id
             name
             avatar {templateSrc}
@@ -18,7 +18,7 @@ const assemblyCongressmanQuery = gql`
                 color
             }
         }
-        Substitutes: Congressmen(assembly: $assembly type: "varamadur") {
+        Substitutes: Congressmen(assembly: $assembly type: substitute) {
             id
             name
             avatar {templateSrc}

@@ -13,16 +13,24 @@ module.exports = ({ config }) => {
         ],
     });
     config.module.rules.push({
-        test: /\.(ts|tsx)$/,
-        use: [
-            {
-                loader: require.resolve('awesome-typescript-loader'),
-            },
-            // Optional
-            // {
-            //     loader: require.resolve('react-docgen-typescript-loader'),
-            // },
-        ],
+        test: /\.tsx?$/,
+        loader: 'babel-loader',
+        query:{
+            "presets": [
+                ["@babel/preset-env", {
+                    targets: {
+                        browsers: ["last 2 versions", "safari >= 7"]
+                    }
+                }],
+                "@babel/preset-react",
+                "@babel/preset-typescript"
+            ],
+            "plugins": [
+                "@babel/proposal-class-properties",
+                "@babel/proposal-object-rest-spread",
+                "transform-es2015-modules-commonjs",
+            ]
+        }
     });
     config.resolve.extensions.push('.ts', '.tsx');
     return config;

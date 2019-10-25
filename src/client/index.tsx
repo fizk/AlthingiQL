@@ -4,6 +4,7 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import {ApolloProvider} from 'react-apollo';
 import {ApolloClient} from 'apollo-client';
 import Routers from './router';
+import AppRouter from './theme/routes';
 import {IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {HttpLink} from 'apollo-link-http';
@@ -20,9 +21,15 @@ const client = new ApolloClient({
 
 ReactDOM.hydrate(
     <ApolloProvider client={client}>
-        <Router>
-            <Routers/>
-        </Router>
+        <AppRouter />
     </ApolloProvider>,
     document.querySelector('[data-react]'),
 );
+// ReactDOM.hydrate(
+//     <ApolloProvider client={client}>
+//         <Router>
+//             <Routers/>
+//         </Router>
+//     </ApolloProvider>,
+//     document.querySelector('[data-react]'),
+// );

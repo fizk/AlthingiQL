@@ -1,0 +1,270 @@
+import React from 'react';
+import {Link} from "react-router-dom";
+import {Aside, Main} from "../../layouts/Container";
+import {
+    Assembly,
+    CategoryCount, CongressmanValue,
+    Inflation, IssueValue, PartyTime,
+    ServerFetchStatus,
+    StatusCount,
+    TypeCount
+} from "../../../../../@types";
+
+interface Props {
+    assembly: number;
+    assemblies: ServerFetchStatus & {
+        assemblies: Assembly[];
+    };
+    issueStatistics: ServerFetchStatus & {
+        bills: StatusCount[];
+        governmentBills: StatusCount[];
+        proposals: StatusCount[];
+        types: TypeCount[];
+        categories: CategoryCount[];
+    };
+    inflation: ServerFetchStatus & {
+        inflation: Inflation[];
+    };
+    congressmenPerformance: ServerFetchStatus & {
+        bills: CongressmanValue[];
+        questions: CongressmanValue[];
+        resolutions: CongressmanValue[];
+        speeches: CongressmanValue[];
+    };
+    speechTimes: ServerFetchStatus & {
+        parties: PartyTime[];
+    };
+    issueTimes: ServerFetchStatus & {
+        issues: IssueValue[];
+    };
+}
+
+interface State {}
+
+export default class AssemblySummaryPage extends React.Component<Props, State> {
+    render(): React.ReactNode {
+        return (
+            <>
+                <Main>
+                    {!this.props.issueStatistics.error && this.props.issueStatistics.loading === false && (
+                        <>
+                            <h3>Government Bills</h3>
+                            <table>
+                                <tbody>
+                                {this.props.issueStatistics.governmentBills.map(bill => (
+                                    <tr>
+                                        <td>{bill.count}</td>
+                                        <td>{bill.status}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                            <h3>Bills</h3>
+                            <table>
+                                <tbody>
+                                {this.props.issueStatistics.bills.map(bill => (
+                                    <tr>
+                                        <td>{bill.count}</td>
+                                        <td>{bill.status}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                            <h3>Proposals</h3>
+                            <table>
+                                <tbody>
+                                {this.props.issueStatistics.proposals.map(proposals => (
+                                    <tr>
+                                        <td>{proposals.count}</td>
+                                        <td>{proposals.status}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                            <h3>types</h3>
+                            <table>
+                                <tbody>
+                                {this.props.issueStatistics.types.map(types => (
+                                    <tr>
+                                        <td>{types.count}</td>
+                                        <td>{types.type.type}</td>
+                                        <td>
+                                            <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?tegund=${types.type.type}`}>
+                                                {types.type.typeSubName || types.type.typeName}
+                                            </Link>
+                                        </td>
+                                        <td>{}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                            <h3>categories</h3>
+                            <table>
+                                <tbody>
+                                {this.props.issueStatistics.categories.map(category => (
+                                    <tr>
+                                        <td>{category.count}</td>
+                                        <td>
+                                            <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?fmalalokkur=${category.category.id}`}>{category.category.title}</Link>
+                                        </td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                        </>
+                    )}
+                    {!this.props.issueStatistics.error && this.props.issueStatistics.loading === true && (
+                        <div>Loading...</div>
+                    )}
+                    {this.props.issueStatistics.error && (
+                        <div>Error...</div>
+                    )}
+
+                    {!this.props.inflation.error && this.props.inflation.loading === false && (
+                        <>
+                            <h3>Inflation</h3>
+                            <table>
+                                <thead>
+                                {this.props.inflation.inflation.map(item => (
+                                    <tr>
+                                        <td>{item.date}</td>
+                                        <td>{item.value}</td>
+                                    </tr>
+                                ))}
+                                </thead>
+                            </table>
+                        </>
+                    )}
+                    {!this.props.inflation.error && this.props.inflation.loading === true && (
+                        <div>Loading...</div>
+                    )}
+                    {this.props.inflation.error && (
+                        <div>Error...</div>
+                    )}
+
+                    {!this.props.congressmenPerformance.error && this.props.congressmenPerformance.loading === false && (
+                        <>
+                            <h3>Congressman performance | Bills</h3>
+                            <ul>
+                                {this.props.congressmenPerformance.bills.map(congressman => (
+                                    <li>
+                                        {congressman.value} |
+                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>{congressman.congressman.name}</Link>
+                                        {congressman.congressman.party.name} |
+                                        {congressman.congressman.constituency && congressman.congressman.constituency.name}
+                                    </li>
+
+                                ))}
+                            </ul>
+                            <h3>Congressman performance | Questions</h3>
+                            <ul>
+                                {this.props.congressmenPerformance.questions.map(congressman => (
+                                    <li>
+                                        {congressman.value} |
+                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>{congressman.congressman.name}</Link>
+                                        {congressman.congressman.party.name} |
+                                        {congressman.congressman.constituency && congressman.congressman.constituency.name}
+                                    </li>
+
+                                ))}
+                            </ul>
+                            <h3>Congressman performance | Resolutions</h3>
+                            <ul>
+                                {this.props.congressmenPerformance.resolutions.map(congressman => (
+                                    <li>
+                                        {congressman.value} |
+                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>{congressman.congressman.name}</Link>
+                                        {congressman.congressman.party.name} |
+                                        {congressman.congressman.constituency && congressman.congressman.constituency.name}
+                                    </li>
+
+                                ))}
+                            </ul>
+                            <h3>Congressman performance | Speeches</h3>
+                            <ul>
+                                {this.props.congressmenPerformance.speeches.map(congressman => (
+                                    <li>
+                                        {congressman.value} |
+                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>{congressman.congressman.name}</Link>
+                                        {congressman.congressman.party.name} |
+                                        {congressman.congressman.constituency && congressman.congressman.constituency.name}
+                                    </li>
+
+                                ))}
+                            </ul>
+                        </>
+                    )}
+                    {!this.props.congressmenPerformance.error && this.props.congressmenPerformance.loading == true && (
+                        <div>Loading...</div>
+                    )}
+                    {this.props.congressmenPerformance.error && (
+                        <div>Error...</div>
+                    )}
+
+                    {!this.props.speechTimes.error && this.props.speechTimes.loading === false && (
+                        <>
+                            <h3>Party times</h3>
+                            <ul>
+                              {this.props.speechTimes.parties.map(party => (
+                                  <li>
+                                      {party.time} |
+                                      <Link to={`/loggjafarthing/${this.props.assembly}/thingflokkar/${party.party.id}`}>{party.party.name}</Link>
+                                  </li>
+                              ))}
+                            </ul>
+                        </>
+                    )}
+                    {!this.props.speechTimes.error && this.props.speechTimes.loading === true && (
+                        <div>Loading...</div>
+                    )}
+                    {this.props.speechTimes.error && (
+                        <div>Error...</div>
+                    )}
+
+                    {!this.props.issueTimes.error && this.props.issueTimes.loading === false && (
+                        <>
+                            <h3>Issues speech time</h3>
+                            <ul>
+                                {this.props.issueTimes.issues.map(issue => (
+                                    <li>
+                                        {issue.value}
+                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmal/${issue.issue.type.category}/${issue.issue.id}`}>{issue.issue.name}</Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    )}
+                    {!this.props.issueTimes.error && this.props.issueTimes.loading === true && (
+                        <div>Loading...</div>
+                    )}
+                    {this.props.issueTimes.error && (
+                        <div>Error...</div>
+                    )}
+                </Main>
+
+                <Aside>
+                    {!this.props.assemblies.error && this.props.assemblies.loading === false && (
+                        <>
+                            <h3>Assemblies</h3>
+                            <ul>
+                                {this.props.assemblies.assemblies.map(assembly => (
+                                    <li>
+                                        <Link to={`/loggjafarthing/${assembly.id}`}>
+                                            {assembly.id} Loggjafarthing
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    )}
+                    {!this.props.assemblies.error && this.props.assemblies.loading === true && (
+                        <div>Loading...</div>
+                    )}
+                    {this.props.assemblies.error && (
+                        <div>Error...</div>
+                    )}
+                </Aside>
+            </>
+        )
+    }
+}

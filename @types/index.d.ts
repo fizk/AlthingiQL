@@ -39,7 +39,7 @@ export interface PartyTime {
 
 export interface Category {
     id: number,
-    description: string,
+    description: string | null,
     superId: number,
     title: string;
 }
@@ -77,7 +77,7 @@ export interface IssueCount {
 
 export interface IssueA extends IssueType {
     subName: string;
-    status: string;
+    status: string | null;
     question: string;
     goal: string;
     majorChanges: string;
@@ -101,7 +101,7 @@ export interface Type {
     type:  string;//'n' | 'b' | 'l' | 'm' | 'q' | 's' | 'v' | 'a' | 'f' | /**/ 'ff' | 'ft' | 'um' | 'ud' | 'uu';
     category: string;//'a' | 'b'
     typeName: string
-    typeSubName: string
+    typeSubName: string | null
 }
 
 export interface TypeCount {
@@ -245,6 +245,14 @@ export interface CategorySpeechTime {
     time: number,
 }
 
+export interface SuperCategorySpeechTime {
+    superCategory: {
+        id: number,
+        title: string,
+    },
+    time: number,
+}
+
 export interface IssueSummary {
     count: number;
     type: string;
@@ -285,7 +293,7 @@ export interface VoteResult {
 
 export interface StatusCount {
     count: number,
-    status: string
+    status: string | null
 }
 
 export interface ServerFetchStatus {
@@ -322,7 +330,7 @@ export interface ClientCursor {
     from: number;
 }
 
-export interface ClientConfig {
+export interface Config {
     host: string;
     port: string | number;
 }
@@ -451,7 +459,7 @@ export declare namespace DataSource {
         category_id: number;
         super_category_id: number;
         title: string;
-        description: string;
+        description: string | null;
     }
 
     export interface SuperCategory {
@@ -459,6 +467,8 @@ export declare namespace DataSource {
         title: string;
     }
 }
+
+export type CategoryType = 'a' | 'b' | 'A' | 'B';
 
 declare global {
     interface Window {
