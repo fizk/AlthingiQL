@@ -1,5 +1,4 @@
 import React from 'react';
-import {Main} from "../../layouts/Container";
 import {PlenaryItem, ServerFetchStatus} from "../../../../../@types";
 import {Link} from "react-router-dom";
 
@@ -11,10 +10,7 @@ interface Props {
     };
 }
 
-interface State {
-}
-
-export default class AssemblyPlenaryPanel extends React.Component<Props, State> {
+export default class AssemblyPlenaryPanel extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
@@ -22,7 +18,7 @@ export default class AssemblyPlenaryPanel extends React.Component<Props, State> 
                     <>
                         <ul>
                             {this.props.agenda.items.map(item => (
-                                <li>
+                                <li key={item.id}>
                                     <h3>Issue</h3>
                                     <Link to={`/loggjafarthing/${item.assembly.id}/thingmal/${item.issue.type.category}/${item.issue.id}`}>
                                         {item.issue.id} | {item.issue.name}

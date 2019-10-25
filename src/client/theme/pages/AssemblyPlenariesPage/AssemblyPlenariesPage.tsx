@@ -1,6 +1,5 @@
 import React from 'react';
 import {Aside, Main} from "../../layouts/Container";
-import Congressman from "../../components/Congressman";
 import {Plenary, ServerFetchStatus} from "../../../../../@types";
 import {Link} from "react-router-dom";
 
@@ -11,10 +10,7 @@ interface Props {
     };
 }
 
-interface State {
-}
-
-export default class AssemblyPlenariesPage extends React.Component<Props, State> {
+export default class AssemblyPlenariesPage extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
@@ -23,7 +19,7 @@ export default class AssemblyPlenariesPage extends React.Component<Props, State>
                     {!this.props.plenaries.error && this.props.plenaries.loading === false && (
                         <ul>
                             {this.props.plenaries.plenaries.map(plenary => (
-                                <li>
+                                <li key={plenary.id}>
                                     <div><Link to={`/loggjafarthing/${this.props.assembly}/thingfundir/${plenary.id}`}>{plenary.name}</Link></div>
                                     <time>{plenary.from} - {plenary.from}</time>
                                 </li>

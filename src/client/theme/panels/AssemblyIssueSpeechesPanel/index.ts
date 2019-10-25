@@ -34,6 +34,7 @@ const issueSpeechesQuery = gql`
 
 export default compose(
     graphql(issueSpeechesQuery, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({ownProps, data: {error, loading, fetchMore, IssueSpeeches}}: any) => {
             return {
                 speeches: {
@@ -42,6 +43,7 @@ export default compose(
                     speeches: loading === false ? IssueSpeeches.speeches : [],
                     done: loading === false ? IssueSpeeches.done : false,
                 },
+                // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
                 pagination: () => {
                     return fetchMore({
                         query: issueSpeechesQuery,
@@ -54,6 +56,7 @@ export default compose(
                                 to: IssueSpeeches.cursor.to,
                             },
                         },
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         updateQuery: (previousResult: any, {fetchMoreResult}: any) => {
                             return {
                                 IssueSpeeches: {
@@ -71,7 +74,7 @@ export default compose(
                 },
             }
         },
-        options: ({issue, assembly, speech, category}: any) => {
+        options: ({issue, assembly, speech, category}: {issue: number; assembly: number; speech: string; category: string}) => {
             return {
                 variables: {
                     issue,

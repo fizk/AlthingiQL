@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AssemblyHeader /> default props 1`] = `
+<div
+  className="assembly-header"
+>
+  <h2
+    className="assembly-header__title"
+  >
+    1
+    . Löggjafarþing
+  </h2>
+  <h3
+    className="assembly-header__sub-title"
+  >
+    
+  </h3>
+  <nav
+    className="menu__nav"
+  >
+    <ul
+      className="menu__menu"
+    >
+      <li
+        className="menu__menu-item"
+      >
+        <a
+          aria-current={null}
+          className="menu__menu-link"
+          href="/loggjafarthing/1"
+          onClick={[Function]}
+        >
+          Samantekt
+        </a>
+      </li>
+      <li
+        className="menu__menu-item"
+      >
+        <a
+          aria-current={null}
+          className="menu__menu-link"
+          href="/loggjafarthing/1/thingmal"
+          onClick={[Function]}
+        >
+          Þingmál
+        </a>
+      </li>
+      <li
+        className="menu__menu-item"
+      >
+        <a
+          aria-current={null}
+          className="menu__menu-link"
+          href="/loggjafarthing/1/thingfundir"
+          onClick={[Function]}
+        >
+          Þingfundir
+        </a>
+      </li>
+      <li
+        className="menu__menu-item"
+      >
+        <a
+          aria-current={null}
+          className="menu__menu-link"
+          href="/loggjafarthing/1/thingmenn"
+          onClick={[Function]}
+        >
+          Þingmenn
+        </a>
+      </li>
+      <li
+        className="menu__menu-item"
+      >
+        <a
+          aria-current={null}
+          className="menu__menu-link"
+          href="/loggjafarthing/1/thingflokkar"
+          onClick={[Function]}
+        >
+          Þingflokkar
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

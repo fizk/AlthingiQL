@@ -1,14 +1,10 @@
 import React from 'react';
-import {Main} from "../../layouts/Container";
 
 interface Props {
     assembly: number;
 }
 
-interface State {
-}
-
-export default class AssemblyPlenariesPanel extends React.Component<Props, State> {
+export default class AssemblyPlenariesPanel extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>

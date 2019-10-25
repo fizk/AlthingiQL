@@ -113,6 +113,7 @@ const queryAssemblyIssuesSpeechDuration = gql`
 
 export default compose(
     graphql(queryAssemblies, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, Assemblies}}: any) => {
             return {assemblies: {
                 error,
@@ -122,6 +123,7 @@ export default compose(
         }
     }),
     graphql(queryAssemblyIssuesSummary, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, AssemblyIssuesSummary}}: any) => {
             return {issueStatistics: {
                 error,
@@ -140,6 +142,7 @@ export default compose(
         }),
     }),
     graphql(queryAssemblyInflation, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, Inflation}}: any) => {
             return {inflation: {
                 inflation: loading === false ? Inflation : [],
@@ -154,6 +157,7 @@ export default compose(
         }),
     }),
     graphql(queryCongressmenPerformance, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, CongressmenAssemblyBills, CongressmenAssemblyQuestions, CongressmenAssemblyResolutions, CongressmenAssemblySpeechTime}}: any) => {
             return {
                 congressmenPerformance: {
@@ -173,6 +177,7 @@ export default compose(
         }),
     }),
     graphql(queryAssemblyPartySpeechTimes, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, AssemblySummary}}: any) => {
             return {
                 speechTimes: {
@@ -189,6 +194,7 @@ export default compose(
         }),
     }),
     graphql(queryAssemblyIssuesSpeechDuration, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, AssemblyIssuesSpeechDuration}}: any) => {
             return {
                 issueTimes: {

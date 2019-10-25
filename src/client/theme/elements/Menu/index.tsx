@@ -2,13 +2,7 @@ import React, {FunctionComponent} from 'react';
 import {NavLink, NavLinkProps} from "react-router-dom";
 import './index.scss';
 
-interface Props {
-}
-
-interface State {
-}
-
-export default class Class extends React.Component<Props, State> {
+export default class Class extends React.Component {
     render(): React.ReactNode {
         return (
             <nav className="menu__nav">

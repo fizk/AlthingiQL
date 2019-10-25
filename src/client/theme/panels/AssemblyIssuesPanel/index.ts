@@ -48,6 +48,7 @@ const assemblyIssueQuery = gql`
 
 export default compose(
     graphql(assemblyIssueQuery, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({ownProps, data: {fetchMore, error, loading, AssemblyIssues}}: any) => {
             return {
                 issues: {
@@ -56,6 +57,7 @@ export default compose(
                     issues: loading === false ? AssemblyIssues.issues : undefined,
                     done: loading === false ? AssemblyIssues.done : true,
                 },
+                // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
                 pagination: () => {
                     return fetchMore({
                         query: assemblyIssueQuery,
@@ -68,6 +70,7 @@ export default compose(
                                 to: AssemblyIssues.cursor.to,
                             },
                         },
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         updateQuery: (previousResult: any, { fetchMoreResult }: any) => {
                             return {
                                 AssemblyIssues: {
@@ -90,7 +93,7 @@ export default compose(
             variables: {
                 assembly,
                 filter,
-                types: filter.has('tegund') ? filter.get('tegund')!.split(',') : null,
+                types: filter.has('tegund') ? (filter.get('tegund') || '').split(',') : null,
             },
         }),
     })

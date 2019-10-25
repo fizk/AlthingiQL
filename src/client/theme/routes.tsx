@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FunctionComponent} from 'react';
-import {BrowserRouter as Router, Link, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import {Footer, Header, User} from "./layouts/Container";
 import AssemblyHeader from "./components/AssemblyHeader";
 
@@ -25,41 +25,41 @@ import './global.scss';
 
 const Routes: FunctionComponent<{}> = () => (
     <Router>
-        <Route path="/loggjafarthing/:assembly" render={({match}) => (
+        <Route path="/loggjafarthing/:assembly" render={({match}): React.ReactNode => (
             <div className="app">
                 <Header>
                     <AssemblyHeader id={match.params.assembly} title="Ráðuneyti Katrínar Jakobsdóttur"/>
                 </Header>
                 <User>avatar and search</User>
 
-                <Route exact path="/loggjafarthing/:assembly" render={() => (
+                <Route exact path="/loggjafarthing/:assembly" render={(): React.ReactNode => (
                     <AssemblySummaryPage assembly={Number(match.params.assembly)} />
                 )} />
 
-                <Route path="/loggjafarthing/:assembly/thingmal" render={({match, location}) => (
+                <Route path="/loggjafarthing/:assembly/thingmal" render={({match, location}): React.ReactNode => (
                     <>
                     <AssemblyIssuesPage assembly={Number(match.params.assembly)}
                                         filter={new URLSearchParams(location.search)}>
-                        <Route exact path="/loggjafarthing/:assembly/thingmal" render={() => (
+                        <Route exact path="/loggjafarthing/:assembly/thingmal" render={(): React.ReactNode => (
                             <AssemblyIssuesPanel assembly={Number(match.params.assembly)}
                                     filter={new URLSearchParams(location.search)}/>
                         )} />
-                        <Route path="/loggjafarthing/:assembly/thingmal/:category/:issue" render={({match}) => (
+                        <Route path="/loggjafarthing/:assembly/thingmal/:category/:issue" render={({match}): React.ReactNode => (
                             <>
                             <AssemblyIssuePanel assembly={Number(match.params.assembly)}
                                                 issue={Number(match.params.issue)}
                                                 category={match.params.category}>
-                                <Route exact path="/loggjafarthing/:assembly/thingmal/:category/:issue" render={() => (
+                                <Route exact path="/loggjafarthing/:assembly/thingmal/:category/:issue" render={(): React.ReactNode => (
                                     <AssemblyIssueSummaryPanel assembly={Number(match.params.assembly)}
                                                                issue={Number(match.params.issue)}
                                                                category={match.params.category}/>
                                 )} />
-                                <Route path="/loggjafarthing/:assembly/thingmal/:category/:issue/thingskjol" render={() => (
+                                <Route path="/loggjafarthing/:assembly/thingmal/:category/:issue/thingskjol" render={(): React.ReactNode => (
                                     <AssemblyIssueDocumentsPanel assembly={Number(match.params.assembly)}
                                                                  issue={Number(match.params.issue)}
                                                                  category={match.params.category}/>
                                 )} />
-                                <Route path="/loggjafarthing/:assembly/thingmal/:category/:issue/raedur" render={() => (
+                                <Route path="/loggjafarthing/:assembly/thingmal/:category/:issue/raedur" render={(): React.ReactNode => (
                                     <AssemblyIssueSpeechesPanel assembly={Number(match.params.assembly)}
                                                                 issue={Number(match.params.issue)}
                                                                 category={match.params.category}/>
@@ -72,36 +72,36 @@ const Routes: FunctionComponent<{}> = () => (
                     </>
                 )} />
 
-                <Route path="/loggjafarthing/:assembly/thingfundir" render={() => (
+                <Route path="/loggjafarthing/:assembly/thingfundir" render={(): React.ReactNode => (
                     <AssemblyPlenariesPage assembly={Number(match.params.assembly)}>
-                        <Route exact path="/loggjafarthing/:assembly/thingfundir" render={() => (
+                        <Route exact path="/loggjafarthing/:assembly/thingfundir" render={(): React.ReactNode => (
                             <AssemblyPlenariesPanel assembly={Number(match.params.assembly)} />
                         )} />
-                        <Route exact path="/loggjafarthing/:assembly/thingfundir/:plenary" render={({match}) => (
+                        <Route exact path="/loggjafarthing/:assembly/thingfundir/:plenary" render={({match}): React.ReactNode => (
                             <AssemblyPlenaryPanel assembly={Number(match.params.assembly)}
                                                   plenary={Number(match.params.plenary)} />
                         )} />
                     </AssemblyPlenariesPage>
                 )} />
 
-                <Route path="/loggjafarthing/:assembly/thingmenn" render={() => (
+                <Route path="/loggjafarthing/:assembly/thingmenn" render={(): React.ReactNode => (
                     <AssemblyCongressmenPage assembly={Number(match.params.assembly)}>
-                        <Route exact path="/loggjafarthing/:assembly/thingmenn" render={() => (
+                        <Route exact path="/loggjafarthing/:assembly/thingmenn" render={(): React.ReactNode => (
                             <AssemblyCongressmenPanel assembly={Number(match.params.assembly)} />
                         )} />
-                        <Route exact path="/loggjafarthing/:assembly/thingmenn/:congressman" render={({match}) => (
+                        <Route exact path="/loggjafarthing/:assembly/thingmenn/:congressman" render={({match}): React.ReactNode => (
                             <AssemblyCongressmanPanel assembly={Number(match.params.assembly)}
                                                       congressman={Number(match.params.congressman)} />
                         )} />
                     </AssemblyCongressmenPage>
                 )} />
 
-                <Route path="/loggjafarthing/:assembly/thingflokkar" render={() => (
+                <Route path="/loggjafarthing/:assembly/thingflokkar" render={(): React.ReactNode => (
                     <AssemblyPartiesPage assembly={Number(match.params.assembly)}>
-                        <Route exact path="/loggjafarthing/:assembly/thingflokkar" render={() => (
+                        <Route exact path="/loggjafarthing/:assembly/thingflokkar" render={(): React.ReactNode => (
                             <AssemblyPartiesPanel assembly={Number(match.params.assembly)} />
                         )} />
-                        <Route exact path="/loggjafarthing/:assembly/thingflokkar/:party" render={({match}) => (
+                        <Route exact path="/loggjafarthing/:assembly/thingflokkar/:party" render={({match}): React.ReactNode => (
                             <AssemblyPartyPanel assembly={Number(match.params.assembly)}
                                                 party={Number(match.params.party)} />
                         )} />

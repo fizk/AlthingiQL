@@ -38,6 +38,7 @@ const assemblyCongressmanQuery = gql`
 
 export default compose(
     graphql(assemblyCongressmanQuery, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, Congressmen, Substitutes}}: any) => {
             return {congressmen: {
                 error,

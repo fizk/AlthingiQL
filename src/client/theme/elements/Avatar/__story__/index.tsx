@@ -4,7 +4,7 @@ import { withKnobs, select, number} from '@storybook/addon-knobs';
 import Avatar from '..';
 import '../../../layouts/Container/global.scss';
 
-const stories = storiesOf('Avatar', module);
+const stories = storiesOf('Elements/Avatar', module);
 stories.addDecorator(withKnobs);
 
 stories.add('Sizes', () => {

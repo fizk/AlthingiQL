@@ -11,23 +11,19 @@ interface Props {
     };
 }
 
-interface State {
-}
-
-export default class AssemblyIssueDocumentsPanel extends React.Component<Props, State> {
+export default class AssemblyIssueDocumentsPanel extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
                 {!this.props.documents.error && this.props.documents.loading === false && (
                     <ul>
                         {this.props.documents.documents.map(document => (
-                            <li>
-
+                            <li key={document.id}>
                                 {document.date} <Link to={`/loggjafarthing/${this.props.assembly}/thingmal/a/${this.props.issue}/thingskjol/${document.id}`}>{document.type}</Link>
-                                 - <a href={document.url} rel="noopener" target="_blank">URL</a>
+                                 - <a href={document.url} rel="noopener noreferrer" target="_blank">URL</a>
                                 <ul>
                                 {document.proponents.map(congressman => (
-                                    <li>
+                                    <li key={congressman.id}>
                                         <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>{congressman.name}</Link>
                                         {congressman.party.name} | {congressman.constituency && congressman.constituency.name}
                                     </li>
@@ -35,7 +31,7 @@ export default class AssemblyIssueDocumentsPanel extends React.Component<Props, 
                                 </ul>
                                 <ul>
                                 {document.votes.map(vote => (
-                                    <li>
+                                    <li key={vote.id}>
                                         {vote.type} - {vote.date} - {vote.method} - <em>{vote.outcome}</em>
                                         <dl>
                                             <dt>yes</dt>

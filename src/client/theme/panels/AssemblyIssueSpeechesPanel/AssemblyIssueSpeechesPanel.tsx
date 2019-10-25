@@ -14,10 +14,7 @@ interface Props {
     pagination: () => void;
 }
 
-interface State {
-}
-
-export default class AssemblyIssueSpeechesPanel extends React.Component<Props, State> {
+export default class AssemblyIssueSpeechesPanel extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
@@ -25,7 +22,7 @@ export default class AssemblyIssueSpeechesPanel extends React.Component<Props, S
                     <>
                         <ul>
                             {this.props.speeches.speeches.map(speech => (
-                                <ul>
+                                <li key={speech.id}>
                                     <p>
                                         {speech.period.from} {speech.period.to}
                                     </p>
@@ -45,7 +42,7 @@ export default class AssemblyIssueSpeechesPanel extends React.Component<Props, S
                                     <Markdown
                                         source={speech.text || ''}
                                     />
-                                </ul>
+                                </li>
                             ))}
                         </ul>
                         {!this.props.speeches.done && (

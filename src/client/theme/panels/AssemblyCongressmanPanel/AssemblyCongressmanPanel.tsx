@@ -29,10 +29,7 @@ interface Props {
     };
 }
 
-interface State {
-}
-
-export default class AssemblyCongressmanPanel extends React.Component<Props, State> {
+export default class AssemblyCongressmanPanel extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
@@ -58,8 +55,8 @@ export default class AssemblyCongressmanPanel extends React.Component<Props, Sta
                             </tr>
                             </thead>
                             <tbody>
-                            {this.props.issues.speeches.map(category => (
-                                <tr>
+                            {this.props.issues.speeches.map((category, i) => (
+                                <tr key={i}>
                                     <td>{category.time}</td>
                                     <td>{category.superCategory.title}</td>
                                 </tr>
@@ -81,7 +78,7 @@ export default class AssemblyCongressmanPanel extends React.Component<Props, Sta
                             </thead>
                             <tbody>
                                 {this.props.issues.types.map(issue => (
-                                    <tr>
+                                    <tr key={issue.type}>
                                         <td>{issue.count}</td>
                                         <td>{issue.documentType}</td>
                                         <td>{issue.order}</td>
@@ -96,7 +93,7 @@ export default class AssemblyCongressmanPanel extends React.Component<Props, Sta
                         <h3>Promoted issues</h3>
                         <ul>
                         {this.props.issues.promotions.map(issue => (
-                            <li>
+                            <li key={issue.id}>
                                 {issue.id} <Link to={`/loggjafarthing/${this.props.assembly}/thingmal/${issue.type.category}/${issue.id}`}>{issue.name}</Link>
                             </li>
                         ))}
@@ -124,7 +121,7 @@ export default class AssemblyCongressmanPanel extends React.Component<Props, Sta
                             </thead>
                             <tbody>
                             {this.props.sessions.sessions.map(session => (
-                                <tr>
+                                <tr key={session.id}>
                                     <td>{session.period.from}</td>
                                     <td>{session.period.to}</td>
                                     <td>{session.type}</td>
@@ -146,8 +143,8 @@ export default class AssemblyCongressmanPanel extends React.Component<Props, Sta
                     <>
                         <h3>Votes</h3>
                         <ul>
-                            {this.props.votes.votes.map(vote => (
-                                <li>{vote.count} {vote.vote}</li>
+                            {this.props.votes.votes.map((vote, i) => (
+                                <li key={i}>{vote.count} {vote.vote}</li>
                             ))}
                         </ul>
                     </>

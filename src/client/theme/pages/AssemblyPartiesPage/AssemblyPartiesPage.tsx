@@ -10,10 +10,7 @@ interface Props {
     };
 }
 
-interface State {
-}
-
-export default class AssemblyPartiesPage extends React.Component<Props, State> {
+export default class AssemblyPartiesPage extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
@@ -22,7 +19,7 @@ export default class AssemblyPartiesPage extends React.Component<Props, State> {
                     {!this.props.parties.error && this.props.parties.loading === false && (
                         <ul>
                             {this.props.parties.parties.map(party => (
-                                <li>
+                                <li key={party.party.idw}>
                                     <Link to={`/loggjafarthing/${this.props.assembly}/thingflokkar/${party.party.id}`}>
                                         {party.party.name}
                                     </Link>

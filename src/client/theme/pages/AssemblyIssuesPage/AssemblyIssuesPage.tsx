@@ -1,6 +1,5 @@
 import React from 'react';
 import {Aside, Main} from "../../layouts/Container";
-import Congressman from "../../components/Congressman";
 import {Link} from "react-router-dom";
 import {CategoryCount, ServerFetchStatus, TypeCount} from "../../../../../@types";
 
@@ -13,10 +12,7 @@ interface Props {
     filter: Map<string, string>;
 }
 
-interface State {
-}
-
-export default class AssemblyIssuesPage extends React.Component<Props, State> {
+export default class AssemblyIssuesPage extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
@@ -28,9 +24,9 @@ export default class AssemblyIssuesPage extends React.Component<Props, State> {
                             <h3>Flokkur</h3>
                             <ul>
                             {this.props.options.types.map(type => (
-                                <li>
+                                <li key={type.type.category}>
                                     <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?tegund=${type.type.type}`}>
-                                        {this.props.filter.has('tegund') && this.props.filter.get('tegund')!.split(',').indexOf(type.type.type) >= 0 && (
+                                        {this.props.filter.has('tegund') && (this.props.filter.get('tegund') || '').split(',').indexOf(type.type.type) >= 0 && (
                                             <span>*</span>
                                         )}
                                         {type.type.typeSubName || type.type.typeName}
@@ -42,7 +38,7 @@ export default class AssemblyIssuesPage extends React.Component<Props, State> {
                             <h3>Malaflokkur</h3>
                             <ul>
                             {this.props.options.categories.map(category => (
-                                <li>
+                                <li key={category.category.id}>
                                     <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?fmalalokkur=${category.category.id}`}>
                                         {category.category.title}
                                     </Link>
