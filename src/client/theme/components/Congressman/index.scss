@@ -1,0 +1,67 @@
+
+
+.congressman {
+    display: flex;
+    flex: auto;
+    align-items: center;
+    max-width: 100%;
+}
+
+.congressman__badge {
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 1px solid white;
+    height: var(--size-m);
+    width: var(--size-m);
+
+    .congressman--lg & {
+        height: var(--size-l);
+        width: var(--size-l);
+    }
+}
+
+.congressman__avatar {
+    flex: 0 0 calc(var(--size-xl) + calc(var(--size-m)/2));
+    //flex: 0 0 (map_get($space, xl) + (map_get($space, md) / 2));
+    align-self: flex-start;
+    line-height: 0;
+    position: relative;
+
+    .congressman--lg & {
+        flex: 0 0 calc(var(--size-xxl) + calc(var(--size-l)/2) );
+        //flex: 0 0 (map_get($space, xxl) + (map_get($space, lg) / 2));
+    }
+}
+
+.congressman__body {
+    max-width: calc(100% - calc(var(--size-xl) + calc(var(--size-m)/2) ));
+    //max-width: calc(100% - #{map_get($space, xl) + (map_get($space, md) / 2)});
+    flex-grow: 1;
+    padding: 0 var(--size-xs);
+
+    .congressman--lg & {
+        max-width: calc(100% - calc(var(--size-xxl) + calc(var(--size-l)/2) ));
+        //max-width: calc(100% - #{map_get($space, xxl) + (map_get($space, lg) / 2)});
+    }
+}
+
+.congressman__title {
+    font-weight: 300;
+    font-size: var(--font-size-m);
+    //@include headline-3($ellipsis: true);
+
+    .congressman--lg & {
+        //@include headline-2($ellipsis: true);
+    }
+
+    //+ * {
+    //    margin-top: map_get($space, xxs); //@todo questionable
+    //}
+}
+
+.congressman__constituency {
+    //@include headline-5;
+    vertical-align: middle;
+}

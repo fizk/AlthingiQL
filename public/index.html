@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hundur</title>
+    <style>
+
+        html {
+            box-sizing: border-box;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+
+        }
+        body {
+            background-color: #FEF8F3;
+        }
+
+        .app {
+            display: grid;
+            grid-template-columns: auto 1fr 1fr;
+            grid-template-rows: auto 1fr;
+
+        }
+        .app__aside {
+            background-color: white;
+            grid-row: span 2;
+            min-height: 100vh;
+        }
+        .app__header {
+            background-color: #F0755B;
+            color: #FEF8F3;;
+        }
+        .app__user {}
+        .app__main {
+            grid-column: span 2;
+        }
+        .app__footer {
+            background-color: #b1b1b1;
+            grid-column: span 3;
+        }
+
+    </style>
+</head>
+<body>
+    <div data-react class="app">
+        <aside class="app__aside">aside</aside>
+        <header class="app__header">
+            149. Loggjafarthing
+        </header>
+        <div class="app__user">
+            search
+        </div>
+        <main class="app__main">
+            main content
+        </main>
+        <footer class="app__footer">
+            footer
+        </footer>
+    </div>
+</body>
+</html>

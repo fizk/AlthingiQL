@@ -1,0 +1,24 @@
+
+.menu__nav {
+    //margin-bottom: calc(var(--space-l) * -1);
+}
+
+.menu__menu {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+}
+
+.menu__menu-item {}
+
+.menu__menu-link {
+    display: block;
+    color: currentColor;
+    border-bottom: 5px solid transparent;
+    padding: calc(var(--space-m) - 5px) 0;
+}
+
+.menu__menu-link:hover,
+.menu__menu-link--active {
+    border-bottom-color: currentColor;
+}
