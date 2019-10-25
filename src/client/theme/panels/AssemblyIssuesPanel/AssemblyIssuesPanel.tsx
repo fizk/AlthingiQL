@@ -13,10 +13,7 @@ interface Props {
 
 }
 
-interface State {
-}
-
-export default class AssemblyIssuesPanel extends React.Component<Props, State> {
+export default class AssemblyIssuesPanel extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
@@ -24,7 +21,7 @@ export default class AssemblyIssuesPanel extends React.Component<Props, State> {
                     <>
                     <ul>
                         {this.props.issues.issues.map(issue => (
-                            <li>
+                            <li key={issue.id}>
                                 <Link to={`/loggjafarthing/${issue.assembly.id}/thingmal/${issue.type.category}/${issue.id}`}>
                                     {issue.id} {issue.name}
                                 </Link>

@@ -15,6 +15,7 @@ const queryAssemblyIssuesSummary = gql`
 
 export default compose(
     graphql(queryAssemblyIssuesSummary, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, AssemblyIssuesSummary}}: any) => {
             return {
                 options: loading === false ? {
@@ -34,7 +35,7 @@ export default compose(
             variables: {
                 assembly,
                 filter,
-                types: filter.has('tegund') ? filter.get('tegund')!.split(',') : null,
+                types: filter.has('tegund') ? (filter.get('tegund') || '').split(',') : null,
             },
         }),
     })

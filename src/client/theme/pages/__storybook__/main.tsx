@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
-import {withKnobs, boolean, text} from '@storybook/addon-knobs';
+import {BrowserRouter as Router} from 'react-router-dom';
+import {withKnobs, boolean} from '@storybook/addon-knobs';
 import faker from 'faker';
 
 import {Footer, Header, User} from "../../layouts/Container";
@@ -100,7 +100,7 @@ stories.add('/loggjafarthing/:assembly', () => {
             inflation: Array.from({length: 10}).map((item, i) => ({
                 id: 1,
                 value: faker.random.number({min:5, max:10, precision: .2}),
-                date: (() => {
+                date: ((): string => {
                     const date = new Date('2001-01-01');
                     date.setMonth(date.getMonth() + i);
                     return date.toUTCString()
@@ -180,7 +180,7 @@ stories.add('/loggjafarthing/:assembly/thingmal', () => {
                 category
             })),
         },
-        pagination: () => {},
+        pagination: (): void => {},
 
     };
     return (
@@ -328,7 +328,7 @@ stories.add('/loggjafarthing/:assembly/thingmal/:category/:issue/raedur', () => 
             speeches: Array.from({length: faker.random.number(10)}).map(speech),
             done: false
         },
-        pagination: () => {}
+        pagination: (): void => {}
     };
     return (
         <Router>

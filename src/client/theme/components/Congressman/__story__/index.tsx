@@ -2,7 +2,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {withKnobs, text, boolean} from '@storybook/addon-knobs';
 import Congressman from '..';
-import '../../../components/Chrome/index.scss';
+import '../../../layouts/Container/global.scss';
 
 const congressman = {
     id: 719,
@@ -22,12 +22,14 @@ const party = {
 const constituency = {
     id: 1,
     name: 'string',
+    // eslint-disable-next-line
     abbr_short: 'RV', //todo fix naming
+    // eslint-disable-next-line
     abbr_long: 'string', //todo fix naming
     description: 'string',
 };
 
-const stories = storiesOf('Congressman', module);
+const stories = storiesOf('Components/Congressman', module);
 stories.addDecorator(withKnobs);
 
 
@@ -143,6 +145,69 @@ stories.add('Body', () => {
                         I love sweet pastry sweet. Jelly liquorice tootsie roll.
                     </p>
                 </Congressman>
+            </li>
+        </ul>
+    )
+});
+
+stories.add('As links', () => {
+    const congressmanProps = {
+        ...congressman,
+        name: text('Name', 'Langt Nafnsson')
+    };
+    const partyProps = boolean('Party', true) ? party : undefined;
+    return (
+        <ul>
+            <li style={{padding: '1rem 0'}}>
+                <a href="#">
+                    <Congressman congressman={congressmanProps} party={partyProps} >
+                        <h4>She is important</h4>
+                        <time>15. Jan 2001</time>
+                        <p>
+                            Icing chocolate jujubes I love I love I love I love cotton candy pie. Sweet
+                            lemon drops cake powder jelly toffee. Tiramisu apple pie icing. I love candy canes
+                            chocolate cotton candy.
+                        </p>
+                        <p>
+                            Carrot cake jelly beans dessert jujubes danish. Ice cream tootsie roll I love.
+                            I love sweet pastry sweet. Jelly liquorice tootsie roll.
+                        </p>
+                    </Congressman>
+                </a>
+            </li>
+            <li style={{padding: '1rem 0'}}>
+                <a href="#">
+                    <Congressman congressman={congressmanProps} party={partyProps} variations={['md']} >
+                        <h4>She is important</h4>
+                        <time>15. Jan 2001</time>
+                        <p>
+                            Icing chocolate jujubes I love I love I love I love cotton candy pie. Sweet
+                            lemon drops cake powder jelly toffee. Tiramisu apple pie icing. I love candy canes
+                            chocolate cotton candy.
+                        </p>
+                        <p>
+                            Carrot cake jelly beans dessert jujubes danish. Ice cream tootsie roll I love.
+                            I love sweet pastry sweet. Jelly liquorice tootsie roll.
+                        </p>
+                    </Congressman>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <Congressman congressman={congressmanProps} party={partyProps} variations={['lg']} >
+                        <h4>She is important</h4>
+                        <time>15. Jan 2001</time>
+                        <p>
+                            Icing chocolate jujubes I love I love I love I love cotton candy pie. Sweet
+                            lemon drops cake powder jelly toffee. Tiramisu apple pie icing. I love candy canes
+                            chocolate cotton candy.
+                        </p>
+                        <p>
+                            Carrot cake jelly beans dessert jujubes danish. Ice cream tootsie roll I love.
+                            I love sweet pastry sweet. Jelly liquorice tootsie roll.
+                        </p>
+                    </Congressman>
+                </a>
             </li>
         </ul>
     )

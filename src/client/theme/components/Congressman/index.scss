@@ -5,6 +5,7 @@
     flex: auto;
     align-items: center;
     max-width: 100%;
+    color: currentColor;
 }
 
 .congressman__badge {
@@ -45,6 +46,10 @@
         max-width: calc(100% - calc(var(--size-xxl) + calc(var(--size-l)/2) ));
         //max-width: calc(100% - #{map_get($space, xxl) + (map_get($space, lg) / 2)});
     }
+}
+
+.congressman__content {
+    color: var(--font-color-primary);
 }
 
 .congressman__title {

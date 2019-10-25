@@ -11,10 +11,7 @@ interface Props extends ServerFetchStatus {
     issueItem: Issue;
 }
 
-interface State {
-}
-
-export default class AssemblyIssueSummaryPanel extends React.Component<Props, State> {
+export default class AssemblyIssueSummaryPanel extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
@@ -37,7 +34,7 @@ export default class AssemblyIssueSummaryPanel extends React.Component<Props, St
                         <h3>proponents</h3>
                         <ul>
                             {((this.props.issueItem as IssueA).proponents || []).map(congressman => (
-                                <li>
+                                <li key={congressman.id}>
                                     <Link to={`/loggjafarthing/${this.props.issueItem.assembly.id}/thingmenn/${congressman.id}`}>
                                         {congressman.name}
                                     </Link>
@@ -50,7 +47,7 @@ export default class AssemblyIssueSummaryPanel extends React.Component<Props, St
                         <h3>Speakers</h3>
                         <ul>
                         {this.props.issueItem.speakers.map(congressman => (
-                            <li>
+                            <li key={congressman.congressman.id}>
                                 {congressman.value}
                                 <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>
                                     {congressman.congressman.name}

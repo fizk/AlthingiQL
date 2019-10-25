@@ -35,7 +35,7 @@ export default class Congressman extends React.Component<Props> {
         }, 39);
 
         return (
-            <article className={classVariations('congressman', this.props.variations)}>
+            <section className={classVariations('congressman', this.props.variations)}>
                 <header className="congressman__avatar">
                     <Avatar size={size}
                         src={(this.props.congressman.avatar.templateSrc || '').replace('{size}', `${size}x${size}`)}
@@ -52,9 +52,11 @@ export default class Congressman extends React.Component<Props> {
                     <h3 className="congressman__title">
                         {this.props.congressman.name} {this.props.constituency && (<span className="congressman__constituency">{this.props.constituency.abbr_short}</span>)}
                     </h3>
-                    {this.props.children}
+                    <div className="congressman__content">
+                        {this.props.children}
+                    </div>
                 </div>
-            </article>
+            </section>
         );
     }
 }

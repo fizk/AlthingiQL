@@ -31,8 +31,8 @@ stories.add('For Assembly', () => {
             <div className="app">
                 <Main>Some main content</Main>
 
-                <Aside>{Array.from({length: 4}).map(item => (
-                    <Congressman congressman={{
+                <Aside>{Array.from({length: 4}).map((item, i) => (
+                    <Congressman key={i} congressman={{
                         id: 1,
                         name: 'some',
                         avatar: {templateSrc: ''}

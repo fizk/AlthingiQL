@@ -25,7 +25,7 @@
     "@types/faker": "^4.1.6",
     "@typescript-eslint/eslint-plugin": "^2.3.3",
     "@typescript-eslint/parser": "^2.3.3",
-    "eslint": "^6.5.1",
+    "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.16.0",
     "faker": "^4.1.0",
     "jest": "^24.9.0",
@@ -110,7 +110,7 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/jest/jestAssetsTransformer.js"
     },
     "testMatch": [
-      "**/__test__/**/*.{ts,tsx}"
+      "<rootDir>/src/client/theme/**/__test__/**/*.{ts,tsx}"
     ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"

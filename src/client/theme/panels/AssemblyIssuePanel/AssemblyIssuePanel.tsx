@@ -11,10 +11,7 @@ interface Props {
     };
 }
 
-interface State {
-}
-
-export default class AssemblyIssuePanel extends React.Component<Props, State> {
+export default class AssemblyIssuePanel extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>

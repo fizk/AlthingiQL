@@ -29,7 +29,7 @@ export default class Avatar extends React.Component<Props> {
 
     public componentDidMount(): void {
         this.observer.observe(this.myRef.current as HTMLImageElement);
-        this.myRef.current!.addEventListener('load', (event) => {
+        this.myRef.current && this.myRef.current.addEventListener('load', (event) => {
             (event.target as HTMLImageElement).classList.replace(
                 'avatar__image--hidden',
                 'avatar__image--visible'
@@ -37,13 +37,15 @@ export default class Avatar extends React.Component<Props> {
         });
     }
 
-    public componentWillReceiveProps(nextProps: Readonly<Props>): void {
+    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<Props>): void {
         if (this.props.src !== nextProps.src ) {
-            if (this.isViewPort(this.myRef.current!)) {
-                this.myRef.current!.src = nextProps.src;
+            if (this.myRef.current && this.isViewPort(this.myRef.current)) {
+                if (this.myRef.current) {
+                    this.myRef.current.src = nextProps.src;
+                }
             } else {
-                this.myRef.current!.removeAttribute('src');
-                this.myRef.current!.classList.replace(
+                this.myRef.current && this.myRef.current.removeAttribute('src');
+                this.myRef.current && this.myRef.current.classList.replace(
                     'avatar__image--visible',
                     'avatar__image--hidden'
                 );
@@ -51,7 +53,7 @@ export default class Avatar extends React.Component<Props> {
         }
     }
 
-    private observerCallback = (entries: IntersectionObserverEntry[]) => {
+    private observerCallback = (entries: IntersectionObserverEntry[]): void => {
         entries.forEach(item => {
             if (item.intersectionRatio > 0.9 && !(item.target as HTMLImageElement).src) {
                 (item.target as HTMLImageElement).src = this.props.src;
@@ -69,7 +71,8 @@ export default class Avatar extends React.Component<Props> {
         );
     }
 
-    public render() {
+    public render(): React.ReactNode {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { src, size, ...rest } = this.props;
         return (
             <div role="image" style={{height: size, width: size}} className={classVariations('avatar')}>
@@ -78,7 +81,7 @@ export default class Avatar extends React.Component<Props> {
                      width={size}
                      src={undefined}
                      ref={this.myRef}
-                     {...rest as any}/>
+                     {...rest as {[key: string]: string}}/>
             </div>
         );
     }

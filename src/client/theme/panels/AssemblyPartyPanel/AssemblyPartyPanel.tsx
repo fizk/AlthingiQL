@@ -5,10 +5,7 @@ interface Props {
     party: number;
 }
 
-interface State {
-}
-
-export default class AssemblyPartyPanel extends React.Component<Props, State> {
+export default class AssemblyPartyPanel extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>

@@ -9,6 +9,7 @@ import {
     StatusCount,
     TypeCount
 } from "../../../../../@types";
+import Congressman from '../../components/Congressman';
 
 interface Props {
     assembly: number;
@@ -39,9 +40,7 @@ interface Props {
     };
 }
 
-interface State {}
-
-export default class AssemblySummaryPage extends React.Component<Props, State> {
+export default class AssemblySummaryPage extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
@@ -51,8 +50,8 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <h3>Government Bills</h3>
                             <table>
                                 <tbody>
-                                {this.props.issueStatistics.governmentBills.map(bill => (
-                                    <tr>
+                                {this.props.issueStatistics.governmentBills.map((bill, i) => (
+                                    <tr key={i}>
                                         <td>{bill.count}</td>
                                         <td>{bill.status}</td>
                                     </tr>
@@ -62,8 +61,8 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <h3>Bills</h3>
                             <table>
                                 <tbody>
-                                {this.props.issueStatistics.bills.map(bill => (
-                                    <tr>
+                                {this.props.issueStatistics.bills.map((bill, i) => (
+                                    <tr key={i}>
                                         <td>{bill.count}</td>
                                         <td>{bill.status}</td>
                                     </tr>
@@ -73,8 +72,8 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <h3>Proposals</h3>
                             <table>
                                 <tbody>
-                                {this.props.issueStatistics.proposals.map(proposals => (
-                                    <tr>
+                                {this.props.issueStatistics.proposals.map((proposals, i) => (
+                                    <tr key={i}>
                                         <td>{proposals.count}</td>
                                         <td>{proposals.status}</td>
                                     </tr>
@@ -84,8 +83,8 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <h3>types</h3>
                             <table>
                                 <tbody>
-                                {this.props.issueStatistics.types.map(types => (
-                                    <tr>
+                                {this.props.issueStatistics.types.map((types, i) => (
+                                    <tr key={i}>
                                         <td>{types.count}</td>
                                         <td>{types.type.type}</td>
                                         <td>
@@ -102,7 +101,7 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <table>
                                 <tbody>
                                 {this.props.issueStatistics.categories.map(category => (
-                                    <tr>
+                                    <tr key={category.category.id}>
                                         <td>{category.count}</td>
                                         <td>
                                             <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?fmalalokkur=${category.category.id}`}>{category.category.title}</Link>
@@ -125,8 +124,8 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <h3>Inflation</h3>
                             <table>
                                 <thead>
-                                {this.props.inflation.inflation.map(item => (
-                                    <tr>
+                                {this.props.inflation.inflation.map((item, i) => (
+                                    <tr key={i}>
                                         <td>{item.date}</td>
                                         <td>{item.value}</td>
                                     </tr>
@@ -147,23 +146,24 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <h3>Congressman performance | Bills</h3>
                             <ul>
                                 {this.props.congressmenPerformance.bills.map(congressman => (
-                                    <li>
-                                        {congressman.value} |
-                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>{congressman.congressman.name}</Link>
-                                        {congressman.congressman.party.name} |
-                                        {congressman.congressman.constituency && congressman.congressman.constituency.name}
+                                    <li key={congressman.congressman.id}>
+                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>
+                                            <Congressman congressman={congressman.congressman} party={congressman.congressman.party} constituency={congressman.congressman.constituency} >
+                                                {congressman.value}
+                                            </Congressman>
+                                        </Link>
                                     </li>
-
                                 ))}
                             </ul>
                             <h3>Congressman performance | Questions</h3>
                             <ul>
                                 {this.props.congressmenPerformance.questions.map(congressman => (
-                                    <li>
-                                        {congressman.value} |
-                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>{congressman.congressman.name}</Link>
-                                        {congressman.congressman.party.name} |
-                                        {congressman.congressman.constituency && congressman.congressman.constituency.name}
+                                    <li key={congressman.congressman.id}>
+                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>
+                                            <Congressman congressman={congressman.congressman} party={congressman.congressman.party} constituency={congressman.congressman.constituency} >
+                                                {congressman.value}
+                                            </Congressman>
+                                        </Link>
                                     </li>
 
                                 ))}
@@ -171,11 +171,12 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <h3>Congressman performance | Resolutions</h3>
                             <ul>
                                 {this.props.congressmenPerformance.resolutions.map(congressman => (
-                                    <li>
-                                        {congressman.value} |
-                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>{congressman.congressman.name}</Link>
-                                        {congressman.congressman.party.name} |
-                                        {congressman.congressman.constituency && congressman.congressman.constituency.name}
+                                    <li key={congressman.congressman.id}>
+                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>
+                                            <Congressman congressman={congressman.congressman} party={congressman.congressman.party} constituency={congressman.congressman.constituency} >
+                                                {congressman.value}
+                                            </Congressman>
+                                        </Link>
                                     </li>
 
                                 ))}
@@ -183,11 +184,12 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <h3>Congressman performance | Speeches</h3>
                             <ul>
                                 {this.props.congressmenPerformance.speeches.map(congressman => (
-                                    <li>
-                                        {congressman.value} |
-                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>{congressman.congressman.name}</Link>
-                                        {congressman.congressman.party.name} |
-                                        {congressman.congressman.constituency && congressman.congressman.constituency.name}
+                                    <li key={congressman.congressman.id}>
+                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.congressman.id}`}>
+                                            <Congressman congressman={congressman.congressman} party={congressman.congressman.party} constituency={congressman.congressman.constituency} >
+                                                {congressman.value}
+                                            </Congressman>
+                                        </Link>
                                     </li>
 
                                 ))}
@@ -206,7 +208,7 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <h3>Party times</h3>
                             <ul>
                               {this.props.speechTimes.parties.map(party => (
-                                  <li>
+                                  <li key={party.party.id}>
                                       {party.time} |
                                       <Link to={`/loggjafarthing/${this.props.assembly}/thingflokkar/${party.party.id}`}>{party.party.name}</Link>
                                   </li>
@@ -226,7 +228,7 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <h3>Issues speech time</h3>
                             <ul>
                                 {this.props.issueTimes.issues.map(issue => (
-                                    <li>
+                                    <li key={issue.issue.id}>
                                         {issue.value}
                                         <Link to={`/loggjafarthing/${this.props.assembly}/thingmal/${issue.issue.type.category}/${issue.issue.id}`}>{issue.issue.name}</Link>
                                     </li>
@@ -248,7 +250,7 @@ export default class AssemblySummaryPage extends React.Component<Props, State> {
                             <h3>Assemblies</h3>
                             <ul>
                                 {this.props.assemblies.assemblies.map(assembly => (
-                                    <li>
+                                    <li key={assembly.id}>
                                         <Link to={`/loggjafarthing/${assembly.id}`}>
                                             {assembly.id} Loggjafarthing
                                         </Link>

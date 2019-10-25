@@ -11,10 +11,7 @@ interface Props {
     };
 }
 
-interface State {
-}
-
-export default class AssemblyCongressmenPage extends React.Component<Props, State> {
+export default class AssemblyCongressmenPage extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
@@ -25,7 +22,7 @@ export default class AssemblyCongressmenPage extends React.Component<Props, Stat
                             <h3>Congressmen</h3>
                             <ul>
                                 {this.props.congressmen.congressmen.map(congressman => (
-                                    <li>
+                                    <li key={congressman.id}>
                                         <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>{congressman.name}</Link>
                                         {congressman.party.name} | {congressman.constituency && congressman.constituency.name}
                                     </li>
@@ -34,7 +31,7 @@ export default class AssemblyCongressmenPage extends React.Component<Props, Stat
                             <h3>Substitutes</h3>
                             <ul>
                                 {this.props.congressmen.substitutes.map(congressman => (
-                                    <li>
+                                    <li key={congressman.id}>
                                         <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>{congressman.name}</Link>
                                         {congressman.party.name} | {congressman.constituency && congressman.constituency.name}
                                     </li>

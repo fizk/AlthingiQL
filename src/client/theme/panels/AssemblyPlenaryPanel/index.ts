@@ -54,6 +54,7 @@ const queryAssemblyPlenary = gql`
 
 export default compose(
     graphql(queryAssemblyPlenary, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, AssemblyPlenary}}: any) => {
             return {agenda: {
                 error,

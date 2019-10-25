@@ -18,6 +18,7 @@ const queryAssemblyParties = gql`
 
 export default compose(
     graphql(queryAssemblyParties, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, AssemblySummary}}: any) => {
             return {parties: {
                 error,

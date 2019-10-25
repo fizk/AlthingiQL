@@ -545,7 +545,7 @@ export const partiesList = () => parties;
 export const party = (name: string | undefined = undefined): Party => ({
     id: faker.random.number(1000),
     name: name ? name : oneOf(parties),
-    color: faker.commerce.color(),
+    color: faker.internet.color().slice(1),
 });
 
 export const constituency = (): Constituency => ({
@@ -575,7 +575,7 @@ export const congressman = (): Congressman => ({
     id: faker.random.number(1000),
     name: `${faker.name.firstName()} ${faker.name.lastName()}`,
     avatar: {
-        templateSrc: 'string',
+        templateSrc: faker.image.avatar(),
     },
     party: party()
 });

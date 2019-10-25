@@ -35,7 +35,8 @@ const assemblyIssueQuery = gql`
 
 export default compose(
     graphql(assemblyIssueQuery, {
-        props: ({data: {fetchMore, error, loading, AssemblyIssue}}: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        props: ({data: {error, loading, AssemblyIssue}}: any) => {
             return {issueProperties: {
                     error,
                     loading,

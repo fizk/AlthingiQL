@@ -40,7 +40,8 @@ const issueDocumentsQuery = gql`
 
 export default compose(
     graphql(issueDocumentsQuery, {
-        props: ({data: {error, loading, IssueDocuments}}) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        props: ({data: {error, loading, IssueDocuments}}: any) => {
             return {documents: {
                 error,
                 loading,
