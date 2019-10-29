@@ -1,3 +1,4 @@
+import {ApolloError} from "apollo-client";
 
 export interface Assembly {
     id: number;
@@ -143,6 +144,8 @@ export interface SpeechRange {
 export interface Person {
     id: number;
     name: string;
+    birth: string
+    abbreviation: string
     avatar: Picture;
 }
 
@@ -297,7 +300,12 @@ export interface StatusCount {
 }
 
 export interface ServerFetchStatus {
-    error: any;
+    error: /*ApolloError |*/ Error | undefined;
+    loading: boolean;
+}
+
+export interface ComponentRenderStatus {
+    error: Error | undefined;
     loading: boolean;
 }
 

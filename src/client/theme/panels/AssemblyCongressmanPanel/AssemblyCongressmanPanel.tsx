@@ -9,6 +9,14 @@ import {
     Issue
 } from "../../../../../@types";
 import {Link} from "react-router-dom";
+import Portrait from "../../elements/Portrait";
+import SessionDiagram from "../../components/SessionDiagram";
+import VoteRatioChart from "../../components/VoteRatioChart";
+import CategoryRatioChart from "../../components/CategoryRatioChart";
+import IssueRatioTable from "../../components/IssueRatioTable";
+import {IssueGrid, IssueGridItem} from "../../elements/IssueGrid";
+import {Spinner} from "../../elements/Icons";
+import './index.scss';
 
 interface Props {
     assembly: number;
@@ -32,130 +40,86 @@ interface Props {
 export default class AssemblyCongressmanPanel extends React.Component<Props> {
     render(): React.ReactNode {
         return (
-            <>
-                {!this.props.person.error && this.props.person.loading === false && (
-                    <h2>{this.props.person.person.name}</h2>
-                )}
-                {!this.props.person.error && this.props.person.loading === true && (
-                    <div>Loading...</div>
-                )}
-                {this.props.person.error &&  (
-                    <div>Error...</div>
-                )}
+            <article className="assembly-congressman-panel">
+                <header className="assembly-congressman-panel__header">
+                    <Portrait src={
+                        !this.props.person.error && this.props.person.loading === false
+                            ? (this.props.person.person.avatar.templateSrc || '').replace('{size}', '330x330')
+                            : undefined
+                    }/>
 
-
-                {!this.props.issues.error && this.props.issues.loading === false && (
-                    <>
-                        <h3>Categories</h3>
-                        <table>
-                            <thead>
-                            <tr>
-                                <td>time</td>
-                                <td>title</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.props.issues.speeches.map((category, i) => (
-                                <tr key={i}>
-                                    <td>{category.time}</td>
-                                    <td>{category.superCategory.title}</td>
-                                </tr>
+                    {!this.props.person.error && this.props.person.loading === false && (
+                        <>
+                        <h2>{this.props.person.person.name} - ({this.props.person.person.abbreviation})</h2>
+                        <h3>{this.props.person.person.birth}</h3>
+                        </>
+                    )}
+                    {!this.props.person.error && this.props.person.loading === true && (
+                        <h2>Loading...</h2>
+                    )}
+                    {this.props.person.error &&  (
+                        <h2>Error...{this.props.person.error.message}</h2>
+                    )}
+                </header>
+                <section className="assembly-congressman-panel__votes">
+                    <h3 className="assembly-congressman-panel__headline">
+                        Þátttaka í atkvæðagreiðslum
+                    </h3>
+                    <VoteRatioChart loading={this.props.votes.loading}
+                                    error={this.props.votes.error}
+                                    votes={this.props.votes && this.props.votes.votes}/>
+                </section>
+                <section className="assembly-congressman-panel__issues">
+                    <h3 className="assembly-congressman-panel__headline">
+                        Flutningsmaður
+                    </h3>
+                    <IssueRatioTable loading={this.props.issues.loading}
+                                     error={this.props.issues.error}
+                                     issues={this.props.issues.types}/>
+                </section>
+                <section className="assembly-congressman-panel__sessions">
+                    <h3 className="assembly-congressman-panel__headline">
+                        Viðvera
+                    </h3>
+                    <SessionDiagram loading={this.props.sessions.loading}
+                                    error={this.props.sessions.error}
+                                    sessions={this.props.sessions.sessions}/>
+                </section>
+                <section className="assembly-congressman-panel__speeches">
+                    <h3 className="assembly-congressman-panel__headline">
+                        Ræðutími á málaflokka
+                    </h3>
+                    <CategoryRatioChart loading={this.props.issues.loading}
+                                        error={this.props.issues.error}
+                                        categories={this.props.issues.speeches}/>
+                </section>
+                <aside className="assembly-congressman-panel__promotions">
+                    <h3 className="assembly-congressman-panel__headline">
+                        Fyrsti flutningsmaður
+                    </h3>
+                    {!this.props.issues.error && this.props.issues.loading === false && (
+                        <IssueGrid variations={['md']}>
+                            {this.props.issues.promotions.map(issue => (
+                                <IssueGridItem type={issue.type.type}>
+                                    <Link to={`/loggjafarthing/${this.props.assembly}/thingmal/${issue.type.category}/${issue.id}`}>
+                                        <h4>{issue.id} {issue.type.category}</h4>
+                                        <h5>{issue.name}</h5>
+                                        {issue.type.type} | {issue.type.typeSubName || issue.type.typeName}
+                                    </Link>
+                                </IssueGridItem>
                             ))}
-                            </tbody>
-                        </table>
-
-                        <h3>Issue Count</h3>
-                        <table>
-                            <thead>
-                            <tr>
-                                <td>count</td>
-                                <td>documentType</td>
-                                <td>order</td>
-                                <td>type</td>
-                                <td>typeName</td>
-                                <td>typeSubName</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {this.props.issues.types.map(issue => (
-                                    <tr key={issue.type}>
-                                        <td>{issue.count}</td>
-                                        <td>{issue.documentType}</td>
-                                        <td>{issue.order}</td>
-                                        <td>{issue.type}</td>
-                                        <td>{issue.typeName}</td>
-                                        <td>{issue.typeSubName}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-
-                        <h3>Promoted issues</h3>
-                        <ul>
-                        {this.props.issues.promotions.map(issue => (
-                            <li key={issue.id}>
-                                {issue.id} <Link to={`/loggjafarthing/${this.props.assembly}/thingmal/${issue.type.category}/${issue.id}`}>{issue.name}</Link>
-                            </li>
-                        ))}
-                        </ul>
-                    </>
-                )}
-                {!this.props.issues.error && this.props.issues.loading === true && (
-                    <div>Loading...</div>
-                )}
-                {this.props.issues.error &&  (
-                    <div>Error...</div>
-                )}
-
-
-                {!this.props.sessions.error && this.props.sessions.loading === false && (
-                    <>
-                        <h3>Sessions</h3>
-                        <table>
-                            <thead>
-                            <tr>
-                                <td>from</td>
-                                <td>to</td>
-                                <td>type</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.props.sessions.sessions.map(session => (
-                                <tr key={session.id}>
-                                    <td>{session.period.from}</td>
-                                    <td>{session.period.to}</td>
-                                    <td>{session.type}</td>
-                                </tr>
-                            ))}
-                            </tbody>
-                        </table>
-                    </>
-                )}
-                {!this.props.sessions.error && this.props.sessions.loading === true && (
-                    <div>Loading...</div>
-                )}
-                {this.props.sessions.error &&  (
-                    <div>Error...</div>
-                )}
-
-
-                {!this.props.votes.error && this.props.votes.loading === false && (
-                    <>
-                        <h3>Votes</h3>
-                        <ul>
-                            {this.props.votes.votes.map((vote, i) => (
-                                <li key={i}>{vote.count} {vote.vote}</li>
-                            ))}
-                        </ul>
-                    </>
-                )}
-                {!this.props.votes.error && this.props.votes.loading === true && (
-                    <div>Loading...</div>
-                )}
-                {this.props.votes.error && (
-                    <div>Error...</div>
-                )}
-            </>
+                        </IssueGrid>
+                    )}
+                    {!this.props.issues.error && this.props.issues.loading === true && (
+                        <div className="assembly-congressman-panel__spinner">
+                            <Spinner/>
+                        </div>
+                    )}
+                    {this.props.issues.error &&  (
+                        <div>Error...</div>
+                    )}
+                </aside>
+            </article>
         )
     }
 }

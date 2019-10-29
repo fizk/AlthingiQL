@@ -77,6 +77,9 @@ const queryAssemblyCongressman = gql`
             id
             name
             avatar {templateSrc}
+            birth
+            abbreviation
+            
         }
     }
 `;

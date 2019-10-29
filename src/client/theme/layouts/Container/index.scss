@@ -1,6 +1,15 @@
+@import "../../../mixins";
+
+:root {
+    --app-color-background-aside: var(--color-white);
+    --app-color-background-footer: var(--color-white);
+    --app-color-background-header: var(--color-red);
+    --app-color-text-header: var(--color-off-white);
+}
+
 .app {
     display: grid;
-    grid-template-columns: minmax(200px, auto) 1fr 1fr;
+    grid-template-columns: 350px 1fr 1fr;
     grid-template-rows: auto 1fr;
 
     grid-template-areas:
@@ -10,16 +19,30 @@
     ;
 
 }
+@include viewport-4 {
+    .app {
+        grid-template-columns: 350px 100vw;
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-areas:
+            'aside header'
+            'aside user'
+            'aside main'
+            'footer footer'
+        ;
+    }
+}
 .app__aside {
-    background-color: var(--color-white);
+    background-color: var(--app-color-background-aside);
     min-height: 100vh;
     grid-area: aside;
 }
+
 .app__header {
-    color: var(--font-color-secondary);
-    background-color: var(--primary-color-middle);
+    color: var(--app-color-text-header);
+    background-color: var(--app-color-background-header);
     grid-area: header;
 }
+
 .app__user {
     grid-area: user;
 }
@@ -27,7 +50,8 @@
 .app__main {
     grid-area: main;
 }
+
 .app__footer {
-    background-color: var(--primary-color-dark);
+    background-color: var(--app-color-background-footer);
     grid-area: footer;
 }

@@ -1,0 +1,51 @@
+@import "../../../mixins";
+
+@include viewport-4 {
+    .assembly-congressman-panel {
+        --issue-grid-coumn-count: 1fr;
+    }
+}
+@include viewport-7  {
+    .assembly-congressman-panel {
+        --issue-grid-coumn-count: 1fr 1fr;
+    }
+}
+@include viewport-9 {
+    .assembly-congressman-panel {
+        --issue-grid-coumn-count: 1fr 1fr 1fr;
+    }
+}
+@include viewport-12 {
+    .assembly-congressman-panel {
+        --issue-grid-coumn-count: 1fr 1fr 1fr;
+    }
+}
+
+.issue-grid {
+    display: grid;
+
+    grid-template-columns: var(--issue-grid-coumn-count);
+    grid-template-rows: 1fr 1fr 1fr;
+
+    grid-gap: var(--space-l);
+
+    grid-auto-flow: dense;
+
+    list-style: none;
+}
+
+.issue-grid__item {
+    background-color: white;
+}
+
+.issue-grid__item--sm {
+    grid-row: span 1;
+}
+
+.issue-grid__item--md {
+    grid-row: span 2;
+}
+
+.issue-grid__item--lg {
+    grid-row: span 3;
+}

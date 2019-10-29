@@ -26,8 +26,8 @@ $ export ENV_SERVER_HOST=http://loggjafarthing.einarvalur.co
 $ docker-compose up -d run
 ```
 
-This will then start the service in development mode. It has listeners for file-changes and nodemon for restarting the
-node server. 
+This will then start the service in development mode. It has listeners for file-changes and [nodemon](https://nodemon.io/) 
+for restarting the node server. 
 
 ### Run locally.
 If you rather want to run it locally, you can clone this repo and then install all npm packages via:

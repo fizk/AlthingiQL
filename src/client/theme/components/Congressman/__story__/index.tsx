@@ -2,11 +2,13 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {withKnobs, text, boolean} from '@storybook/addon-knobs';
 import Congressman from '..';
-import '../../../layouts/Container/global.scss';
+import '../../../global.scss';
 
 const congressman = {
     id: 719,
     name: text('name', 'Oddný G. Harðardóttir'),
+    birth: '2001-01-01',
+    abbreviation: 'AcD',
     avatar: {
         src: 'https://picsum.photos/60',
         templateSrc: 'https://picsum.photos/id/1025/60',

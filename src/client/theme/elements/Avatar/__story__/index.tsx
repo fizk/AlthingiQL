@@ -2,7 +2,9 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, select, number} from '@storybook/addon-knobs';
 import Avatar from '..';
-import '../../../layouts/Container/global.scss';
+// @ts-ignore
+import notes from '../readme.md';
+import '../../../global.scss';
 
 const stories = storiesOf('Elements/Avatar', module);
 stories.addDecorator(withKnobs);
@@ -27,7 +29,7 @@ stories.add('Sizes', () => {
                 size={props.size}/>
         </>
     )
-});
+}, {notes: {markdown: notes}});
 stories.add('Scroll load', () => {
     const props = {
         id: select('Image ID', {0: '0', 10: '10', 1001: '1001', 1014: '1014'}, '10', undefined),
@@ -55,4 +57,4 @@ stories.add('Scroll load', () => {
             </li>
         </ul>
     )
-});
+}, {notes: {markdown: notes}});
