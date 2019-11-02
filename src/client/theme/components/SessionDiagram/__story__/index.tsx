@@ -7,8 +7,6 @@ import {Session} from "../../../../../../@types";
 import notes from '../readme.md'
 import '../../../global.scss';
 
-
-
 const stories = storiesOf('Components/SessionDiagram', module);
 stories.addDecorator(withKnobs);
 

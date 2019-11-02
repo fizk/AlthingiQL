@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {pie, arc} from 'd3-shape';
+import {pie, arc, DefaultArcObject} from 'd3-shape';
 import classVariations from '../../../utils/classVariations';
 import './index.scss';
 
@@ -42,9 +42,9 @@ export default class PieChart extends React.PureComponent<Props> {
             .innerRadius(size / 2)
             .outerRadius(size / 4);
         const arcs = pieData.map(item => {
-            const [innerCentroidX, innerCentroidY] = path.centroid(item as any);
+            const [innerCentroidX, innerCentroidY] = path.centroid(item as unknown as DefaultArcObject);
             return {
-                path: path(item as any),
+                path: path(item as unknown as DefaultArcObject),
                 data: item.data,
                 dimensions: {
                     innerCentroid: { x: innerCentroidX, y: innerCentroidY },
@@ -64,8 +64,8 @@ export default class PieChart extends React.PureComponent<Props> {
                         {arcs.map(a => (
                             <g key={`arch-${a.data.value}-${a.data.key}-${a.data.color}`} className="pie-chart__arch">
                                 <path fill={a.data.color || ''}
-                                      onMouseOver={event => this.props.onEnter && this.props.onEnter(event, a.data, total)}
-                                      onMouseOut={event => this.props.onLeave && this.props.onLeave(event, a.data, total)}
+                                      onMouseOver={(event): void => (this.props.onEnter && this.props.onEnter(event, a.data, total))}
+                                      onMouseOut={(event): void => (this.props.onLeave && this.props.onLeave(event, a.data, total))}
                                       className={classVariations('pie-chart__path', [a.data.key || ''])}
                                       d={a.path || undefined}
                                 />

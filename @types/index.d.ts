@@ -1,6 +1,3 @@
-import {ApolloError} from "apollo-client";
-import {strict} from "assert";
-
 export interface Assembly {
     id: number;
     period?: Period;
@@ -40,9 +37,9 @@ export interface PartyTime {
 }
 
 export interface Category {
-    id: number,
-    description: string | null,
-    superId: number,
+    id: number;
+    description: string | null;
+    superId: number;
     title: string;
 }
 
@@ -52,7 +49,7 @@ export interface CategoryCount {
 }
 
 export interface SuperCategory {
-    id: number,
+    id: number;
     title: string;
 }
 
@@ -60,7 +57,7 @@ export interface IssueType {
     id: number;
     assembly: Assembly;
     name: string;
-    type: Type
+    type: Type;
     date: string;
     speakers: CongressmanValue[];
     // speechRange: SpeechRange[];
@@ -69,12 +66,12 @@ export interface IssueType {
 }
 
 export interface IssueCount {
-    order: number,
-    type: string,
-    typeName: string,
-    typeSubName: string,
-    documentType: string,
-    count: number,
+    order: number;
+    type: string;
+    typeName: string;
+    typeSubName: string;
+    documentType: string;
+    count: number;
 }
 
 export interface IssueA extends IssueType {
@@ -90,11 +87,12 @@ export interface IssueA extends IssueType {
     proponents: Proponent[];
     proponentsCount: number;
     // voteRange: VoteRange[];
-    categories: Category[],
-    superCategories: SuperCategory[],
-    governmentIssue: boolean,
+    categories: Category[];
+    superCategories: SuperCategory[];
+    governmentIssue: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IssueB extends IssueType {
 
 }
@@ -102,8 +100,8 @@ export interface IssueB extends IssueType {
 export interface Type {
     type:  string;//'n' | 'b' | 'l' | 'm' | 'q' | 's' | 'v' | 'a' | 'f' | /**/ 'ff' | 'ft' | 'um' | 'ud' | 'uu';
     category: string;//'a' | 'b'
-    typeName: string
-    typeSubName: string | null
+    typeName: string;
+    typeSubName: string | null;
 }
 
 export interface TypeCount {
@@ -114,8 +112,8 @@ export interface TypeCount {
 export type Issue = IssueA | IssueB;
 
 export interface IssueValue {
-    value: number,
-    issue: Issue
+    value: number;
+    issue: Issue;
 }
 
 export interface CongressmanValue {
@@ -145,20 +143,20 @@ export interface SpeechRange {
 export interface Person {
     id: number;
     name: string;
-    birth: string
-    abbreviation: string
+    birth: string;
+    abbreviation: string;
     avatar: Picture;
 }
 
 export interface Congressman extends Person {
     party: Party;
     assembly?: Assembly;
-    constituency?: Constituency
+    constituency?: Constituency;
 }
 
 export interface Proponent extends Congressman {
     order: number;
-    minister: string | null
+    minister: string | null;
 }
 
 export interface Vote {
@@ -240,21 +238,21 @@ export interface CategorySummary {
 
 export interface CategorySpeechTime {
     category: {
-        id: number,
-    },
+        id: number;
+    };
     superCategory: {
-        id: number,
-    },
-    title: string,
-    time: number,
+        id: number;
+    };
+    title: string;
+    time: number;
 }
 
 export interface SuperCategorySpeechTime {
     superCategory: {
-        id: number,
-        title: string,
-    },
-    time: number,
+        id: number;
+        title: string;
+    };
+    time: number;
 }
 
 export interface IssueSummary {
@@ -296,8 +294,8 @@ export interface VoteResult {
 }
 
 export interface StatusCount {
-    count: number,
-    status: string | null
+    count: number;
+    status: string | null;
 }
 
 export interface ServerFetchStatus {
@@ -345,8 +343,8 @@ export interface Config {
 }
 
 export interface Client {
-    getPagination: (url: string, cursor: any) => Promise<{data: object, cursor: {from: number, to: number}, done: boolean}>
-    get: (url: any) => Promise<object>
+    getPagination: (url: string, cursor: any) => Promise<{data: object, cursor: {from: number, to: number}, done: boolean}>;
+    get: (url: any) => Promise<object>;
 }
 
 export declare namespace DataSource {
@@ -364,7 +362,7 @@ export declare namespace DataSource {
         description: string;
         from: string;
         to: string;
-        assemblies?: Assembly[]
+        assemblies?: Assembly[];
     }
 
     export interface Assembly {
@@ -375,7 +373,7 @@ export declare namespace DataSource {
             majority: Party[];
             minority: Party[];
         };
-        cabinet: Cabinet
+        cabinet: Cabinet;
     }
 
     export interface Committee {
@@ -417,18 +415,18 @@ export declare namespace DataSource {
         proponents: Proponent[];
         // voteRange: DateAndCount[];
         // speechRange: DateAndCount[];
-        speakers: CongressmanValue[]
+        speakers: CongressmanValue[];
         categories: Category;
-        super_categories: SuperCategory[]
-        government_issue: boolean,
-        speech_count: number,
-        speech_time: number,
+        super_categories: SuperCategory[];
+        government_issue: boolean;
+        speech_count: number;
+        speech_time: number;
         issue_links: {
             assembly_id: number;
             issue_id: number;
             category: 'A' | 'B';
             type: string;
-        }[]
+        }[];
     }
 
     export interface DateAndCount {

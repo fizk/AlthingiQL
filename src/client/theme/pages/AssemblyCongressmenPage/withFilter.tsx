@@ -18,7 +18,7 @@ interface State {
     filtering: boolean;
 }
 
-const filterComponent = (WrappedComponent: React.ComponentType<Props>) => {
+const filterComponent = (WrappedComponent: React.ComponentType<Props>): React.ComponentClass<Props, State> => {
     return class WithFilter extends React.Component<Props, State> {
 
         constructor(props: Props) {

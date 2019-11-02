@@ -1,6 +1,6 @@
-import React from "react";
+import React, {FunctionComponent} from "react";
 
-export const Spinner = () => (
+export const Spinner: FunctionComponent = () => (
     <svg viewBox="0 0 100 100">
         <circle
             id="thepath"
@@ -34,7 +34,7 @@ export const Spinner = () => (
     </svg>
 );
 
-export const Empty = () => (
+export const Empty: FunctionComponent = () => (
     <svg width="100" height="100" viewBox="0 0 100 100">
         <g strokeWidth="10" fill="none" fillRule="evenodd">
             <path stroke="#CCC" d="M20 10h60v80H20z"/>
