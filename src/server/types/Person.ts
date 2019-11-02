@@ -1,6 +1,7 @@
 import {GraphQLString, GraphQLObjectType, GraphQLInt, GraphQLList} from 'graphql';
 import Party from './Party';
 import Image from './Image';
+import {GraphQLDate} from "graphql-iso-date";
 
 export default new GraphQLObjectType({
     name: 'Person',
@@ -12,6 +13,14 @@ export default new GraphQLObjectType({
         },
         name: {
             name: 'name',
+            type: GraphQLString,
+        },
+        birth: {
+            name: 'birth',
+            type: GraphQLDate,
+        },
+        abbreviation: {
+            name: 'abbreviation',
             type: GraphQLString,
         },
         parties: {

@@ -36,11 +36,14 @@ function loadStories() {
     // require('../stories/elements/InflationChart.tsx');
 
     require('../src/client/theme/layouts/Container/__story__');
-    require('../src/client/theme/components/AssemblyHeader/__story__');
     require('../src/client/theme/pages/__storybook__/main');
-
     require('../src/client/theme/elements/Avatar/__story__');
+    require('../src/client/theme/elements/Portrait/__story__');
+
     require('../src/client/theme/components/Congressman/__story__');
+    require('../src/client/theme/components/AssemblyHeader/__story__');
+    require('../src/client/theme/components/SessionDiagram/__story__');
+    require('../src/client/theme/components/VoteRatioChart/__story__');
 }
 
 addDecorator((storyFn) => React.createElement('div', {style: {padding: 20}}, storyFn()));

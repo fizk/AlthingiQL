@@ -1,0 +1,41 @@
+
+:root {
+    --assembly-congressman-page-supplementary-color: var(--color-off-white);
+}
+
+.assembly-congressman-page__title {
+    font-weight: 300;
+    font-size: var(--font-size-m);
+    padding: 0 var(--space-l);
+}
+
+.assembly-congressman-page__congressman-list {
+    list-style: none;
+    padding: 0 var(--space-l);
+}
+
+.assembly-congressman-page__congressman-item {
+    padding: var(--space-m) 0;
+    border-bottom: 1px solid var(--assembly-congressman-page-supplementary-color);
+}
+
+.assembly-congressman-page__congressman-title {
+    font-weight: 100;
+    font-size: var(--font-size-s);
+}
+
+.assembly-congressman-page__search {
+    padding: var(--space-l);
+}
+
+.assembly-congressman-page__search-input {
+    width: 100%;
+    border: none;
+    padding: var(--space-s);
+    background-color: var(--assembly-congressman-page-supplementary-color);
+}
+
+.assembly-congressman-page__loader {
+    width: var(--space-l);
+    margin: auto;
+}

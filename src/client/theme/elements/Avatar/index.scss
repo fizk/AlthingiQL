@@ -1,9 +1,11 @@
-
+:root {
+    --avatar-background-color: var(--color-gray-light);
+}
 
 .avatar {
     border-radius: 50%;
     display: inline-block;
-    background-color: var(--primary-color-default);
+    background-color: var(--avatar-background-color);
 }
 
 .avatar__image {

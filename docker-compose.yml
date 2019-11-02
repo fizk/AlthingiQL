@@ -25,6 +25,7 @@ services:
             - API_HOST=${ENV_API_HOST:-host.docker.internal}
             - API_PORT=${ENV_API_PORT:-8080}
             - IMAGE_SERVER=${ENV_IMAGE_SERVER:-/images}
+            - FORWARDER_SERVER=${ENV_FORWARDER_SERVER:-http://localhost:8008}
             #- ASSETS_SERVER=http://static-server
         volumes:
             - ./@types:/usr/src/app/@types

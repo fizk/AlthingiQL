@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {withKnobs} from '@storybook/addon-knobs';
 import AssemblyHeader from '../index'
-import '../../../layouts/Container/global.scss';
+import '../../../global.scss';
 
 const stories = storiesOf('Theme/AssemblyHeader', module);
 stories.addDecorator(withKnobs);

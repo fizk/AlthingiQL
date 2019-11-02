@@ -19,12 +19,12 @@ export default class AssemblyIssuesPage extends React.Component<Props> {
                 <Main>{this.props.children}</Main>
                 <Aside>
                     <div>Massive filter</div>
-                    {!this.props.options.error && this.props.options.loading === false && (
+                    {!this.props.options.error && !this.props.options.loading && (
                         <>
                             <h3>Flokkur</h3>
                             <ul>
                             {this.props.options.types.map(type => (
-                                <li key={type.type.category}>
+                                <li key={type.type.type}>
                                     <Link to={`/loggjafarthing/${this.props.assembly}/thingmal?tegund=${type.type.type}`}>
                                         {this.props.filter.has('tegund') && (this.props.filter.get('tegund') || '').split(',').indexOf(type.type.type) >= 0 && (
                                             <span>*</span>
@@ -47,7 +47,7 @@ export default class AssemblyIssuesPage extends React.Component<Props> {
                             </ul>
                         </>
                     )}
-                    {!this.props.options.error && this.props.options.loading === true && (
+                    {!this.props.options.error && this.props.options.loading && (
                         <div>Loading...</div>
                     )}
                     {this.props.options.error && (

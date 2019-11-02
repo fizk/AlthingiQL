@@ -2,6 +2,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import faker from 'faker';
 
 import {Footer, Header, User} from "../../layouts/Container";
@@ -35,11 +36,10 @@ import {
     speech,
     plenary,
     plenaryItem,
-    sessions,
-    oneOf
+    sessions
 } from '../../../utils/fakers'
 import {CategoryType,} from "../../../../../@types";
-import '../../layouts/Container/global.scss';
+import '../../global.scss';
 
 const stories = storiesOf('Pages/Main', module);
 stories.addDecorator(withKnobs);
@@ -50,7 +50,7 @@ stories.add('/loggjafarthing/:assembly', () => {
     const data = {
         assembly: 149,
         assemblies: {
-            error: boolean('assemblies - error', false) ? 'Some error' : undefined,
+            error: boolean('assemblies - error', false) ? new Error('error') : undefined,
             loading: boolean('assemblies - loading', false),
             assemblies: Array.from({length: 10}).map((item, i) => {
                 return {
@@ -71,7 +71,7 @@ stories.add('/loggjafarthing/:assembly', () => {
             }),
         },
         issueStatistics: {
-            error:  boolean('issueStatistics - error', false) ? 'Some error' : undefined,
+            error:  boolean('issueStatistics - error', false) ? new Error('error') : undefined,
             loading: boolean('issueStatistics - loading', false),
             bills: billStatusList().map(status => ({
                 count: faker.random.number(100),
@@ -95,7 +95,7 @@ stories.add('/loggjafarthing/:assembly', () => {
             })),
         },
         inflation: {
-            error:  boolean('inflation - error', false) ? 'Some error' : undefined,
+            error:  boolean('inflation - error', false) ? new Error('error') : undefined,
             loading: boolean('inflation - loading', false),
             inflation: Array.from({length: 10}).map((item, i) => ({
                 id: 1,
@@ -108,7 +108,7 @@ stories.add('/loggjafarthing/:assembly', () => {
             }))
         },
         congressmenPerformance: {
-            error:  boolean('congressmenPerformance - error', false) ? 'Some error' : undefined,
+            error:  boolean('congressmenPerformance - error', false) ? new Error('error') : undefined,
             loading: boolean('congressmenPerformance - loading', false),
             bills: [1,2,3,4,5,].map(() => ({
                 congressman: congressman(),
@@ -128,7 +128,7 @@ stories.add('/loggjafarthing/:assembly', () => {
             })),
         },
         speechTimes: {
-            error:  boolean('speechTimes - error', false) ? 'Some error' : undefined,
+            error:  boolean('speechTimes - error', false) ? new Error('error') : undefined,
             loading: boolean('speechTimes - loading', false),
             parties: Array.from({length: 6}).map(() => ({
                 party: party(),
@@ -136,7 +136,7 @@ stories.add('/loggjafarthing/:assembly', () => {
             }))
         },
         issueTimes: {
-            error:  boolean('issueTimes - error', false) ? 'Some error' : undefined,
+            error:  boolean('issueTimes - error', false) ? new Error('error') : undefined,
             loading: boolean('issueTimes - loading', false),
             issues: Array.from({length: 5}).map(() => ({
                 value: faker.random.number(1000),
@@ -162,14 +162,14 @@ stories.add('/loggjafarthing/:assembly/thingmal', () => {
     const data = {
         assembly: 123,
         issues: {
-            error:  boolean('issues - error', false) ? 'Some error' : undefined,
+            error:  boolean('issues - error', false) ? new Error('error') : undefined,
             loading: boolean('issues - loading', false),
             issues: Array.from({length: 20}).map(issue),
             done: false,
         },
         filter: new Map(),
         options: {
-            error:  boolean('options - error', false) ? 'Some error' : undefined,
+            error:  boolean('options - error', false) ? new Error('error') : undefined,
             loading: boolean('options - loading', false),
             types: issueTypesList().map(type => ({
                 count: faker.random.number(100),
@@ -201,7 +201,7 @@ stories.add('/loggjafarthing/:assembly/thingmal', () => {
 
 stories.add('/loggjafarthing/:assembly/thingmal/:category/:issue', () => {
     const data = {
-        error:  boolean('error', false) ? 'Some error' : undefined,
+        error:  boolean('error', false) ? new Error('error') : undefined,
         loading: boolean('loading', false),
         assembly: 123,
         issue: 1,
@@ -209,12 +209,12 @@ stories.add('/loggjafarthing/:assembly/thingmal/:category/:issue', () => {
         progress: [],
         issueItem: issue(),
         issueProperties: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             issue: issue()
         },
         options: {
-            error:  boolean('options - error', false) ? 'Some error' : undefined,
+            error:  boolean('options - error', false) ? new Error('error') : undefined,
             loading: boolean('options - loading', false),
             types: issueTypesList().map(type => ({
                 count: faker.random.number(100),
@@ -247,19 +247,19 @@ stories.add('/loggjafarthing/:assembly/thingmal/:category/:issue', () => {
 
 stories.add('/loggjafarthing/:assembly/thingmal/:category/:issue/thingskjol', () => {
     const data = {
-        error:  boolean('error', false) ? 'Some error' : undefined,
+        error:  boolean('error', false) ? new Error('error') : undefined,
         loading: boolean('loading', false),
         assembly: 123,
         issue: 1,
         category: ('A' as CategoryType),
         issueItem: issue(),
         issueProperties: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             issue: issue()
         },
         options: {
-            error:  boolean('options - error', false) ? 'Some error' : undefined,
+            error:  boolean('options - error', false) ? new Error('error') : undefined,
             loading: boolean('options - loading', false),
             types: issueTypesList().map(type => ({
                 count: faker.random.number(100),
@@ -271,7 +271,7 @@ stories.add('/loggjafarthing/:assembly/thingmal/:category/:issue/thingskjol', ()
             })),
         },
         documents: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             documents: Array.from({length: 10}).map(document)
         },
@@ -297,7 +297,7 @@ stories.add('/loggjafarthing/:assembly/thingmal/:category/:issue/thingskjol', ()
 
 stories.add('/loggjafarthing/:assembly/thingmal/:category/:issue/raedur', () => {
     const data = {
-        error:  boolean('error', false) ? 'Some error' : undefined,
+        error:  boolean('error', false) ? new Error('error') : undefined,
         loading: boolean('loading', false),
         assembly: 123,
         issue: 1,
@@ -305,12 +305,12 @@ stories.add('/loggjafarthing/:assembly/thingmal/:category/:issue/raedur', () => 
         progress: [],
         issueItem: issue(),
         issueProperties: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             issue: issue()
         },
         options: {
-            error:  boolean('options - error', false) ? 'Some error' : undefined,
+            error:  boolean('options - error', false) ? new Error('error') : undefined,
             loading: boolean('options - loading', false),
             types: issueTypesList().map(type => ({
                 count: faker.random.number(100),
@@ -323,7 +323,7 @@ stories.add('/loggjafarthing/:assembly/thingmal/:category/:issue/raedur', () => 
         },
         filter: new Map(),
         speeches: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             speeches: Array.from({length: faker.random.number(10)}).map(speech),
             done: false
@@ -352,7 +352,7 @@ stories.add('/loggjafarthing/:assembly/thingfundir', () => {
     const data = {
         assembly: 123,
         plenaries: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             plenaries: Array.from({length: 100}).map(plenary)
         }
@@ -379,12 +379,12 @@ stories.add('/loggjafarthing/:assembly/thingfundir/:plenary', () => {
         assembly: 123,
         plenary: 321,
         agenda: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             items: Array.from({length: faker.random.number(10)}).map(plenaryItem),
         },
         plenaries: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             plenaries: Array.from({length: faker.random.number(10)}).map(plenary),
         }
@@ -410,11 +410,12 @@ stories.add('/loggjafarthing/:assembly/thingmenn', () => {
     const data = {
         assembly: 123,
         congressmen: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             congressmen: Array.from({length: faker.random.number(10)}).map(congressman),
             substitutes: Array.from({length: faker.random.number(10)}).map(congressman),
-        }
+        },
+        onFilter: action('filter congressmen names'),
 
     };
     return (
@@ -438,34 +439,29 @@ stories.add('/loggjafarthing/:assembly/thingmenn/:congressman', () => {
     const data = {
         assembly: 123,
         congressmen: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             congressmen: Array.from({length: faker.random.number(10)}).map(congressman),
             substitutes: Array.from({length: faker.random.number(10)}).map(congressman),
         },
+        onFilter: action('filter congressmen names'),
         congressman: 1234,
         sessions: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             sessions: sessions()
         },
         votes: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
-            votes: Array.from({length: 10}).map(() => ({
+
+            votes: ["absence", "announced_absence", "neutral" , "partisan"].map(vote => ({
                 count: faker.random.number(100),
-                vote: oneOf([
-                    'boðaði fjarvist',
-                    'f: óþekktur kóði',
-                    'fjarverandi',
-                    'greiðir ekki atkvæði',
-                    'já',
-                    'nei',
-                ]),
+                vote: vote
             })),
         },
         issues: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             promotions: Array.from({length: faker.random.number(10)}).map(issue),
             types: Array.from({length: faker.random.number(10)}).map((item, i) => ({
@@ -485,11 +481,13 @@ stories.add('/loggjafarthing/:assembly/thingmenn/:congressman', () => {
             }))
         },
         person: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             person: {
                 id: faker.random.number(1000),
                 name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+                birth: '1978-04-11',
+                abbreviation: 'EVA',
                 avatar: {
                     templateSrc: faker.image.avatar(),
                 },
@@ -518,7 +516,7 @@ stories.add('/loggjafarthing/:assembly/thingflokkar', () => {
     const data = {
         assembly: 123,
         parties: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             parties: Array.from({length: 10}).map(() => ({
                 party: party()
@@ -548,7 +546,7 @@ stories.add('/loggjafarthing/:assembly/thingflokkar/:party', () => {
         assembly: 123,
         party: 321,
         parties: {
-            error:  boolean('error', false) ? 'Some error' : undefined,
+            error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
             parties: Array.from({length: 10}).map(() => ({
                 party: party()

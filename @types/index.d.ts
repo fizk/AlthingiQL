@@ -1,3 +1,5 @@
+import {ApolloError} from "apollo-client";
+import {strict} from "assert";
 
 export interface Assembly {
     id: number;
@@ -143,6 +145,8 @@ export interface SpeechRange {
 export interface Person {
     id: number;
     name: string;
+    birth: string
+    abbreviation: string
     avatar: Picture;
 }
 
@@ -297,7 +301,12 @@ export interface StatusCount {
 }
 
 export interface ServerFetchStatus {
-    error: any;
+    error: /*ApolloError |*/ Error | undefined;
+    loading: boolean;
+}
+
+export interface ComponentRenderStatus {
+    error: Error | undefined;
     loading: boolean;
 }
 
@@ -368,7 +377,7 @@ export declare namespace DataSource {
         };
         cabinet: Cabinet
     }
-    
+
     export interface Committee {
         committee_id: number;
         name: string;
@@ -377,7 +386,7 @@ export declare namespace DataSource {
         abbr_long: string;
         abbr_short: string;
     }
-    
+
     export interface Constituency {
         abbr_long: string;
         abbr_short: string;
@@ -385,7 +394,7 @@ export declare namespace DataSource {
         description: string;
         name: string;
     }
-    
+
     export interface Issue {
         issue_id: number;
         assembly_id: number;
@@ -421,7 +430,7 @@ export declare namespace DataSource {
             type: string;
         }[]
     }
-    
+
     export interface DateAndCount {
         date: string;
         count: number;
@@ -434,7 +443,7 @@ export declare namespace DataSource {
         death: string;
         abbreviation: string;
     }
-    
+
     export interface Congressman extends Person {
         constituency: Constituency;
         party: Party;
@@ -454,7 +463,7 @@ export declare namespace DataSource {
         begin: string;
         end: string;
     }
-    
+
     export interface Category {
         category_id: number;
         super_category_id: number;
@@ -470,9 +479,14 @@ export declare namespace DataSource {
 
 export type CategoryType = 'a' | 'b' | 'A' | 'B';
 
+declare const __FORWARDER_SERVER__: string;
+declare const __DEVELOPMENT__: boolean;
+
 declare global {
     interface Window {
-        __APOLLO_STATE__: any;
+        __APOLLO_STATE__: string;
+        __FORWARDER_SERVER__: string;
+        __DEVELOPMENT__: boolean;
 
     }
 }

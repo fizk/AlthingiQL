@@ -1,0 +1,84 @@
+@import "../../../mixins";
+
+.assembly-congressman-panel {
+    margin: var(--space-l);
+    display: grid;
+    grid-template-columns: 400px 1fr 1fr;
+    grid-gap: var(--space-l);
+    grid-template-areas:
+        'header votes sessions'
+        'header issues speeches'
+        'header promotions promotions'
+    ;
+}
+
+.assembly-congressman-panel__header {
+    grid-area: header;
+}
+
+.assembly-congressman-panel__votes {
+    grid-area: votes;
+}
+
+.assembly-congressman-panel__issues {
+    grid-area: issues;
+}
+
+.assembly-congressman-panel__sessions {
+    grid-area: sessions;
+}
+
+.assembly-congressman-panel__speeches {
+    grid-area: speeches;
+}
+
+.assembly-congressman-panel__promotions {
+    grid-area: promotions;
+}
+
+.assembly-congressman-panel__spinner {
+    width: var(--size-l);
+    margin: auto;
+}
+
+.assembly-congressman-panel__headline {
+    font-size: var(--font-size-m);
+    font-weight: 500;
+    margin-bottom: var(--space-m);
+}
+
+//@include viewport-4 {
+//    .assembly-congressman-panel {
+//        --issue-grid-coumn-count: 1fr;
+//    }
+//
+//    .assembly-congressman-panel {
+//        margin: var(--space-l);
+//        display: grid;
+//        grid-template-columns: 1fr;
+//        grid-gap: var(--space-l);
+//        grid-template-areas:
+//            'header'
+//            'votes'
+//            'sessions'
+//            'issues'
+//            'speeches'
+//            'promotions'
+//    ;
+//    }
+//}
+//@include viewport-7  {
+//    .assembly-congressman-panel {
+//        --issue-grid-coumn-count: 1fr 1fr;
+//    }
+//}
+//@include viewport-9 {
+//    .assembly-congressman-panel {
+//        --issue-grid-coumn-count: 1fr 1fr;
+//    }
+//}
+//@include viewport-12 {
+//    .assembly-congressman-panel {
+//        --issue-grid-coumn-count: 1fr 1fr;
+//    }
+//}

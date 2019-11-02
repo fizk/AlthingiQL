@@ -1,0 +1,22 @@
+:root {
+    --portrait-background-color: var(--color-gray-light);
+}
+
+.portrait {
+    border-radius: 50%;
+    display: inline-block;
+    background-color: var(--portrait-background-color);
+}
+
+.portrait__image {
+    border-radius: 50%;
+    transition: opacity .2s;
+}
+
+.portrait__image--hidden {
+    opacity: 0;
+}
+
+.portrait__image--visible {
+    opacity: 1;
+}

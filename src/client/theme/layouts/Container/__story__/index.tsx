@@ -5,8 +5,9 @@ import {withKnobs} from '@storybook/addon-knobs';
 import {Aside, Footer, Header, Main, User} from '..';
 import AssemblyHeader from "../../../components/AssemblyHeader";
 import Congressman from "../../../components/Congressman";
-import '../global.scss';
-
+// @ts-ignore
+import notes from '../readme.md';
+import '../../../global.scss';
 
 
 const stories = storiesOf('Theme/Layouts', module);
@@ -24,7 +25,7 @@ stories.add('Scaffolding', () => {
             </div>
         </Router>
     )
-});
+}, {notes: { markdown: notes }});
 stories.add('For Assembly', () => {
     return (
         <Router>
@@ -35,6 +36,8 @@ stories.add('For Assembly', () => {
                     <Congressman key={i} congressman={{
                         id: 1,
                         name: 'some',
+                        birth: '2001-01-01',
+                        abbreviation: 'AVc',
                         avatar: {templateSrc: ''}
                     }}/>
                 ))}</Aside>
@@ -48,4 +51,4 @@ stories.add('For Assembly', () => {
             </div>
         </Router>
     )
-});
+}, {notes: { markdown: notes }});

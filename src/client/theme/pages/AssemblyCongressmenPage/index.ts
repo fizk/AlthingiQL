@@ -2,6 +2,7 @@ import {graphql} from 'react-apollo';
 import compose from '../../../utils/compose';
 import gql from 'graphql-tag';
 import AssemblyCongressmenPage from './AssemblyCongressmenPage';
+import withFilter from './withFilter';
 
 const assemblyCongressmanQuery = gql`
     query ($assembly: Int!) {
@@ -36,6 +37,8 @@ const assemblyCongressmanQuery = gql`
     }
 `;
 
+
+
 export default compose(
     graphql(assemblyCongressmanQuery, {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -48,4 +51,4 @@ export default compose(
             }}
         }
     })
-)(AssemblyCongressmenPage)
+)(withFilter(AssemblyCongressmenPage))

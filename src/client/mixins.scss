@@ -1,0 +1,39 @@
+
+
+@mixin ellipsis () {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+$breakpoint-values: (
+    //sm: 480px,
+    sm: 375px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+);
+
+@mixin viewport-4() {
+    @media (min-width: map_get($breakpoint-values, sm)) {
+        @content
+    }
+}
+
+@mixin viewport-7() {
+    @media (min-width: map_get($breakpoint-values, md)) {
+        @content
+    }
+}
+
+@mixin viewport-9() {
+    @media (min-width: map_get($breakpoint-values, lg)) {
+        @content
+    }
+}
+
+@mixin viewport-12() {
+    @media (min-width: map_get($breakpoint-values, xl)) {
+        @content
+    }
+}
