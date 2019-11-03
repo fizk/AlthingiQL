@@ -12,8 +12,8 @@ export default class CategoryRatioChart extends React.Component<Props> {
                 <table>
                     <thead>
                     <tr>
-                        <td>time</td>
-                        <td>title</td>
+                        <td>Timi (sek)</td>
+                        <td>Málaflokkur</td>
                     </tr>
                     </thead>
                     <tbody>

@@ -16,8 +16,8 @@ import CategoryRatioChart from "../../components/CategoryRatioChart";
 import IssueRatioTable from "../../components/IssueRatioTable";
 import {IssueGrid, IssueGridItem} from "../../elements/IssueGrid";
 import {Spinner} from "../../elements/Icons";
-import './index.scss';
 import ErrorBoundary from "../..//components/ErrorBoundary";
+import './index.scss';
 
 interface Props {
     assembly: number;
@@ -37,8 +37,6 @@ interface Props {
         person: Person;
     };
 }
-
-
 
 export default class AssemblyCongressmanPanel extends React.Component<Props> {
     render(): React.ReactNode {

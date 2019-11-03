@@ -1,15 +1,44 @@
 @import "../../../mixins";
 
 .assembly-congressman-panel {
+    --issue-grid-coumn-count: 1fr;
+
     margin: var(--space-l);
     display: grid;
-    grid-template-columns: 400px 1fr 1fr;
     grid-gap: var(--space-l);
+    grid-template-columns: 1fr;
     grid-template-areas:
-        'header votes sessions'
-        'header issues speeches'
-        'header promotions promotions'
+        'header'
+        'votes'
+        'sessions'
+        'issues'
+        'speeches'
+        'promotions'
     ;
+
+    @include viewport-9 {
+        --issue-grid-coumn-count: 1fr 1fr;
+
+        grid-template-columns: 400px 1fr;
+        grid-template-areas:
+            'header votes'
+            'header issues'
+            'header sessions'
+            'header speeches'
+            'promotions promotions'
+        ;
+    }
+
+    @include viewport-12 {
+        --issue-grid-coumn-count: 1fr 1fr 1fr;
+
+        grid-template-columns: 400px 1fr 1fr;
+        grid-template-areas:
+            'header votes sessions'
+            'header issues speeches'
+            'promotions promotions promotions'
+        ;
+    }
 }
 
 .assembly-congressman-panel__header {
@@ -46,39 +75,3 @@
     font-weight: 500;
     margin-bottom: var(--space-m);
 }
-
-//@include viewport-4 {
-//    .assembly-congressman-panel {
-//        --issue-grid-coumn-count: 1fr;
-//    }
-//
-//    .assembly-congressman-panel {
-//        margin: var(--space-l);
-//        display: grid;
-//        grid-template-columns: 1fr;
-//        grid-gap: var(--space-l);
-//        grid-template-areas:
-//            'header'
-//            'votes'
-//            'sessions'
-//            'issues'
-//            'speeches'
-//            'promotions'
-//    ;
-//    }
-//}
-//@include viewport-7  {
-//    .assembly-congressman-panel {
-//        --issue-grid-coumn-count: 1fr 1fr;
-//    }
-//}
-//@include viewport-9 {
-//    .assembly-congressman-panel {
-//        --issue-grid-coumn-count: 1fr 1fr;
-//    }
-//}
-//@include viewport-12 {
-//    .assembly-congressman-panel {
-//        --issue-grid-coumn-count: 1fr 1fr;
-//    }
-//}
