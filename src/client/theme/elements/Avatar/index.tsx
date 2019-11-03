@@ -24,7 +24,15 @@ export default class Avatar extends React.Component<Props> {
 
     public constructor(props: Props) {
         super(props);
-        this.observer = new IntersectionObserver(this.observerCallback, this.options);
+        this.observer = typeof window !== 'undefined' ? new IntersectionObserver(this.observerCallback, this.options) : {
+            root: null,
+            rootMargin: 'string',
+            thresholds: [],
+            disconnect: () => {},
+            observe: () => {},
+            takeRecords:() => ([]),
+            unobserve: () => {},
+        };
     }
 
     public componentDidMount(): void {

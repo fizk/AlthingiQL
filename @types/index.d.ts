@@ -1,3 +1,5 @@
+import {NormalizedCacheObject} from "apollo-cache-inmemory";
+
 export interface Assembly {
     id: number;
     period?: Period;
@@ -482,7 +484,7 @@ declare const __DEVELOPMENT__: boolean;
 
 declare global {
     interface Window {
-        __APOLLO_STATE__: string;
+        __APOLLO_STATE__: NormalizedCacheObject;
         __FORWARDER_SERVER__: string;
         __DEVELOPMENT__: boolean;
 

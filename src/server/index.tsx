@@ -4,15 +4,16 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import schema from './schema';
 import {client} from './utils/client';
+import Html from '../client/theme/layouts/Html';
 import {ApolloClient} from 'apollo-client';
-import {StaticRouter} from 'react-router';
+import {StaticRouter as Router} from 'react-router';
 import 'isomorphic-fetch';
-// import {createStore, combineReducers, applyMiddleware } from 'redux';
-// import thunk from 'redux-thunk';
-// import reducers from '../client/reducers';
-import Routers from '../client/router';
-import Chrome from '../client/components/Chrome';
-import Helmet from 'react-helmet';
+import {createHttpLink} from "apollo-link-http";
+import {InMemoryCache, IntrospectionFragmentMatcher} from "apollo-cache-inmemory";
+import {ApolloProvider} from "@apollo/react-common";
+import AppRouter from "../client/theme/routes";
+import {renderToStringWithData} from "@apollo/react-ssr";
+import introspectionQueryResultData from "../client/fragments";
 
 const assetsServer = process.env.ASSETS_SERVER || '';
 
@@ -39,113 +40,49 @@ app.use('/graphql', graphqlHTTP({
 
 app.get('*', (request, response) => {
 
-    response.send(`
-             <!doctype html>
-             <html lang="is">
-                 <head>
-                     <meta name="viewport" content="width=device-width, initial-scale=1">
-                     <link rel="stylesheet" type="text/css" href="${assetsServer}/app.css" />
-                 </head>
-                 <body>
-                     <div data-react></div>
-                     <script src="${assetsServer}/bundle.js"></script>
-                 </body>
-             </html>`);
-    response.end();
-    //
+    // response.status(200);
+    // response.send(`<!doctype html>\n${ReactDOM.renderToString(
+    //     <Html content={''} state={{}} assetsServer={assetsServer}/>
+    // )}`);
+    // response.end();
+
     // return;
 
-    // const apolloClient = new ApolloClient({
-    //     ssrMode: true,
-    //     networkInterface: createNetworkInterface({
-    //         uri: `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/graphql`,
-    //         opts: {
-    //             credentials: 'same-origin',
-    //             headers: {
-    //                 cookie: request.header('Cookie'),
-    //             },
-    //         },
-    //     }),
-    // });
-    //
-    // const combinedReducer = combineReducers({
-    //     ...reducers,
-    //     apollo: apolloClient.reducer(),
-    // });
-    // const store = createStore(combinedReducer, applyMiddleware(apolloClient.middleware(), thunk));
-    //
-    // const application = (
-    //     <ApolloProvider client={apolloClient} store={store}>
-    //         <StaticRouter location={request.url} context={{}}>
-    //             <Routers />
-    //         </StaticRouter>
-    //     </ApolloProvider>
-    // );
-    //
-    // renderToStringWithData(application).then(content => {
-    //     const initialState = {apollo: apolloClient.getInitialState()};
-    //     const helmet = Helmet.renderStatic();
-    //     const html = `<!doctype html>
-    //          <html lang="is">
-    //              <head>
-    //                  <meta name="viewport" content="width=device-width, initial-scale=1">
-    //                  <meta property="og:site_name" content="Löggjafarþing">
-    //                  <link rel="stylesheet" type="text/css" href="${assetsServer}/stylesheets/application.css" />
-    //                  ${helmet.title.toString()}
-    //                  ${helmet.meta.toString()}
-    //                  ${helmet.link.toString()}
-    //              </head>
-    //              <body>
-    //                  <div data-react>${content}</div>
-    //                  <script>
-    //                     window.__APOLLO_STATE__= ${JSON.stringify(initialState).replace(/</g, '\\\\\u003c')};
-    //                 </script>
-    //                  <script src="${assetsServer}/javascripts/application.js"></script>
-    //              </body>
-    //          </html>`;
-    //     response.status(200);
-    //     response.send(html);
-    //     response.end();
-    // }).catch(error => {
-    //     const html = ReactDOM.renderToStaticMarkup(
-    //         <html lang="is">
-    //             <head>
-    //                 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    //                 <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" />
-    //             </head>
-    //             <body>
-    //                 <Chrome>
-    //                     <pre>
-    //                         message: {error.message}
-    //                         file: {error.file}
-    //                         line: {error.line}
-    //                         column: {error.column}
-    //                     </pre>
-    //                 </Chrome>
-    //             </body>
-    //         </html>,
-    //     );
-    //     // debug('server-error')('%O', error);
-    //     switch (error.constructor) {
-    //         case ReferenceError:
-    //         case EvalError:
-    //         case SyntaxError:
-    //         case RangeError:
-    //         case TypeError:
-    //         case URIError:
-    //             response.status(500);
-    //             break;
-    //         case Error:
-    //         default:
-    //             response.status(500);
-    //             console.log('%s %s %s %s', error.message, error.fileName, error.lineNumber, error.columnNumber);
-    //             console.log('%j', error);
-    //             break;
-    //     }
-    //     // debug('server-error')('%O', error);
-    //     response.send(`<!doctype html>${html}`);
-    //     response.end();
-    // });
+    const fragmentMatcher = new IntrospectionFragmentMatcher({introspectionQueryResultData});
+    const cache = new InMemoryCache({fragmentMatcher});
+
+    const client = new ApolloClient({
+        ssrMode: true,
+        ssrForceFetchDelay: 1000,
+        link: createHttpLink({
+            uri: `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/graphql`,
+            credentials: 'same-origin',
+            headers: {
+                cookie: request.header('Cookie'),
+            },
+        }),
+        cache: cache,
+    });
+
+    const App = (
+        <ApolloProvider client={client}>
+            <Router location={request.url} context={{}}>
+                <AppRouter />
+            </Router>
+        </ApolloProvider>
+    );
+
+    renderToStringWithData(App).then((content) => {
+        const initialState = client.extract();
+        const html = <Html content={content} state={initialState} assetsServer={assetsServer} />;
+        response.status(200);
+        response.send(`<!doctype html>\n${ReactDOM.renderToStaticMarkup(html)}`);
+        response.end();
+    }).catch(error => {
+        response.status(500);
+        response.send(`error ${error.message}`);
+        response.end();
+    });
 });
 
 // tslint:disable-next-line:no-console
