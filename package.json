@@ -34,6 +34,7 @@
     "ts-jest": "^24.1.0"
   },
   "dependencies": {
+    "@apollo/react-ssr": "^3.1.3",
     "@babel/cli": "^7.6.4",
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.5.5",

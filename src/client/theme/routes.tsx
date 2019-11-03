@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FunctionComponent} from 'react';
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {Footer, Header, User} from "./layouts/Container";
 import AssemblyHeader from "./components/AssemblyHeader";
 
@@ -25,9 +25,7 @@ import './global.scss';
 
 
 const Routes: FunctionComponent<{}> = () => (
-    <Router>
-
-        <Route path="/loggjafarthing/:assembly" render={({match}): React.ReactNode => (
+    <Route path="/loggjafarthing/:assembly" render={({match}): React.ReactNode => (
             <div className="app">
                 <Header>
                     <AssemblyHeader id={match.params.assembly} title="Ráðuneyti Katrínar Jakobsdóttur"/>
@@ -112,8 +110,6 @@ const Routes: FunctionComponent<{}> = () => (
             </div>
         )}>
         </Route>
-
-    </Router>
 );
 
 export default Routes;

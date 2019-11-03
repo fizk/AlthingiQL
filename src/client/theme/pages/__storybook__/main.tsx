@@ -463,7 +463,7 @@ stories.add('/loggjafarthing/:assembly/thingmenn/:congressman', () => {
         issues: {
             error:  boolean('error', false) ? new Error('error') : undefined,
             loading: boolean('loading', false),
-            promotions: Array.from({length: faker.random.number(10)}).map(issue),
+            promotions: Array.from({length: faker.random.number({min: 1, max: 10})}).map(issue),
             types: Array.from({length: faker.random.number(10)}).map((item, i) => ({
                     order: i,
                     type: faker.lorem.word(),

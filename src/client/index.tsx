@@ -10,9 +10,10 @@ import {ApolloLink} from 'apollo-link';
 import introspectionQueryResultData from './fragments';
 import {onError} from "apollo-link-error";
 import {postGraphQLError, postNetworkError} from './utils/postError'
+import {BrowserRouter as Router} from "react-router-dom";
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({introspectionQueryResultData});
-const cache = new InMemoryCache({fragmentMatcher});
+const cache = new InMemoryCache({fragmentMatcher}).restore(window.__APOLLO_STATE__);
 
 const linkError = onError(({ graphQLErrors, networkError, operation }): void => {
     graphQLErrors && postGraphQLError(graphQLErrors, operation);
@@ -27,10 +28,11 @@ const client = new ApolloClient({
     ]),
 });
 
-ReactDOM.render(
-// ReactDOM.hydrate(
+ReactDOM.hydrate(
     <ApolloProvider client={client}>
-        <AppRouter />
+        <Router>
+            <AppRouter />
+        </Router>
     </ApolloProvider>,
     document.querySelector('[data-react]'),
 );

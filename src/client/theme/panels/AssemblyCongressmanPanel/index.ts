@@ -86,6 +86,9 @@ const queryAssemblyCongressman = gql`
 
 export default compose(
     graphql(queryAssemblyCongressmanSession, {
+        options: {
+            ssr: true
+        },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, CongressmanAssemblySessions}}: any) => {
             return {sessions: {
@@ -96,6 +99,9 @@ export default compose(
         }
     }),
     graphql(queryAssemblyCongressmanVotes, {
+        options: {
+            ssr: true
+        },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, CongressmanAssemblyVotes}}: any) => {
             return {votes: {
@@ -106,6 +112,9 @@ export default compose(
         }
     }),
     graphql(queryAssemblyCongressmanIssues, {
+        options: {
+            ssr: true
+        },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props: ({data: {error, loading, CongressmanAssemblyPromote, CongressmanIssueTypePromotion, CongressmanAssemblyCategorySpeechTime}}: any) => {
             return {issues: {
@@ -128,6 +137,7 @@ export default compose(
             }}
         },
         options: ({assembly, congressman}: {assembly: number; congressman: number}) => ({
+            ssr: true,
             variables: {
                 assembly,
                 congressman,
