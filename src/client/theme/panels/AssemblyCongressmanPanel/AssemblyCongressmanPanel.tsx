@@ -15,7 +15,7 @@ import VoteRatioChart from "../../components/VoteRatioChart";
 import CategoryRatioChart from "../../components/CategoryRatioChart";
 import IssueRatioTable from "../../components/IssueRatioTable";
 import {IssueGrid, IssueGridItem} from "../../elements/IssueGrid";
-import {Spinner} from "../../elements/Icons";
+import {Error, Spinner} from "../../elements/Icons";
 import ErrorBoundary from "../..//components/ErrorBoundary";
 import './index.scss';
 import {Helmet} from "react-helmet";
@@ -62,10 +62,16 @@ export default class AssemblyCongressmanPanel extends React.Component<Props> {
                             </>
                         )}
                         {!this.props.person.error && this.props.person.loading && (
-                            <h2>Loading...</h2>
+                            <>
+                                <h2>...</h2>
+                                <h3>&nbsp;</h3>
+                            </>
                         )}
                         {this.props.person.error &&  (
-                            <h2>Error...{this.props.person.error.message}</h2>
+                            <>
+                                <h2>...</h2>
+                                <h3>{this.props.person.error.message}</h3>
+                            </>
                         )}
                     </header>
                     <section className="assembly-congressman-panel__votes">
@@ -126,12 +132,14 @@ export default class AssemblyCongressmanPanel extends React.Component<Props> {
                             </IssueGrid>
                         )}
                         {!this.props.issues.error && this.props.issues.loading && (
-                            <div className="assembly-congressman-panel__spinner">
+                            <div className="assembly-congressman-panel__icon-container">
                                 <Spinner/>
                             </div>
                         )}
                         {this.props.issues.error &&  (
-                            <div>Error...</div>
+                            <div className="assembly-congressman-panel__icon-container">
+                                <Error/>
+                            </div>
                         )}
                     </aside>
                 </article>
