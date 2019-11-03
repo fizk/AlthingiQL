@@ -12,6 +12,7 @@ import AssemblyParty from './pages/AssemblyParty';
 
 export default () => (
     <Chrome>
+
         <Route exact={true} path="/" component={Index} />
         <Route path="/loggjafarthing" render={() => (
             <Route path="/loggjafarthing/:assembly([0-9]*)" render={() => (
@@ -47,5 +48,6 @@ export default () => (
         <Route path="/raduneyti" render={() => (
             <Cabinet />
         )}/>
+
     </Chrome>
 );

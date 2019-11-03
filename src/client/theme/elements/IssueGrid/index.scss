@@ -1,0 +1,30 @@
+@import "../../../mixins";
+
+:root {
+    --issue-grid-coumn-count: 1fr 1fr 1fr;
+}
+
+.issue-grid {
+    display: grid;
+    grid-template-columns: var(--issue-grid-coumn-count);
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: var(--space-l);
+    grid-auto-flow: dense;
+    list-style: none;
+}
+
+.issue-grid__item {
+    background-color: white;
+}
+
+.issue-grid__item--sm {
+    grid-row: span 1;
+}
+
+.issue-grid__item--md {
+    grid-row: span 2;
+}
+
+.issue-grid__item--lg {
+    grid-row: span 3;
+}

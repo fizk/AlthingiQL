@@ -1,0 +1,88 @@
+:root {
+    --vote-ratio-chart-absence: var(--color-gray-middle);
+    --vote-ratio-chart-announced_absence: var(--color-gray-light);
+    --vote-ratio-chart-partisan: var(--color-green);
+    --vote-ratio-chart-neutral: var(--color-yellow);
+    --vote-ratio-chart-default: var(--color-gray-light);
+    --vote-ratio-chart-error: var(--color-red);
+}
+
+.vote-ratio-chart {
+    display: flex;
+}
+
+// Container
+.vote-ratio-chart__pie {
+    align-self: flex-start;
+}
+
+.vote-ratio-chart__legend {
+    align-self: center;
+    flex-grow: 1;
+}
+
+// Table
+.vote-ratio-chart__legend-table {
+    font-size: var(--font-size-s);
+    font-weight: 100;
+    padding: 0 var(--space-m);
+    table-layout: fixed;
+}
+
+.vote-ratio-chart__legend-count {
+    text-align: right;
+}
+.vote-ratio-chart__legend-label {
+    vertical-align: center;
+    padding: 0 var(--space-s);
+}
+.vote-ratio-chart__legend-vote {}
+
+// Table dot / label
+.vote-ratio-chart__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.vote-ratio-chart__dot--absence {
+    background-color: var(--vote-ratio-chart-absence);
+}
+.vote-ratio-chart__dot--announced_absence {
+    background-color: var(--vote-ratio-chart-announced_absence);
+}
+.vote-ratio-chart__dot--partisan {
+    background-color: var(--vote-ratio-chart-partisan);
+}
+.vote-ratio-chart__dot--neutral {
+    background-color: var(--vote-ratio-chart-neutral);
+}
+.vote-ratio-chart__dot--default {
+    background-color: var(--vote-ratio-chart-default);
+}
+.vote-ratio-chart__dot-error {
+    background-color: var(--vote-ratio-chart-error);
+}
+
+// Pie
+.pie-chart__path--absence {
+    fill: var(--vote-ratio-chart-absence);
+}
+.pie-chart__path--announced_absence  {
+    fill: var(--vote-ratio-chart-announced_absence);
+}
+
+.pie-chart__path--partisan {
+    fill: var(--vote-ratio-chart-partisan);
+}
+.pie-chart__path--neutral {
+    fill: var(--vote-ratio-chart-neutral);
+}
+
+.pie-chart__path--default {
+    fill: var(--vote-ratio-chart-default);
+}
+.pie-chart__path--error {
+    fill: var(--vote-ratio-chart-error);
+}
+

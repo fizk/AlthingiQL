@@ -33,6 +33,8 @@ module.exports = {
         }),
         new DefinePlugin({
             __GRAPHQL_SERVER__: JSON.stringify(process.env.GRAPHQL_SERVER || 'http://localhost:3000/graphql'),
+            __FORWARDER_SERVER__: JSON.stringify(process.env.FORWARDER_SERVER || 'http://localhost:8008'),
+            __DEVELOPMENT__: JSON.stringify(process.env.NODE_ENV === 'development')
         })
     ],
     module: {

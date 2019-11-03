@@ -1,33 +1,74 @@
+@import "../../../mixins";
+
+:root {
+    --app-color-background-aside: var(--color-white);
+    --app-color-background-footer: var(--color-white);
+    --app-color-background-header: var(--color-red);
+    --app-color-text-header: var(--color-off-white);
+}
+
 .app {
     display: grid;
-    grid-template-columns: minmax(200px, auto) 1fr 1fr;
-    grid-template-rows: auto 1fr;
-
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
     grid-template-areas:
-        'aside header user'
-        'aside main main'
-        'aside footer footer'
-    ;
+        'header'
+        'user'
+        'main'
+        'footer'
+;
+    height: 100vh;
+}
+@include viewport-7 {
+    .app {
+        display: grid;
+        grid-template-columns: 350px 1fr 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            'aside header user'
+            'aside main main'
+            'footer footer footer'
+        ;
+        height: 100vh;
+    }
+}
 
-}
 .app__aside {
-    background-color: var(--color-white);
-    min-height: 100vh;
+    background-color: var(--app-color-background-aside);
     grid-area: aside;
+    overflow-y: scroll;
+
+    //offscreen canvas
+    position: fixed;
+    transform: translateX(-100%);
+    min-height: 100vh;
+    transition: transform .2s ease-in-out;
+    top: 0;
+    bottom: 0;
 }
+@include viewport-7 {
+    .app__aside {
+        position: static;
+        transform: translateX(0);
+    }
+}
+
 .app__header {
-    color: var(--font-color-secondary);
-    background-color: var(--primary-color-middle);
+    color: var(--app-color-text-header);
+    background-color: var(--app-color-background-header);
     grid-area: header;
 }
+
 .app__user {
     grid-area: user;
 }
 
 .app__main {
     grid-area: main;
+    overflow-y: scroll;
 }
+
 .app__footer {
-    background-color: var(--primary-color-dark);
+    background-color: var(--app-color-background-footer);
     grid-area: footer;
 }

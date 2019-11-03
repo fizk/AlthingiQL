@@ -23,8 +23,10 @@ import AssemblyPartyPanel from "./panels/AssemblyPartyPanel";
 import AssemblyIssuePanel from "./panels/AssemblyIssuePanel";
 import './global.scss';
 
+
 const Routes: FunctionComponent<{}> = () => (
     <Router>
+
         <Route path="/loggjafarthing/:assembly" render={({match}): React.ReactNode => (
             <div className="app">
                 <Header>
@@ -68,7 +70,6 @@ const Routes: FunctionComponent<{}> = () => (
                             </>
                         )} />
                     </AssemblyIssuesPage>
-
                     </>
                 )} />
 
@@ -90,8 +91,7 @@ const Routes: FunctionComponent<{}> = () => (
                             <AssemblyCongressmenPanel assembly={Number(match.params.assembly)} />
                         )} />
                         <Route exact path="/loggjafarthing/:assembly/thingmenn/:congressman" render={({match}): React.ReactNode => (
-                            <AssemblyCongressmanPanel assembly={Number(match.params.assembly)}
-                                                      congressman={Number(match.params.congressman)} />
+                            <AssemblyCongressmanPanel assembly={Number(match.params.assembly)} congressman={Number(match.params.congressman)} />
                         )} />
                     </AssemblyCongressmenPage>
                 )} />
@@ -112,6 +112,7 @@ const Routes: FunctionComponent<{}> = () => (
             </div>
         )}>
         </Route>
+
     </Router>
 );
 

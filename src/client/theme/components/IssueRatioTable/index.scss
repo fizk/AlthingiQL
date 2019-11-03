@@ -1,0 +1,115 @@
+.issue-ratio-table {
+    display: flex;
+}
+
+.issue-ratio-table__pie {
+    align-self: center;
+}
+.issue-ratio-table__legend {
+    align-self: flex-start;
+    flex-grow: 1;
+}
+
+.issue-ratio-table__legend-table {
+    font-size: var(--font-size-s);
+    font-weight: 100;
+    padding: 0 var(--space-m);
+    table-layout: fixed;
+}
+.issue-ratio-table__legend-label {}
+.issue-ratio-table__legend-table-count {
+    text-align: right;
+}
+.issue-ratio-table__legend-table-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.issue-ratio-table__legend-table-dot--a {
+    background-color: var(--issue-a);
+}
+.issue-ratio-table__legend-table-dot--b {
+    background-color: var(--issue-b);
+}
+.issue-ratio-table__legend-table-dot--f {
+    background-color: var(--issue-f);
+}
+.issue-ratio-table__legend-table-dot--ff {
+    background-color: var(--issue-ff);
+}
+.issue-ratio-table__legend-table-dot--ft {
+    background-color: var(--issue-ft);
+}
+.issue-ratio-table__legend-table-dot--l {
+    background-color: var(--issue-l);
+}
+.issue-ratio-table__legend-table-dot--m {
+    background-color: var(--issue-m);
+}
+.issue-ratio-table__legend-table-dot--n {
+    background-color: var(--issue-n);
+}
+.issue-ratio-table__legend-table-dot--q {
+    background-color: var(--issue-q);
+}
+.issue-ratio-table__legend-table-dot--s {
+    background-color: var(--issue-s);
+}
+.issue-ratio-table__legend-table-dot--ud {
+    background-color: var(--issue-a);
+}
+.issue-ratio-table__legend-table-dot--um {
+    background-color: var(--issue-um);
+}
+.issue-ratio-table__legend-table-dot--uu {
+    background-color: var(--issue-uu);
+}
+.issue-ratio-table__legend-table-dot--v {
+    background-color: var(--issue-v);
+}
+
+// Pie
+.pie-chart__path--a {
+    fill: var(--issue-a);
+}
+.pie-chart__path--b {
+    fill: var(--issue-b);
+}
+.pie-chart__path--f {
+    fill: var(--issue-f);
+}
+.pie-chart__path--ff {
+    fill: var(--issue-ff);
+}
+.pie-chart__path--ft {
+    fill: var(--issue-ft);
+}
+.pie-chart__path--l {
+    fill: var(--issue-l);
+}
+.pie-chart__path--m {
+    fill: var(--issue-m);
+}
+.pie-chart__path--n {
+    fill: var(--issue-n);
+}
+.pie-chart__path--q {
+    fill: var(--issue-q);
+}
+.pie-chart__path--s {
+    fill: var(--issue-s);
+}
+.pie-chart__path--ud {
+    fill: var(--issue-ud);
+}
+.pie-chart__path--um {
+    fill: var(--issue-um);
+}
+.pie-chart__path--uu {
+    fill: var(--issue-uu);
+}
+.pie-chart__path--v {
+    fill: var(--issue-v);
+}

@@ -1,0 +1,36 @@
+:root {
+    --session-diagram-stroke: var(--color-gray-middle);
+    --session-diagram-congressman: var(--color-green);
+    --session-diagram-substitute: var(--color-yellow);
+    --session-diagram-with-substitute: var(--color-gray-light);
+    --session-diagram-error: var(--color-red);
+}
+
+.session-diagram__line {
+    stroke-width: 1;
+    stroke: var(--session-diagram-stroke);
+}
+
+.session-diagram__bar {
+
+}
+
+.session-diagram__bar--congressman {
+    fill: var(--session-diagram-congressman);
+}
+
+.session-diagram__bar--substitute {
+    fill: var(--session-diagram-substitute);
+}
+
+.session-diagram__bar--with-substitute {
+    fill: var(--session-diagram-with-substitute);
+}
+
+.session-diagram__bar--error {
+    fill: var(--session-diagram-error);
+}
+
+.session-diagram__label {
+    fill: var(--session-diagram-stroke);
+}

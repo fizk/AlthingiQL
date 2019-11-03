@@ -17,11 +17,11 @@ export default class AssemblyIssuesPanel extends React.Component<Props> {
     render(): React.ReactNode {
         return (
             <>
-                {!this.props.issues.error && this.props.issues.loading === false && (
+                {!this.props.issues.error && !this.props.issues.loading && (
                     <>
                     <ul>
                         {this.props.issues.issues.map(issue => (
-                            <li key={issue.id}>
+                            <li key={`${issue.id}${issue.type.type}`}>
                                 <Link to={`/loggjafarthing/${issue.assembly.id}/thingmal/${issue.type.category}/${issue.id}`}>
                                     {issue.id} {issue.name}
                                 </Link>
@@ -34,7 +34,7 @@ export default class AssemblyIssuesPanel extends React.Component<Props> {
                     </>
 
                 )}
-                {!this.props.issues.error && this.props.issues.loading === true && (
+                {!this.props.issues.error && this.props.issues.loading && (
                     <div>Loading...</div>
                 )}
                 {this.props.issues.error && (
