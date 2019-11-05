@@ -36,7 +36,7 @@
 .app__aside {
     background-color: var(--app-color-background-aside);
     grid-area: aside;
-    overflow-y: scroll;
+    //overflow-y: scroll;
 
     //offscreen canvas
     position: fixed;

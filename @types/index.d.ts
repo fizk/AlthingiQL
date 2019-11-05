@@ -150,6 +150,16 @@ export interface Person {
     avatar: Picture;
 }
 
+export interface AssemblyCongressman {
+    id: number;
+    name: string;
+    birth: string;
+    abbreviation: string;
+    avatar: Picture;
+    constituency: Constituency;
+    parties: Party[];
+}
+
 export interface Congressman extends Person {
     party: Party;
     assembly?: Assembly;
@@ -267,6 +277,11 @@ export interface IssueSummary {
 export interface VoteSummary {
     count: number;
     vote: string;
+}
+
+export interface ValueCount {
+    count: number;
+    value: string;
 }
 
 export interface Document {

@@ -1,13 +1,9 @@
 import {GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLList} from 'graphql';
 import {GraphQLDateTime} from 'graphql-iso-date';
 import Assembly from './Assembly';
-import Congressman from './Congressman';
 import CongressmanValue from './CongressmanValue';
 import IssueInterface from './IssueInterface';
 import {DataSource} from '../../../@types';
-import IssueCategory from './IssueCategory';
-import IssueType from './IssueType';
-import Category from "./Category";
 import Type from "./Type";
 import Proponent from "./Proponent";
 
@@ -34,6 +30,14 @@ const IssueA: GraphQLObjectType = new GraphQLObjectType<DataSource.Issue>({
         type: {
             type: Type,
             resolve: (root) => ({...root}),
+        },
+        documentType: {
+            type: GraphQLString,
+            resolve: ({document_type}) => document_type,
+        },
+        documentURL: {
+            type: GraphQLString,
+            resolve: ({document_url}) => document_url,
         },
         status: {
             type: GraphQLString,

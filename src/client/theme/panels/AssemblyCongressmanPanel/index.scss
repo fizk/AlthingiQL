@@ -19,7 +19,7 @@
     @include viewport-9 {
         --issue-grid-coumn-count: 1fr 1fr;
 
-        grid-template-columns: 400px 1fr;
+        grid-template-columns: 330px 1fr;
         grid-template-areas:
             'header votes'
             'header issues'
@@ -32,13 +32,24 @@
     @include viewport-12 {
         --issue-grid-coumn-count: 1fr 1fr 1fr;
 
-        grid-template-columns: 400px 1fr 1fr;
+        grid-template-columns: 330px 1fr 1fr;
         grid-template-areas:
             'header votes sessions'
             'header issues speeches'
             'promotions promotions promotions'
         ;
     }
+}
+
+.assembly-congressman-panel__title {
+    text-align: center;
+    padding: var(--space-m) 0 var(--space-s) 0;
+    font-size: var(--font-size-l);
+}
+.assembly-congressman-panel__subtitle {
+    text-align: center;
+    font-weight: 300;
+    font-size: var(--font-size-m);
 }
 
 .assembly-congressman-panel__header {

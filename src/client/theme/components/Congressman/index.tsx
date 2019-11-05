@@ -30,9 +30,9 @@ export default class Congressman extends React.Component<Props> {
 
         const size = (this.props.variations || []).reduce((previous, current) => {
             if (current === 'md') return 39;
-            if (current === 'lg') return 61;
+            if (current === 'lg') return 49;
             return previous;
-        }, 39);
+        }, 49);
 
         return (
             <section className={classVariations('congressman', this.props.variations)}>

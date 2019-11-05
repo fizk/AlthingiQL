@@ -21,47 +21,53 @@ export default class AssemblyCongressmenPage extends React.Component<Props> {
             <>
                 <Main>{this.props.children}</Main>
                 <Aside>
-                    <section className="assembly-congressman-page__search">
-                        <input onChange={this.props.onFilter} className="assembly-congressman-page__search-input" type="search" placeholder="Leita..."/>
-                    </section>
-                    {!this.props.congressmen.error && this.props.congressmen.loading === false && (
-                        <>
-                            <h3 className="assembly-congressman-page__title">Þingmenn</h3>
-                            <ul className="assembly-congressman-page__congressman-list">
-                                {this.props.congressmen.congressmen.map(congressman => (
-                                    <li key={congressman.id} className="assembly-congressman-page__congressman-item">
-                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>
-                                            <Congressman congressman={congressman} party={congressman.party} >
-                                                <h4 className="assembly-congressman-page__congressman-title">{congressman.party.name}</h4>
-                                                <h4 className="assembly-congressman-page__congressman-title">{congressman.constituency && congressman.constituency.name}</h4>
-                                            </Congressman>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                            <h3 className="assembly-congressman-page__title">Varamenn</h3>
-                            <ul className="assembly-congressman-page__congressman-list">
-                                {this.props.congressmen.substitutes.map(congressman => (
-                                    <li key={congressman.id} className="assembly-congressman-page__congressman-item">
-                                        <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>
-                                            <Congressman congressman={congressman} party={congressman.party} >
-                                                <h4 className="assembly-congressman-page__congressman-title">{congressman.party.name}</h4>
-                                                <h4 className="assembly-congressman-page__congressman-title">{congressman.constituency && congressman.constituency.name}</h4>
-                                            </Congressman>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </>
-                    )}
-                    {!this.props.congressmen.error && this.props.congressmen.loading === true && (
-                        <div className="assembly-congressman-page__loader">
-                            <Spinner />
-                        </div>
-                    )}
-                    {this.props.congressmen.error &&  (
-                        <div>Error...</div>
-                    )}
+                    <div className="assembly-congressman-page">
+                        <section className="assembly-congressman-page__search">
+                            <input onChange={this.props.onFilter} className="assembly-congressman-page__search-input" type="search" placeholder="Leita..."/>
+                        </section>
+                        {!this.props.congressmen.error && !this.props.congressmen.loading && (
+                            <div className="assembly-congressman-page__list">
+                                <div>
+                                <h3 className="assembly-congressman-page__title">Þingmenn</h3>
+                                <ul className="assembly-congressman-page__congressman-list">
+                                    {this.props.congressmen.congressmen.map(congressman => (
+                                        <li key={congressman.id} className="assembly-congressman-page__congressman-item">
+                                            <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>
+                                                <Congressman congressman={congressman} party={congressman.party} >
+                                                    <h4 className="assembly-congressman-page__congressman-title">{congressman.party.name}</h4>
+                                                    <h4 className="assembly-congressman-page__congressman-title">{congressman.constituency && congressman.constituency.name}</h4>
+                                                </Congressman>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                                </div>
+                                <div>
+                                <h3 className="assembly-congressman-page__title">Varamenn</h3>
+                                <ul className="assembly-congressman-page__congressman-list">
+                                    {this.props.congressmen.substitutes.map(congressman => (
+                                        <li key={congressman.id} className="assembly-congressman-page__congressman-item">
+                                            <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>
+                                                <Congressman congressman={congressman} party={congressman.party} >
+                                                    <h4 className="assembly-congressman-page__congressman-title">{congressman.party.name}</h4>
+                                                    <h4 className="assembly-congressman-page__congressman-title">{congressman.constituency && congressman.constituency.name}</h4>
+                                                </Congressman>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                                </div>
+                            </div>
+                        )}
+                        {!this.props.congressmen.error && this.props.congressmen.loading && (
+                            <div className="assembly-congressman-page__loader">
+                                <Spinner />
+                            </div>
+                        )}
+                        {this.props.congressmen.error &&  (
+                            <div>Error...</div>
+                        )}
+                    </div>
                 </Aside>
             </>
         )

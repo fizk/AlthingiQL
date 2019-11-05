@@ -5,8 +5,8 @@ import {
     Session,
     SuperCategorySpeechTime,
     VoteSummary,
-    Person,
-    Issue
+    AssemblyCongressman,
+    Issue, ValueCount
 } from "../../../../../@types";
 import {Link} from "react-router-dom";
 import Portrait from "../../elements/Portrait";
@@ -17,8 +17,8 @@ import IssueRatioTable from "../../components/IssueRatioTable";
 import {IssueGrid, IssueGridItem} from "../../elements/IssueGrid";
 import {Error, Spinner} from "../../elements/Icons";
 import ErrorBoundary from "../..//components/ErrorBoundary";
-import './index.scss';
 import {Helmet} from "react-helmet";
+import './index.scss';
 
 interface Props {
     assembly: number;
@@ -35,7 +35,10 @@ interface Props {
         speeches: SuperCategorySpeechTime[];
     };
     person: ServerFetchStatus & {
-        person: Person;
+        person: AssemblyCongressman;
+    };
+    otherDocs: ServerFetchStatus & {
+        docs: ValueCount[];
     };
 }
 
@@ -57,20 +60,28 @@ export default class AssemblyCongressmanPanel extends React.Component<Props> {
 
                         {!this.props.person.error && !this.props.person.loading && (
                             <>
-                                <h2>{this.props.person.person.name} - ({this.props.person.person.abbreviation})</h2>
-                                <h3>{this.props.person.person.birth}</h3>
+                                <h2 className="assembly-congressman-panel__title">{this.props.person.person.name} - ({this.props.person.person.abbreviation})</h2>
+                                <h3 className="assembly-congressman-panel__subtitle">{this.props.person.person.birth}</h3>
+                                <h3 className="assembly-congressman-panel__subtitle">
+                                    {this.props.person.person.constituency.name}
+                                </h3>
+                                <ul>
+                                    {this.props.person.person.parties.map(party => (
+                                        <li key={party.id}>{party.name}</li>
+                                    ))}
+                                </ul>
                             </>
                         )}
                         {!this.props.person.error && this.props.person.loading && (
                             <>
-                                <h2>...</h2>
-                                <h3>&nbsp;</h3>
+                                <h2 className="assembly-congressman-panel__title">...</h2>
+                                <h3 className="assembly-congressman-panel__subtitle">&nbsp;</h3>
                             </>
                         )}
                         {this.props.person.error &&  (
                             <>
-                                <h2>...</h2>
-                                <h3>{this.props.person.error.message}</h3>
+                                <h2 className="assembly-congressman-panel__title">...</h2>
+                                <h3 className="assembly-congressman-panel__subtitle">{this.props.person.error.message}</h3>
                             </>
                         )}
                     </header>
@@ -93,6 +104,14 @@ export default class AssemblyCongressmanPanel extends React.Component<Props> {
                                          error={this.props.issues.error}
                                          issues={this.props.issues.types}/>
                         </ErrorBoundary>
+                        <h3>Onnur thingskjol</h3>
+                        {!this.props.otherDocs.error && !this.props.otherDocs.loading && (
+                            <ul>
+                                {this.props.otherDocs.docs.map(document => (
+                                    <li key={document.value}>{document.count} | {document.value}</li>
+                                ))}
+                            </ul>
+                        )}
                     </section>
                     <section className="assembly-congressman-panel__sessions">
                         <h3 className="assembly-congressman-panel__headline">
