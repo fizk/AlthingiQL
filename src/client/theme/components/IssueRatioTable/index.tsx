@@ -49,14 +49,10 @@ export default class IssueRatioTable extends React.Component<Props> {
                     {!this.props.error && !this.props.loading && this.props.issues.map(issue => (
                         <tr key={issue.type}>
                             <td className="issue-ratio-table__legend-table-count">{issue.count}</td>
-                            {/*<td>{issue.documentType}</td>*/}
-                            {/*<td>{issue.order}</td>*/}
                             <td className="vote-ratio-chart__legend-label">
                                 <div className={classVariations('issue-ratio-table__legend-table-dot', [issue.type])} />
                             </td>
-                            <td>{issue.type}</td>
-                            {/*<td>{issue.typeName}</td>*/}
-                            {/*<td>{issue.typeSubName}</td>*/}
+                            <td>{issue.typeSubName ||issue.typeName}</td>
                         </tr>
                     ))}
                     </tbody>

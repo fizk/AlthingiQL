@@ -72,18 +72,28 @@ const queryAssemblyCongressmanIssues = gql`
 `;
 
 const queryAssemblyCongressman = gql`
-    query congressmanAssemblySessions ($congressman: Int!) {
-        Person(id: $congressman) {
+    query congressmanAssemblySessions ($assembly: Int! $congressman: Int!) {
+        CongressmanAssembly(assembly: $assembly congressman: $congressman) {
             id
             name
             avatar {templateSrc}
             birth
             abbreviation
-            
+            parties {id name color}
+            constituency {id name abbr_short}
         }
     }
 `;
 
+
+const queryAssemblyCongressmanOtherDocs = gql`
+    query CongressmanOtherDocuments ($assembly: Int! $congressman: Int!) {
+        CongressmanOtherDocuments (assembly: $assembly congressman: $congressman) {
+            value
+            count
+        }
+    }
+`;
 export default compose(
     graphql(queryAssemblyCongressmanSession, {
         options: {
@@ -129,11 +139,28 @@ export default compose(
     }),
     graphql(queryAssemblyCongressman, {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        props: ({data: {loading, error, Person}}: any) => {
+        props: ({data: {loading, error, CongressmanAssembly}}: any) => {
             return {person: {
                 loading,
                 error,
-                person: loading === false ? Person : undefined,
+                person: loading === false ? CongressmanAssembly : undefined,
+            }}
+        },
+        options: ({assembly, congressman}: {assembly: number; congressman: number}) => ({
+            ssr: true,
+            variables: {
+                assembly,
+                congressman,
+            },
+        }),
+    }),
+    graphql(queryAssemblyCongressmanOtherDocs, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        props: ({data: {loading, error, CongressmanOtherDocuments}}: any) => {
+            return {otherDocs: {
+                loading,
+                error,
+                docs: loading === false ? CongressmanOtherDocuments : undefined,
             }}
         },
         options: ({assembly, congressman}: {assembly: number; congressman: number}) => ({

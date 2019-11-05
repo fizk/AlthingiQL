@@ -1,17 +1,33 @@
-
+@import "../../../mixins";
 :root {
     --assembly-congressman-page-supplementary-color: var(--color-off-white);
+}
+
+.assembly-congressman-page {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+}
+
+.assembly-congressman-page__list {
+    flex-grow: 1;
+    overflow: scroll;
 }
 
 .assembly-congressman-page__title {
     font-weight: 300;
     font-size: var(--font-size-m);
-    padding: 0 var(--space-l);
+    padding: var(--space-m) var(--space-l);
+    position: sticky;
+    top: 0;
+    background-color: var(--color-white);
+    z-index: 1;
 }
 
 .assembly-congressman-page__congressman-list {
     list-style: none;
-    padding: 0 var(--space-l);
+    padding: 0 var(--space-l) var(--space-l) var(--space-l);
 }
 
 .assembly-congressman-page__congressman-item {
@@ -22,6 +38,7 @@
 .assembly-congressman-page__congressman-title {
     font-weight: 100;
     font-size: var(--font-size-s);
+    @include ellipsis;
 }
 
 .assembly-congressman-page__search {
