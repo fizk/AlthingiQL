@@ -28,10 +28,10 @@ export default class Portrait extends React.Component<Props> {
             root: null,
             rootMargin: 'string',
             thresholds: [],
-            disconnect: () => {},
-            observe: () => {},
-            takeRecords:() => ([]),
-            unobserve: () => {},
+            disconnect: (): void => {},
+            observe: (): void => {},
+            takeRecords:(): IntersectionObserverEntry[] => ([]),
+            unobserve: (): void => {},
         };
     }
 

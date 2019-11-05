@@ -108,7 +108,7 @@ export default class AssemblyCongressmanPanel extends React.Component<Props> {
                         {!this.props.otherDocs.error && !this.props.otherDocs.loading && (
                             <ul>
                                 {this.props.otherDocs.docs.map(document => (
-                                    <li>{document.count} | {document.value}</li>
+                                    <li key={document.value}>{document.count} | {document.value}</li>
                                 ))}
                             </ul>
                         )}
