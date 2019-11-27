@@ -40,6 +40,9 @@ interface Props {
     otherDocs: ServerFetchStatus & {
         docs: ValueCount[];
     };
+    speechTime: ServerFetchStatus & {
+        time: ValueCount;
+    };
 }
 
 export default class AssemblyCongressmanPanel extends React.Component<Props> {
@@ -57,7 +60,6 @@ export default class AssemblyCongressmanPanel extends React.Component<Props> {
                                 ? (this.props.person.person.avatar.templateSrc || '').replace('{size}', '330x330')
                                 : undefined
                         }/>
-
                         {!this.props.person.error && !this.props.person.loading && (
                             <>
                                 <h2 className="assembly-congressman-panel__title">{this.props.person.person.name} - ({this.props.person.person.abbreviation})</h2>
@@ -111,6 +113,16 @@ export default class AssemblyCongressmanPanel extends React.Component<Props> {
                                     <li key={document.value}>{document.count} | {document.value}</li>
                                 ))}
                             </ul>
+                        )}
+                        <h3>Heildar raedutimi</h3>
+                        {!this.props.speechTime.error && !this.props.speechTime.loading && (
+                            <p>{Math.floor(this.props.speechTime.time.count / 60)} minutur</p>
+                        )}
+                        {!this.props.speechTime.error && this.props.speechTime.loading && (
+                            <p>0 minutur</p>
+                        )}
+                        {this.props.speechTime.error && (
+                            <p>0 minutur</p>
                         )}
                     </section>
                     <section className="assembly-congressman-panel__sessions">

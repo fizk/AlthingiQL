@@ -1,4 +1,4 @@
-FROM node:10.16.3-buster-slim
+FROM node:10.17.0-buster-slim
 
 RUN apt-get update \
   && apt-get install -y  vim

@@ -28,6 +28,7 @@ import CongressmenAssemblyResolutions from './CongressmenAssemblyResolutions';
 import CongressmenAssemblyBills from './CongressmenAssemblyBills';
 import CongressmanAssembly from './CongressmanAssembly';
 import CongressmanOtherDocuments from './CongressmanOtherDocuments';
+import CongressmanAssemblySpeechTime from './CongressmanAssemblySpeechTime';
 import DocumentVotes from './DocumentVotes';
 import Inflation from './Inflation';
 import Inflations from './Inflations';
@@ -66,6 +67,7 @@ export default {
     CongressmenAssemblyBills,
     CongressmanAssembly,
     CongressmanOtherDocuments,
+    CongressmanAssemblySpeechTime,
     DocumentVotes,
     Inflation,
     Inflations,
