@@ -1,8 +1,9 @@
-import {GraphQLString, GraphQLObjectType, GraphQLInt} from 'graphql';
+import {GraphQLString, GraphQLObjectType, GraphQLInt, GraphQLList} from 'graphql';
 import Party from './Party';
 import Assembly from './Assembly';
 import Image from './Image';
 import Constituency from "./Constituency";
+import Ministry from "./Ministry";
 
 export default new GraphQLObjectType({
     name: 'Congressman',
@@ -23,6 +24,14 @@ export default new GraphQLObjectType({
             name: 'party',
             type: Party,
         },
+        parties: {
+            name: 'party',
+            type: GraphQLList(Party),
+        },
+        ministries: {
+            name: 'ministries',
+            type: GraphQLList(Ministry),
+        },
         constituency: {
             type: Constituency
         },
@@ -35,7 +44,7 @@ export default new GraphQLObjectType({
                 return {
                     src: `http://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
                     templateSrc: process.env.IMAGE_SERVER
-                        ? `${process.env.IMAGE_SERVER}/unsafe/{size}/smart/https://www.althingi.is/myndir/thingmenn-cache/${root.congressman_id}/${root.congressman_id}-220.jpg` // tslint:disable-line
+                        ? `${process.env.IMAGE_SERVER}/unsafe/{size}/smart/www.althingi.is/myndir/thingmenn-cache/${root.congressman_id}/${root.congressman_id}-220.jpg` // tslint:disable-line
                         : `https://www.althingi.is/myndir/mynd/thingmenn/${root.congressman_id}/org/mynd.jpg`,
                 };
             },

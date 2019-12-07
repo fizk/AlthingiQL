@@ -80,6 +80,7 @@ const queryAssemblyCongressman = gql`
             birth
             abbreviation
             parties {id name color}
+            ministries {id name}
             constituency {id name abbr_short}
         }
     }

@@ -73,6 +73,7 @@ The application is configured via:
 | API_PROTOCOL    | http          |
 | API_HOST        | localhost     |
 | API_PORT        | 8080          |
+| API_PATH        | /api          |
 | IMAGE_SERVER    | /images       |
 All of these values are already set in the `docker-compose` file.
 

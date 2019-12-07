@@ -34,8 +34,13 @@ export default class AssemblyCongressmenPage extends React.Component<Props> {
                                         <li key={congressman.id} className="assembly-congressman-page__congressman-item">
                                             <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>
                                                 <Congressman congressman={congressman} party={congressman.party} >
-                                                    <h4 className="assembly-congressman-page__congressman-title">{congressman.party.name}</h4>
+                                                    <h4 className="assembly-congressman-page__congressman-title">{congressman.party && congressman.party.name}</h4>
                                                     <h4 className="assembly-congressman-page__congressman-title">{congressman.constituency && congressman.constituency.name}</h4>
+                                                    <ul>
+                                                        {congressman.ministries && congressman.ministries.map(ministry => (
+                                                            <li key={ministry.id}>{ministry.name}</li>
+                                                        ))}
+                                                    </ul>
                                                 </Congressman>
                                             </Link>
                                         </li>
@@ -49,7 +54,7 @@ export default class AssemblyCongressmenPage extends React.Component<Props> {
                                         <li key={congressman.id} className="assembly-congressman-page__congressman-item">
                                             <Link to={`/loggjafarthing/${this.props.assembly}/thingmenn/${congressman.id}`}>
                                                 <Congressman congressman={congressman} party={congressman.party} >
-                                                    <h4 className="assembly-congressman-page__congressman-title">{congressman.party.name}</h4>
+                                                    <h4 className="assembly-congressman-page__congressman-title">{congressman.party && congressman.party.name}</h4>
                                                     <h4 className="assembly-congressman-page__congressman-title">{congressman.constituency && congressman.constituency.name}</h4>
                                                 </Congressman>
                                             </Link>

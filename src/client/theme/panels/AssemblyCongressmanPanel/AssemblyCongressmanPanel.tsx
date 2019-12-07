@@ -72,6 +72,12 @@ export default class AssemblyCongressmanPanel extends React.Component<Props> {
                                         <li key={party.id}>{party.name}</li>
                                     ))}
                                 </ul>
+                                <ul>
+                                    {this.props.person.person.ministries && this.props.person.person.ministries.map(ministry => (
+                                        <li key={ministry.id}>{ministry.name}</li>
+                                    ))}
+                                </ul>
+
                             </>
                         )}
                         {!this.props.person.error && this.props.person.loading && (
