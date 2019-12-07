@@ -14,6 +14,12 @@ const assemblyCongressmanQuery = gql`
                 id
             }
             constituency {id name}
+            ministries {id name}
+            parties {
+                id
+                name
+                color
+            }
             party {
                 id
                 name

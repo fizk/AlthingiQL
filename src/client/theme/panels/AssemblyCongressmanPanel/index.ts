@@ -3,7 +3,7 @@ import compose from '../../../utils/compose';
 import gql from 'graphql-tag';
 import AssemblyCongressmanPanel from './AssemblyCongressmanPanel';
 
-const queryAssemblyCongressmanSession = gql`
+const queryAssemblyCongressmanSessions = gql`
     query CongressmanAssemblySessions ($congressman: Int! $assembly: Int!) {
         CongressmanAssemblySessions(congressman: $congressman assembly: $assembly) {
             id
@@ -72,7 +72,7 @@ const queryAssemblyCongressmanIssues = gql`
 `;
 
 const queryAssemblyCongressman = gql`
-    query congressmanAssemblySessions ($assembly: Int! $congressman: Int!) {
+    query CongressmanAssembly ($assembly: Int! $congressman: Int!) {
         CongressmanAssembly(assembly: $assembly congressman: $congressman) {
             id
             name
@@ -80,11 +80,11 @@ const queryAssemblyCongressman = gql`
             birth
             abbreviation
             parties {id name color}
+            ministries {id name}
             constituency {id name abbr_short}
         }
     }
 `;
-
 
 const queryAssemblyCongressmanOtherDocs = gql`
     query CongressmanOtherDocuments ($assembly: Int! $congressman: Int!) {
@@ -94,8 +94,17 @@ const queryAssemblyCongressmanOtherDocs = gql`
         }
     }
 `;
+const queryAssemblyCongressmanSpeechTime = gql`
+    query CongressmanAssemblySpeechTime ($assembly: Int! $congressman: Int!) {
+        CongressmanAssemblySpeechTime (assembly: $assembly congressman: $congressman) {
+            value
+            count
+        }
+    }
+`;
+
 export default compose(
-    graphql(queryAssemblyCongressmanSession, {
+    graphql(queryAssemblyCongressmanSessions, {
         options: {
             ssr: true
         },
@@ -161,6 +170,23 @@ export default compose(
                 loading,
                 error,
                 docs: loading === false ? CongressmanOtherDocuments : undefined,
+            }}
+        },
+        options: ({assembly, congressman}: {assembly: number; congressman: number}) => ({
+            ssr: true,
+            variables: {
+                assembly,
+                congressman,
+            },
+        }),
+    }),
+    graphql(queryAssemblyCongressmanSpeechTime, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        props: ({data: {loading, error, CongressmanAssemblySpeechTime}}: any) => {
+            return {speechTime: {
+                loading,
+                error,
+                time: loading === false ? CongressmanAssemblySpeechTime : undefined,
             }}
         },
         options: ({assembly, congressman}: {assembly: number; congressman: number}) => ({

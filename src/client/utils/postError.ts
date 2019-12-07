@@ -20,7 +20,7 @@ const submitError = (data: object): void => {
         method: 'POST',
         cache: 'no-cache',
         mode: 'cors',
-        headers: {'content-type': 'application-json'},
+        headers: {'content-type': 'application/json'},
         body: JSON.stringify(payload),
     }).then(() => true);
 };

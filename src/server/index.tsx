@@ -27,6 +27,7 @@ const clientConfig = {
     protocol: process.env.API_PROTOCOL || 'http',
     host: process.env.API_HOST || 'localhost',
     port: process.env.API_PORT || 8080,
+    path: process.env.API_PATH,
 };
 
 app.use(express.static('public'));

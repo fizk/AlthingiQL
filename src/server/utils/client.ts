@@ -1,13 +1,13 @@
 import * as http from 'http';
 import {RequestOptions} from 'http';
-import {Client, ClientConfig, ClientCursor} from "../../../@types";
+import {Client, ClientCursor} from "../../../@types";
 
-export const getPagination = (config: ClientConfig) => (url: string, cursor?: ClientCursor) => {
+export const getPagination = (config: any) => (url: string, cursor?: ClientCursor) => {
     const startTime = process.hrtime();
     const options: RequestOptions = {
         hostname: config.host,
         port: config.port,
-        path: url,
+        path: config.path ? config.path + url : url,
         method: 'GET',
         headers: {
             Connection: 'keep-alive',
@@ -99,12 +99,12 @@ export const getPagination = (config: ClientConfig) => (url: string, cursor?: Cl
     });
 };
 
-export const get = (config: ClientConfig) => (url: string) => {
+export const get = (config: any) => (url: string) => {
     const startTime = process.hrtime();
     const options: RequestOptions = {
         hostname: config.host,
         port: config.port,
-        path: url,
+        path: config.path ? config.path + url : url,
         method: 'GET',
         headers: {
             Connection: 'keep-alive',

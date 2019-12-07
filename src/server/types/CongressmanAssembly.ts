@@ -3,6 +3,7 @@ import Party from './Party';
 import Assembly from './Assembly';
 import Image from './Image';
 import Constituency from "./Constituency";
+import Ministry from "./Ministry";
 
 export default new GraphQLObjectType({
     name: 'CongressmanAssembly',
@@ -29,6 +30,9 @@ export default new GraphQLObjectType({
         },
         constituency: {
             type: Constituency
+        },
+        ministries: {
+            type: GraphQLList(Ministry),
         },
         assembly: {
             type: Assembly,

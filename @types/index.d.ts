@@ -158,12 +158,24 @@ export interface AssemblyCongressman {
     avatar: Picture;
     constituency: Constituency;
     parties: Party[];
+    ministries: Ministry[]
 }
 
 export interface Congressman extends Person {
     party: Party;
+    parties?: Party[];
+    ministries?: Ministry[];
     assembly?: Assembly;
     constituency?: Constituency;
+}
+
+export interface Ministry {
+    id: number;
+    name: string;
+    abbrShort: string;
+    abbrLong: string;
+    first: number;
+    last: number;
 }
 
 export interface Proponent extends Congressman {
@@ -489,6 +501,15 @@ export declare namespace DataSource {
     export interface SuperCategory {
         super_category_id: number;
         title: string;
+    }
+
+    export interface Ministry {
+        ministry_id: number;
+        name: string;
+        abbr_short: string;
+        abbr_long: string;
+        first: number;
+        last: number;
     }
 }
 
